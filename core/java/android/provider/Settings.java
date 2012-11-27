@@ -6246,6 +6246,12 @@ public final class Settings {
                 "managed_profile_contact_remote_search";
 
         /**
+         * Whether to display the ADB notification.
+         * @hide
+         */
+        public static final String ADB_NOTIFY = "adb_notify";
+
+        /**
          * Holds comma separated list of ordering of QS tiles.
          * @hide
          */
