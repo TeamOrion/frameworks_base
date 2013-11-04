@@ -15,4 +15,12 @@
   
   <!-- Charging Battery led -->
   <java-symbol type="bool" name="config_intrusiveBatteryLed" />
+ 
+  <!-- Advanced Power menu w/ restart options -->
+  <java-symbol type="array" name="shutdown_reboot_options" />
+  <java-symbol type="array" name="shutdown_reboot_actions" />
+  <java-symbol type="string" name="reboot_title" />
+  <java-symbol type="string" name="reboot_confirm" />
+  <java-symbol type="string" name="reboot_progress" />
+
 </resources

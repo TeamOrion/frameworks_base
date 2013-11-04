@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Reboot menu -->
+    <!-- Reboot Progress Dialog. This is shown if the user chooses to reboot the phone. -->
+    <string name="reboot_title">@string/global_action_restart</string>
+    <string name="reboot_confirm">Your device will restart.</string>
+    <string name="reboot_progress">Restarting\u2026</string>
+
+    <!-- Button to restart the phone, within the Restart Options dialog -->
+    <string name="reboot_system">System</string>
+    <!-- Button to restart the phone into recovery, within the Restart Options dialog -->
+    <string name="reboot_recovery">Recovery</string>
+    <!-- Button to restart the phone into bootloader, within the Restart Options dialog -->
+    <string name="reboot_bootloader">Bootloader</string>
+
+</resources>
