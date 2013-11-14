@@ -66,6 +66,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0" >
                 <com.android.systemui.statusbar.policy.KeyButtonView
+                    android:id="@+id/menu_left"
+                    android:layout_width="@dimen/navigation_extra_key_width"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/accessibility_menu"
+                    android:src="@drawable/ic_sysbar_menu"
+                    android:visibility="invisible"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="start"
+                    systemui:keyCode="82" />
+                    
+                <com.android.systemui.statusbar.policy.KeyButtonView
                     android:id="@+id/ime_left"
                     android:layout_width="@dimen/navigation_extra_key_width"
                     android:layout_height="match_parent"
@@ -84,12 +95,7 @@
                 android:scaleType="center"
                 android:contentDescription="@string/accessibility_back"
                 />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="invisible"
-                />
+
             <com.android.systemui.statusbar.policy.KeyButtonView android:id="@+id/home"
                 android:layout_width="@dimen/navigation_key_width"
                 android:layout_height="match_parent"
@@ -100,12 +106,7 @@
                 android:scaleType="center"
                 android:contentDescription="@string/accessibility_home"
                 />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="invisible"
-                />
+
             <com.android.systemui.statusbar.policy.KeyButtonView android:id="@+id/recent_apps"
                 android:layout_width="@dimen/navigation_key_width"
                 android:layout_height="match_parent"

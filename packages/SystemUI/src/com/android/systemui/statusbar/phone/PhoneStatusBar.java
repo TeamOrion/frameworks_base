@@ -64,6 +64,7 @@ import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -117,6 +118,11 @@ import com.android.keyguard.KeyguardHostView.OnDismissAction;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.keyguard.ViewMediatorCallback;
+import com.android.internal.util.slim.ActionConfig;
+import com.android.internal.util.slim.ActionConstants;
+import com.android.internal.util.slim.ActionHelper;
+import com.android.internal.util.slim.DeviceUtils;
+
 import com.android.systemui.BatteryMeterView;
 import com.android.systemui.BatteryLevelTextView;
 import com.android.systemui.DemoMode;
@@ -260,7 +266,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     public static final int FADE_KEYGUARD_DURATION_PULSING = 96;
 
     /** Allow some time inbetween the long press for back and recents. */
-    private static final int LOCK_TO_APP_GESTURE_TOLERENCE = 200;
+    private static final int LOCK_TO_APP_GESTURE_TOLERENCE = 2000;
 
     /** If true, the system is in the half-boot-to-decryption-screen state.
      * Prudently disable QS and notifications.  */
@@ -390,6 +396,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     // for disabling the status bar
     int mDisabled1 = 0;
     int mDisabled2 = 0;
+    boolean mDisableHomeLongpress;
 
     // tracking calls to View.setSystemUiVisibility()
     int mSystemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE;
@@ -449,7 +456,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
 Settings.System.RECENTS_LONG_PRESS_ACTIVITY), false, this);
-
             resolver.registerContentObserver(Settings.System.getUriFor(
 Settings.System.BATTERY_SAVER_MODE_COLOR),
                     false, this, UserHandle.USER_ALL);
@@ -485,8 +491,32 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                         mBatterySaverWarningColor = mContext.getResources()
                                 .getColor(com.android.internal.R.color.battery_saver_mode_color);
                     }
-            }
-            
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_BUTTON_TINT))
+                || uri.equals(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_BUTTON_TINT_MODE))
+                || uri.equals(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_CONFIG))
+                || uri.equals(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_GLOW_TINT))
+                || uri.equals(Settings.System.getUriFor(
+                    Settings.System.MENU_LOCATION))
+                || uri.equals(Settings.System.getUriFor(
+                    Settings.System.MENU_VISIBILITY))) {
+                if (mNavigationBarView != null) {
+                    mNavigationBarView.recreateNavigationBar();
+                    prepareNavigationBarView();
+                }
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_CAN_MOVE))) {
+                prepareNavigationBarView();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_IME_ARROWS))) {
+                if (mNavigationBarView != null) {
+                    mNavigationBarView.updateNavigationBarSettings();
+                }
+            }          
+                       
             update();
         }
 
@@ -502,6 +532,30 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                     
 // This method reads Settings.Secure.RECENTS_LONG_PRESS_ACTIVITY
             updateCustomRecentsLongPressHandler(false);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_BUTTON_TINT),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_BUTTON_TINT_MODE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_GLOW_TINT),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_CONFIG),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_CAN_MOVE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.MENU_LOCATION),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.MENU_VISIBILITY),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_IME_ARROWS),
+                    false, this, UserHandle.USER_ALL);
         }
     }
 
@@ -808,6 +862,7 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
         mScreenPinningRequest = new ScreenPinningRequest(mContext);
         updateCustomRecentsLongPressHandler(true);
 
+        mScreenPinningRequest.setCallback(mScreenPinningCallback);
     }
 
     // ================================================================================
@@ -901,6 +956,26 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
         }
 
         mAssistManager = new AssistManager(this, context);
+
+        if (mNavigationBarView == null) {
+            mNavigationBarView =
+                (NavigationBarView) View.inflate(context, R.layout.navigation_bar, null);
+        }
+
+        mNavigationBarView.setBar(this);
+        mNavigationBarView.setOnVerticalChangedListener(
+                new NavigationBarView.OnVerticalChangedListener() {
+            @Override
+            public void onVerticalChanged(boolean isVertical) {
+                mNotificationPanel.setQsScrimEnabled(!isVertical);
+            }
+        });
+        mNavigationBarView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                checkUserAutohide(v, event);
+                return false;
+            }});
 
         // figure out which pixel-format to use for the status bar.
         mPixelFormat = PixelFormat.OPAQUE;
@@ -1287,12 +1362,19 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
     };
 
     private long mLastLockToAppLongPress;
-    private View.OnLongClickListener mLongPressBackRecentsListener =
-            new View.OnLongClickListener() {
+    private KeyButtonView.LongClickCallback mLongClickCallback =
+            new KeyButtonView.LongClickCallback() {
         @Override
         public boolean onLongClick(View v) {
-            handleLongPressBackRecents(v);
-            return true;
+            return handleLongPressBackRecents(v);
+        }
+    };
+
+    private ScreenPinningRequest.ScreenPinningCallback mScreenPinningCallback =
+            new ScreenPinningRequest.ScreenPinningCallback() {
+        @Override
+        public void onStartLockTask() {
+            mNavigationBarView.setOverrideMenuKeys(true);
         }
     };
 
@@ -1338,14 +1420,19 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
     private void prepareNavigationBarView() {
         mNavigationBarView.reorient();
 
-        mNavigationBarView.getRecentsButton().setOnClickListener(mRecentsClickListener);
-        mNavigationBarView.getRecentsButton().setOnTouchListener(mRecentsPreloadOnTouchListener);
-        mNavigationBarView.getRecentsButton().setLongClickable(true);
-        mNavigationBarView.getRecentsButton().setOnLongClickListener(mLongPressBackRecentsListener);
-        mNavigationBarView.getBackButton().setLongClickable(true);
-        mNavigationBarView.getBackButton().setOnLongClickListener(mLongPressBackRecentsListener);
-        mNavigationBarView.getHomeButton().setOnTouchListener(mHomeActionListener);
-        mNavigationBarView.getHomeButton().setOnLongClickListener(mLongPressHomeListener);
+        View home = mNavigationBarView.getHomeButton();
+        View recents = mNavigationBarView.getRecentsButton();
+
+        mNavigationBarView.setPinningCallback(mLongClickCallback);
+
+        if (recents != null) {
+            recents.setOnClickListener(mRecentsClickListener);
+            recents.setOnTouchListener(mRecentsPreloadOnTouchListener);
+        }
+        if (home != null) {
+            home.setOnTouchListener(mHomeActionListener);
+        }
+
         mAssistManager.onConfigurationChanged();
     }
 
@@ -2489,7 +2576,6 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
 
         if (false) postStartTracing();
     }
-
     @Override
     public void animateExpandSettingsPanel() {
         if (SPEW) Log.d(TAG, "animateExpand: mExpandedVisible=" + mExpandedVisible);
@@ -2706,6 +2792,11 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
             mNavigationBarView.setNavigationIconHints(hints);
         }
         checkBarModes();
+    }
+
+    @Override // CommandQueue
+    public void showCustomIntentAfterKeyguard(Intent intent) {
+        startActivityDismissingKeyguard(intent, false, false);
     }
 
     @Override // CommandQueue
@@ -4389,76 +4480,49 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
      * 1) Not currently in screen pinning (lock task).
      * 2) Back is long-pressed without recents.
      */
-    private void handleLongPressBackRecents(View v) {
+    private boolean handleLongPressBackRecents(View v) {
         try {
             boolean sendBackLongPress = false;
             boolean hijackRecentsLongPress = false;
             IActivityManager activityManager = ActivityManagerNative.getDefault();
             boolean isAccessiblityEnabled = mAccessibilityManager.isEnabled();
             if (activityManager.isInLockTaskMode() && !isAccessiblityEnabled) {
-                long time = System.currentTimeMillis();
                 // If we recently long-pressed the other button then they were
                 // long-pressed 'together'
-                if ((time - mLastLockToAppLongPress) < LOCK_TO_APP_GESTURE_TOLERENCE) {
+                if (mNavigationBarView.getRightMenuButton().isPressed()
+                        && mNavigationBarView.getLeftMenuButton().isPressed()) {
                     activityManager.stopLockTaskModeOnCurrent();
-                    // When exiting refresh disabled flags.
-                    mNavigationBarView.setDisabledFlags(mDisabled1, true);
-                } else if ((v.getId() == R.id.back)
-                        && !mNavigationBarView.getRecentsButton().isPressed()) {
+                    mNavigationBarView.setOverrideMenuKeys(false);
+                } else if ((v.getId() == mNavigationBarView.getLeftMenuButton().getId())
+                        && !mNavigationBarView.getRightMenuButton().isPressed()) {
                     // If we aren't pressing recents right now then they presses
                     // won't be together, so send the standard long-press action.
                     sendBackLongPress = true;
                 } else if ((v.getId() == R.id.recent_apps)) {
                     hijackRecentsLongPress = true;
                 }
-                mLastLockToAppLongPress = time;
             } else {
                 // If this is back still need to handle sending the long-press event.
-                if (v.getId() == R.id.back) {
-                    sendBackLongPress = true;
-                } else if (v.getId() == R.id.recent_apps) {
-                    hijackRecentsLongPress = true;
+
+                long time = System.currentTimeMillis();
+                if (( time - mLastLockToAppLongPress) < LOCK_TO_APP_GESTURE_TOLERENCE) {
+                    if (v.getId() == mNavigationBarView.getLeftMenuButton().getId()
+                        || v.getId() == mNavigationBarView.getRightMenuButton().getId()) {
+                        sendBackLongPress = true;
+                    }
                 } else if (isAccessiblityEnabled && activityManager.isInLockTaskMode()) {
                     // When in accessibility mode a long press that is recents (not back)
                     // should stop lock task.
                     activityManager.stopLockTaskModeOnCurrent();
-                    // When exiting refresh disabled flags.
-                    mNavigationBarView.setDisabledFlags(mDisabled1, true);
+                    mNavigationBarView.setOverrideMenuKeys(false);
                 }
+                mLastLockToAppLongPress = time;
             }
-            if (sendBackLongPress) {
-                KeyButtonView keyButtonView = (KeyButtonView) v;
-                keyButtonView.sendEvent(KeyEvent.ACTION_DOWN, KeyEvent.FLAG_LONG_PRESS);
-                keyButtonView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
-            }
-
-            if (hijackRecentsLongPress) {
-                 // If there is a user-selected, registered handler for the
-                // recents long press, start the Intent.  Otherwise,
-                // perform the default action, which is last app switching.
-
-                // Copy it so the value doesn't change between now and when the activity is started.
-                ComponentName customRecentsLongPressHandler = mCustomRecentsLongPressHandler;
-                if (customRecentsLongPressHandler != null) {
-                    startCustomRecentsLongPressActivity(customRecentsLongPressHandler);
-                } else {
-                    ActionUtils.switchToLastApp(mContext, mCurrentUserId);
-                }
-                
-                final ActivityManager am =
-                        (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-                ActivityManager.RunningTaskInfo lastTask = getLastTask(am);
-
-                if (lastTask != null) {
-                    if (DEBUG) Log.d(TAG, "switching to " + lastTask.topActivity.getPackageName());
-                    final ActivityOptions opts = ActivityOptions.makeCustomAnimation(mContext,
-                            R.anim.last_app_in, R.anim.last_app_out);
-                    am.moveTaskToFront(lastTask.id, ActivityManager.MOVE_TASK_NO_USER_ACTION,
-                            opts.toBundle());
-                }
-            }
+            
+            return sendBackLongPress;
         } catch (RemoteException e) {
             Log.d(TAG, "Unable to reach activity manager", e);
+            return false;
         }
     }
 
