@@ -54,7 +54,11 @@ public class ActionConstants {
     public static final String ACTION_MEDIA_NEXT           = "**media_next**";
     public static final String ACTION_MEDIA_PLAY_PAUSE     = "**media_play_pause**";
     public static final String ACTION_WAKE_DEVICE          = "**wake_device**";
+<<<<<<< HEAD
     public static final String ACTION_SMART_PULLDOWN       = "**smart_pulldown**";
+=======
+    public static final String ACTION_NOW_ON_TAP           = "**now_on_tap**";
+>>>>>>> cb0f728... fb: Slims navbar customizations
 
     // no action
     public static final String ACTION_NULL            = "**null**";
@@ -69,6 +73,7 @@ public class ActionConstants {
     public static final String ACTION_DELIMITER = "|";
 
     public static final String NAVIGATION_CONFIG_DEFAULT =
+<<<<<<< HEAD
           ACTION_BACK    + ACTION_DELIMITER
         + ACTION_NULL    + ACTION_DELIMITER
         + ICON_EMPTY     + ACTION_DELIMITER
@@ -77,6 +82,16 @@ public class ActionConstants {
         + ICON_EMPTY     + ACTION_DELIMITER
         + ACTION_RECENTS + ACTION_DELIMITER
         + ACTION_NULL    + ACTION_DELIMITER
+=======
+          ACTION_BACK       + ACTION_DELIMITER
+        + ACTION_NULL       + ACTION_DELIMITER
+        + ICON_EMPTY        + ACTION_DELIMITER
+        + ACTION_HOME       + ACTION_DELIMITER
+        + ACTION_NOW_ON_TAP + ACTION_DELIMITER
+        + ICON_EMPTY        + ACTION_DELIMITER
+        + ACTION_RECENTS    + ACTION_DELIMITER
+        + ACTION_NULL       + ACTION_DELIMITER
+>>>>>>> cb0f728... fb: Slims navbar customizations
         + ICON_EMPTY;
 
     public static final String NAV_RING_CONFIG_DEFAULT =
