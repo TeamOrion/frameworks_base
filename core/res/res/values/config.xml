@@ -2567,6 +2567,5 @@
     <bool name="config_showNotificationSlider">false</bool>
     
     <!-- Bool whether to show MotoDoze Gestures in Universe -->
-    <bool name="config_showMotoDozeGestures">false</bool>
-    
+    <bool name="config_showMotoDozeGestures">false</bool>    
 </resources>
