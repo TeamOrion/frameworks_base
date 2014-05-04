@@ -82,6 +82,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.OperationCanceledException;
 import android.os.Parcelable;
+import android.os.RemoteException;
 import android.provider.DocumentsContract;
 import android.provider.DocumentsContract.Document;
 import android.text.TextUtils;
@@ -117,6 +118,7 @@ import com.android.documentsui.model.DocumentStack;
 import com.android.documentsui.model.RootInfo;
 import com.google.android.collect.Lists;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -808,8 +810,8 @@ public class DirectoryFragment extends Fragment {
 
 
                 DocumentsContract.deleteDocument(client, doc.derivedUri);
-            } catch (Exception e) {
-                Log.w(TAG, "Failed to delete " + doc);
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed to delete " + doc, e);
                 hadTrouble = true;
             } finally {
                 ContentProviderClient.releaseQuietly(client);
@@ -1304,7 +1306,7 @@ public class DirectoryFragment extends Fragment {
                 // Do nothing
             } catch (RemoteException e) {
                 Log.w(TAG, "Failed to load thumbnail for " + mUri + ": " + e);
-            } catch (Exception e) {
+            } catch (IOException e) {
                 Log.w(TAG, "Failed to load thumbnail for " + mUri + ": " + e);
             } finally {
                 ContentProviderClient.releaseQuietly(client);
