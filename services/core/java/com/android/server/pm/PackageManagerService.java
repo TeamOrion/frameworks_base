@@ -508,6 +508,7 @@ public class PackageManagerService extends IPackageManager.Stub {
     final ArrayMap<String, FeatureInfo> mAvailableFeatures;
     final ArrayMap<Signature, ArraySet<String>> mSignatureAllowances;
 
+
     // If mac_permissions.xml was found for seinfo labeling.
     boolean mFoundPolicyFile;
 

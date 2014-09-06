@@ -101,9 +101,12 @@ public class SystemConfig {
     // URL-handling state upon factory reset.
     final ArraySet<String> mLinkedApps = new ArraySet<>();
 
+    final ArrayMap<Signature, ArraySet<String>> mSignatureAllowances
+            = new ArrayMap<Signature, ArraySet<String>>();
+            
     // These are the permitted backup transport service components
     final ArraySet<ComponentName> mBackupTransportWhitelist = new ArraySet<>();
-
+    
     public static SystemConfig getInstance() {
         synchronized (SystemConfig.class) {
             if (sInstance == null) {
@@ -151,6 +154,10 @@ public class SystemConfig {
 
     public ArraySet<ComponentName> getBackupTransportWhitelist() {
         return mBackupTransportWhitelist;
+	}
+	
+    public ArrayMap<Signature, ArraySet<String>> getSignatureAllowances() {
+        return mSignatureAllowances;
     }
 
     SystemConfig() {
