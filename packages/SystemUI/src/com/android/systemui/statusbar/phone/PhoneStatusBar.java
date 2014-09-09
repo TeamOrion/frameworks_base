@@ -107,6 +107,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.PathInterpolator;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -339,6 +340,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     // settings
     private QSDragPanel mQSPanel;
+
+    // task manager
+    private TaskManager mTaskManager;
+    private LinearLayout mTaskManagerPanel;
+    private ImageButton mTaskManagerButton;
+    private boolean showTaskList = false;
 
     // top bar
     StatusBarHeaderView mHeader;
@@ -1194,6 +1201,22 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                 @Override
                 public boolean isEditing() {
                     return mQSPanel.isEditing();
+                }
+            });
+        }
+
+        // task manager
+        if (mContext.getResources().getBoolean(R.bool.config_showTaskManagerSwitcher)) {
+            mTaskManagerPanel =
+                    (LinearLayout) mStatusBarWindow.findViewById(R.id.task_manager_panel);
+            mTaskManager = new TaskManager(mContext, mTaskManagerPanel);
+            mTaskManager.setActivityStarter(this);
+            mTaskManagerButton = (ImageButton) mHeader.findViewById(R.id.task_manager_button);
+            mTaskManagerButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    showTaskList = !showTaskList;
+                    mNotificationPanel.setTaskManagerVisibility(showTaskList);
                 }
             });
         }
@@ -2515,6 +2538,9 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
         mWaitingForKeyguardExit = false;
         disable(mDisabledUnmodified1, mDisabledUnmodified2, !force /* animate */);
         setInteracting(StatusBarManager.WINDOW_STATUS_BAR, true);
+        if (mContext.getResources().getBoolean(R.bool.config_showTaskManagerSwitcher)) {
+            mTaskManager.refreshTaskManagerView();
+        }
     }
 
     public void animateCollapsePanels() {
