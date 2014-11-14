@@ -6292,7 +6292,13 @@ public final class Settings {
          * @hide
          */
         public static final String ASSISTANT = "assistant";
-
+		
+		/**
+         * String to contain power menu actions
+         * @hide
+         */
+        public static final String POWER_MENU_ACTIONS = "power_menu_actions";
+ 
         /**
          * Whether the camera launch gesture should be disabled.
          *
