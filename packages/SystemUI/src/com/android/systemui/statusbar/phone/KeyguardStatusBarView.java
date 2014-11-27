@@ -36,8 +36,6 @@ import com.android.systemui.statusbar.policy.KeyguardUserSwitcher;
 import com.android.systemui.statusbar.policy.UserInfoController;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
 
-import java.text.NumberFormat;
-
 /**
  * The header group on Keyguard.
  */
@@ -74,6 +72,7 @@ public class KeyguardStatusBarView extends RelativeLayout {
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(getContext(),
                 android.R.interpolator.fast_out_slow_in);
         updateUserSwitcher();
+        updateVisibilities();
     }
 
     @Override
