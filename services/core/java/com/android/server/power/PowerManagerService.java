@@ -380,11 +380,7 @@ public final class PowerManagerService extends SystemService
     private int mStayOnWhilePluggedInSetting;
 
     // True if the device should wake up when plugged or unplugged
-<<<<<<< HEAD
-    private int mWakeUpWhenPluggedOrUnpluggedSetting; 
-=======
     private int mWakeUpWhenPluggedOrUnpluggedSetting;
->>>>>>> f7aaad6... Port: Wake on plug (1/2)
 
     // True if the device should stay on.
     private boolean mStayOn;
