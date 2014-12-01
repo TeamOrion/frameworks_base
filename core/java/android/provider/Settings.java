@@ -3796,7 +3796,14 @@ public final class Settings {
         public static final String RECENT_CARD_TEXT_COLOR = "recent_card_text_color";
 
         /**
-         * Color temperature of the display during the day
+         * Show search bar in recents
+         * @hide
+         */
+        public static final String RECENTS_SHOW_SEARCH_BAR = "recents_show_search_bar";
+
+        /**
+         * Heads Up Notifications
+         *
          * @hide
          */
         public static final String DISPLAY_TEMPERATURE_DAY = "display_temperature_day";
