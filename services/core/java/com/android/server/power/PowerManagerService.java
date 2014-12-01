@@ -1470,8 +1470,8 @@ public final class PowerManagerService extends SystemService
 
     private boolean shouldWakeUpWhenPluggedOrUnpluggedLocked(
             boolean wasPowered, int oldPlugType, boolean dockedOnWirelessCharger) {
-        // Don't wake when powered unless configured to do so.
-        if (mWakeUpWhenPluggedOrUnpluggedSetting == 0 ) {
+        // Don't wake when powered if disabled in settings.
+        if (mWakeUpWhenPluggedOrUnpluggedSetting == 0) {
             return false;
         }
 
