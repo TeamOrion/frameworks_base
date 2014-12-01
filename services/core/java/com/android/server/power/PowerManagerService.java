@@ -380,7 +380,11 @@ public final class PowerManagerService extends SystemService
     private int mStayOnWhilePluggedInSetting;
 
     // True if the device should wake up when plugged or unplugged
+<<<<<<< HEAD
     private int mWakeUpWhenPluggedOrUnpluggedSetting; 
+=======
+    private int mWakeUpWhenPluggedOrUnpluggedSetting;
+>>>>>>> f7aaad6... Port: Wake on plug (1/2)
 
     // True if the device should stay on.
     private boolean mStayOn;
@@ -1470,8 +1474,8 @@ public final class PowerManagerService extends SystemService
 
     private boolean shouldWakeUpWhenPluggedOrUnpluggedLocked(
             boolean wasPowered, int oldPlugType, boolean dockedOnWirelessCharger) {
-        // Don't wake when powered unless configured to do so.
-        if (mWakeUpWhenPluggedOrUnpluggedSetting == 0 ) {
+        // Don't wake when powered if disabled in settings.
+        if (mWakeUpWhenPluggedOrUnpluggedSetting == 0) {
             return false;
         }
 
