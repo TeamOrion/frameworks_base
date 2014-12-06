@@ -1913,6 +1913,11 @@ public interface WindowManager extends ViewManager {
             if (needsMenuKey != o.needsMenuKey) {
                 needsMenuKey = o.needsMenuKey;
                 changes |= NEEDS_MENU_KEY_CHANGED;
+			}
+
+            if (blurMaskAlphaThreshold != o.blurMaskAlphaThreshold) {
+                blurMaskAlphaThreshold = o.blurMaskAlphaThreshold;
+                changes |= BLUR_MASK_ALPHA_THRESHOLD_CHANGED;
             }
 
             if (blurMaskAlphaThreshold != o.blurMaskAlphaThreshold) {

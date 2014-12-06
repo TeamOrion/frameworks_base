@@ -445,6 +445,7 @@ public class VolumePanel extends Handler implements DemoMode {
                     | LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
                     | LayoutParams.FLAG_HARDWARE_ACCELERATED);
             mView = window.findViewById(R.id.content);
+
             Interaction.register(mView, new Interaction.Callback() {
                 @Override
                 public void onInteraction() {

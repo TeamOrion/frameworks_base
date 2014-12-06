@@ -3822,7 +3822,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     private void addStatusBarWindow() {
         makeStatusBarView();
-        mStatusBarWindowManager = new StatusBarWindowManager(mContext, mKeyguardMonitor);
+        mStatusBarWindowManager = new StatusBarWindowManager(mContext, this);
         mStatusBarWindowManager.add(mStatusBarWindow, getStatusBarHeight());
     }
 
