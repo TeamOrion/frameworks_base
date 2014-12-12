@@ -3684,6 +3684,16 @@ public final class Settings {
           * Position of date
           * 0 - Left of clock
           * 1 - Right of clock
+         * Boolean value on whether to show weather in the statusbar
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_WEATHER = "status_bar_show_weather";
+
+        /**
+          * Volume keys control cursor in text fields (default is 0)
+          * 0 - Disabled
+          * 1 - Volume up/down moves cursor left/right
+          * 2 - Volume up/down moves cursor right/left
           * @hide
           */
          public static final String STATUSBAR_CLOCK_DATE_POSITION = "statusbar_clock_date_position";

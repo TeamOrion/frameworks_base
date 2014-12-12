@@ -2,7 +2,6 @@
 <!--
 /**
  * Copyright (c) 2009, The Android Open Source Project
- * Copyright (c) 2015, The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,7 +15,7 @@
  * See the License for the specific language governing permissions and 
  * limitations under the License.
  */
--->
+--> 
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"> 
 
@@ -29,4 +28,7 @@
     <string name="select_application">Select application</string>
     <string name="lockscreen_choose_action_title">Choose action</string>
     <string name="lockscreen_none_target">None</string>
+
+    <!-- Weather string format in expanded statusbar header -->
+    <string name="status_bar_expanded_header_weather_format"><xliff:g id="temp">%1$s</xliff:g> - <xliff:g id="condition">%2$s</xliff:g></string>
 </resources>
