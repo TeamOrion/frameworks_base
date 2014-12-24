@@ -149,15 +149,6 @@ public class DocumentsActivity extends Activity {
     private RootsCache mRoots;
     private State mState;
 
-    private List<DocumentInfo> mClipboardFiles;
-    /* true if copy, false if cut */
-    private boolean mClipboardIsCopy;
-
-    private StorageManager mStorageManager;
-
-    private final Object mRootsLock = new Object();
-    private HashMap<String, File> mIdToPath;
-
     private boolean mIsContactPhoto = false;
 
     @Override

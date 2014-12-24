@@ -118,6 +118,13 @@ import android.drm.DrmStore.DrmDeliveryType;
 import android.drm.DrmStore.RightsStatus;
 import android.drm.DrmStore.Action;
 
+
+import android.content.ContentValues;
+import android.drm.DrmManagerClient;
+import android.drm.DrmStore.DrmDeliveryType;
+import android.drm.DrmStore.RightsStatus;
+import android.drm.DrmStore.Action;
+
 /**
  * Display the documents inside a single directory.
  */
