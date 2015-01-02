@@ -21,12 +21,15 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -52,6 +55,7 @@ import java.util.Collection;
 /** View that represents the quick settings tile panel. **/
 public class QSPanel extends ViewGroup {
     private static final float TILE_ASPECT = 1.2f;
+    private static final float TILE_ASPECT_SMALL = 0.8f;
 
     private final Context mContext;
     protected final ArrayList<TileRecord> mRecords = new ArrayList<TileRecord>();
@@ -63,19 +67,23 @@ public class QSPanel extends ViewGroup {
     private final QSDetailClipper mClipper;
     private final H mHandler = new H();
 
-    protected int mColumns;
-    protected int mCellWidth;
-    protected int mCellHeight;
-    protected int mLargeCellWidth;
-    protected int mLargeCellHeight;
-    protected int mPanelPaddingBottom;
-    protected int mDualTileUnderlap;
-    protected int mBrightnessPaddingTop;
-    protected int mGridHeight;
+    private int mColumns;
     private int mNumberOfColumns;
+    private int mCellWidth;
+    private int mCellHeight;
+    private int mLargeCellWidth;
+    private int mLargeCellHeight;
+    private int mPanelPaddingBottom;
+    private int mDualTileUnderlap;
+    private int mBrightnessPaddingTop;
+    private int mGridHeight;
     private boolean mExpanded;
     private boolean mListening;
     private boolean mClosingDetail;
+
+    private boolean mBrightnessSliderEnabled;
+    private boolean mUseFourColumns;
+    private boolean mVibrationEnabled;
 
     private Record mDetailRecord;
     private Callback mCallback;
@@ -84,6 +92,10 @@ public class QSPanel extends ViewGroup {
 
     private QSFooter mFooter;
     private boolean mGridContentVisible = true;
+
+    protected Vibrator mVibrator;
+
+    private SettingsObserver mSettingsObserver;
 
     private boolean mUseMainTiles = false;
 
@@ -109,6 +121,8 @@ public class QSPanel extends ViewGroup {
         addView(mBrightnessView);
         addView(mFooter.getView());
         mClipper = new QSDetailClipper(mDetail);
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+        mSettingsObserver = new SettingsObserver(mHandler);
         updateResources();
 
         mBrightnessController = new BrightnessController(getContext(),
@@ -123,6 +137,35 @@ public class QSPanel extends ViewGroup {
                 closeDetail();
             }
         });
+    }
+
+    /**
+     * Enable/disable brightness slider.
+     */
+    private boolean showBrightnessSlider() {
+        ToggleSlider brightnessSlider = (ToggleSlider) findViewById(R.id.brightness_slider);
+        if (mBrightnessSliderEnabled) {
+            mBrightnessView.setVisibility(VISIBLE);
+            brightnessSlider.setVisibility(VISIBLE);
+        } else {
+            mBrightnessView.setVisibility(GONE);
+            brightnessSlider.setVisibility(GONE);
+        }
+        updateResources();
+        return mBrightnessSliderEnabled;
+    }
+
+    /**
+     * Use three or four columns.
+     */
+    private int useFourColumns() {
+        final Resources res = mContext.getResources();
+        if (mUseFourColumns) {
+            mNumberOfColumns = 4;
+        } else {
+            mNumberOfColumns = res.getInteger(R.integer.quick_settings_num_columns);
+        }
+        return mNumberOfColumns;
     }
 
     private void updateDetailText() {
@@ -161,6 +204,7 @@ public class QSPanel extends ViewGroup {
         updateNumColumns();
         if (mListening) {
             refreshAllTiles();
+            mSettingsObserver.observe();
         }
         updateDetailText();
     }
@@ -247,8 +291,11 @@ public class QSPanel extends ViewGroup {
         mFooter.setListening(mListening);
         if (mListening) {
             refreshAllTiles();
+            mSettingsObserver.observe();
+        } else {
+            mSettingsObserver.unobserve();
         }
-        if (listening) {
+        if (listening && showBrightnessSlider()) {
             mBrightnessController.registerCallbacks();
         } else {
             mBrightnessController.unregisterCallbacks();
@@ -256,7 +303,7 @@ public class QSPanel extends ViewGroup {
     }
 
     public void refreshAllTiles() {
-        mUseMainTiles = Settings.Secure.getIntForUser(getContext().getContentResolver(),
+        mUseMainTiles = Settings.System.getIntForUser(getContext().getContentResolver(),
                 Settings.Secure.QS_USE_MAIN_TILES, 1, UserHandle.USER_CURRENT) == 1;
         for (int i = 0; i < mRecords.size(); i++) {
             TileRecord r = mRecords.get(i);
@@ -479,7 +526,7 @@ public class QSPanel extends ViewGroup {
                 tileRecord.tileView.setVisibility(newVis);
             }
         }
-        mBrightnessView.setVisibility(newVis);
+        mBrightnessView.setVisibility(showBrightnessSlider() ? newVis : GONE);
         if (mGridContentVisible != visible) {
             MetricsLogger.visibility(mContext, MetricsLogger.QS_PANEL, newVis);
         }
@@ -687,5 +734,42 @@ public class QSPanel extends ViewGroup {
         void onShowingDetail(QSTile.DetailAdapter detail);
         void onToggleStateChanged(boolean state);
         void onScanStateChanged(boolean state);
+    }
+
+    private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.Secure.QS_USE_FOUR_COLUMNS),
+                    false, this, UserHandle.USER_ALL);
+            update();
+        }
+
+        void unobserve() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            update();
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            update();
+        }
+
+        public void update() {
+            ContentResolver resolver = mContext.getContentResolver();
+            mUseFourColumns = Settings.System.getIntForUser(
+            mContext.getContentResolver(), Settings.Secure.QS_USE_FOUR_COLUMNS,
+                0, UserHandle.USER_CURRENT) == 1;
+        }
     }
 }

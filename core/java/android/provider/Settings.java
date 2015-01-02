@@ -6890,13 +6890,6 @@ public final class Settings {
          * @hide
          */
         public static final String QS_TILES = "sysui_qs_tiles";
-        
-        /**
-         * Use "main" tiles on the first row of the quick settings panel
-         * 0 = no, 1 = yes
-         * @hide
-         */
-        public static final String QS_USE_MAIN_TILES = "sysui_qs_main_tiles";
 
         /**
          * The TCP/IP port to run ADB on, or -1 for USB
@@ -6910,6 +6903,19 @@ public final class Settings {
          * @hide
          */
         public static final String QS_NUM_TILE_COLUMNS = "sysui_qs_num_tile_columns";
+
+	   /**
+         * Whether to show four tiles per row.
+         * @hide
+         */
+        public static final String QS_USE_FOUR_COLUMNS = "qs_use_four_columns";
+ 
+        /**
+         * Use "main" tiles on the first row of the quick settings panel
+         * 0 = no, 1 = yes
+         * @hide
+         */
+        public static final String QS_USE_MAIN_TILES = "sysui_qs_main_tiles";
 
         /**
          * This are the settings to be backed up.
