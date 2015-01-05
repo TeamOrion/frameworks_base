@@ -231,8 +231,8 @@ public class RingtoneManager {
     private boolean mStopPreviousRingtone = true;
     private Ringtone mPreviousRingtone;
 
-    private String mExcludedExternalStorageDir = null;
     private boolean mIncludeDrm;
+
     
     /**
      * Constructs a RingtoneManager. This constructor is recommended as its
@@ -520,10 +520,9 @@ public class RingtoneManager {
             }
             return query(
                     MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, MEDIA_COLUMNS,
-                    whereClause, null,
-                    MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
-        }
-        return null;
+                    constructBooleanTrueWhereClause(mFilterColumns, mIncludeDrm), null,
+                    MediaStore.Audio.Media.DEFAULT_SORT_ORDER)
+                : null;
     }
     
     private void setFilterColumnsList(int type) {

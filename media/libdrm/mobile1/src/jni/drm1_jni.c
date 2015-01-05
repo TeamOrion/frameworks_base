@@ -26,9 +26,6 @@
 #include "log.h"
 #include "JNIHelp.h"
 
-#define LOG_TAG "libdrm:drm1_jni"
-#define LOG_NDEBUG 0
-
 #define MS_PER_SECOND 1000                  /* Milliseconds per second */
 #define MS_PER_MINUTE 60 * MS_PER_SECOND    /* Milliseconds per minute */
 #define MS_PER_HOUR   60 * MS_PER_MINUTE    /* Milliseconds per hour */
@@ -203,8 +200,7 @@ static int32_t removeItem(int32_t id)
     return JNI_DRM_FAILURE;
 }
 
-
-static int32_t getInputStreamDataLength(int64_t handle)
+static int32_t getInputStreamDataLength(int32_t handle)
 {
     JNIEnv* env;
     jobject* pInputStream;
@@ -213,7 +209,7 @@ static int32_t getInputStreamDataLength(int64_t handle)
     jclass cls;
     jmethodID mid;
 
-    p = (DrmData *)(long)handle;
+    p = (DrmData *)handle;
 
     if (NULL == p)
         return 0;
@@ -239,7 +235,7 @@ static int32_t getInputStreamDataLength(int64_t handle)
     return len;
 }
 
-static int32_t readInputStreamData(int64_t handle, uint8_t* buf, int32_t bufLen)
+static int32_t readInputStreamData(int32_t handle, uint8_t* buf, int32_t bufLen)
 {
     JNIEnv* env;
     jobject* pInputStream;
@@ -251,7 +247,7 @@ static int32_t readInputStreamData(int64_t handle, uint8_t* buf, int32_t bufLen)
     int tmpLen;
     jbyte* pNativeBuf;
 
-    p = (DrmData *)(long)handle;
+    p = (DrmData *)handle;
 
     if (NULL == p || NULL == buf || bufLen <- 0)
         return 0;
@@ -342,23 +338,6 @@ static int64_t mkgmtime(
     return result;
 }
 
-static int64_t mkUTCtime(
-        uint32_t year, uint32_t month, uint32_t day,
-        uint32_t hour, uint32_t minute, uint32_t second)
-{
-    struct tm localTime;
-
-    memset (&localTime, 0x0, sizeof (struct tm));
-    localTime.tm_year = year - 1900;
-    localTime.tm_mon  = month - 1;
-    localTime.tm_mday = day;
-    localTime.tm_hour = hour;
-    localTime.tm_min  = minute;
-    localTime.tm_sec  = second;
-
-    return mktime (&localTime);
-}
-
 /**
  * Compute the milliseconds by the specified <code>date</code>
  * and <code>time</code>.
@@ -394,7 +373,7 @@ static int64_t computeTime(int32_t date, int32_t time)
     if (second < 0) second = 0;
     if (second > 59) second = 59;
 
-    return mkUTCtime (year, month, day, hour, minute, second) * 1000;
+    return mkgmtime(year, month, day, hour, minute, second) * 1000;
 }
 
 /**
@@ -606,7 +585,7 @@ Java_android_drm_mobile1_DrmRawContent_nativeConstructDrmContent
     if (JNI_DRM_FAILURE == addItem(drmInData))
         return JNI_DRM_FAILURE;
 
-    inData.inputHandle = (int64_t)(long)drmInData;
+    inData.inputHandle = (int32_t)drmInData;
     inData.mimeType = mimeType;
     inData.getInputDataLength = getInputStreamDataLength;
     inData.readInputData = readInputStreamData;
@@ -951,8 +930,8 @@ Java_android_drm_mobile1_DrmRightsManager_nativeInstallDrmRights
     drmInData->env = env;
     drmInData->pInData = &data;
     drmInData->len = len;
-    memset(&inData, 0, sizeof(inData));
-    inData.inputHandle = (int64_t)(long)drmInData;
+
+    inData.inputHandle = (int32_t)drmInData;
     inData.mimeType = mimeType;
     inData.getInputDataLength = getInputStreamDataLength;
     inData.readInputData = readInputStreamData;
@@ -960,8 +939,6 @@ Java_android_drm_mobile1_DrmRightsManager_nativeInstallDrmRights
     memset(&rightsInfo, 0, sizeof(T_DRM_Rights_Info));
     if (DRM_FAILURE == SVC_drm_installRights(inData, &rightsInfo))
         return JNI_DRM_FAILURE;
-
-    ALOGD("Success in SVC_drm_installRights\n");
 
     freeItem(drmInData);
 
