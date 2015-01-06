@@ -211,11 +211,12 @@ public class StatusBarWindowView extends FrameLayout {
         if (mService.getBarState() == StatusBarState.KEYGUARD) {
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    mService.requestVisualizer(false, 0);
+
+                    mService.mKeyguardBottomArea.requestVisualizer(false, 0);
                     break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    mService.requestVisualizer(true, 500);
+                    mService.mKeyguardBottomArea.requestVisualizer(true, 500);
                     break;
             }
         }
