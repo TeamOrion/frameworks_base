@@ -69,6 +69,9 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * The Settings provider contains global system-level device preferences.
@@ -1582,7 +1585,7 @@ public final class Settings {
                 return value.length() <= MAX_IPV6_LENGTH;
             }
         };
-
+        
         /** @hide */
         public static void getMovedToGlobalSettings(Set<String> outKeySet) {
             outKeySet.addAll(MOVED_TO_GLOBAL);
@@ -4515,6 +4518,44 @@ public final class Settings {
         }
 
         /**
+         * Put a delimited list as a string
+         * @param resolver to access the database with
+         * @param name to store
+         * @param delimiter to split
+         * @param list to join and store
+         * @hide
+         */
+        public static void putListAsDelimitedString(ContentResolver resolver, String name,
+                                                    String delimiter, List<String> list) {
+            String store = TextUtils.join(delimiter, list);
+            putString(resolver, name, store);
+        }
+
+        /**
+         * Get a delimited string returned as a list
+         * @param resolver to access the database with
+         * @param name to store
+         * @param delimiter to split the list with
+         * @return list of strings for a specific Settings.Secure item
+         * @hide
+         */
+        public static List<String> getDelimitedStringAsList(ContentResolver resolver, String name,
+                                                            String delimiter) {
+            String baseString = getString(resolver, name);
+            List<String> list = new ArrayList<String>();
+            if (!TextUtils.isEmpty(baseString)) {
+                final String[] array = TextUtils.split(baseString, Pattern.quote(delimiter));
+                for (String item : array) {
+                    if (TextUtils.isEmpty(item)) {
+                        continue;
+                    }
+                    list.add(item);
+                }
+            }
+            return list;
+        }
+        
+        /**
          * Store a name/value pair into the database.
          * @param resolver to access the database with
          * @param name to store
@@ -6292,12 +6333,6 @@ public final class Settings {
          * @hide
          */
         public static final String ASSISTANT = "assistant";
-		
-		/**
-         * String to contain power menu actions
-         * @hide
-         */
-        public static final String POWER_MENU_ACTIONS = "power_menu_actions";
  
         /**
          * Whether the camera launch gesture should be disabled.
@@ -6315,6 +6350,12 @@ public final class Settings {
         public static final String CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED =
                 "camera_double_tap_power_gesture_disabled";
 
+         /**
+         * Launch actions for left/right lockscreen targets
+         * @hide
+         */
+        public static final String LOCKSCREEN_TARGETS = "lockscreen_target_actions";
+        
         /**
          * This are the settings to be backed up.
          *
@@ -6740,6 +6781,12 @@ public final class Settings {
          */
         public static final String POWER_SOUNDS_ENABLED = "power_sounds_enabled";
 
+		/**
+         * String to contain power menu actions
+         * @hide
+         */
+        public static final String POWER_MENU_ACTIONS = "power_menu_actions";
+        
         /**
          * URI for the "wireless charging started" sound.
          * @hide
@@ -6909,7 +6956,7 @@ public final class Settings {
         */
        @Deprecated
        public static final String INSTALL_NON_MARKET_APPS = Secure.INSTALL_NON_MARKET_APPS;
-
+        
        /**
         * Whether HDMI control shall be enabled. If disabled, no CEC/MHL command will be
         * sent or processed. (0 = false, 1 = true)

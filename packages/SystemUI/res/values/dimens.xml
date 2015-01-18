@@ -588,4 +588,8 @@
 
     <!-- Thickness of the shadows of the assist disclosure beams -->
     <dimen name="assist_disclosure_shadow_thickness">1.5dp</dimen>
+    
+    <!-- Lockscreen shortcut-->
+    <dimen name="shortcut_picker_left_padding">40dip</dimen>
+
 </resources>
