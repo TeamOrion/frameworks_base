@@ -32,8 +32,20 @@
     <!-- Weather string format in expanded statusbar header -->
     <string name="status_bar_expanded_header_weather_format"><xliff:g id="temp">%1$s</xliff:g> - <xliff:g id="condition">%2$s</xliff:g></string>
 
-    <string name="qs_tile_edit_header_instruction">Press and hold a tile to edit</string>
-    <string name="quick_settings_edit_label">Edit Tiles</string>
+    <string name="qs_tile_edit_header_instruction">Press and hold tiles to rearrange</string>
+    <string name="quick_settings_edit_label">Edit tiles</string>
     <string name="quick_settings_cannot_delete_edit_tile">Cannot delete the Edit tile</string>
     <string name="qs_tiles_reset_confirmation">Reset quick settings tiles to default configuration?</string>
+    <string name="quick_settings_tile_reset_to_default">Reset to default layout</string>
+    <string name="quick_settings_title_header">Header</string>
+    <string name="quick_settings_title_tiles">Tiles</string>
+    <string name="quick_settings_remove">Remove tile</string>
+	<string name="quick_settings_network_adb_label">ADB over network</string>
+
+    <string name="quick_settings_screen_timeout_detail_title">Screen timeout</string>
+    <!-- Content description of the screen timeout tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screen_timeout">Screen timeout: <xliff:g id="timeout" example="30 seconds">%s</xliff:g>.</string>
+
+    <!-- Announcement made when the screen timeout tile changes (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screen_timeout_changed">Screen timeout changed to <xliff:g id="timeout" example="30 seconds">%s</xliff:g>.</string>
 </resources>

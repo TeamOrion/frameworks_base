@@ -105,9 +105,6 @@ public class QSUtils {
                 case QSConstants.TILE_BLUETOOTH:
                     removeTile = !deviceSupportsBluetooth();
                     break;
-                case QSConstants.TILE_NFC:
-                    removeTile = !deviceSupportsNfc(context);
-                    break;
             }
             if (removeTile) {
                 iterator.remove();
