@@ -200,6 +200,7 @@ public class QsTuner extends Fragment implements Callback {
         else if (spec.equals("location")) return R.string.quick_settings_location_label;
         else if (spec.equals("cast")) return R.string.quick_settings_cast_title;
         else if (spec.equals("hotspot")) return R.string.quick_settings_hotspot_label;
+        else if (spec.equals("timeout")) return R.string.quick_settings_timeout_label;
         return 0;
     }
 
@@ -441,8 +442,10 @@ public class QsTuner extends Fragment implements Callback {
             else if (mSpec.equals("rotation")) return R.drawable.ic_portrait_from_auto_rotate;
             else if (mSpec.equals("flashlight")) return R.drawable.ic_signal_flashlight_enable;
             else if (mSpec.equals("location")) return R.drawable.ic_signal_location_enable;
+            else if (mSpec.equals("cast")) return R.drawable.ic_qs_cast_on;
             else if (mSpec.equals("hotspot")) return R.drawable.ic_hotspot_enable;
-	    return R.drawable.android;
+            else if (mSpec.equals("timeout")) return R.drawable.ic_qs_screen_timeout_vector;
+            return R.drawable.android;
         }
 
         @Override
