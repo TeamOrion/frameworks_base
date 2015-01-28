@@ -3649,6 +3649,18 @@ public final class Settings {
         public static final String RECENT_SHOW_RUNNING_TASKS = "show_running_tasks";
 
         /**
+         * Whether to show the weather info on the lock screen
+         * @hide
+         */
+        public static final String LOCK_SCREEN_SHOW_WEATHER = "lock_screen_show_weather";
+
+        /**
+         * Whether to show the weather location lock screen
+         * @hide
+         */
+        public static final String LOCK_SCREEN_SHOW_WEATHER_LOCATION = "lock_screen_show_weather_location";
+
+        /**
          * Amount of apps to show in recents
          * @hide
          */
