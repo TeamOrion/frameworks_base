@@ -42,7 +42,8 @@ public class QSConstants {
         public static final String TILE_EXPANDED_DESKTOP = "expanded_desktop";
         public static final String TILE_BATTERY_SAVER = "battery_saver";
         public static final String TILE_MUSIC = "music";
-    protected static final ArrayList<String> STATIC_TILES_AVAILABLE = new ArrayList<String>();
+        public static final String TILE_SCREENSHOT = "screenshot"; 
+   protected static final ArrayList<String> STATIC_TILES_AVAILABLE = new ArrayList<String>();
     protected static final ArrayList<String> TILES_AVAILABLE = new ArrayList<String>();
 
     static {
@@ -72,6 +73,7 @@ public class QSConstants {
                 STATIC_TILES_AVAILABLE.add(TILE_EXPANDED_DESKTOP);
                 STATIC_TILES_AVAILABLE.add(TILE_BATTERY_SAVER);
                 STATIC_TILES_AVAILABLE.add(TILE_MUSIC);
+                STATIC_TILES_AVAILABLE.add(TILE_SCREENSHOT);
         TILES_AVAILABLE.addAll(STATIC_TILES_AVAILABLE);
     }
 }

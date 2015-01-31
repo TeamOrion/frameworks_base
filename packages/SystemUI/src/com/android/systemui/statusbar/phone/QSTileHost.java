@@ -52,6 +52,7 @@ import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenOffTile;
 import com.android.systemui.qs.tiles.ScreenTimeoutTile;
 import com.android.systemui.qs.tiles.SoundTile;
+import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.statusbar.policy.BluetoothController;
 import com.android.systemui.statusbar.policy.CastController;
@@ -306,6 +307,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("expanded_desktop")) return new ExpandedDesktopTile(this);
         else if (tileSpec.equals("battery_saver")) return new BatterySaverTile(this);
         else if (tileSpec.equals("music")) return new MusicTile(this);
+        else if (tileSpec.equals("screenshot")) return new ScreenshotTile(this);
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);
         else throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
     }
@@ -383,6 +385,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
      else if (spec.equals("expanded_desktop")) return R.string.quick_settings_expanded_desktop; 
      else if (spec.equals("battery_saver")) return R.string.quick_settings_battery_saver;  
      else if (spec.equals("music")) return R.string.quick_settings_music_label;
-       return 0; 
+     else if (spec.equals("screenshot")) return R.string.quick_settings_screenshot_label;
+     return 0; 
     }
 }
