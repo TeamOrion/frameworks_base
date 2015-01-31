@@ -45,6 +45,7 @@ public class QSConstants {
         public static final String TILE_SCREENSHOT = "screenshot"; 
         public static final String TILE_USB_TETHER = "usb_tether";
         public static final String TILE_NFC = "nfc"; 
+        public static final String TILE_SYNC = "sync";
    protected static final ArrayList<String> STATIC_TILES_AVAILABLE = new ArrayList<String>();
     protected static final ArrayList<String> TILES_AVAILABLE = new ArrayList<String>();
 
@@ -78,6 +79,7 @@ public class QSConstants {
                 STATIC_TILES_AVAILABLE.add(TILE_SCREENSHOT);
                 STATIC_TILES_AVAILABLE.add(TILE_USB_TETHER);
                 STATIC_TILES_AVAILABLE.add(TILE_NFC);
+                STATIC_TILES_AVAILABLE.add(TILE_SYNC);
         TILES_AVAILABLE.addAll(STATIC_TILES_AVAILABLE);
     }
 }
