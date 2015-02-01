@@ -48,7 +48,7 @@ import java.util.Collection;
 
 /** View that represents the quick settings tile panel. **/
 public class QSPanel extends ViewGroup {
-    private static final float TILE_ASPECT = 1.2f;
+    protected static final float TILE_ASPECT = 1.2f;
 
     protected final ArrayList<TileRecord> mRecords = new ArrayList<>();
     protected View mDetail;
@@ -64,11 +64,11 @@ public class QSPanel extends ViewGroup {
     protected int mCellHeight;
     protected int mLargeCellWidth;
     protected int mLargeCellHeight;
+    protected int mNumberOfColumns;
     protected int mPanelPaddingBottom;
     protected int mDualTileUnderlap;
     protected int mBrightnessPaddingTop;
     protected int mGridHeight;
-    private int mNumberOfColumns;
     private boolean mUseFourColumns;
     private boolean mExpanded;
     protected boolean mListening;
@@ -140,8 +140,9 @@ public class QSPanel extends ViewGroup {
             mNumberOfColumns = 4;
         } else {
             mNumberOfColumns = res.getInteger(R.integer.quick_settings_num_columns);
-        }
-        return mNumberOfColumns;
+        }       
+		return mNumberOfColumns;
+
     }
 
     public void setBrightnessMirror(BrightnessMirrorController c) {
@@ -534,7 +535,7 @@ public class QSPanel extends ViewGroup {
         boolean isRtl = getLayoutDirection() == LAYOUT_DIRECTION_RTL;
         for (TileRecord record : mRecords) {
             if (record.tileView.getVisibility() == GONE) continue;
-            final int cols = getColumnCount(record.row);
+            final int cols = useFourColumns();
             final int cw = record.row == 0 ? mLargeCellWidth : mCellWidth;
             final int extra = (w - cw * cols) / (cols + 1);
             int left = record.col * cw + (record.col + 1) * extra;
