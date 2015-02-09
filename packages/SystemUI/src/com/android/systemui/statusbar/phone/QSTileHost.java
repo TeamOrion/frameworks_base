@@ -43,6 +43,7 @@ import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
+import com.android.systemui.qs.tiles.ScreenOffTile;
 import com.android.systemui.qs.tiles.ScreenTimeoutTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.statusbar.policy.BluetoothController;
@@ -290,6 +291,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("hotspot")) return new HotspotTile(this);
         else if (tileSpec.equals("edit")) return new EditTile(this);
         else if (tileSpec.equals("screen_timeout")) return new ScreenTimeoutTile(this);
+        else if (tileSpec.equals("screen_off")) return  new ScreenOffTile(this);
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);
         else throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
     }
@@ -359,6 +361,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (spec.equals("hotspot")) return R.string.quick_settings_hotspot_label;
         else if (spec.equals("edit")) return R.string.quick_settings_edit_label;
 		else if (spec.equals("screen_timeout")) return R.string.quick_settings_screen_timeout_detail_title;
+		else if (spec.equals("screen_off")) return R.string.quick_settings_screen_off;
         return 0;
     }
 }
