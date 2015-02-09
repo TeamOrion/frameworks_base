@@ -52,6 +52,7 @@ public class QSConstants {
     public static final String TILE_EXPANDED_DESKTOP = "expanded_desktop";
     public static final String TILE_MUSIC = "music";
     public static final String TILE_HEADS_UP = "heads_up";
+    public static final String TILE_BATTERY_SAVER = "battery_saver";
 
     // Order matters
     protected static final ArrayList<String> TILES_DEFAULT = new ArrayList<String>();
@@ -94,5 +95,6 @@ public class QSConstants {
         TILES_AVAILABLE.add(TILE_EXPANDED_DESKTOP);
         TILES_AVAILABLE.add(TILE_MUSIC);
         TILES_AVAILABLE.add(TILE_HEADS_UP);
+	    TILES_AVAILABLE.add(TILE_BATTERY_SAVER);
     }
 }
