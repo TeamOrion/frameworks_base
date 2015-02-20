@@ -3766,7 +3766,14 @@ public final class Settings {
         public static final String RECENT_PANEL_GRAVITY = "recent_panel_gravity";
 
         /**
+
          * Size of recent panel view in percent (default = 100).
+
+         * Style of clock
+         * 0 - Hide Clock
+         * 1 - Right Clock
+         * 2 - Center Clock
+         * 3 - Left Clock
          * @hide
          */
         public static final String RECENT_PANEL_SCALE_FACTOR = "recent_panel_scale_factor";
