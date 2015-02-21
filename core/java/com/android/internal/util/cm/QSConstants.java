@@ -35,6 +35,7 @@ public class QSConstants {
     public static final String TILE_ADB_NETWORK = "adb_network";
 	public static final String TILE_SCREEN_TIMEOUT = "screen_timeout";
 	public static final String TILE_SCREEN_OFF = "screen_off";
+	public static final String TILE_REBOOT = "reboot";
 	public static final String TILE_EDIT = "edit";
 
     protected static final ArrayList<String> STATIC_TILES_AVAILABLE = new ArrayList<String>();
@@ -61,6 +62,7 @@ public class QSConstants {
         STATIC_TILES_AVAILABLE.add(TILE_ADB_NETWORK);
 		STATIC_TILES_AVAILABLE.add(TILE_SCREEN_TIMEOUT);
 		STATIC_TILES_AVAILABLE.add(TILE_SCREEN_OFF);
+		STATIC_TILES_AVAILABLE.add(TILE_REBOOT);
 
         TILES_AVAILABLE.addAll(STATIC_TILES_AVAILABLE);
     }
