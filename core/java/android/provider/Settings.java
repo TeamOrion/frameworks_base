@@ -3764,6 +3764,12 @@ public final class Settings {
         public static final String LOCK_SCREEN_WEATHER_TEXT_COLOR = "lock_screen_weather_text_color";
 
         /**
+         * Display second in the Clock
+         * @hide
+         */
+        public static final String CLOCK_USE_SECOND = "clock_use_second";
+
+        /**
          * Color of the weather condition icons on the lock screen
          * @hide
          */
