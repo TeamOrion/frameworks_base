@@ -43,6 +43,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.StatusBarManager;
 import android.app.WallpaperManager;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentCallbacks2;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -4932,14 +4933,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 	
     public void onScreenTurnedOn() {
+		if (mVisualizerEnabled) {
+            mBackdrop.setVisible(true);
+        }
         mScreenOnFromKeyguard = true;
         mStackScroller.setAnimationsEnabled(true);
         mNotificationPanel.onScreenTurnedOn();
         mNotificationPanel.setTouchDisabled(false);
-        updateVisibleToUser();
-        if (mVisualizerEnabled) {
-            mBackdrop.setVisible(true);
-        }
+        updateVisibleToUser();       
     }
 
     /**
@@ -4985,7 +4986,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     // When in accessibility mode a long press that is recents (not back)
                     // should stop lock task.
                     activityManager.stopLockTaskModeOnCurrent();
-                    mNavigationBarView.setOverrideMenuKeys(false);
+                    // When exiting refresh disabled flags.
+                    mNavigationBarView.setDisabledFlags(mDisabled, true);
                 }
                 mLastLockToAppLongPress = time;
             }
