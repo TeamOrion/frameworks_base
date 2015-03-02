@@ -385,8 +385,8 @@ boolean isLandscape = mContext.getResources().getConfiguration().orientation
     }
 
     public void noUserInteraction() {
-        if (mClearRecents != null) {
-            mClearRecents.setVisibility(View.VISIBLE);
+        if (mFloatingButton != null) {
+            mFloatingButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -401,14 +401,29 @@ boolean isLandscape = mContext.getResources().getConfiguration().orientation
         mFloatingButton = ((View)getParent()).findViewById(R.id.floating_action_button);
          mClearRecents = ((View)getParent()).findViewById(R.id.clear_recents);
         mClearRecents.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
 
-                if (mClearRecents.getAlpha() != 1f) {
+            public void onClick(View v) {
+                if (mFloatingButton.getAlpha() != 1f) {
                     return;
                 }
 
-                // Hide clear recents button before dismiss all tasks
-                startHideClearRecentsButtonAnimation();
+                if (dismissAll()) {
+                    // Hide clear recents before dismiss all tasks
+                    mFloatingButton.animate()
+                        .alpha(0f)
+                        .setStartDelay(0)
+                        .setUpdateListener(null)
+                        .setInterpolator(mConfig.fastOutSlowInInterpolator)
+                        .setDuration(mConfig.taskViewRemoveAnimDuration)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                mFloatingButton.setVisibility(View.GONE);
+                                mFloatingButton.setAlpha(1f);
+                            }
+                        })
+                        .start();
+                }
 
                 dismissAllTasksAnimated();
             }
