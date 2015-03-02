@@ -34,6 +34,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
@@ -48,6 +49,7 @@ import android.content.ServiceConnection;
 import android.database.ContentObserver;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -85,6 +87,7 @@ import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DateTimeView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -148,8 +151,9 @@ public abstract class BaseStatusBar extends SystemUI implements
     protected static final int MSG_TOGGLE_SCREENSHOT = 1034;
     protected static final int MSG_SET_PIE_TRIGGER_MASK = 1035;
 
+    protected static final boolean ENABLE_HEADS_UP = true; 
     // scores above this threshold should be displayed in heads up mode.
-    protected static final int INTERRUPTION_THRESHOLD = 10;
+    protected static final int INTERRUPTION_THRESHOLD = 1;
     protected static final String SETTING_HEADS_UP_TICKER = "ticker_gets_heads_up";
 
     // Should match the value in PhoneWindowManager
@@ -204,6 +208,8 @@ public abstract class BaseStatusBar extends SystemUI implements
     private Locale mLocale;
     private float mFontScale;
 
+    protected boolean mUseHeadsUp = false;
+    protected boolean mHeadsUpTicker = false;
     protected boolean mDisableNotificationAlerts = false;
 
     private int mHeadsUpSnoozeTime;
@@ -281,6 +287,8 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     protected int mZenMode;
 
+    private ArrayList<String> mDndList;
+    private ArrayList<String> mBlacklist;
     // which notification is currently being longpress-examined by the user
     private NotificationGuts mNotificationGutsExposed;
 
@@ -327,6 +335,37 @@ public abstract class BaseStatusBar extends SystemUI implements
             mUsersAllowingPrivateNotifications.clear();
             // ... and refresh all the notifications
             updateNotifications();
+        }
+    };
+
+    class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        public void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.HEADS_UP_CUSTOM_VALUES),
+                    false, this);
+            resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.HEADS_UP_BLACKLIST_VALUES),
+                    false, this);
+            update();
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            update();
+        }
+
+        private void update() {
+            final String dndString = Settings.System.getString(mContext.getContentResolver(),
+                    Settings.System.HEADS_UP_CUSTOM_VALUES);
+            final String blackString = Settings.System.getString(mContext.getContentResolver(),
+                    Settings.System.HEADS_UP_BLACKLIST_VALUES);
+            splitAndAddToArrayList(mDndList, dndString, "\\|");
+            splitAndAddToArrayList(mBlacklist, blackString, "\\|");
         }
     };
 
@@ -570,6 +609,12 @@ public abstract class BaseStatusBar extends SystemUI implements
         mDreamManager = IDreamManager.Stub.asInterface(
                 ServiceManager.checkService(DreamService.DREAM_SERVICE));
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+
+        mDndList = new ArrayList<String>();
+        mBlacklist = new ArrayList<String>();
+
+        SettingsObserver observer = new SettingsObserver(mHandler);
+        observer.observe();
 
         mSettingsObserver.onChange(false); // set up
         mContext.getContentResolver().registerContentObserver(
@@ -2356,6 +2401,12 @@ public abstract class BaseStatusBar extends SystemUI implements
         if (isHeadsUpInSnooze()) {
             return false;
         }
+
+        // check if notification from the package is blacklisted first
+        if (isPackageBlacklisted(sbn.getPackageName())) {
+            return false;
+        }
+
         // some predicates to make the boolean logic legible
         boolean isNoisy = (notification.defaults & Notification.DEFAULT_SOUND) != 0
                 || (notification.defaults & Notification.DEFAULT_VIBRATE) != 0
@@ -2363,16 +2414,18 @@ public abstract class BaseStatusBar extends SystemUI implements
                 || notification.vibrate != null;
         boolean isHighPriority = sbn.getScore() >= INTERRUPTION_THRESHOLD;
         boolean isFullscreen = notification.fullScreenIntent != null;
-
-        // incoming call should be allowed to process
-        // to handle non-intrusive ui correctly
-        int defHeadsUp = isIncomingCall(pkg)
-                ? Notification.HEADS_UP_ALLOWED
-                : Notification.HEADS_UP_NEVER;
+        boolean hasTicker = mHeadsUpTicker && !TextUtils.isEmpty(notification.tickerText);
+        boolean isOngoing = sbn.isOngoing();
+        //denying heads up by default
         int asHeadsUp = notification.extras.getInt(Notification.EXTRA_AS_HEADS_UP,
-                defHeadsUp);
-        boolean isAllowed = (asHeadsUp != Notification.HEADS_UP_NEVER);
-        if (DEBUG) Log.d(TAG, "package: "+pkg+", asHeadsUp: "+asHeadsUp);
+                   Notification.HEADS_UP_NEVER);
+         PackageManager pmUser = getPackageManagerForUser(
+                 sbn.getUser().getIdentifier());
+         //but if it's a system package, heads up should still be shown
+         boolean isSystemPackage = isThisASystemPackage(pkg, pmUser);
+         boolean isAllowed = (asHeadsUp != Notification.HEADS_UP_NEVER) || isSystemPackage;
+         if (DEBUG) Log.d(TAG, "package: "+pkg+", isSystem: "+isSystemPackage
+                 +", asHeadsUp: "+asHeadsUp+", isAllowed: "+isAllowed);
 
         boolean accessibilityForcesLaunch = isFullscreen
                 && mAccessibilityManager.isTouchExplorationEnabled();
@@ -2381,23 +2434,28 @@ public abstract class BaseStatusBar extends SystemUI implements
                                          || !mStatusBarKeyguardViewManager.isOccluded())
                 && mStatusBarKeyguardViewManager.isInputRestricted();
 
-        boolean interrupt = (isFullscreen || (isHighPriority && isNoisy)
-                || asHeadsUp == Notification.HEADS_UP_REQUESTED)
+        final InputMethodManager inputMethodManager = (InputMethodManager)
+                mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        boolean isIMEShowing = inputMethodManager.isImeShowing();
+
+        boolean isExpanded = false;
+            if (mStackScroller != null) {
+                isExpanded = mStackScroller.getIsExpanded();
+        }
+
+        boolean interrupt = (isFullscreen || (isHighPriority && (isNoisy || hasTicker))) 
                 && isAllowed
                 && !accessibilityForcesLaunch
                 && mPowerManager.isScreenOn()
-                && !keyguardIsShowing;
-        if (DEBUG) Log.d(TAG, "interrupt: "+interrupt);
+    	        && !isIMEShowing
+                && !isExpanded;
 
         if (!interrupt) {
             boolean isHeadsUpPackage = (mNoMan.getHeadsUpNotificationsEnabledForPackage(
                     pkg, sbn.getUid()) != Notification.HEADS_UP_NEVER);
             if (DEBUG) Log.d(TAG, "package: "+pkg+", isHeadsUpPackage: "+isHeadsUpPackage);
 
-            boolean isExpanded = false;
-            if (mStackScroller != null) {
-                isExpanded = mStackScroller.getIsExpanded();
-            }
             // Possibly a heads up package set from the user.
             interrupt = isHeadsUpPackage
                     && !sbn.isOngoing()
@@ -2416,8 +2474,49 @@ public abstract class BaseStatusBar extends SystemUI implements
         } catch (RemoteException e) {
             Log.d(TAG, "failed to query dream manager", e);
         }
+
+        // its below our threshold priority, we might want to always display
+        // notifications from certain apps
+        if (!isHighPriority && !isOngoing && !isExpanded && !isIMEShowing) {
+            // However, we don't want to interrupt if we're in an application that is
+            // in Do Not Disturb
+            if (!isPackageInDnd(getTopLevelPackage())) {
+                return true;
+            }
+        }
+
         if (DEBUG) Log.d(TAG, "interrupt: " + interrupt);
-        return interrupt;
+            return interrupt;
+        }
+
+    private String getTopLevelPackage() {
+        final ActivityManager am = (ActivityManager)
+                mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo > taskInfo = am.getRunningTasks(1);
+        ComponentName componentInfo = taskInfo.get(0).topActivity;
+        return componentInfo.getPackageName();
+    }
+
+    private boolean isPackageInDnd(String packageName) {
+        return mDndList.contains(packageName);
+    }
+
+    private boolean isPackageBlacklisted(String packageName) {
+        return mBlacklist.contains(packageName);
+    }
+
+    private void splitAndAddToArrayList(ArrayList<String> arrayList,
+                                        String baseString, String separator) {
+        // clear first
+        if (arrayList != null) {
+            arrayList.clear();
+            if (baseString != null) {
+                final String[] array = TextUtils.split(baseString, separator);
+                for (String item : array) {
+                    arrayList.add(item.trim());
+                }
+            }
+        }
     }
 
     private boolean isIncomingCall(String packageName) {
