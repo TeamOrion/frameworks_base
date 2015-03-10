@@ -28,5 +28,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
-    android:src="@drawable/ic_doc_drm_am_alpha" />
-
+    android:src="@drawable/ic_doc_drm_am_alpha"
+    android:tint="@*android:color/secondary_text_material_light"
+    android:autoMirrored="true" />
