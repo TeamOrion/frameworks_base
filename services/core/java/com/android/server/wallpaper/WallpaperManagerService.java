@@ -810,6 +810,31 @@ public class WallpaperManagerService extends IWallpaperManager.Stub {
         }
     }
 
+    /** @hide */
+    public ParcelFileDescriptor getKeyguardWallpaper(IWallpaperManagerCallback cb,
+                                                     Bundle outParams) {
+        synchronized (mLock) {
+            int wallpaperUserId = mCurrentUserId;
+            KeyguardWallpaperData wallpaper = mKeyguardWallpaperMap.get(wallpaperUserId);
+            try {
+                if (outParams != null) {
+                    outParams.putInt("width", wallpaper.width);
+                    outParams.putInt("height", wallpaper.height);
+                }
+                wallpaper.callbacks.register(cb);
+                File f = new File(getWallpaperDir(wallpaperUserId), KEYGUARD_WALLPAPER);
+                if (!f.exists()) {
+                    return null;
+                }
+                return ParcelFileDescriptor.open(f, MODE_READ_ONLY);
+            } catch (FileNotFoundException e) {
+                /* Shouldn't happen as we check to see if the file exists */
+                Slog.w(TAG, "Error getting wallpaper", e);
+            }
+            return null;
+        }
+    }
+
     public WallpaperInfo getWallpaperInfo() {
         int userId = UserHandle.getCallingUserId();
         synchronized (mLock) {
@@ -1261,6 +1286,80 @@ public class WallpaperManagerService extends IWallpaperManager.Stub {
         }
         if (wallpaper.height < baseSize) {
             wallpaper.height = baseSize;
+        }
+    }
+
+    private void loadKeyguardSettingsLocked(int userId) {
+        if (DEBUG) Slog.v(TAG, "loadKeyguardSettingsLocked");
+
+        JournaledFile journal = makeJournaledFile(KEYGUARD_WALLPAPER_INFO, userId);
+        FileInputStream stream = null;
+        File file = journal.chooseForRead();
+        KeyguardWallpaperData keyguardWallpaper = mKeyguardWallpaperMap.get(userId);
+        if (keyguardWallpaper == null) {
+            keyguardWallpaper = new KeyguardWallpaperData(userId);
+            mKeyguardWallpaperMap.put(userId, keyguardWallpaper);
+        }
+        boolean success = false;
+        try {
+            stream = new FileInputStream(file);
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setInput(stream, null);
+
+            int type;
+            do {
+                type = parser.next();
+                if (type == XmlPullParser.START_TAG) {
+                    String tag = parser.getName();
+                    if ("kwp".equals(tag)) {
+                        keyguardWallpaper.width = Integer.parseInt(parser.getAttributeValue(null,
+                                "width"));
+                        keyguardWallpaper.height = Integer.parseInt(parser
+                                .getAttributeValue(null, "height"));
+                        keyguardWallpaper.name = parser.getAttributeValue(null, "name");
+                        if (DEBUG) {
+                            Slog.v(TAG, "mWidth:" + keyguardWallpaper.width);
+                            Slog.v(TAG, "mHeight:" + keyguardWallpaper.height);
+                            Slog.v(TAG, "mName:" + keyguardWallpaper.name);
+                        }
+                    }
+                }
+            } while (type != XmlPullParser.END_DOCUMENT);
+            success = true;
+        } catch (FileNotFoundException e) {
+            Slog.w(TAG, "no current wallpaper -- first boot?");
+        } catch (NullPointerException e) {
+            Slog.w(TAG, "failed parsing " + file + " " + e);
+        } catch (NumberFormatException e) {
+            Slog.w(TAG, "failed parsing " + file + " " + e);
+        } catch (XmlPullParserException e) {
+            Slog.w(TAG, "failed parsing " + file + " " + e);
+        } catch (IOException e) {
+            Slog.w(TAG, "failed parsing " + file + " " + e);
+        } catch (IndexOutOfBoundsException e) {
+            Slog.w(TAG, "failed parsing " + file + " " + e);
+        }
+        try {
+            if (stream != null) {
+                stream.close();
+            }
+        } catch (IOException e) {
+            // Ignore
+        }
+
+        if (!success) {
+            keyguardWallpaper.width = -1;
+            keyguardWallpaper.height = -1;
+            keyguardWallpaper.name = "";
+        }
+
+        // We always want to have some reasonable width hint.
+        int baseSize = getMaximumSizeDimension();
+        if (keyguardWallpaper.width < baseSize) {
+            keyguardWallpaper.width = baseSize;
+        }
+        if (keyguardWallpaper.height < baseSize) {
+            keyguardWallpaper.height = baseSize;
         }
     }
 
