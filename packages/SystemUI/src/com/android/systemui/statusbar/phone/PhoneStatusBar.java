@@ -1942,7 +1942,7 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
         }
 
         // apply user lockscreen image
-        if (backdropBitmap == null) {
+        if (mMediaMetadata == null && backdropBitmap == null) {
             WallpaperManager wm = (WallpaperManager)
                     mContext.getSystemService(Context.WALLPAPER_SERVICE);
             if (wm != null) {
@@ -3386,6 +3386,13 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
         resetUserSetupObserver();
         setControllerUsers();
         mAssistManager.onUserSwitched(newUserId);
+        WallpaperManager wm = (WallpaperManager)
+                mContext.getSystemService(Context.WALLPAPER_SERVICE);
+        wm.forgetLoadedKeyguardWallpaper();
+        updateMediaMetaData(true);
+        if (mNavigationBarView != null) {
+            mNavigationBarView.updateSettings();
+        }
     }
 
     private void setControllerUsers() {
