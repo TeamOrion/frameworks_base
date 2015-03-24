@@ -120,6 +120,7 @@ import android.drm.DrmStore.Action;
 
 
 import android.content.ContentValues;
+import android.drm.DrmHelper;
 import android.drm.DrmManagerClient;
 import android.drm.DrmStore.DrmDeliveryType;
 import android.drm.DrmStore.RightsStatus;
