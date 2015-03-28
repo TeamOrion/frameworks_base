@@ -132,14 +132,9 @@ public class TaskStack {
             return false;
         }
 
-<<<<<<< HEAD
-        mDimLayer.setBounds(bounds, false);
-        mAnimationBackgroundSurface.setBounds(bounds, false);
-=======
         mDimLayer.setBounds(bounds);
         mAnimationBackgroundSurface.setBounds(bounds);
->>>>>>> cadbff9... WindowManager: Upper level changes to expose blur effect
-        mBlurLayer.setBounds(bounds);
+        mBlurLayer.setBounds(bounds, false);
         mBounds.set(bounds);
 
         return true;
