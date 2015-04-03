@@ -54,9 +54,6 @@ import android.util.Slog;
 import com.android.internal.widget.ILockSettings;
 import com.android.internal.widget.LockPatternUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -334,8 +331,8 @@ public class LockSettingsService extends ILockSettings.Stub {
 
         maybeUpdateKeystore(pattern, userId);
 
-        final byte[] hash = LockPatternUtils.patternToHash(
-                LockPatternUtils.stringToPattern(pattern));
+        final byte[] hash = mLockPatternUtils.patternToHash(
+                mLockPatternUtils.stringToPattern(pattern));
         mStorage.writePatternHash(hash, userId);
     }
 
@@ -388,9 +385,14 @@ public class LockSettingsService extends ILockSettings.Stub {
     }
 
     @Override
+    public byte getLockPatternSize(int userId) {
+        return mStorage.getLockPatternSize(userId);
+    }
+
+    @Override
     public boolean checkPattern(String pattern, int userId) throws RemoteException {
         checkPasswordReadPermission(userId);
-        byte[] hash = LockPatternUtils.patternToHash(LockPatternUtils.stringToPattern(pattern));
+        byte[] hash = mLockPatternUtils.patternToHash(mLockPatternUtils.stringToPattern(pattern));
         byte[] storedHash = mStorage.readPatternHash(userId);
 
         if (storedHash == null) {
@@ -494,7 +496,10 @@ public class LockSettingsService extends ILockSettings.Stub {
         Secure.LOCK_PATTERN_ENABLED,
         Secure.LOCK_BIOMETRIC_WEAK_FLAGS,
         Secure.LOCK_PATTERN_VISIBLE,
-        Secure.LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED
+        Secure.LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED,
+        Secure.LOCK_PATTERN_SIZE,
+        Secure.LOCK_DOTS_VISIBLE,
+        Secure.LOCK_SHOW_ERROR_PATH,
     };
 
     // These are protected with a read permission
