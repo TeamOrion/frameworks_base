@@ -36,6 +36,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.telecom.TelecomManager;
 import android.util.AttributeSet;
@@ -89,9 +90,6 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     private static final int DOZE_ANIMATION_STAGGER_DELAY = 48;
     private static final int DOZE_ANIMATION_ELEMENT_DURATION = 250;
 
-    // the length to animate the visualizer in and out
-    private static final int VISUALIZER_ANIMATION_DURATION = 300;
-
     private KeyguardAffordanceView mCameraImageView;
     private KeyguardAffordanceView mPhoneImageView;
     private KeyguardAffordanceView mLockIcon;
@@ -117,10 +115,6 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     private boolean mLongClickToForceLock;
     private boolean mLongClickToSleep;
     private PowerManager mPm;
-
-    private VisualizerView mVisualizer;
-    private boolean mScreenOn;
-    private boolean mLinked;
 
     public KeyguardBottomAreaView(Context context) {
         this(context, null);
@@ -202,24 +196,6 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         mLockIcon.setOnLongClickListener(this);
         mCameraImageView.setOnClickListener(this);
         mPhoneImageView.setOnClickListener(this);
-        mVisualizer = (VisualizerView) findViewById(R.id.visualizerView);
-        if (mVisualizer != null) {
-            Paint paint = new Paint();
-            Resources res = mContext.getResources();
-            paint.setStrokeWidth(res.getDimensionPixelSize(R.dimen.kg_visualizer_path_stroke_width));
-            paint.setAntiAlias(true);
-            paint.setColor(res.getColor(R.color.equalizer_fill_color));
-            paint.setPathEffect(new DashPathEffect(new float[] {
-                    res.getDimensionPixelSize(R.dimen.kg_visualizer_path_effect_1),
-                    res.getDimensionPixelSize(R.dimen.kg_visualizer_path_effect_2)
-            }, 0));
-
-            int bars = res.getInteger(R.integer.kg_visualizer_divisions);
-            mVisualizer.addRenderer(new LockscreenBarEqRenderer(bars, paint,
-                    res.getInteger(R.integer.kg_visualizer_db_fuzz),
-                    res.getInteger(R.integer.kg_visualizer_db_fuzz_factor)));
-
-        }
 
         initAccessibility();
     }
@@ -408,7 +384,6 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
             mTrustDrawable.start();
         } else {
             mTrustDrawable.stop();
-            requestVisualizer(false, 0);
         }
         if (changedView == this && visibility == VISIBLE) {
             updateLockIcon();
@@ -417,10 +392,14 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     }
 
     @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+    }
+
+    @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mTrustDrawable.stop();
-        requestVisualizer(false, 0);
     }
 
     private void updateLockIcon() {
@@ -562,16 +541,12 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
 
         @Override
         public void onScreenTurnedOn() {
-            mScreenOn = true;
             updateLockIcon();
-            requestVisualizer(true, 300);
         }
 
         @Override
         public void onScreenTurnedOff(int why) {
-            mScreenOn = false;
             updateLockIcon();
-            requestVisualizer(false, 0);
         }
 
         @Override
@@ -610,110 +585,4 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
             return mIntrinsicHeight;
         }
     }
-
-    public void requestVisualizer(boolean show, int delay) {
-        removeCallbacks(mStartVisualizer);
-        removeCallbacks(mStopVisualizer);
-        if (DEBUG) Log.d(TAG, "requestVisualizer(show: " + show + ", delay: " + delay + ")");
-        if (show && mScreenOn
-                && mPhoneStatusBar.getBarState() == StatusBarState.KEYGUARD
-                && !mPhoneStatusBar.isKeyguardFadingAway()
-                && !mPhoneStatusBar.isGoingToNotificationShade()
-                && mPhoneStatusBar.getCurrentMediaNotificationKey() != null) {
-            if (DEBUG) Log.d(TAG, "--> starting visualizer");
-            postDelayed(mStartVisualizer, delay);
-        } else {
-            if (DEBUG) Log.d(TAG, "--> stopping visualizer");
-            postDelayed(mStopVisualizer, delay);
-        }
-    }
-
-    private static class LockscreenBarEqRenderer extends Renderer {
-        private int mDivisions;
-        private Paint mPaint;
-        private int mDbFuzz;
-        private int mDbFuzzFactor;
-
-        /**
-         * Renders the FFT data as a series of lines, in histogram form
-         *
-         * @param divisions - must be a power of 2. Controls how many lines to draw
-         * @param paint - Paint to draw lines with
-         * @param dbfuzz - final dB display adjustment
-         * @param dbFactor - dbfuzz is multiplied by dbFactor.
-         */
-        public LockscreenBarEqRenderer(int divisions, Paint paint, int dbfuzz, int dbFactor) {
-            super();
-            if (DEBUG) {
-                Log.d(TAG, "Lockscreen EQ Renderer; divisions:" + divisions + ", dbfuzz: "
-                        + dbfuzz + "dbFactor: " + dbFactor);
-            }
-            mDivisions = divisions;
-            mPaint = paint;
-            mDbFuzz = dbfuzz;
-            mDbFuzzFactor = dbFactor;
-        }
-
-        @Override
-        public void onRender(Canvas canvas, AudioData data, Rect rect) {
-            // Do nothing, we only display FFT data
-        }
-
-        @Override
-        public void onRender(Canvas canvas, FFTData data, Rect rect) {
-            for (int i = 0; i < data.bytes.length / mDivisions; i++) {
-                mFFTPoints[i * 4] = i * 4 * mDivisions;
-                mFFTPoints[i * 4 + 2] = i * 4 * mDivisions;
-                byte rfk = data.bytes[mDivisions * i];
-                byte ifk = data.bytes[mDivisions * i + 1];
-                float magnitude = (rfk * rfk + ifk * ifk);
-                int dbValue = magnitude > 0 ? (int) (10 * Math.log10(magnitude)) : 0;
-
-                mFFTPoints[i * 4 + 1] = rect.height();
-                mFFTPoints[i * 4 + 3] = rect.height() - ((dbValue * mDbFuzzFactor) + mDbFuzz);
-            }
-
-            canvas.drawLines(mFFTPoints, mPaint);
-        }
-    }
-
-    private final Runnable mStartVisualizer = new Runnable() {
-        @Override
-        public void run() {
-            if (DEBUG) Log.w(TAG, "mStartVisualizer");
-
-            mVisualizer.animate()
-                    .alpha(1f)
-                    .setDuration(VISUALIZER_ANIMATION_DURATION);
-            AsyncTask.execute(new Runnable() {
-                @Override
-                public void run() {
-                    if (mVisualizer != null && !mLinked) {
-                        mVisualizer.link(0);
-                        mLinked = true;
-                    }
-                }
-            });
-        }
-    };
-
-    private final Runnable mStopVisualizer = new Runnable() {
-        @Override
-        public void run() {
-            if (DEBUG) Log.w(TAG, "mStopVisualizer");
-
-            mVisualizer.animate()
-                    .alpha(0f)
-                    .setDuration(VISUALIZER_ANIMATION_DURATION);
-            AsyncTask.execute(new Runnable() {
-                @Override
-                public void run() {
-                    if (mVisualizer != null && mLinked) {
-                        mVisualizer.unlink();
-                        mLinked = false;
-                    }
-                }
-            });
-        }
-    };
 }
