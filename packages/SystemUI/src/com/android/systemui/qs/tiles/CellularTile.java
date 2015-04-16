@@ -97,11 +97,7 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
         if (mController.isMobileDataSupported()) {
             showDetail(true);
         } else {
-            if (mTelephonyManager.getDefault().getPhoneCount() > 1) {
-                mHost.startSettingsActivity(MOBILE_NETWORK_SETTINGS_MSIM);
-            } else {
-                mHost.startSettingsActivity(MOBILE_NETWORK_SETTINGS);
-            }
+            mHost.startSettingsActivity(DATA_USAGE_SETTINGS);
         }
     }
 
