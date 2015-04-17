@@ -2322,4 +2322,10 @@
     <!-- Configuration that determines if PROTOCOL_ERRORS is to be treated as a
          permanent error -->
     <bool translatable="false" name="config_protocol_errors_perm_failure">true</bool>
+
+    <!-- Whether doze should invert colors for notifications. If the RRO theme causes
+    the NORMAL notification background to be dark and the text to be light, this boolean
+    needs to be set to false, to prevent the doze notifications from being light -->
+    <bool name="config_invert_colors_on_doze">true</bool>
+    
 </resources>

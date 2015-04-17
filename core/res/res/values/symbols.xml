@@ -2326,6 +2326,7 @@
 
   <java-symbol type="drawable" name="platlogo_m" />
 
+
   <!-- config softap extention feature -->
   <java-symbol type="bool" name="config_softap_extention" />
 
@@ -2372,4 +2373,8 @@
   <!-- Data Connectivity Error Configurations -->
   <java-symbol type="bool" name="config_reject_ggsn_perm_failure" />
   <java-symbol type="bool" name="config_protocol_errors_perm_failure" />
+
+  <!-- Doze invert -->
+  <java-symbol type="bool" name="config_invert_colors_on_doze" />
+
 </resources>
