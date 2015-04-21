@@ -3911,7 +3911,7 @@ public final class Settings {
         public static final String RECENTS_CLEAR_ALL_DISMISS_ALL = "recents_clear_all_dismiss_all";
 
         /**
-         * Heads Up Notifications
+         * Live display temperature preferences
          *
          * @hide
          */
@@ -3981,7 +3981,7 @@ public final class Settings {
         public static final String ENABLE_REVERSE_LOOKUP = "enable_reverse_lookup";
 
         /**
-         * Heads Up Notifications
+         * The forward lookup provider
          *
          * @hide
          */
