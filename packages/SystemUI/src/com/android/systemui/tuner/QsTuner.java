@@ -204,6 +204,7 @@ public class QsTuner extends Fragment implements Callback {
         else if (spec.equals("sound")) return R.string.quick_settings_sound_label;
         else if (spec.equals("sync")) return R.string.quick_settings_sync_label;
         else if (spec.equals("usb_tether")) return R.string.quick_settings_usb_tether_label;
+        else if (spec.equals("ambient_display")) return R.string.quick_settings_ambient_display_label;
         return 0;
     }
 
@@ -448,6 +449,7 @@ public class QsTuner extends Fragment implements Callback {
             else if (mSpec.equals("sound")) return R.drawable.ic_qs_ringer_audible;
             else if (mSpec.equals("sync")) return R.drawable.ic_qs_sync_on;
             else if (mSpec.equals("usb_tether")) return R.drawable.ic_qs_usb_tether_off;
+            else if (mSpec.equals("ambient_display")) return R.drawable.ic_qs_ambientdisplay_on;
             return R.drawable.android;
         }
 
