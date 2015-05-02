@@ -46,9 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="6dip"
-        android:paddingEnd="6dip"
-        android:orientation="horizontal"
-        >
+        android:paddingEnd="8dip"
+        android:orientation="horizontal">
 
         <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
             android:id="@+id/notification_icon_area"
@@ -76,8 +75,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textAppearance="@style/TextAppearance.StatusBar.Clock"
+                    android:textAppearance="@style/TextAppearance.StatusBar.CarrierLabel"
                     android:singleLine="true"
+                    android:visibility="gone"
                     android:ellipsize="end"/>
 
                 <com.android.systemui.statusbar.phone.IconMerger android:id="@+id/notificationIcons"
@@ -119,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:singleLine="true"
-                android:paddingStart="6dip"
+                android:paddingStart="7dip"
                 android:gravity="center_vertical|start"
                 />
         </com.android.keyguard.AlphaOptimizedLinearLayout>
