@@ -3168,10 +3168,14 @@ public final class Settings {
         public static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
 
         /**
-         * Status bar battery %
-         * 0: Hide the battery percentage
-         * 1: Display the battery percentage inside the icon
-         * 2: Display the battery percentage next to the icon
+
+         * Enable built in CAF task manager
+         * @hide
+         */
+        public static final String ENABLE_TASK_MANAGER = "enable_task_manager";
+
+        /**
+         * Whether to colorize all weather condition icons on the lock screen
          * @hide
          */
         public static final String STATUS_BAR_SHOW_BATTERY_PERCENT =
