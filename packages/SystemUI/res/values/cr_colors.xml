@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2015 crDroid Android
-
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-
           http://www.apache.org/licenses/LICENSE-2.0
-
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,5 +15,14 @@
 
     <!-- Color for the RAM bar text in the recent view -->
     <color name="ram_bar_text">#FFFFFFFF</color>
+ 
+    <!-- Task Manager -->
+    <color name="memory_usage_item_background">#0000</color>
+    <color name="task_manager_title_text">#ffffffff</color>
+    <color name="memory_usage_text_text">#ffffffff</color>
+    <color name="qs_panel_background">#0000</color>
+    <color name="task_item_view_background">#808080</color>
+    <color name="task_item_background">#0000</color>
+    <color name="task_item_text">#ffffffff</color>
 
 </resources>
