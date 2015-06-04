@@ -38,6 +38,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.InputDevice;
 import android.view.KeyCharacterMap;
@@ -62,6 +63,9 @@ import static android.view.accessibility.AccessibilityNodeInfo.ACTION_LONG_CLICK
 
 public class KeyButtonView extends ImageView {
 
+    private static final String TAG = "StatusBar.KeyButtonView";
+    private static final boolean DEBUG = false;
+    
     private int mContentDescriptionRes;
     private long mDownTime;
     private int mCode;
@@ -69,8 +73,12 @@ public class KeyButtonView extends ImageView {
     String mLongpressAction;
     private int mTouchSlop;
     private boolean mPerformedLongClick;
+    private Animator mAnimateToQuiescent = new ObjectAnimator();
+    public static final float DEFAULT_QUIESCENT_ALPHA = 1f;
 
     private boolean mSupportsLongpress = false;
+    private float mQuiescentAlpha = DEFAULT_QUIESCENT_ALPHA;
+    private float mDrawingAlpha = 1f;
     boolean mIsLongpressed = false;
     private AudioManager mAudioManager;
     private boolean mGestureAborted;
@@ -177,6 +185,38 @@ public class KeyButtonView extends ImageView {
         }
     }
 
+    public void setQuiescentAlpha(float alpha, boolean animate) {
+        mAnimateToQuiescent.cancel();
+        alpha = Math.min(Math.max(alpha, 0), 1);
+        if (alpha == mQuiescentAlpha && alpha == mDrawingAlpha) return;
+        mQuiescentAlpha = alpha;
+        if (DEBUG) Log.d(TAG, "New quiescent alpha = " + mQuiescentAlpha);
+        if (mBackground != null && animate) {
+            mAnimateToQuiescent = animateToQuiescent();
+            mAnimateToQuiescent.start();
+        } else {
+            setDrawingAlpha(mQuiescentAlpha);
+        }
+    }
+
+    private ObjectAnimator animateToQuiescent() {
+        return ObjectAnimator.ofFloat(this, "drawingAlpha", mQuiescentAlpha);
+    }
+
+    public float getQuiescentAlpha() {
+        return mQuiescentAlpha;
+    }
+    public float getDrawingAlpha() {
+        return mDrawingAlpha;
+    }
+    public void setDrawingAlpha(float x) {
+        setImageAlpha((int) (x * 255));
+        if (mBackground != null) {
+            mBackground.setAlpha((int)(x * 255));
+        }
+        mDrawingAlpha = x;
+    }
+          
     @Override
     public boolean performAccessibilityActionInternal(int action, Bundle arguments) {
         if (action == ACTION_CLICK && mCode != 0) {
