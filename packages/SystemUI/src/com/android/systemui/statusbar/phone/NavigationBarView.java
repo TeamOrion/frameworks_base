@@ -107,7 +107,7 @@ public class NavigationBarView extends LinearLayout {
     private static final int KEY_IME_SWITCHER = 2;
     private static final int KEY_IME_LEFT = 3;
     private static final int KEY_IME_RIGHT = 4;
-
+    
     private int mMenuVisibility;
     private int mMenuSetting;
     private boolean mOverrideMenuKeys;
@@ -268,11 +268,11 @@ public class NavigationBarView extends LinearLayout {
                 return true;
             }
         });
-
-        mSettingsObserver = new SettingsObserver(new Handler());
         
         mButtonsConfig = ActionHelper.getNavBarConfig(mContext);
         mButtonIdList = new ArrayList<Integer>();
+        
+        mSettingsObserver = new SettingsObserver(new Handler());
     }
 
     @Override
@@ -842,7 +842,7 @@ public class NavigationBarView extends LinearLayout {
         View leftMenuKeyView = getLeftMenuButton();
         View rightMenuKeyView = getRightMenuButton();
 
-        // Only show Menu if IME switcher and IME arrowsnot shown.
+        // Only show Menu if IME switcher and IME arrows not shown.
         boolean showLeftMenuButton = (((mMenuVisibility == MENU_VISIBILITY_ALWAYS || show)
                 && (mMenuSetting == SHOW_LEFT_MENU || mMenuSetting == SHOW_BOTH_MENU)
                 && (mMenuVisibility != MENU_VISIBILITY_NEVER))
@@ -1139,7 +1139,7 @@ public class NavigationBarView extends LinearLayout {
                 UserHandle.USER_CURRENT);
 
         mImeArrowVisibility = (Settings.System.getIntForUser(resolver,
-                Settings.System.NAVIGATION_BAR_IME_ARROWS, HIDE_IME_ARROW,
+                Settings.System.STATUS_BAR_IME_ARROWS, HIDE_IME_ARROW,
                 UserHandle.USER_CURRENT) == SHOW_IME_ARROW);
 
         setNavigationIconHints(mNavigationIconHints, true);

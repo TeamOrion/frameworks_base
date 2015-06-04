@@ -3364,7 +3364,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
     private LongSparseLongArray mMeasureCache;
 
     @ViewDebug.ExportedProperty(deepExport = true, prefix = "bg_")
-    private Drawable mBackground;
+    protected Drawable mBackground;
     private TintInfo mBackgroundTint;
 
     @ViewDebug.ExportedProperty(deepExport = true, prefix = "fg_")
