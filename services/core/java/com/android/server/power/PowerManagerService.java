@@ -1618,17 +1618,14 @@ public final class PowerManagerService extends SystemService
                     if (now < nextTimeout) {
                         mUserActivitySummary = USER_ACTIVITY_SCREEN_BRIGHT;
                         if (mWakefulness == WAKEFULNESS_AWAKE) {
-                            int buttonBrightness, keyboardBrightness;
+                            int buttonBrightness;
                             if (mButtonBrightnessOverrideFromWindowManager >= 0) {
                                 buttonBrightness = mButtonBrightnessOverrideFromWindowManager;
-                                keyboardBrightness = mButtonBrightnessOverrideFromWindowManager;
                             } else {
                                 buttonBrightness = mButtonBrightness;
                             }
-
-                            if (mButtonTimeout != 0
-                                    && now > mLastUserActivityTime + mButtonTimeout) {
-                                mButtonsLight.setBrightness(0);
+                            if (mButtonTimeout != 0 && now > mLastUserActivityTime + mButtonTimeout) {
+                                 mButtonsLight.setBrightness(0);
                             } else {
                                 mButtonsLight.setBrightness(buttonBrightness);
                                 if (buttonBrightness != 0 && mButtonTimeout != 0) {
