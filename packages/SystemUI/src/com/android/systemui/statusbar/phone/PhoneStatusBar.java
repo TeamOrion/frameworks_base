@@ -874,14 +874,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mCastController, mSuController);
         mSettingsObserver.onChange(false); // set up
 
-        // If system disabled system wide notification alert
-        // we do not add the view here and will do it later
-        // when StatusBarManager notifies us that the state has changed.
-        if (!mDisableNotificationAlerts) {
-            addHeadsUpView();
-        }
-
-
         mHeadsUpObserver.onChange(true); // set up
         if (ENABLE_HEADS_UP) {
             mContext.getContentResolver().registerContentObserver(
