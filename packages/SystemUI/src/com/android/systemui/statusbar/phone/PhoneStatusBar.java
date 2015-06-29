@@ -2351,6 +2351,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
 
         Bitmap artworkBitmap = null;
+	    Bitmap backdropBitmap = null;
+
         if (mMediaMetadata != null) {
             artworkBitmap = mMediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
             if (artworkBitmap == null) {
