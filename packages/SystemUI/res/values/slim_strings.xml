@@ -129,14 +129,8 @@
     <string name="pie_phone_status_airplane_mode">Airplane mode on</string>
     <string name="pie_phone_status_emergency_only">Emergency calls only</string>
 
-    <!-- Interruption level: None. [CHAR LIMIT=20] -->
-    <string name="interruption_level_silent">Silent</string>
-
-    <!-- Weather string format in expanded statusbar header -->
-    <string name="status_bar_expanded_header_weather_format"><xliff:g id="temp">%1$s</xliff:g> - <xliff:g id="condition">%2$s</xliff:g></string>
- 
-
-    <!-- Zen mode: No interruptions title, with a warning about alarms. [CHAR LIMIT=60] -->
-    <string name="zen_silent_with_warning">No interruptions, except alarms.</string>
+    <!-- QS Tiles -->
+    <string name="quick_settings_sync">Sync</string>
+    <string name="quick_settings_sync_off">Sync off</string>
 
 </resources>
