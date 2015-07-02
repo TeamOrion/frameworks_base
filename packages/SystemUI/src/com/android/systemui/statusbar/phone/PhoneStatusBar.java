@@ -498,6 +498,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.HEADS_UP_SNOOZE_TIME),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_GLOBAL_SWITCH),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.PIE_CONTROLS), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -554,6 +557,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         R.integer.heads_up_notification_decay),
                         UserHandle.USER_CURRENT);
                 resetHeadsUpDecayTimer();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_GLOBAL_SWITCH))) {
+                final int headsUpGlobalSwitch = Settings.System.getIntForUser(
+                        mContext.getContentResolver(),
+                        Settings.System.HEADS_UP_GLOBAL_SWITCH,
+                        1,
+                        UserHandle.USER_CURRENT);
+                setHeadsUpGlobalSwitch(headsUpGlobalSwitch);
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.PIE_CONTROLS))) {
                 attachPieContainer(isPieEnabled());
@@ -995,13 +1006,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mHeadsUpNotificationView.setVisibility(View.GONE);
         mHeadsUpNotificationView.setBar(this);
 
-            mHeadsUpNotificationView.setVisibility(View.GONE);
-            mHeadsUpNotificationView.setBar(this);
-            mHeadsUpNotificationDecay = Settings.System.getIntForUser(
-                    mContext.getContentResolver(),
-                    Settings.System.HEADS_UP_NOTIFCATION_DECAY,
-                    res.getInteger(R.integer.heads_up_notification_decay),
-                    UserHandle.USER_CURRENT);
+        final int headsUpGlobalSwitch = Settings.System.getIntForUser(
+                mContext.getContentResolver(),
+                Settings.System.HEADS_UP_GLOBAL_SWITCH,
+                1,
+                UserHandle.USER_CURRENT);
+        setHeadsUpGlobalSwitch(headsUpGlobalSwitch);
         mHeadsUpNotificationDecay = Settings.System.getIntForUser(
                 mContext.getContentResolver(),
                 Settings.System.HEADS_UP_NOTIFCATION_DECAY,
