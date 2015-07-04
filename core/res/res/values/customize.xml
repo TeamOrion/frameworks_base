@@ -45,16 +45,16 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <bool name="def_custom_sys_sound">false</bool>
 
     <!-- Default ringtone for SIM1,the value is ringtone file name. -->
-    <string name="def_custom_sys_ringtone"></string>
+    <string name="def_custom_sys_ringtone">Orion.ogg</string>
 
     <!-- Default ringtone for SIM2,the value is ringtone file name. -->
-    <string name="def_custom_sys_ringtone2"></string>
+    <string name="def_custom_sys_ringtone2">Themos.ogg</string>
 
     <!-- Default ringtone for SIM3,the value is ringtone file name. -->
     <string name="def_custom_sys_ringtone3"></string>
 
     <!-- Default ringtone for system notification,the value is ringtone file name. -->
-    <string name="def_custom_sys_notification"></string>
+    <string name="def_custom_sys_notification">Castor.ogg</string>
 
     <!-- Default ringtone for mms,the value is ringtone file name. -->
     <string name="def_custom_sys_mms"></string>
