@@ -122,6 +122,8 @@ public class DisplayMetrics {
      * @deprecated There is no longer a static density; you can find the
      * density for a display in {@link #densityDpi}.
      */
+    public static int DENSITY_CURRENT;
+
     @Deprecated
     public static int DENSITY_DEVICE;
 
