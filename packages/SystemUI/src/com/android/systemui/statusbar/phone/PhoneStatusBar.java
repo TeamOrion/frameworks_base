@@ -633,6 +633,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
             mShowTaskManager = Settings.System.getIntForUser(resolver,
                     Settings.System.ENABLE_TASK_MANAGER, 0, UserHandle.USER_CURRENT) == 1;
+
             mVisualizerEnabled = Settings.Secure.getIntForUser(resolver,
                     Settings.Secure.LOCKSCREEN_VISUALIZER_ENABLED, 1,
                     UserHandle.USER_CURRENT) != 0;
