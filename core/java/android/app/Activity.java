@@ -678,7 +678,7 @@ public class Activity extends ContextThemeWrapper
 
     private static Performance mPerf = null;
     private String[] mPerfActivityList = null;
-    private static int mDragBoostPossible = -1;
+    private static int mDragBoostPossible = 1;
     private static int mPerfLockDuration = -1;
     private static int mAsCpuBoost = -1;
     private static int mAsSchedBoost = -1;
