@@ -211,7 +211,8 @@ public final class InCallAdapter {
      * @param accountHandle The PhoneAccountHandle through which to place the call.
      * @param setDefault {@code True} if this account should be set as the default for calls.
      */
-    public void phoneAccountSelected(String callId, PhoneAccountHandle accountHandle, boolean setDefault) {
+    public void phoneAccountSelected(String callId, PhoneAccountHandle accountHandle,
+            boolean setDefault) {
         try {
             mAdapter.phoneAccountSelected(callId, accountHandle, setDefault);
         } catch (RemoteException e) {
