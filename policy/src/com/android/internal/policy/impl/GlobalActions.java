@@ -41,6 +41,7 @@ import android.content.IntentFilter;
 import android.content.pm.UserInfo;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
+import android.Manifest;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
@@ -257,6 +258,8 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                 }
             } else if (actionKey.equals(PolicyConstants.ACTION_LOCKDOWN)) {
                 mItems.add(getLockdownAction(icon));
+            } else if (actionKey.equals(PolicyConstants.ACTION_SCREENRECORD)) {
+                mItems.add(getScreenRecordAction(icon));
             } else if (actionKey != null) {
                 // must be a screenshot, custom app or action shorcut
                 mItems.add(
@@ -434,6 +437,26 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         };
     }
 
+    private Action getScreenRecordAction(Drawable icon) {
+        return new SinglePressAction(icon, R.string.global_action_screen_record) {
+
+             @Override
+             public void onPress() {
+                 toggleScreenRecord();
+             }
+
+             @Override
+             public boolean showDuringKeyguard() {
+                 return true;
+             }
+
+             @Override
+             public boolean showBeforeProvisioning() {
+                 return true;
+             }
+        };
+    }
+
     private UserInfo getCurrentUser() {
         try {
             return ActivityManagerNative.getDefault().getCurrentUser();
@@ -482,6 +505,11 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                 }
             }
         }
+    }
+
+    private void toggleScreenRecord() {
+        final Intent recordIntent = new Intent("org.chameleonos.action.NOTIFY_RECORD_SERVICE");
+        mContext.sendBroadcast(recordIntent, Manifest.permission.RECORD_SCREEN);
     }
 
     private void prepareDialog() {

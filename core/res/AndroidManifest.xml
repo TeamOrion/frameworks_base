@@ -2961,6 +2961,12 @@
         android:description="@string/permdesc_useHardwareFramework"
         android:protectionLevel="signature" />
 
+    <!-- Allows an application to record the screen.
+         @hide This is not a third-party API (intended for system apps). -->
+    <permission android:name="android.permission.RECORD_SCREEN"
+        android:label="@string/permlab_recordScreen"
+        android:description="@string/permdesc_recordScreen" />
+
     <!-- =============================================================== -->
     <!-- Permissions for accessing security data                         -->
     <!-- =============================================================== -->
