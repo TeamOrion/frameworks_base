@@ -209,7 +209,7 @@ public class StorageVolume implements Parcelable {
             id = id.substring(0, 8);
         }
         try {
-            return (int) Long.parseLong(id, 16);
+            return (int)Long.parseLong(id, 16);
         } catch (NumberFormatException e) {
             return -1;
         }
