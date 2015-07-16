@@ -69,6 +69,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
     View mSearchBar;
     RecentsViewCallbacks mCb;
     View mClearRecents;
+    View mFloatingButton;
 
     public RecentsView(Context context) {
         super(context);
@@ -330,12 +331,12 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
         mConfig.getTaskStackBounds(width, height, mConfig.systemInsets.top,
                 mConfig.systemInsets.right, taskStackBounds);
 
-        if (mClearRecents != null && showClearAllRecents) {
+        if (mFloatingButton != null && showClearAllRecents) {
             int clearRecentsLocation = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.RECENTS_CLEAR_ALL_LOCATION, Constants.DebugFlags.App.RECENTS_CLEAR_ALL_TOP_RIGHT);
+                    Settings.System.RECENTS_CLEAR_ALL_LOCATION, Constants.DebugFlags.App.RECENTS_CLEAR_ALL_BOTTOM_RIGHT);
             
 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)
-                    mClearRecents.getLayoutParams();
+                    mFloatingButton.getLayoutParams();
 boolean isLandscape = mContext.getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
             if (mSearchBar == null || isLandscape) {
@@ -352,19 +353,19 @@ boolean isLandscape = mContext.getResources().getConfiguration().orientation
                     params.gravity = Gravity.TOP | Gravity.LEFT;
                     break;
                 case Constants.DebugFlags.App.RECENTS_CLEAR_ALL_TOP_RIGHT:
-                default:
                     params.gravity = Gravity.TOP | Gravity.RIGHT;
                     break;
                 case Constants.DebugFlags.App.RECENTS_CLEAR_ALL_BOTTOM_LEFT:
                     params.gravity = Gravity.BOTTOM | Gravity.LEFT;
                     break;
                 case Constants.DebugFlags.App.RECENTS_CLEAR_ALL_BOTTOM_RIGHT:
+					default:
                     params.gravity = Gravity.BOTTOM | Gravity.RIGHT;
                     break;
             }
-            mClearRecents.setLayoutParams(params);
+            mFloatingButton.setLayoutParams(params);
         } else {
-            mClearRecents.setVisibility(View.GONE);
+            mFloatingButton.setVisibility(View.GONE);
         }
 
         // Measure each TaskStackView with the full width and height of the window since the 
@@ -397,7 +398,8 @@ boolean isLandscape = mContext.getResources().getConfiguration().orientation
     @Override
     protected void onAttachedToWindow () {
         super.onAttachedToWindow();
-        mClearRecents = ((View)getParent()).findViewById(R.id.clear_recents);
+        mFloatingButton = ((View)getParent()).findViewById(R.id.floating_action_button);
+         mClearRecents = ((View)getParent()).findViewById(R.id.clear_recents);
         mClearRecents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -416,6 +418,7 @@ boolean isLandscape = mContext.getResources().getConfiguration().orientation
     /**
      * This is called with the full size of the window since we are handling our own insets.
      */
+
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         // Get the search bar bounds so that we lay it out
