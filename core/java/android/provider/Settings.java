@@ -3913,12 +3913,6 @@ public final class Settings {
         public static final String ENABLE_REVERSE_LOOKUP = "enable_reverse_lookup";
 
         /**
-         * Show search bar in recents
-         * @hide
-         */
-        public static final String RECENTS_SHOW_SEARCH_BAR = "recents_show_search_bar";
-
-        /**
          * Heads Up Notifications
          *
          * @hide
