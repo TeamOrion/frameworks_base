@@ -25,12 +25,18 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.telecom.TelecomManager;
 import android.util.AttributeSet;
@@ -52,8 +58,13 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.KeyguardAffordanceView;
 import com.android.systemui.statusbar.KeyguardIndicationController;
+import com.android.systemui.statusbar.StatusBarState;
 import com.android.systemui.statusbar.policy.AccessibilityController;
 import com.android.systemui.statusbar.policy.PreviewInflater;
+import com.pheelicks.visualizer.AudioData;
+import com.pheelicks.visualizer.FFTData;
+import com.pheelicks.visualizer.VisualizerView;
+import com.pheelicks.visualizer.renderer.Renderer;
 
 import static android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK;
 import static android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
@@ -67,6 +78,8 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         AccessibilityController.AccessibilityStateChangedCallback, View.OnLongClickListener {
 
     final static String TAG = "PhoneStatusBar/KeyguardBottomAreaView";
+
+    private static final boolean DEBUG = false;
 
     private static final Intent SECURE_CAMERA_INTENT =
             new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE)
@@ -98,6 +111,10 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     private final TrustDrawable mTrustDrawable;
     private final Interpolator mLinearOutSlowInInterpolator;
     private int mLastUnlockIconRes = 0;
+
+    private boolean mLongClickToForceLock;
+    private boolean mLongClickToSleep;
+    private PowerManager mPm;
 
     public KeyguardBottomAreaView(Context context) {
         this(context, null);
@@ -179,6 +196,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         mLockIcon.setOnLongClickListener(this);
         mCameraImageView.setOnClickListener(this);
         mPhoneImageView.setOnClickListener(this);
+
         initAccessibility();
     }
 
@@ -371,6 +389,11 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
             updateLockIcon();
             updateCameraVisibility();
         }
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
     }
 
     @Override
