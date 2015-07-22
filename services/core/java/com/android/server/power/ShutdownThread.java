@@ -237,6 +237,8 @@ public final class ShutdownThread extends Thread {
                 }
             }
 
+            /*
+            (No need for a reboot confirmation dialog here)
             if (sConfirmDialog == null) {
                 sConfirmDialog = new AlertDialog.Builder(context)
                         .setTitle(titleResourceId)
@@ -250,11 +252,16 @@ public final class ShutdownThread extends Thread {
                         .setNegativeButton(com.android.internal.R.string.no, null)
                         .create();
             }
+            */
 
-            closer.dialog = sConfirmDialog;
-            sConfirmDialog.setOnDismissListener(closer);
-            sConfirmDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
-            sConfirmDialog.show();
+            if (sConfirmDialog != null) {
+                closer.dialog = sConfirmDialog;
+                sConfirmDialog.setOnDismissListener(closer);
+                sConfirmDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+                sConfirmDialog.show();
+            } else {
+                beginShutdownSequence(context);
+            }
 
         } else {
             beginShutdownSequence(context);
