@@ -240,10 +240,6 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
         // We have to increment/decrement the post animation trigger in case there are no children
         // to ensure that it runs
         ctx.postAnimationTrigger.increment();
-
-        // Hide clear recents button before return to home
-        startHideClearRecentsButtonAnimation();
-
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
@@ -256,25 +252,6 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
         // Notify of the exit animation
         mCb.onExitToHomeAnimationTriggered();
-    }
-
-    public void startHideClearRecentsButtonAnimation() {
-        if (mClearRecents != null) {
-            mClearRecents.animate()
-                .alpha(0f)
-                .setStartDelay(0)
-                .setUpdateListener(null)
-                .setInterpolator(mConfig.fastOutSlowInInterpolator)
-                .setDuration(mConfig.taskViewRemoveAnimDuration)
-                .withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        mClearRecents.setVisibility(View.GONE);
-                        mClearRecents.setAlpha(1f);
-                    }
-                })
-                .start();
-        }
     }
 
     /** Adds the search bar */
@@ -314,10 +291,10 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-        Rect searchBarSpaceBounds = new Rect();
         
         // Get the search bar bounds and measure the search bar layout
         if (mSearchBar != null) {
+            Rect searchBarSpaceBounds = new Rect();
             mConfig.getSearchBarBounds(width, height, mConfig.systemInsets.top, searchBarSpaceBounds);
             mSearchBar.measure(
                     MeasureSpec.makeMeasureSpec(searchBarSpaceBounds.width(), MeasureSpec.EXACTLY),
@@ -334,20 +311,9 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
         if (mFloatingButton != null && showClearAllRecents) {
             int clearRecentsLocation = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.RECENTS_CLEAR_ALL_LOCATION, Constants.DebugFlags.App.RECENTS_CLEAR_ALL_BOTTOM_RIGHT);
-            
 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)
                     mFloatingButton.getLayoutParams();
-boolean isLandscape = mContext.getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
-            if (mSearchBar == null || isLandscape) {
-                params.topMargin = mContext.getResources().
-                    getDimensionPixelSize(com.android.internal.R.dimen.status_bar_height);
-            } else {
-                params.topMargin = mContext.getResources().
-                    getDimensionPixelSize(com.android.internal.R.dimen.status_bar_height)
-                        + searchBarSpaceBounds.height();
-            }
-           
+params.topMargin = taskStackBounds.top;       
             switch (clearRecentsLocation) {
                 case Constants.DebugFlags.App.RECENTS_CLEAR_ALL_TOP_LEFT:
                     params.gravity = Gravity.TOP | Gravity.LEFT;
@@ -385,15 +351,10 @@ boolean isLandscape = mContext.getResources().getConfiguration().orientation
     }
 
     public void noUserInteraction() {
-        if (mFloatingButton != null) {
-            mFloatingButton.setVisibility(View.VISIBLE);
+        if (mClearRecents != null) {
+            mClearRecents.setVisibility(View.VISIBLE);
         }
     }
-
-  private boolean dismissAll() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-            Settings.System.RECENTS_CLEAR_ALL_DISMISS_ALL, 1) == 1;
-	}
 
     @Override
     protected void onAttachedToWindow () {
@@ -403,32 +364,10 @@ boolean isLandscape = mContext.getResources().getConfiguration().orientation
         mClearRecents.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                if (mFloatingButton.getAlpha() != 1f) {
-                    return;
-                }
-
-                if (dismissAll()) {
-                    // Hide clear recents before dismiss all tasks
-                    mFloatingButton.animate()
-                        .alpha(0f)
-                        .setStartDelay(0)
-                        .setUpdateListener(null)
-                        .setInterpolator(mConfig.fastOutSlowInInterpolator)
-                        .setDuration(mConfig.taskViewRemoveAnimDuration)
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                mFloatingButton.setVisibility(View.GONE);
-                                mFloatingButton.setAlpha(1f);
-                            }
-                        })
-                        .start();
-                }
-
-                dismissAllTasksAnimated();
-            }
-        });
-    }
+                 dismissAllTasksAnimated();
+			}
+		});
+	}
 
     /**
      * This is called with the full size of the window since we are handling our own insets.
