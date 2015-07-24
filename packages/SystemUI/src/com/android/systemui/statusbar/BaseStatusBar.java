@@ -2416,15 +2416,13 @@ public abstract class BaseStatusBar extends SystemUI implements
         boolean isFullscreen = notification.fullScreenIntent != null;
         boolean hasTicker = mHeadsUpTicker && !TextUtils.isEmpty(notification.tickerText);
         boolean isOngoing = sbn.isOngoing();
-        //denying heads up by default
 
         // incoming call should be allowed to process
         // to handle non-intrusive ui correctly
         int defHeadsUp = (isIncomingCall(pkg) && isNonIntrusiveEnabled())
                 ? Notification.HEADS_UP_ALLOWED
                 : Notification.HEADS_UP_NEVER;
-        int asHeadsUp = notification.extras.getInt(Notification.EXTRA_AS_HEADS_UP,
-                   Notification.HEADS_UP_NEVER);
+        int asHeadsUp = notification.extras.getInt(Notification.EXTRA_AS_HEADS_UP, defHeadsUp);
          PackageManager pmUser = getPackageManagerForUser(
                  sbn.getUser().getIdentifier());
          //but if it's a system package, heads up should still be shown
