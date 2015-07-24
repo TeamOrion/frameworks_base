@@ -39,6 +39,7 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.PowerManager;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.telecom.TelecomManager;
 import android.util.AttributeSet;
 import android.util.Log;
