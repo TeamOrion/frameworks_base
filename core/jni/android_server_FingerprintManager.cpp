@@ -195,7 +195,7 @@ static jint nativeCloseHal(JNIEnv* env, jobject clazz) {
 static const JNINativeMethod g_methods[] = {
     { "nativeAuthenticate", "()I", (void*)nativeAuthenticate },
     { "nativeEnroll", "(I)I", (void*)nativeEnroll },
-    { "nativeEnrollCancel", "()I", (void*)nativeEnrollCancel },
+    { "nativeCancel", "()I", (void*)nativeCancel },
     { "nativeRemove", "(I)I", (void*)nativeRemove },
     { "nativeOpenHal", "()I", (void*)nativeOpenHal },
     { "nativeCloseHal", "()I", (void*)nativeCloseHal },
