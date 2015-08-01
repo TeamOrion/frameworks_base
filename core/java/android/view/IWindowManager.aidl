@@ -264,6 +264,12 @@ interface IWindowManager
      */
     WindowContentFrameStats getWindowContentFrameStats(IBinder token);
 
+    /** FLOAT VIEW **/
+    Rect getAppFullscreenViewRect();
+    Rect getAppMinimumViewRect();
+    Rect getFloatViewRect();
+    void notifyFloatActivityTouched(IBinder token, boolean force);
+
     /**
      * Toggle global menu
      *

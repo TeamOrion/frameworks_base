@@ -173,4 +173,8 @@
     <string name="select_application">Select application</string>
     <string name="lockscreen_target_empty">Empty</string>
 
+   <!-- Title shown in recents popup for showing app in floating mode -->
+    <string name="status_bar_recent_floating_item_title">Floating mode</string>
+
+
 </resources>
