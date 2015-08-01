@@ -1007,7 +1007,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         mHeadsUpNotificationView.setVisibility(View.GONE);
         mHeadsUpNotificationView.setBar(this);
-
+        mHeadsUpNotificationView.setNotificationHelper(mNotificationHelper);
         final int headsUpGlobalSwitch = Settings.System.getIntForUser(
                 mContext.getContentResolver(),
                 Settings.System.HEADS_UP_GLOBAL_SWITCH,
