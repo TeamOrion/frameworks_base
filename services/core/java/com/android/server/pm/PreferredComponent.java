@@ -205,6 +205,10 @@ public class PreferredComponent {
         int numMatch = 0;
         for (int i=0; i<NQ; i++) {
             ResolveInfo ri = query.get(i);
+            //Only Need to care for ResolveInfo with Intent.CATEGORY_DEFAULT.
+            if (!ri.isDefault) {
+                continue;
+            }
             ActivityInfo ai = ri.activityInfo;
             boolean good = false;
             for (int j=0; j<NS; j++) {
