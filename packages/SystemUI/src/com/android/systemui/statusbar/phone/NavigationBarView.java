@@ -355,6 +355,16 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
 
         mSettingsObserver = new SettingsObserver(new Handler());
 
+        mDoubleTapGesture = new GestureDetector(mContext,
+                new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+                if (pm != null) pm.goToSleep(e.getEventTime());
+                return true;
+            }
+        });
+
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mIsPowerSaveMode = mPowerManager.isPowerSaveMode();
 
@@ -413,6 +423,9 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
             boolean ret = mDelegateHelper.onInterceptTouchEvent(event);
             if (ret) return true;
         }
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.DOUBLE_TAP_SLEEP_NAVBAR, 0) == 1)
+            mDoubleTapGesture.onTouchEvent(event);
 
         return super.onTouchEvent(event);
     }
