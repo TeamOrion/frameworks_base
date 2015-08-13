@@ -515,6 +515,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.RECENT_CARD_TEXT_COLOR), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_NOTIFCATION_DECAY), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ENABLE_TASK_MANAGER),
                     false, this, UserHandle.USER_ALL);
 
