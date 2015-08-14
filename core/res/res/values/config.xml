@@ -2194,6 +2194,7 @@
           when evaluating RSRP for LTE antenna bar display
            0. Strict threshold
            1. Lenient threshold
+           2. Custom threshold
     -->
     <integer name="config_LTE_RSRP_threshold_type">1</integer>
 
@@ -2317,5 +2318,15 @@
     <!-- Do the battery/notification LEDs support pulsing?
          Used to decide if we show pulse settings -->
     <bool name="config_ledCanPulse">true</bool>
+
+    <!-- When config_LTE_RSRP_threshold_type is set to "custom" -->
+    <integer-array name="config_LTE_RSRP_custom_levels">
+        <item>-140</item>
+        <item>-128</item>
+        <item>-118</item>
+        <item>-108</item>
+        <item>-98</item>
+        <item>-44</item>
+    </integer-array>
 
 </resources>
