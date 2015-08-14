@@ -174,4 +174,7 @@
   <java-symbol type="integer" name="config_nightColorTemperature" />
   <java-symbol type="integer" name="config_outdoorAmbientLux" />
 
+
+    <!-- LED pulse -->
+    <java-symbol type="bool" name="config_ledCanPulse" />
 </resources>

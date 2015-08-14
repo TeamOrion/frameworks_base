@@ -2313,4 +2313,9 @@
     <integer name="config_nightColorTemperature">4500</integer>
     <integer name="config_outdoorAmbientLux">9000</integer>
 
+
+    <!-- Do the battery/notification LEDs support pulsing?
+         Used to decide if we show pulse settings -->
+    <bool name="config_ledCanPulse">true</bool>
+
 </resources>
