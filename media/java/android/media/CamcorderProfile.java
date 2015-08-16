@@ -285,7 +285,7 @@ public class CamcorderProfile
 
     // Start and end of vendor quality list
     private static final int QUALITY_VENDOR_LIST_START = QUALITY_VGA;
-    private static final int QUALITY_VENDOR_LIST_END = QUALITY_TIME_LAPSE_2k;
+    private static final int QUALITY_VENDOR_LIST_END = QUALITY_TIME_LAPSE_1440P;
 
     /**
      * Default recording duration in seconds before the session is terminated.
