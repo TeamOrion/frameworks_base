@@ -2246,6 +2246,7 @@
     <!-- Use ERI text for network name on CDMA LTE -->
     <bool name="config_LTE_eri_for_network_name">true</bool>
 
+    <bool name="config_proximityCheckOnWakeEnabledByDefault">false</bool>
     <!-- The list of components which should be automatically disabled. -->
     <string-array name="config_disabledComponents" translatable="false">
     </string-array>
