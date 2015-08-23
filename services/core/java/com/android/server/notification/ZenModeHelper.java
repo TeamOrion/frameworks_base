@@ -39,6 +39,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.provider.Settings.Global;
 import android.provider.Settings.Secure;
+import android.provider.Settings.System;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.ZenModeConfig;
 import android.telecom.TelecomManager;
@@ -242,6 +243,15 @@ public class ZenModeHelper implements AudioManagerInternal.RingerModeDelegate {
         final int newMode = Global.getInt(mContext.getContentResolver(),
                 Global.ZEN_MODE, Global.ZEN_MODE_OFF);
         setZenMode(newMode, "setting");
+    }
+
+    public boolean getAreLightsAllowed() {
+        return mAllowLights;
+    }
+
+    public void readLightsAllowedModeFromSetting() {
+        mAllowLights = System.getIntForUser(mContext.getContentResolver(),
+                System.ALLOW_LIGHTS, 1, UserHandle.USER_CURRENT) == 1;
     }
 
     private void applyRestrictions() {
