@@ -4102,12 +4102,6 @@ public final class Settings {
          */
         public static final String NETWORK_TRAFFIC_COLOR = "network_traffic_color";
 
-        /**
-         * Network stats Color style
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_HIDE_ARROW = "network_traffic_hide_arrow";
- 
          /**
          * Height of the gesture anywhere trigger.
          * Force expanded notifications on all apps that support it.
