@@ -3580,7 +3580,17 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                 Settings.Secure.getUriFor(Settings.Secure.USER_SETUP_COMPLETE), true,
                 mUserSetupObserver, mCurrentUserId);
     }
-                
+
+    public void resetQsPanelVisibility() {
+        mShowTaskList = mShowTaskList;
+        if (mShowTaskList) {
+            mQSPanel.setVisibility(View.VISIBLE);
+            mTaskManagerPanel.setVisibility(View.GONE);
+            mShowTaskList = false;
+        }
+    }
+
+
     private void recreateStatusBar() {
        mStatusBarHeaderMachine.updateEnablement(); 
        mStatusBarHeaderMachine.doUpdateStatusHeaderObservers(true);
