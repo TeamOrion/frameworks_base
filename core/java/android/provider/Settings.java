@@ -6541,6 +6541,12 @@ public final class Settings {
         public static final String QS_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
 
         /**
+         * Enable launch actions for left/right lockscreen targets
+         * @hide
+         */
+        public static final String LOCKSCREEN_BOTTOM_SHORTCUTS = "lockscreen_bottom_shortcuts";
+
+        /**
          * List of QS tile names
          * @hide
          */

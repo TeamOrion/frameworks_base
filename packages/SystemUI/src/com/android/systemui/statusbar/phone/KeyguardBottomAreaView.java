@@ -243,6 +243,11 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         updateCameraVisibility(); // in case onFinishInflate() was called too early
     }
 
+    private boolean lockScreenShortcutsEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+            Settings.Secure.LOCKSCREEN_BOTTOM_SHORTCUTS, 1) == 1;
+    }
+
     private Intent getCameraIntent() {
         KeyguardUpdateMonitor updateMonitor = KeyguardUpdateMonitor.getInstance(mContext);
         boolean currentUserHasTrust = updateMonitor.getUserHasTrust(
@@ -260,12 +265,13 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
                 PackageManager.MATCH_DEFAULT_ONLY,
                 mLockPatternUtils.getCurrentUser());
         boolean visible = !isCameraDisabledByDpm() && resolved != null
-                && getResources().getBoolean(R.bool.config_keyguardShowCameraAffordance);
+                && getResources().getBoolean(R.bool.config_keyguardShowCameraAffordance)
+                && lockScreenShortcutsEnabled();
         mCameraImageView.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     private void updatePhoneVisibility() {
-        boolean visible = isPhoneVisible();
+        boolean visible = isPhoneVisible() && lockScreenShortcutsEnabled();
         mPhoneImageView.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
@@ -400,6 +406,9 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         if (changedView == this && visibility == VISIBLE) {
             updateLockIcon();
             updateCameraVisibility();
+            if (isPhoneVisible()) {
+                updatePhoneVisibility();
+            }
         }
     }
 
