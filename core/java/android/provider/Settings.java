@@ -3620,6 +3620,18 @@ public final class Settings {
         public static final String PIE_BUTTON_ALPHA = "pie_button_alpha";
 
         /**
+         * Whether to use the custom status bar header or not
+         * @hide
+         */
+        public static final String STATUS_BAR_CUSTOM_HEADER = "status_bar_custom_header";
+
+        /**
+         * Current active provider
+         * @hide
+         */
+        public static final String STATUS_BAR_CUSTOM_HEADER_PROVIDER = "status_bar_custom_header_provider";
+
+        /**
          * Pie button pressed and long pressed alpha
          * @hide
          */
