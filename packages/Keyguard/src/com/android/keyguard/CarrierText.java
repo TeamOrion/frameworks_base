@@ -16,7 +16,6 @@
 
 package com.android.keyguard;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -24,7 +23,6 @@ import android.content.res.TypedArray;
 import android.net.ConnectivityManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.method.SingleLineTransformationMethod;
 import android.util.AttributeSet;
@@ -173,12 +171,7 @@ public class CarrierText extends TextView {
                         getContext().getText(R.string.keyguard_missing_sim_message_short), text);
             }
         }
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.LOCK_SCREEN_HIDE_CARRIER, 0) == 0) {
-            setText(displayText);
-        } else {
-            setText("");
-        }
+        setText(displayText);
     }
 
     @Override
