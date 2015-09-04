@@ -222,4 +222,7 @@
     <!-- Blur effects -->
     <java-symbol type="bool" name="config_ui_blur_enabled" />
 
+  <!-- Config to disable showing ringtones from removable storage -->
+  <java-symbol type="bool" name="config_excludeRingtonesFromRemovableStorage" />
+
 </resources>
