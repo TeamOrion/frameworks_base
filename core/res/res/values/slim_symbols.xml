@@ -232,4 +232,7 @@
   <java-symbol type="drawable" name="ic_lock_screen_record" />
   <java-symbol type="string" name="global_action_screen_record" />
 
+  <!-- WiFi turn off notification -->
+  <java-symbol type="string" name="notify_turn_wifi_off_title" />
+
 </resources>
