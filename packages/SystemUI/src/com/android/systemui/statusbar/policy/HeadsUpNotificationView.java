@@ -278,6 +278,7 @@ public class HeadsUpNotificationView extends LinearLayout implements SwipeHelper
 
     @Override
     public void onAttachedToWindow() {
+        super.onAttachedToWindow();
         final ViewConfiguration viewConfiguration = ViewConfiguration.get(getContext());
         float touchSlop = viewConfiguration.getScaledTouchSlop();
         mSwipeHelper = new SwipeHelper(SwipeHelper.X, this, getContext());
@@ -330,6 +331,7 @@ public class HeadsUpNotificationView extends LinearLayout implements SwipeHelper
 
     @Override
     protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
         mContext.getContentResolver().unregisterContentObserver(mSettingsObserver);
     }
 
