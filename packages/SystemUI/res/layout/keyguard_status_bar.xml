@@ -75,6 +75,7 @@
         android:ellipsize="marquee"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/kg_carrier_text"
+        android:visibility="gone"
         android:singleLine="true" />
 
 </com.android.systemui.statusbar.phone.KeyguardStatusBarView>
