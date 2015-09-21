@@ -104,7 +104,7 @@ public class RecentsTaskLoadPlan {
             ActivityManager.RecentTaskInfo t = mRawTasks.get(i);
 
             boolean onlyShowRunningTasks = Settings.System.getIntForUser(
-                    mContext.getContentResolver(), Settings.System.RECENT_SHOW_RUNNING_TASKS, 0,
+                    mContext.getContentResolver(), Settings.System.RECENT_SHOW_RUNNING_TASKS, 1,
                     UserHandle.USER_CURRENT) == 1;
 
             final List<ActivityManager.RunningTaskInfo> runningTasks =
