@@ -577,7 +577,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 final int headsUpGlobalSwitch = Settings.System.getIntForUser(
                         mContext.getContentResolver(),
                         Settings.System.HEADS_UP_GLOBAL_SWITCH,
-                        1,
+                        0,
                         UserHandle.USER_CURRENT);
                 setHeadsUpGlobalSwitch(headsUpGlobalSwitch);
             } else if (uri.equals(Settings.System.getUriFor(
