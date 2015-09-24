@@ -1376,7 +1376,27 @@ public final class Settings {
         public static void getNonLegacyMovedKeys(HashSet<String> outKeySet) {
             outKeySet.addAll(MOVED_TO_GLOBAL);
         }
-
+        
+ /**
+         * Look up a boolean in the database.
+         * @param resolver to access the database with
+         * @param name to look up in the table
+         * @param def Value to return if the setting is not defined.
+         * @return The setting's current value, or 'def' if it is not defined
+         * or not a valid boolean.
+         */
+        public static boolean getBoolean(ContentResolver cr, String name, boolean def) {
+            String v = getString(cr, name);
+            try {
+                if(v != null)
+                    return "1".equals(v);
+                else
+                    return def;
+            } catch (NumberFormatException e) {
+                return def;
+            }
+        }
+        
         /**
          * Look up a name in the database.
          * @param resolver to access the database with
@@ -4176,6 +4196,20 @@ public final class Settings {
          * @hide
          */
         public static final String HEADS_UP_FLOATING = "heads_up_floating";
+
+        /**
+         * Allows to show the background activity back the lockscreen
+         * 0 = off
+         * 1 = on
+         * @hide
+         */
+        public static final String LOCKSCREEN_SEE_THROUGH = "lockscreen_see_through";
+
+        /**
+         * Allows setting the radius for lockscreen blur
+         * @hide
+         */
+        public static final String LOCKSCREEN_BLUR_RADIUS = "lockscreen_blur_radius";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -8203,7 +8237,7 @@ public final class Settings {
                 BLUETOOTH_MAP_PRIORITY_PREFIX = "bluetooth_map_priority_";
 
         /**
-         * Get the key that retrieves a bluetooth headset's priority.
+         * n the key that retrieves a bluetooth headset's priority.
          * @hide
          */
         public static final String getBluetoothHeadsetPriorityKey(String address) {
