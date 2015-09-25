@@ -243,7 +243,6 @@ public class RingtoneManager {
     public RingtoneManager(Activity activity) {
         mContext = mActivity = activity;
         setType(mType);
-        mExcludedExternalStorageDir = getExcludedExternalStorageDir();
     }
 
     /**
@@ -256,7 +255,6 @@ public class RingtoneManager {
     public RingtoneManager(Context context) {
         mContext = context;
         setType(mType);
-        mExcludedExternalStorageDir = getExcludedExternalStorageDir();
     }
 
     /**
@@ -511,19 +509,15 @@ public class RingtoneManager {
          // Get the external media cursor. First check to see if it is mounted.
         final String status = Environment.getExternalStorageState();
 
-        if (status.equals(Environment.MEDIA_MOUNTED) ||
-                status.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
-            String whereClause = constructBooleanTrueWhereClause(mFilterColumns, mIncludeDrm);
-            if (mExcludedExternalStorageDir != null) {
-                whereClause += " AND " + MediaStore.MediaColumns.DATA + " NOT LIKE '" +
-                        mExcludedExternalStorageDir + "%'";
-            }
-            return query(
+        return (status.equals(Environment.MEDIA_MOUNTED) ||
+                status.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) 
+           ? query(
                     MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, MEDIA_COLUMNS,
                     constructBooleanTrueWhereClause(mFilterColumns, mIncludeDrm), null,
                     MediaStore.Audio.Media.DEFAULT_SORT_ORDER)
                 : null;
     }
+    
     
     private void setFilterColumnsList(int type) {
         List<String> columns = mFilterColumns;

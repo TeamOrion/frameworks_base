@@ -54,8 +54,10 @@ import android.util.Slog;
 import com.android.internal.widget.ILockSettings;
 import com.android.internal.widget.LockPatternUtils;
 
+import java.io.File;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;

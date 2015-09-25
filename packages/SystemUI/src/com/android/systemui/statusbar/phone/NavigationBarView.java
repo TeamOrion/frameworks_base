@@ -33,6 +33,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
@@ -376,12 +377,14 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        mSettingsObserver.observe();
         mContext.registerReceiver(mBatteryDimReceiver, mBatteryFilter);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        mSettingsObserver.unobserve();
         mContext.unregisterReceiver(mBatteryDimReceiver);
     }
 
@@ -1318,6 +1321,53 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
 
         }
 
+    }
+        private class SettingsObserver extends ContentObserver {
+
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_IME_ARROWS), false, this);    
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_NAVBAR), false, this);
+            resolver.registerContentObserver(Settings.Global.getUriFor(
+                    Settings.Global.POLICY_CONTROL), false, this);
+            onChange(false);
+        }
+
+        void unobserve() {
+            mContext.getContentResolver().unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            update();
+            onNavButtonTouched();
+            setNavigationIconHints(mNavigationIconHints, true);
+        }
+
+        public void update() {
+            ContentResolver resolver = mContext.getContentResolver();
+
+            mImeArrowVisibility =
+                    (Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_IME_ARROWS, HIDE_IME_ARROW,
+                    UserHandle.USER_CURRENT) == SHOW_IME_ARROW);
+           
+            mDoubleTapToSleep = (Settings.System.getIntForUser(resolver,
+                    Settings.System.DOUBLE_TAP_SLEEP_NAVBAR, 0,
+                    UserHandle.USER_CURRENT) == 1);
+            String expDeskString = Settings.Global.getStringForUser(resolver,
+                    Settings.Global.POLICY_CONTROL, UserHandle.USER_CURRENT);
+            mIsExpandedDesktopOn = (expDeskString != null ?
+                    expDeskString.equals("immersive.full=*") : false);
+        }
     }
 
     private void updateBackButtonDrawables(
