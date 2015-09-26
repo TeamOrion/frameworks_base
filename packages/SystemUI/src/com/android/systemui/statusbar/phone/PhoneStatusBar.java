@@ -690,7 +690,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mBatteryLevel.setVisibility(mShowBatteryText ? View.VISIBLE : View.GONE);
 
             mShowTaskManager = Settings.System.getIntForUser(resolver,
-                    Settings.System.ENABLE_TASK_MANAGER, 0, UserHandle.USER_CURRENT) == 1;
+                    Settings.System.ENABLE_TASK_MANAGER, 1, UserHandle.USER_CURRENT) == 1;
 
             mVisualizerEnabled = Settings.Secure.getIntForUser(resolver,
                     Settings.Secure.LOCKSCREEN_VISUALIZER_ENABLED, 1,

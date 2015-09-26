@@ -1033,7 +1033,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
             mShowWeather = Settings.System.getInt(
                     resolver, Settings.System.STATUS_BAR_SHOW_WEATHER, 1) == 1;
             mShowTaskManager = Settings.System.getIntForUser(resolver,
-                    Settings.System.ENABLE_TASK_MANAGER, 0, currentUserId) == 1;
+                    Settings.System.ENABLE_TASK_MANAGER, 1, currentUserId) == 1;
             updateVisibilities();
         }
     }
