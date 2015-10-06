@@ -1809,6 +1809,12 @@ public class PackageManagerService extends IPackageManager.Stub {
                             ? (UPDATE_PERMISSIONS_REPLACE_PKG|UPDATE_PERMISSIONS_REPLACE_ALL)
                             : 0));
 
+            // Remove any stale app permissions (declared permission that now are undeclared
+            // by the same app, removed from its Manifest in newer versions)
+            if (!onlyCore) {
+                mSettings. removeStalePermissions();
+            }
+
             // If this is the first boot, and it is a normal boot, then
             // we need to initialize the default preferred apps.
             if (!mRestoredSettings && !onlyCore) {
@@ -3173,6 +3179,17 @@ public class PackageManagerService extends IPackageManager.Stub {
                 }
                 if (userId != 0) {
                     ri = new ResolveInfo(mResolveInfo);
+                    ri.activityInfo = new ActivityInfo(ri.activityInfo);
+                    ri.activityInfo.applicationInfo = new ApplicationInfo(
+                            ri.activityInfo.applicationInfo);
+                    ri.activityInfo.applicationInfo.uid = UserHandle.getUid(userId,
+                            UserHandle.getAppId(ri.activityInfo.applicationInfo.uid));
+                    return ri;
+                }
+                return mResolveInfo;
+            } else if (shouldIncludeResolveActivity(intent)) {
+                if (userId != 0) {
+                    ResolveInfo ri = new ResolveInfo(mResolveInfo);
                     ri.activityInfo = new ActivityInfo(ri.activityInfo);
                     ri.activityInfo.applicationInfo = new ApplicationInfo(
                             ri.activityInfo.applicationInfo);
