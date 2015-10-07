@@ -3187,17 +3187,6 @@ public class PackageManagerService extends IPackageManager.Stub {
                     return ri;
                 }
                 return mResolveInfo;
-            } else if (shouldIncludeResolveActivity(intent)) {
-                if (userId != 0) {
-                    ResolveInfo ri = new ResolveInfo(mResolveInfo);
-                    ri.activityInfo = new ActivityInfo(ri.activityInfo);
-                    ri.activityInfo.applicationInfo = new ApplicationInfo(
-                            ri.activityInfo.applicationInfo);
-                    ri.activityInfo.applicationInfo.uid = UserHandle.getUid(userId,
-                            UserHandle.getAppId(ri.activityInfo.applicationInfo.uid));
-                    return ri;
-                }
-                return mResolveInfo;
             }
         }
         return null;
