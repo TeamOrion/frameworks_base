@@ -1858,12 +1858,10 @@ public class PackageManagerService extends IPackageManager.Stub {
             mSeparateProcesses = null;
         }
 
-
         mWindowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
         Display d = mWindowManager.getDefaultDisplay();
         mPolicy = new PhoneWindowManager();
         d.getMetrics(mMetrics);
-        
         mInstaller = installer;
         mPackageDexOptimizer = new PackageDexOptimizer(this);
         mMoveCallbacks = new MoveCallbacks(FgThread.get().getLooper());
@@ -6206,7 +6204,8 @@ public class PackageManagerService extends IPackageManager.Stub {
         if (DEBUG_DEXOPT) {
             Log.i(TAG, "Optimizing app " + curr + " of " + total + ": " + pkg.packageName);
         }
-        try {
+        if (!isFirstBoot()) {
+            try {
                 // give the packagename to the PhoneWindowManager
                 ApplicationInfo ai;
                 try {
@@ -6216,10 +6215,11 @@ public class PackageManagerService extends IPackageManager.Stub {
                 }
                 mPolicy.setPackageName((String) (ai != null ? mContext.getPackageManager().getApplicationLabel(ai) : pkg.packageName));
 
-            ActivityManagerNative.getDefault().showBootMessage(
-                    mContext.getResources().getString(R.string.android_upgrading_apk,
-                            curr, total), true);
-        } catch (RemoteException e) {
+                ActivityManagerNative.getDefault().showBootMessage(
+                        mContext.getResources().getString(R.string.android_upgrading_apk,
+                                curr, total), true);
+            } catch (RemoteException e) {
+            }
         }
         PackageParser.Package p = pkg;
         synchronized (mInstallLock) {
