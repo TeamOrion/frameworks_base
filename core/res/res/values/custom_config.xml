@@ -74,4 +74,6 @@
          config to 19. -->
     <integer name="config_deviceHardwareKeys">19</integer>
 
+    <!-- Is Advanced Reboot enabled? -->
+    <bool name="config_advanced_reboot">true</bool>
 </resources>
