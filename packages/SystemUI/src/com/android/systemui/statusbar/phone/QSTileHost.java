@@ -40,6 +40,7 @@ import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.EditTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
+import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
@@ -298,6 +299,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
 	else if (tileSpec.equals("reboot")) return  new RebootTile(this);
 		else if (tileSpec.equals("ambient_display")) return new AmbientDisplayTile(this);
         else if (tileSpec.equals("sound")) return new SoundTile(this);
+        else if (tileSpec.equals("headsup")) return new HeadsUpTile(this);
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);
         else throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
     }
@@ -371,6 +373,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
 		else if (spec.equals("reboot")) return R.string.quick_settings_reboot_label;
 		else if (spec.equals("ambient_display")) return R.string.quick_settings_ambient_display_label;
         else if (spec.equals("sound")) return R.string.quick_settings_sound_label;
-        return 0;
+        else if (spec.equals("headsup")) return R.string.quick_settings_heads_up_label;  
+ return 0;
     }
 }

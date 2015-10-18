@@ -139,7 +139,7 @@ public class QsTuner extends Fragment implements Callback {
     @Override
     public void onTilesChanged() {
         mQsPanel.setTiles(mTileHost.getTiles());
-    }
+       }
 
     @Override
     public void setEditing(boolean editing) {
