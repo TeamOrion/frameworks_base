@@ -364,8 +364,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private TaskManager mTaskManager;
     private LinearLayout mTaskManagerPanel;
     private ImageButton mTaskManagerButton;
+    // task manager enabled
     private boolean mShowTaskManager;
-    private boolean showTaskList = false;
+    // task manager click state
+    private boolean mShowTaskList = false;
 
     // top bar
     StatusBarHeaderView mHeader;
@@ -418,6 +420,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     int[] mAbsPos = new int[2];
     ArrayList<Runnable> mPostCollapseRunnables = new ArrayList<>();
+
+    private boolean mRecreating = false;
 
     private boolean mShowBatteryText;
     private boolean mShowBatteryTextCharging;
@@ -700,13 +704,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             updateBatteryLevelText();
             mBatteryLevel.setVisibility(mShowBatteryText ? View.VISIBLE : View.GONE);
 
-
-            mShowTaskManager = Settings.System.getIntForUser(resolver,
-                    Settings.System.ENABLE_TASK_MANAGER, 1, UserHandle.USER_CURRENT) == 1;
-
             mBlurRadius = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.LOCKSCREEN_BLUR_RADIUS, 14);
-
 
             mVisualizerEnabled = Settings.Secure.getIntForUser(resolver,
                     Settings.Secure.LOCKSCREEN_VISUALIZER_ENABLED, 1,
@@ -714,7 +713,22 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
             mBatterySaverBarColor = Settings.System.getIntForUser(
                     resolver, Settings.System.BATTERY_SAVER_MODE_COLOR, 1, UserHandle.USER_CURRENT) == 1;
-
+                    
+            boolean showTaskManager = Settings.System.getIntForUser(resolver,
+                    Settings.System.ENABLE_TASK_MANAGER, 0, UserHandle.USER_CURRENT) == 1;
+            if (mShowTaskManager != showTaskManager) {
+                if (!mShowTaskManager) {
+                    // explicitly reset click state when disabled
+                    mShowTaskList = false;
+                }
+                mShowTaskManager = showTaskManager;
+                if (mHeader != null) {
+                    mHeader.setTaskManagerEnabled(showTaskManager);
+                }
+                if (mNotificationPanel != null) {
+                    mNotificationPanel.setTaskManagerEnabled(showTaskManager);
+                }
+            }
         }
 	}
 
@@ -1349,10 +1363,16 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mTaskManagerButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                showTaskList = !showTaskList;
-                mNotificationPanel.setTaskManagerVisibility(showTaskList);
+                mShowTaskList = !mShowTaskList;
+                mNotificationPanel.setTaskManagerVisibility(mShowTaskList);
             }
         });      
+
+        if (mRecreating) {
+            mHeader.setTaskManagerEnabled(mShowTaskManager);
+            mNotificationPanel.setTaskManagerEnabled(mShowTaskManager);
+            mShowTaskList = false;
+        }
 
         // User info. Trigger first load.
         mHeader.setUserInfoController(mUserInfoController);
@@ -4008,13 +4028,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 mUserSetupObserver,
                 mCurrentUserId);
     }
-
+    
     public void resetQsPanelVisibility() {
-        showTaskList = showTaskList;
-        if (showTaskList) {
+        mShowTaskList = mShowTaskList;
+        if (mShowTaskList) {
             mQSPanel.setVisibility(View.VISIBLE);
             mTaskManagerPanel.setVisibility(View.GONE);
-            showTaskList = false;
+            mShowTaskList = false;
         }
     }
 
