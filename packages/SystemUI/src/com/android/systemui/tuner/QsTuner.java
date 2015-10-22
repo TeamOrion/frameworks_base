@@ -180,7 +180,13 @@ public class QsTuner extends Fragment implements Callback {
             setTiles(order);
         }
 
-        private static class BlankSecurityController implements SecurityController {
+      public void reset() {
+    Secure.putStringForUser(getContext().getContentResolver(), TILES_SETTING,
+            "wifi,bt,dnd,cell,airplane,rotation,flashlight,location,cast",
+              ActivityManager.getCurrentUser());
+        }
+
+      private static class BlankSecurityController implements SecurityController {
             @Override
             public boolean hasDeviceOwner() {
                 return false;
