@@ -158,6 +158,7 @@ public class AlternateRecentsComponent implements ActivityOptions.OnAnimationSta
     TaskStackListenerImpl mTaskStackListener;
     RecentsOwnerEventProxyReceiver mProxyBroadcastReceiver;
     boolean mBootCompleted;
+    boolean mDelayLoadTilBoot;
     boolean mStartAnimationTriggered;
     boolean mCanReuseTaskStackViews = true;
 
@@ -217,9 +218,16 @@ public class AlternateRecentsComponent implements ActivityOptions.OnAnimationSta
     public void onStart() {
         // Initialize some static datastructures
         TaskStackViewLayoutAlgorithm.initializeCurve();
-        // Load the header bar layout
-        reloadHeaderBarLayout(true);
+        if (mBootCompleted) {
+            load();
+        } else {
+            mDelayLoadTilBoot = true;
+        }
+    }
 
+    private void load() {
+            // Load the header bar layout
+        	reloadHeaderBarLayout(true);
         // When we start, preload the data associated with the previous recent tasks.
         // We can use a new plan since the caches will be the same.
         RecentsTaskLoader loader = RecentsTaskLoader.getInstance();
@@ -234,8 +242,12 @@ public class AlternateRecentsComponent implements ActivityOptions.OnAnimationSta
 
     public void onBootCompleted() {
         mBootCompleted = true;
-    }
-
+    
+        if (mDelayLoadTilBoot) {
+            mDelayLoadTilBoot = false;
+            load();
+        }
+      }  
     /** Shows the Recents. */
     @ProxyFromPrimaryToCurrentUser
     public void onShowRecents(boolean triggeredFromAltTab) {
