@@ -375,7 +375,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
     public void resetTiles() {
         setEditing(false);
         Settings.System.putStringForUser(getContext().getContentResolver(),
-                Settings.System.QS_TILES, "default", ActivityManager.getCurrentUser());
+                Settings.System.QS_TILES, "wifi,bt,dnd,cell,airplane,rotation,flashlight,location,edit", ActivityManager.getCurrentUser());
     }
 
     public static int getLabelResource(String spec) {
