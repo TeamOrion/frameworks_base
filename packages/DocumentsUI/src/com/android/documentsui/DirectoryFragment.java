@@ -37,6 +37,7 @@ import static com.android.documentsui.BaseActivity.State.ACTION_GET_CONTENT;
 import static com.android.documentsui.BaseActivity.State.ACTION_MANAGE;
 import static com.android.documentsui.BaseActivity.State.ACTION_OPEN;
 import static com.android.documentsui.BaseActivity.State.ACTION_OPEN_TREE;
+import static com.android.documentsui.BaseActivity.State.ACTION_STANDALONE;
 import static com.android.documentsui.BaseActivity.State.MODE_GRID;
 import static com.android.documentsui.BaseActivity.State.MODE_LIST;
 import static com.android.documentsui.BaseActivity.State.MODE_UNKNOWN;
@@ -536,13 +537,16 @@ public class DirectoryFragment extends Fragment {
             final MenuItem share = menu.findItem(R.id.menu_share);
             final MenuItem delete = menu.findItem(R.id.menu_delete);
             final MenuItem copy = menu.findItem(R.id.menu_copy);
+            final MenuItem cut = menu.findItem(R.id.menu_cut);
 
             final boolean manageOrBrowse = (state.action == ACTION_MANAGE
                     || state.action == ACTION_BROWSE || state.action == ACTION_BROWSE_ALL);
+            final boolean stdMode = state.action == ACTION_STANDALONE;
 
-            open.setVisible(!manageOrBrowse);
-            share.setVisible(manageOrBrowse);
-            delete.setVisible(manageOrBrowse);
+
+            open.setVisible(!manageOrBrowse && !stdMode);
+            share.setVisible(manageOrBrowse || stdMode);
+            delete.setVisible(manageOrBrowse || stdMode);
             // Disable copying from the Recents view.
             copy.setVisible(manageOrBrowse && mType != TYPE_RECENT_OPEN);
 
@@ -601,11 +605,14 @@ public class DirectoryFragment extends Fragment {
                     mCurrentView.setItemChecked(i, true);
                 }
                 updateDisplayState();
+            } else if (id == R.id.menu_cut) {
+                onCutDocuments(docs);
+                mode.finish();
+                return true;
 
             } else if (id == R.id.menu_cut) {
                 onCutDocuments(docs);
                 mode.finish();
-
                 return true;
 
             } else {
@@ -652,7 +659,6 @@ public class DirectoryFragment extends Fragment {
                     if (!Document.MIME_TYPE_DIR.equals(docMimeType) || state.action == ACTION_STANDALONE) {
                         valid = isDocumentEnabled(docMimeType, docFlags);
                     }
->>>>>>> 9fc07eb... Add a standalone File Manager
                 }
 
                 if (hasFolder) {
@@ -809,10 +815,6 @@ public class DirectoryFragment extends Fragment {
         }
 
         return !hadTrouble;
-    }
-
-    private void onCopyDocuments(final List<DocumentInfo> docs) {
-        ((DocumentsActivity) getActivity()).setClipboardDocuments(docs, true);
     }
 
     private void onCutDocuments(final List<DocumentInfo> docs) {
