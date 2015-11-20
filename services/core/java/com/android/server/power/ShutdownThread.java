@@ -252,7 +252,7 @@ public final class ShutdownThread extends Thread {
     }
 
     private static int getAdvancedReboot(Context context) {
-        int def = BuildInfo.getSlimBuildType().equals(BuildInfo.BUILD_TYPE_UNOFFICIAL) ? 1 : 0;
+        int def = BuildInfo.getSlimBuildType().equals("OFFICIAL") ? 1 : 0;
         return Settings.Secure.getInt(context.getContentResolver(),
                 Settings.Secure.ADVANCED_REBOOT, def);
     }
