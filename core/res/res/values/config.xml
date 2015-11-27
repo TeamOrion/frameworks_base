@@ -2509,4 +2509,9 @@
     <bool name="config_show_cmIMESwitcher">true</bool>
 <!-- Default, comma-delimited, quick settings tiles. See QSConstants.java for a list of all available tiles -->
     <string name="config_defaultQuickSettingsTiles">wifi,bt,cell,airplane,rotation,flashlight,location,edit,visualizer,dnd</string>
+
+    <!-- Older sensors are not setting event.timestamp correctly.  Setting to
+          true will use SystemClock.elapsedRealtimeNanos() to set timestamp-->
+    <bool name="config_useSystemClockforSensors">false</bool>
+
 </resources>
