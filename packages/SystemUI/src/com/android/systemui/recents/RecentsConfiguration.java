@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.animation.AnimationUtils;
@@ -112,6 +113,9 @@ public class RecentsConfiguration {
     /** Task bar size & animations */
     public int taskBarHeight;
     public int taskBarDismissDozeDelaySeconds;
+    public int taskBarEnterAnimDuration;
+    public int taskBarEnterAnimDelay;
+    public int taskBarExitAnimDuration;
 
     /** Nav bar scrim */
     public int navBarScrimEnterDuration;
@@ -210,7 +214,9 @@ public class RecentsConfiguration {
                 res.getInteger(R.integer.recents_filter_animate_new_views_duration);
 
         // Loading
-        maxNumTasksToLoad = ActivityManager.getMaxRecentTasksStatic();
+        maxNumTasksToLoad = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.RECENTS_MAX_APPS, ActivityManager.getMaxRecentTasksStatic(),
+                UserHandle.USER_CURRENT);
 
         // Search Bar
         searchBarSpaceHeightPx = res.getDimensionPixelSize(R.dimen.recents_search_bar_space_height);
@@ -267,6 +273,12 @@ public class RecentsConfiguration {
         taskBarHeight = res.getDimensionPixelSize(R.dimen.recents_task_bar_height);
         taskBarDismissDozeDelaySeconds =
                 res.getInteger(R.integer.recents_task_bar_dismiss_delay_seconds);
+        taskBarEnterAnimDuration =
+                res.getInteger(R.integer.recents_animate_task_bar_enter_duration);
+        taskBarEnterAnimDelay =
+                res.getInteger(R.integer.recents_animate_task_bar_enter_delay);
+        taskBarExitAnimDuration =
+                res.getInteger(R.integer.recents_animate_task_bar_exit_duration);
 
         // Nav bar scrim
         navBarScrimEnterDuration =
@@ -277,6 +289,8 @@ public class RecentsConfiguration {
         altTabKeyDelay = res.getInteger(R.integer.recents_alt_tab_key_delay);
         fakeShadows = res.getBoolean(R.bool.config_recents_fake_shadows);
         svelteLevel = res.getInteger(R.integer.recents_svelte_level);
+
+        updateShowSearch(context);
     }
 
     /** Updates the system insets */
@@ -292,6 +306,14 @@ public class RecentsConfiguration {
         lockToAppEnabled = ssp.getSystemSetting(context,
                 Settings.System.LOCK_TO_APP_ENABLED) != 0;
         multiStackEnabled = "true".equals(ssp.getSystemProperty("persist.sys.debug.multi_window"));
+        updateShowSearch(context);
+    }
+
+    private void updateShowSearch(Context context) {
+        boolean showSearchBar = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.RECENTS_SHOW_SEARCH_BAR, 1, UserHandle.USER_CURRENT) == 1;
+        searchBarSpaceHeightPx = showSearchBar ? context.getResources().getDimensionPixelSize(
+                R.dimen.recents_search_bar_space_height): 0;
     }
 
     /** Called when the configuration has changed, and we want to reset any configuration specific
@@ -332,10 +354,10 @@ public class RecentsConfiguration {
             int rightInset, Rect searchBarBounds, Rect taskStackBounds) {
         if (isLandscape && hasTransposedSearchBar) {
             // In landscape, the search bar appears on the left, but we overlay it on top
-            taskStackBounds.set(0, topInset, windowWidth - rightInset, windowHeight);
+            taskStackBounds.set(0, 0, windowWidth - rightInset, windowHeight);
         } else {
             // In portrait, the search bar appears on the top (which already has the inset)
-            taskStackBounds.set(0, searchBarBounds.bottom, windowWidth, windowHeight);
+            taskStackBounds.set(0, 0, windowWidth, windowHeight);
         }
     }
 
