@@ -211,6 +211,7 @@ public class QsTuner extends Fragment implements Callback {
         else if (spec.equals("battery_saver")) return R.string.quick_settings_battery_saver;
         else if (spec.equals("expanded_desktop")) return R.string.quick_settings_expanded_desktop;
         else if (spec.equals("adb_network")) return R.string.quick_settings_adb_network;
+        else if (spec.equals("music")) return R.string.quick_settings_music_label;
         return 0;
     }
 
@@ -462,6 +463,7 @@ public class QsTuner extends Fragment implements Callback {
             else if (mSpec.equals("battery_saver")) return R.drawable.ic_qs_battery_saver_on;
             else if (mSpec.equals("expanded_desktop")) return R.drawable.ic_qs_expanded_desktop;
             else if (mSpec.equals("adb_network")) return R.drawable.ic_qs_network_adb_on;
+            else if (mSpec.equals("music")) return R.drawable.ic_qs_media_play;
             return R.drawable.android;
         }
 
