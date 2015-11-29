@@ -47,6 +47,7 @@ import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.RebootTile;
+import com.android.systemui.qs.tiles.MusicTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenOffTile;
 import com.android.systemui.qs.tiles.ScreenTimeoutTile;
@@ -304,6 +305,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("headsup")) return new HeadsUpTile(this);
         else if (tileSpec.equals("expanded_desktop")) return new ExpandedDesktopTile(this);
         else if (tileSpec.equals("battery_saver")) return new BatterySaverTile(this);
+        else if (tileSpec.equals("music")) return new MusicTile(this);
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);
         else throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
     }
@@ -379,6 +381,8 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (spec.equals("sound")) return R.string.quick_settings_sound_label;
         else if (spec.equals("headsup")) return R.string.quick_settings_heads_up_label;  
      else if (spec.equals("expanded_desktop")) return R.string.quick_settings_expanded_desktop; 
-     return 0; 
+     else if (spec.equals("battery_saver")) return R.string.quick_settings_battery_saver;  
+     else if (spec.equals("music")) return R.string.quick_settings_music_label;
+       return 0; 
     }
 }

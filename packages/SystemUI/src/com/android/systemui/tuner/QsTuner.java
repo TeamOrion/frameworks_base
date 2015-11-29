@@ -297,8 +297,6 @@ public class QsTuner extends Fragment implements Callback {
             else if (mSpec.equals("rotation")) return R.drawable.ic_portrait_from_auto_rotate;
             else if (mSpec.equals("flashlight")) return R.drawable.ic_signal_flashlight_enable;
             else if (mSpec.equals("location")) return R.drawable.ic_signal_location_enable;
-            else if (mSpec.equals("cast")) return R.drawable.ic_qs_cast_on;
-            else if (mSpec.equals("hotspot")) return R.drawable.ic_hotspot_enable;
             return R.drawable.android;
         }
 
