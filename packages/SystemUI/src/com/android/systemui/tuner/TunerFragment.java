@@ -15,24 +15,16 @@
  */
 package com.android.systemui.tuner;
 
-import static com.android.systemui.BatteryMeterView.SHOW_PERCENT_SETTING;
-
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.database.ContentObserver;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
-import android.provider.Settings.System;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,13 +39,11 @@ public class TunerFragment extends PreferenceFragment {
     private static final String TAG = "TunerFragment";
 
     private static final String KEY_QS_TUNER = "qs_tuner";
-    private static final String KEY_BATTERY_PCT = "battery_pct";
+    private static final String KEY_DEMO_MODE = "demo_mode";
 
     public static final String SETTING_SEEN_TUNER_WARNING = "seen_tuner_warning";
 
-    private final SettingObserver mSettingObserver = new SettingObserver();
-
-    private SwitchPreference mBatteryPct;
+    private static final int MENU_REMOVE = Menu.FIRST + 1;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +62,16 @@ public class TunerFragment extends PreferenceFragment {
                 return true;
             }
         });
-        mBatteryPct = (SwitchPreference) findPreference(KEY_BATTERY_PCT);
+        findPreference(KEY_DEMO_MODE).setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(android.R.id.content, new DemoModeFragment(), "DemoMode");
+                ft.addToBackStack(null);
+                ft.commit();
+                return true;
+            }
+        });
         if (Settings.Secure.getInt(getContext().getContentResolver(), SETTING_SEEN_TUNER_WARNING,
                 0) == 0) {
             new AlertDialog.Builder(getContext())
@@ -91,9 +90,6 @@ public class TunerFragment extends PreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        updateBatteryPct();
-        getContext().getContentResolver().registerContentObserver(
-                System.getUriFor(SHOW_PERCENT_SETTING), false, mSettingObserver);
 
         registerPrefs(getPreferenceScreen());
         MetricsLogger.visibility(getContext(), MetricsLogger.TUNER, true);
@@ -102,7 +98,6 @@ public class TunerFragment extends PreferenceFragment {
     @Override
     public void onPause() {
         super.onPause();
-        getContext().getContentResolver().unregisterContentObserver(mSettingObserver);
 
         unregisterPrefs(getPreferenceScreen());
         MetricsLogger.visibility(getContext(), MetricsLogger.TUNER, false);
@@ -135,41 +130,25 @@ public class TunerFragment extends PreferenceFragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(Menu.NONE, MENU_REMOVE, Menu.NONE, R.string.remove_from_settings);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 getActivity().finish();
                 return true;
+            case MENU_REMOVE:
+                TunerService.showResetRequest(getContext(), new Runnable() {
+                    @Override
+                    public void run() {
+                        getActivity().finish();
+                    }
+                });
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private void updateBatteryPct() {
-        mBatteryPct.setOnPreferenceChangeListener(null);
-        mBatteryPct.setChecked(System.getInt(getContext().getContentResolver(),
-                SHOW_PERCENT_SETTING, 0) != 0);
-        mBatteryPct.setOnPreferenceChangeListener(mBatteryPctChange);
-    }
-
-    private final class SettingObserver extends ContentObserver {
-        public SettingObserver() {
-            super(new Handler());
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri, int userId) {
-            super.onChange(selfChange, uri, userId);
-            updateBatteryPct();
-        }
-    }
-
-    private final OnPreferenceChangeListener mBatteryPctChange = new OnPreferenceChangeListener() {
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object newValue) {
-            final boolean v = (Boolean) newValue;
-            MetricsLogger.action(getContext(), MetricsLogger.TUNER_BATTERY_PERCENTAGE, v);
-            System.putInt(getContext().getContentResolver(), SHOW_PERCENT_SETTING, v ? 1 : 0);
-            return true;
-        }
-    };
 }

@@ -91,7 +91,7 @@ public class TunerService extends SystemUI {
         Uri uri = Settings.Secure.getUriFor(key);
         if (!mListeningUris.containsKey(uri)) {
             mListeningUris.put(uri, key);
-            mContentResolver.registerContentObserver(uri, true, mObserver, mCurrentUser);
+            mContentResolver.registerContentObserver(uri, false, mObserver, mCurrentUser);
         }
         // Send the first state.
         String value = Settings.Secure.getStringForUser(mContentResolver, key, mCurrentUser);
@@ -110,7 +110,7 @@ public class TunerService extends SystemUI {
         }
         mContentResolver.unregisterContentObserver(mObserver);
         for (Uri uri : mListeningUris.keySet()) {
-            mContentResolver.registerContentObserver(uri, true, mObserver, mCurrentUser);
+            mContentResolver.registerContentObserver(uri, false, mObserver, mCurrentUser);
         }
     }
 
@@ -135,7 +135,7 @@ public class TunerService extends SystemUI {
     public void clearAll() {
         // A couple special cases.
         Settings.Global.putString(mContentResolver, DemoMode.DEMO_MODE_ALLOWED, null);
-        Settings.System.putString(mContentResolver, BatteryMeterView.SHOW_PERCENT_SETTING, null);
+//        Settings.System.putString(mContentResolver, BatteryMeterView.SHOW_PERCENT_SETTING, null);
         Intent intent = new Intent(DemoMode.ACTION_DEMO);
         intent.putExtra(DemoMode.EXTRA_COMMAND, DemoMode.COMMAND_EXIT);
         mContext.sendBroadcast(intent);

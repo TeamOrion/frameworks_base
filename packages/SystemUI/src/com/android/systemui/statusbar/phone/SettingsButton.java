@@ -19,6 +19,7 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -32,10 +33,10 @@ import com.android.keyguard.AlphaOptimizedImageButton;
 
 public class SettingsButton extends AlphaOptimizedImageButton {
 
-    private static final long LONG_PRESS_LENGTH = 0;
-    private static final long ACCEL_LENGTH = 0;
-    private static final long FULL_SPEED_LENGTH = 0;
-    private static final long RUN_DURATION = 0;
+    private static final long LONG_PRESS_LENGTH = 1000;
+    private static final long ACCEL_LENGTH = 750;
+    private static final long FULL_SPEED_LENGTH = 375;
+    private static final long RUN_DURATION = 350;
 
     private boolean mUpToSpeed;
     private ObjectAnimator mAnimator;
