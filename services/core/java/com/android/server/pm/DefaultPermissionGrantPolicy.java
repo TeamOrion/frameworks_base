@@ -496,6 +496,8 @@ final class DefaultPermissionGrantPolicy {
             if (browserPackage != null
                     && doesPackageSupportRuntimePermissions(browserPackage)) {
                 grantRuntimePermissionsLPw(browserPackage, LOCATION_PERMISSIONS, userId);
+                grantRuntimePermissionsLPw(browserPackage, CONTACTS_PERMISSIONS, userId);
+                grantRuntimePermissionsLPw(browserPackage, STORAGE_PERMISSIONS, userId);
             }
 
             // IME
@@ -764,6 +766,8 @@ final class DefaultPermissionGrantPolicy {
         if (browserPackage != null
                 && doesPackageSupportRuntimePermissions(browserPackage)) {
             grantRuntimePermissionsLPw(browserPackage, LOCATION_PERMISSIONS, false, false, userId);
+            grantRuntimePermissionsLPw(browserPackage, CONTACTS_PERMISSIONS, false, false, userId);
+            grantRuntimePermissionsLPw(browserPackage, STORAGE_PERMISSIONS, false, false, userId);
         }
     }
 
