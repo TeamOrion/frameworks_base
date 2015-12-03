@@ -379,15 +379,10 @@ public class StatusBarWindowView extends FrameLayout {
 
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
-<<<<<<< HEAD
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE), false, this);
-=======
-            resolver.registerContentObserver(CMSettings.System.getUriFor(
-                            CMSettings.System.DOUBLE_TAP_SLEEP_GESTURE), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
                             Settings.System.DOUBLE_TAP_SLEEP_LOCK_SCREEN), false, this);
->>>>>>> d9b84e5... SystemUI: Double tap to sleep on the lock screen (1/2)
             update();
         }
 
