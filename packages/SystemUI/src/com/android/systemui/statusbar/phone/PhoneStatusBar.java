@@ -430,10 +430,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     || uri.equals(Settings.System.getUriFor(
                     Settings.System.RECENT_CARD_TEXT_COLOR))) {
                 rebuildRecentsScreen();
-                    }
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT))) {
-                    recreateStatusBar();
                     updateRowStates();
                     updateSpeedbump();
                     updateClearAll();
@@ -3256,6 +3254,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 Settings.Secure.getUriFor(Settings.Secure.USER_SETUP_COMPLETE), true,
                 mUserSetupObserver, mCurrentUserId);
     }
+    
+    
 
     /**
      * Reload some of our resources when the configuration changes.

@@ -39,6 +39,7 @@ import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.util.TypedValue;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
@@ -69,7 +70,7 @@ import java.text.NumberFormat;
  * The view to manage the header area in the expanded status bar.
  */
 public class StatusBarHeaderView extends RelativeLayout implements View.OnClickListener,
-        NextAlarmController.NextAlarmChangeCallback, EmergencyListener {
+        NextAlarmController.NextAlarmChangeCallback, EmergencyListener,
 		StatusBarHeaderMachine.IStatusBarHeaderMachineObserver {
     static final String TAG = "StatusBarHeaderView";
 

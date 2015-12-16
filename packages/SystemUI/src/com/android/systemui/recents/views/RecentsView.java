@@ -403,8 +403,6 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)
                     mFloatingButton.getLayoutParams();
-            boolean isLandscape = mContext.getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
             if (mSearchBar == null || isLandscape) {
                 params.topMargin = mContext.getResources().
                     getDimensionPixelSize(com.android.internal.R.dimen.status_bar_height);
@@ -493,11 +491,17 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
         super.onAttachedToWindow();
         mFloatingButton = ((View)getParent()).findViewById(R.id.floating_action_button);
         mClearRecents = ((View)getParent()).findViewById(R.id.clear_recents);
+        mMemText = (TextView) ((View)getParent()).findViewById(R.id.recents_memory_text);
+        mMemBar = (ProgressBar) ((View)getParent()).findViewById(R.id.recents_memory_bar);
+        
+        updateMemoryStatus();
         mClearRecents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dismissAllTasksAnimated();
             }
         });
+        }
+        
     private boolean showMemDisplay() {
         boolean enableMemDisplay = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, 0) == 1;
@@ -540,14 +544,6 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
         return memory / 1048576;
     }
     
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        mMemText = (TextView) ((View)getParent()).findViewById(R.id.recents_memory_text);
-        mMemBar = (ProgressBar) ((View)getParent()).findViewById(R.id.recents_memory_bar);
-
-        updateMemoryStatus();
-    }
 
     /**
      * This is called with the full size of the window since we are handling our own insets.
