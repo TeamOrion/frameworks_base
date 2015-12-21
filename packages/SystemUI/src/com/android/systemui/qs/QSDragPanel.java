@@ -46,6 +46,9 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.tuner.QsTuner;
 import com.viewpagerindicator.CirclePageIndicator;
 
+import com.android.internal.util.cm.QSConstants;
+import com.android.internal.util.cm.QSUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -58,6 +61,7 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
     private static final String TAG = "QSDragPanel";
 
     public static final boolean DEBUG_DRAG = true;
+	private static final String BROADCAST_TILE_SPEC_PLACEHOLDER = "broadcast_placeholder";
 
     protected final ArrayList<QSPage> mPages = new ArrayList<>();
 
@@ -1336,46 +1340,40 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
     }
 
     // todo implement proper add tile ui
-    protected void showAddDialog() {
-        List<String> tiles = mHost.getTileSpecs();
-        int numBroadcast = 0;
-        for (int i = 0; i < tiles.size(); i++) {
-            if (tiles.get(i).startsWith(IntentTile.PREFIX)) {
-                numBroadcast++;
-            }
-        }
-        String[] defaults =
-                getContext().getString(R.string.quick_settings_tiles_default).split(",");
-        int availableSize = defaults.length + 1 - (tiles.size() - numBroadcast);
-        if (availableSize < 1) {
-            availableSize = 1;
-        }
-        final String[] available = new String[availableSize];
-        final String[] availableTiles = new String[availableSize];
-        int index = 0;
-        for (int i = 0; i < defaults.length; i++) {
-            if (tiles.contains(defaults[i])) {
-                continue;
-            }
-            int resource = mHost.getLabelResource(defaults[i]);
+	protected void showAddDialog() {
+    List<String> currentTileSpec = mHost.getTileSpecs();
+        final List<String> availableTilesSpec = QSUtils.getAvailableTiles(getContext());
+
+        // Remove tiles already used
+        availableTilesSpec.removeAll(currentTileSpec);
+
+        // Populate labels
+        List<String> availableTilesLabel = new ArrayList<String>();
+        for (String tileSpec : availableTilesSpec) {
+            int resource = QSTileHost.getLabelResource(tileSpec);
             if (resource != 0) {
-                availableTiles[index] = defaults[i];
-                available[index++] = getContext().getString(resource);
+                availableTilesLabel.add(getContext().getString(resource));
             } else {
-                availableTiles[index] = defaults[i];
-                available[index++] = defaults[i];
+                availableTilesLabel.add(tileSpec);
             }
         }
-        available[index++] = getContext().getString(R.string.broadcast_tile);
+
+        // Add broadcast tile
+        availableTilesLabel.add(getContext().getString(R.string.broadcast_tile));
+        availableTilesSpec.add(BROADCAST_TILE_SPEC_PLACEHOLDER);
+
+        String[] items = new String[availableTilesLabel.size()];
+        availableTilesLabel.toArray(items);
 
         final AlertDialog d = new AlertDialog.Builder(getContext(), R.style.Theme_SystemUI_Dialog)
                 .setTitle(R.string.add_tile)
-                .setItems(available, new DialogInterface.OnClickListener() {
+                .setItems(items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        if (which < available.length - 1) {
-                            add(availableTiles[which]);
-                        } else {
+                        String tileSpec = availableTilesSpec.get(which);
+                        if (tileSpec.equals(BROADCAST_TILE_SPEC_PLACEHOLDER)) {
                             showBroadcastTileDialog();
+                        } else {
+                            add(tileSpec);
                         }
                     }
                 }).create();
