@@ -447,6 +447,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     updateClearAll();
                     updateEmptyShadeView();
             }
+            
+            update();
         }
 
         public void update() {
