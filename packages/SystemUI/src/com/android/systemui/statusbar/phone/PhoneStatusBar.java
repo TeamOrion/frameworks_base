@@ -2111,7 +2111,8 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
         Bitmap backdropBitmap = null;
 
         // apply any album artwork first
-        if (mMediaMetadata != null) {
+        if (mMediaMetadata != null && (Settings.System.getIntForUser(mContext.getContentResolver(),
+            Settings.System.LOCKSCREEN_MEDIA_METADATA, 1, UserHandle.USER_CURRENT) == 1)) {
             backdropBitmap = mMediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
             if (backdropBitmap == null) {
                 backdropBitmap = mMediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
