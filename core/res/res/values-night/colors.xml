@@ -13,14 +13,30 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-<!-- Colors specific to Material themes. -->
-<resources>
+	<!-- Colors specific to Material themes. -->
     <color name="notification_action_color_filter">#9F9F9F</color>
     <!-- background of the picture in the big material notification template -->
     <color name="notification_mtrl_big_picture_bg">#CC111111</color>
 
-<!-- DayNight theme  -->
+	<!-- DayNight theme  -->
     <color name="background_floating_material_dark">@color/material_grey_800</color>
+
+    <!-- System - Accents -->
+ 	<color name="accent_material_light">#80CBC4</color>
+ 	<color name="accent_material_dark">#80CBC4</color>
+ 
+ 	<!-- StatusBar Expanded - User Icons -->
+ 	<color name="user_icon_1">#80CBC4</color>
+ 	<color name="user_icon_2">#80CBC4</color>
+ 	<color name="user_icon_3">#80CBC4</color>
+ 	<color name="user_icon_4">#80CBC4</color>
+ 	<color name="user_icon_5">#80CBC4</color>
+ 	<color name="user_icon_6">#80CBC4</color>
+ 	<color name="user_icon_7">#80CBC4</color>
+ 	<color name="user_icon_8">#80CBC4</color>
+ 	<color name="user_icon_default_gray">#ff9e9e9e</color>
+ 	<color name="user_icon_default_white">#ffffffff</color>
 
 </resources>

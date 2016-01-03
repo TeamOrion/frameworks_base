@@ -82,8 +82,8 @@
     <color name="darker_gray">#aaa</color>
 
     <!-- For security permissions -->
-    <color name="perms_dangerous_grp_color">#33b5e5</color>
-    <color name="perms_dangerous_perm_color">#33b5e5</color>
+    <color name="perms_dangerous_grp_color">#384248</color>
+    <color name="perms_dangerous_perm_color">#384248</color>
     <color name="shadow">#cc222222</color>
     <color name="perms_costs_money">#fff4511e</color>
     
@@ -125,7 +125,7 @@
 
     <color name="micro_text_light">#434343</color>
 
-    <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
+    <drawable name="notification_template_icon_bg">#33384248</drawable>
     <drawable name="notification_template_icon_low_bg">#0cffffff</drawable>
     <drawable name="notification_template_divider">#29000000</drawable>
     <drawable name="notification_template_divider_media">#29ffffff</drawable>
