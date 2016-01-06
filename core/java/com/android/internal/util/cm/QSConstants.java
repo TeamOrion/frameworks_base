@@ -37,6 +37,7 @@ public class QSConstants {
 	public static final String TILE_REBOOT = "reboot";
 	public static final String TILE_AMBIENT_DISPLAY = "ambient_display";
         public static final String TILE_SOUND = "sound";
+        public static final String TILE_LTE = "lte";
 	public static final String TILE_EDIT = "edit";
         public static final String TILE_HEADSUP = "headsup";
         public static final String TILE_EXPANDED_DESKTOP = "expanded_desktop";
@@ -80,6 +81,7 @@ public class QSConstants {
                 STATIC_TILES_AVAILABLE.add(TILE_USB_TETHER);
                 STATIC_TILES_AVAILABLE.add(TILE_NFC);
                 STATIC_TILES_AVAILABLE.add(TILE_SYNC);
+                STATIC_TILES_AVAILABLE.add(TILE_LTE);
         TILES_AVAILABLE.addAll(STATIC_TILES_AVAILABLE);
     }
 }
