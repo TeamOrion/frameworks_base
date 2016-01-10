@@ -3414,6 +3414,15 @@ public final class Settings {
          */
         public static final String RECENT_CARD_TEXT_COLOR = "recent_card_text_color";
 
+         /**
+         * The global recents long press activity chosen by the user.
+         * This setting is stored as a flattened component name as
+         * per {@link ComponentName#flattenToString()}.
+         *
+         * @hide
+         */
+        public static final String RECENTS_LONG_PRESS_ACTIVITY = "recents_long_press_activity";
+
         /**
          * Change the number of columns displayed in the Settings dashboard
          * @hide
@@ -3666,7 +3675,7 @@ public final class Settings {
          * (See ButtonsConstants.java for valid values)
          * @hide
          */
-        public static final String KEY_BACK_DOUBLE_TAP_ACTION = "key_back_double_tap_action";        
+        public static final String KEY_BACK_DOUBLE_TAP_ACTION = "key_back_double_tap_action";      
 
          /**
           * Position of date
