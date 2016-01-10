@@ -2404,4 +2404,9 @@
 
   <!-- Ime switcher config entry-->
    <java-symbol type="bool" name="config_show_cmIMESwitcher"/>
+   
+  <!-- Last app switch animations -->
+  <java-symbol type="anim" name="last_app_in" />
+  <java-symbol type="anim" name="last_app_out" />
+  
 </resources>
