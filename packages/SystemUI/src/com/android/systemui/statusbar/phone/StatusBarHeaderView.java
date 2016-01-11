@@ -32,16 +32,12 @@ import android.graphics.Outline;
 import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-<<<<<<< HEAD
 import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Handler;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
-=======
-import android.os.Handler;
->>>>>>> f553a67... SystemUI: add Weather display to status bar header
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.Settings;
@@ -159,7 +155,6 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     private SettingsObserver mSettingsObserver;
     private boolean mShowWeather;
 
-    private SettingsObserver mSettingsObserver;
     private boolean mShowBatteryTextExpanded;
 
     private ImageView mBackgroundImage;
@@ -429,8 +424,6 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     private void updateListeners() {
         if (mListening) {
             mSettingsObserver.observe();
-            mBatteryController.addStateChangedCallback(this);
-
             mNextAlarmController.addStateChangedCallback(this);
             mWeatherController.addCallback(this);
         } else {
