@@ -385,6 +385,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     // Battery saver bars color
     private int mBatterySaverWarningColor;
  
+    private boolean mRecreating = false;
+
     // for disabling the status bar
     int mDisabled1 = 0;
     int mDisabled2 = 0;
@@ -3334,19 +3336,6 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                         Context.WALLPAPER_SERVICE);
                 mKeyguardWallpaper = wm.getKeyguardBitmap();
                 updateMediaMetaData(true);
-            }
-        }
-    };
-
-    private BroadcastReceiver mPackageBroadcastReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) Log.v(TAG, "onReceive: " + intent);
-            String action = intent.getAction();
-            if (Intent.ACTION_PACKAGE_ADDED.equals(action) ||
-                    Intent.ACTION_PACKAGE_CHANGED.equals(action) ||
-                    Intent.ACTION_PACKAGE_FULLY_REMOVED.equals(action) ||
-                    Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
-                updateCustomRecentsLongPressHandler(true);
             }
         }
     };
