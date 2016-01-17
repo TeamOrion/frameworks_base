@@ -6191,7 +6191,6 @@ public class PackageManagerService extends IPackageManager.Stub {
                     mContext.getResources().getString(R.string.android_upgrading_apk,
                             curr, total), true);
         } catch (RemoteException e) {
->>>>>>> 0b94bda... Show Optimizing app dialog on first boot
         }
         PackageParser.Package p = pkg;
         synchronized (mInstallLock) {
