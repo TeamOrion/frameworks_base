@@ -2368,7 +2368,6 @@
   <java-symbol type="bool" name="config_reject_ggsn_perm_failure" />
   <java-symbol type="bool" name="config_protocol_errors_perm_failure" />
 
-<<<<<<< HEAD
   <!-- Regional Specific Symbols -->
   <java-symbol type="bool" name="config_dateformat" />
   <java-symbol type="integer" name="wifi_hotspot_security_type" />
