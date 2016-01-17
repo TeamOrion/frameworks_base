@@ -672,7 +672,6 @@ public class DirectoryFragment extends Fragment {
                     final MenuItem cut = menu.findItem(R.id.menu_cut);
                     copy.setVisible(false);
                     cut.setVisible(false);
->>>>>>> 70935b1... Add a standalone File Manager
                 }
 
                 if (!valid) {
