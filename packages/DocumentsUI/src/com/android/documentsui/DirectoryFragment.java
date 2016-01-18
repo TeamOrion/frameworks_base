@@ -43,13 +43,13 @@ import static com.android.documentsui.BaseActivity.State.MODE_LIST;
 import static com.android.documentsui.BaseActivity.State.MODE_UNKNOWN;
 import static com.android.documentsui.BaseActivity.State.SORT_ORDER_UNKNOWN;
 import static com.android.documentsui.DocumentsActivity.TAG;
-import static com.android.documentsui.DocumentsActivity.State.ACTION_CREATE;
-import static com.android.documentsui.DocumentsActivity.State.ACTION_MANAGE;
-import static com.android.documentsui.DocumentsActivity.State.ACTION_STANDALONE;
-import static com.android.documentsui.DocumentsActivity.State.MODE_GRID;
-import static com.android.documentsui.DocumentsActivity.State.MODE_LIST;
-import static com.android.documentsui.DocumentsActivity.State.MODE_UNKNOWN;
-import static com.android.documentsui.DocumentsActivity.State.SORT_ORDER_UNKNOWN;
+import static com.android.documentsui.BaseActivity.State.ACTION_CREATE;
+import static com.android.documentsui.BaseActivity.State.ACTION_MANAGE;
+import static com.android.documentsui.BaseActivity.State.ACTION_STANDALONE;
+import static com.android.documentsui.BaseActivity.State.MODE_GRID;
+import static com.android.documentsui.BaseActivity.State.MODE_LIST;
+import static com.android.documentsui.BaseActivity.State.MODE_UNKNOWN;
+import static com.android.documentsui.BaseActivity.State.SORT_ORDER_UNKNOWN;
 import static com.android.documentsui.model.DocumentInfo.getCursorInt;
 import static com.android.documentsui.model.DocumentInfo.getCursorLong;
 import static com.android.documentsui.model.DocumentInfo.getCursorString;
@@ -555,10 +555,8 @@ public class DirectoryFragment extends Fragment {
             // Disable copying from the Recents view.
             copy.setVisible(manageOrBrowse && mType != TYPE_RECENT_OPEN);
 
-            final MenuItem cut = menu.findItem(R.id.menu_cut);
 
             final boolean manageMode = state.action == ACTION_MANAGE;
-            final boolean stdMode = state.action == ACTION_STANDALONE;
             open.setVisible(!manageMode && !stdMode);
             share.setVisible(manageMode || stdMode);
             delete.setVisible(manageMode || stdMode);
@@ -610,6 +608,7 @@ public class DirectoryFragment extends Fragment {
                     mCurrentView.setItemChecked(i, true);
                 }
                 updateDisplayState();
+                return true;
             } else if (id == R.id.menu_cut) {
                 onCutDocuments(docs);
                 mode.finish();
@@ -657,7 +656,6 @@ public class DirectoryFragment extends Fragment {
                     }
                     valid = isDocumentEnabled(docMimeType, docFlags);
 
-                    final State state = getDisplayState(DirectoryFragment.this);
                     if (Document.MIME_TYPE_DIR.equals(docMimeType)) {
                         hasFolder = true;
                     }
