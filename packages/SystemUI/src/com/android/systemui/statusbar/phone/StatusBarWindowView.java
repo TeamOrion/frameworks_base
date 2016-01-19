@@ -269,7 +269,6 @@ public class StatusBarWindowView extends FrameLayout {
                 mDoubleTapGesture.onTouchEvent(ev);
             }
         }
-        final int h = getMeasuredHeight();
         if (mDoubleTapToSleepLockScreen &&
                 mService.getBarState() == StatusBarState.KEYGUARD
                 && (ev.getY() < (h / 3) ||
