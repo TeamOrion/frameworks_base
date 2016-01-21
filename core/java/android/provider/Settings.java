@@ -3402,7 +3402,13 @@ public final class Settings {
          */
         public static final String RECENT_CARD_TEXT_COLOR = "recent_card_text_color";
 
-	/**
+        /**
+         * Change the number of columns displayed in the Settings dashboard
+         * @hide
+         */
+        public static final String DASHBOARD_COLUMNS = "dashboard_columns";
+        
+        /**
          * Show or hide clock
          * 0 - hide
          * 1 - show (default)
