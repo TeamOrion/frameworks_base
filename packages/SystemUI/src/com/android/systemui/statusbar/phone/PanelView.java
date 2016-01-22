@@ -720,6 +720,9 @@ public abstract class PanelView extends FrameLayout {
 
             @Override
             public void onAnimationEnd(Animator animation) {
+                if (mPerf != null) {
+                    mPerf.perfLockRelease();
+                }
                 if (expand) PanelView.this.removeOnLayoutChangeListener(mLayoutChangeListener);
                 if (clearAllExpandHack && !mCancelled) {
                     setExpandedHeightInternal(getMaxPanelHeight());
