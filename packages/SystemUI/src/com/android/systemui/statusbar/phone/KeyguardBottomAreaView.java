@@ -124,9 +124,6 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     private PhoneStatusBar mPhoneStatusBar;
     private LockscreenShortcutsHelper mShortcutHelper;
     private final ColorMatrixColorFilter mGrayScaleFilter;
-
-    public static final String CAMERA_LAUNCH_SOURCE_AFFORDANCE = "lockscreen_affordance";
-    public static final String EXTRA_CAMERA_LAUNCH_SOURCE  = "com.android.systemui.camera_launch_source";
  
     private final Interpolator mLinearOutSlowInInterpolator;
     private boolean mUserSetupComplete;

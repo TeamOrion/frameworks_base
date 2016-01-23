@@ -3402,9 +3402,6 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
 
         mKeyguardWallpaper = wm.getKeyguardBitmap();
         updateMediaMetaData(true);
-        if (mNavigationBarView != null) {
-            mNavigationBarView.updateSettings();
-        }
     }
 
     private void setControllerUsers() {
