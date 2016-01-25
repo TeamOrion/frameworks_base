@@ -274,9 +274,17 @@ interface IWindowManager
     WindowContentFrameStats getWindowContentFrameStats(IBinder token);
 
     /**
+<<<<<<< HEAD
      * Get current system ui visibility mode.
      *
      * @hide
      */
     int getSystemUIVisibility();
+=======
+     * Toggle global menu
+     *
+     * @hide
+     */
+    void toggleGlobalMenu();
+>>>>>>> cb0f728... fb: Slims navbar customizations
 }

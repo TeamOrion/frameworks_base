@@ -122,11 +122,19 @@ public class DeviceUtils {
     }
 
     private static boolean isSupportedFeature(Context context, String action) {
+<<<<<<< HEAD
         if (action.equals(SlimActionConstants.ACTION_TORCH)
                         && !deviceSupportsTorch(context)
                 || action.equals(SlimActionConstants.ACTION_VIB)
                         && !deviceSupportsVibrator(context)
                 || action.equals(SlimActionConstants.ACTION_VIB_SILENT)
+=======
+        if (action.equals(ActionConstants.ACTION_TORCH)
+                        && !deviceSupportsTorch(context)
+                || action.equals(ActionConstants.ACTION_VIB)
+                        && !deviceSupportsVibrator(context)
+                || action.equals(ActionConstants.ACTION_VIB_SILENT)
+>>>>>>> cb0f728... fb: Slims navbar customizations
                         && !deviceSupportsVibrator(context)) {
             return false;
         }

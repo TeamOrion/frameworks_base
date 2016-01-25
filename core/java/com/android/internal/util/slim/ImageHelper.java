@@ -33,15 +33,30 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
+<<<<<<< HEAD
+=======
+import android.graphics.drawable.VectorDrawable;
+>>>>>>> cb0f728... fb: Slims navbar customizations
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 
 public class ImageHelper {
 
+<<<<<<< HEAD
     public static Bitmap getColoredBitmap(Drawable d, int color) {
         if (d == null) {
             return null;
         }
+=======
+    public static Drawable getColoredDrawable(Drawable d, int color) {
+        if (d == null) {
+            return null;
+        }
+        if (d instanceof VectorDrawable) {
+            d.setTint(color);
+            return d;
+        }
+>>>>>>> cb0f728... fb: Slims navbar customizations
         Bitmap colorBitmap = ((BitmapDrawable) d).getBitmap();
         Bitmap grayscaleBitmap = toGrayscale(colorBitmap);
         Paint pp = new Paint();
@@ -52,7 +67,50 @@ public class ImageHelper {
         Canvas cc = new Canvas(grayscaleBitmap);
         final Rect rect = new Rect(0, 0, grayscaleBitmap.getWidth(), grayscaleBitmap.getHeight());
         cc.drawBitmap(grayscaleBitmap, rect, rect, pp);
+<<<<<<< HEAD
         return grayscaleBitmap;
+=======
+        return new BitmapDrawable(grayscaleBitmap);
+    }
+
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        if (drawable == null) {
+            return null;
+        } else if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
+    public static Bitmap drawableToShortcutIconBitmap (
+            Context context, Drawable drawable, int dp) {
+        if (drawable == null) {
+            return null;
+        } else if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        int size = Converter.dpToPx(context, dp);
+
+        // ensure that the drawable is not larger than target size
+        while (size < drawable.getIntrinsicHeight()
+                || size < drawable.getIntrinsicWidth()) {
+            size = size + 12;
+        }
+        Bitmap bitmap = Bitmap.createBitmap(size, size, Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds((size - drawable.getIntrinsicWidth()) / 2,
+                (size - drawable.getIntrinsicHeight()) / 2,
+                (size + drawable.getIntrinsicWidth()) / 2,
+                (size + drawable.getIntrinsicHeight()) / 2);
+        drawable.draw(canvas);
+        return bitmap;
+>>>>>>> cb0f728... fb: Slims navbar customizations
     }
 
     private static Bitmap toGrayscale(Bitmap bmpOriginal) {
@@ -78,6 +136,7 @@ public class ImageHelper {
         if (image == null || context == null) {
             return null;
         }
+<<<<<<< HEAD
 
         int newSize = Converter.dpToPx(context, size);
         Bitmap bitmap = ((BitmapDrawable) image).getBitmap();
@@ -99,6 +158,32 @@ public class ImageHelper {
         canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2,
                 middleY - bitmap.getHeight() / 2, paint);
         return new BitmapDrawable(context.getResources(), scaledBitmap);
+=======
+        if (image instanceof VectorDrawable) {
+            return image;
+        } else {
+            int newSize = Converter.dpToPx(context, size);
+            Bitmap bitmap = ((BitmapDrawable) image).getBitmap();
+            Bitmap scaledBitmap = Bitmap.createBitmap(newSize, newSize, Config.ARGB_8888);
+
+            float ratioX = newSize / (float) bitmap.getWidth();
+            float ratioY = newSize / (float) bitmap.getHeight();
+            float middleX = newSize / 2.0f;
+            float middleY = newSize / 2.0f;
+
+            final Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG);
+            paint.setAntiAlias(true);
+
+            Matrix scaleMatrix = new Matrix();
+            scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+
+            Canvas canvas = new Canvas(scaledBitmap);
+            canvas.setMatrix(scaleMatrix);
+            canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2,
+                    middleY - bitmap.getHeight() / 2, paint);
+            return new BitmapDrawable(context.getResources(), scaledBitmap);
+        }
+>>>>>>> cb0f728... fb: Slims navbar customizations
     }
 
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
