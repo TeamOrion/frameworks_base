@@ -3,7 +3,7 @@
 
     <!-- Notification Header and Quick settings panel -->
     <color name="system_primary_color">#000000</color>
-    <color name="system_secondary_color">#000000</color>
+    <color name="system_secondary_color">#212121</color>
     <color name="system_accent_color">#ff33b5e5</color>
     <color name="qs_detail_transition">#000000</color>
 
