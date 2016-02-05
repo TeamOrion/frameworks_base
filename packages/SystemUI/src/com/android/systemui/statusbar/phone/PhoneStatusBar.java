@@ -470,6 +470,7 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                 rebuildRecentsScreen();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT))) {
+                    recreateStatusBar();
                     updateRowStates();
                     updateSpeedbump();
                     updateClearAll();
@@ -3423,8 +3424,11 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                 Settings.Secure.getUriFor(Settings.Secure.USER_SETUP_COMPLETE), true,
                 mUserSetupObserver, mCurrentUserId);
     }
-    
-    
+                
+    private void recreateStatusBar() {
+       mStatusBarHeaderMachine.updateEnablement(); 
+       mStatusBarHeaderMachine.doUpdateStatusHeaderObservers(true);
+    }
 
     /**
      * Reload some of our resources when the configuration changes.

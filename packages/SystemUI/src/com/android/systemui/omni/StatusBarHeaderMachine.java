@@ -178,7 +178,7 @@ public class StatusBarHeaderMachine {
                 AlarmManager.INTERVAL_HOUR, mAlarmHourly);
     }
 
-    private void doUpdateStatusHeaderObservers(final boolean force) {
+    public void doUpdateStatusHeaderObservers(final boolean force) {
         Iterator<IStatusBarHeaderMachineObserver> nextObserver = mObservers
                 .iterator();
         while (nextObserver.hasNext()) {
