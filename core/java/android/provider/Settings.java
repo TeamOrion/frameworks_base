@@ -3525,12 +3525,23 @@ public final class Settings {
          */
         public static final String RECENT_CARD_TEXT_COLOR = "recent_card_text_color";
 
-         /**
+        /**
+         * Hide lockscreen date
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_DATE = "hide_lockscreen_date";
+
+        /**
+         * Hide lockscreen clock
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_CLOCK = "hide_lockscreen_clock";
+
+        /**
          * The global recents long press activity chosen by the user.
          * This setting is stored as a flattened component name as
          * per {@link ComponentName#flattenToString()}.
          *
-         * @hide
          */
         public static final String RECENTS_LONG_PRESS_ACTIVITY = "recents_long_press_activity";
 
