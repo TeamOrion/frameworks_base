@@ -178,7 +178,6 @@ public class KeyguardStatusView extends GridLayout {
 
         refreshTime();
         refreshAlarmStatus(nextAlarm);
-        updateWeatherSettings(false);
         hideLockscreenItems();
     }
 
