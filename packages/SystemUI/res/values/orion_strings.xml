@@ -202,4 +202,6 @@
     <string name="accessibility_quick_settings_compass_changed_off">Compass turned off.</string>
     <string name="accessibility_quick_settings_compass_changed_on">Compass turned on.</string>
 
+    <!-- IME selector Tile -->
+    <string name="quick_settings_ime_label">IME</string>
 </resources>
