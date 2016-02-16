@@ -24,18 +24,18 @@
     <color name="background_floating_material_dark">@color/material_grey_800</color>
 
     <!-- System - Accents -->
- 	<color name="accent_material_light">#80CBC4</color>
- 	<color name="accent_material_dark">#80CBC4</color>
+ 	<color name="accent_material_light">#80cbc4</color>
+ 	<color name="accent_material_dark">#80cbc4</color>
  
  	<!-- StatusBar Expanded - User Icons -->
- 	<color name="user_icon_1">#80CBC4</color>
- 	<color name="user_icon_2">#80CBC4</color>
- 	<color name="user_icon_3">#80CBC4</color>
- 	<color name="user_icon_4">#80CBC4</color>
- 	<color name="user_icon_5">#80CBC4</color>
- 	<color name="user_icon_6">#80CBC4</color>
- 	<color name="user_icon_7">#80CBC4</color>
- 	<color name="user_icon_8">#80CBC4</color>
+ 	<color name="user_icon_1">#80cbc4</color>
+ 	<color name="user_icon_2">#80cbc4</color>
+ 	<color name="user_icon_3">#80cbc4</color>
+ 	<color name="user_icon_4">#80cbc4</color>
+ 	<color name="user_icon_5">#80cbc4</color>
+ 	<color name="user_icon_6">#80cbc4</color>
+ 	<color name="user_icon_7">#80cbc4</color>
+ 	<color name="user_icon_8">#80cbc4</color>
  	<color name="user_icon_default_gray">#ff9e9e9e</color>
  	<color name="user_icon_default_white">#ffffffff</color>
 
