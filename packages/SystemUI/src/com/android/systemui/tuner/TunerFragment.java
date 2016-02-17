@@ -44,14 +44,7 @@ public class TunerFragment extends PreferenceFragment {
 
     public static final String TAG = "TunerFragment";
 
-<<<<<<< HEAD
-    private static final String KEY_QS_TUNER = "qs_tuner";
-    private static final String KEY_DEMO_MODE = "demo_mode";
-
-    public static final String SETTING_SEEN_TUNER_WARNING = "seen_tuner_warning";
-=======
     private final SettingObserver mSettingObserver = new SettingObserver();
->>>>>>> 081bf52... Break SystemUI Tuner into two parts [1/2]
 
     private static final int MENU_REMOVE = Menu.FIRST + 1;
 
