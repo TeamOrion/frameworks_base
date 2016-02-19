@@ -17,14 +17,18 @@
 package com.android.systemui.statusbar.phone;
 
 import android.app.PendingIntent;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
 import com.android.systemui.qs.tiles.AirplaneModeTile;
@@ -37,6 +41,7 @@ import com.android.systemui.qs.tiles.CellularTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.ExpandedDesktopTile;
+import com.android.systemui.qs.tiles.EditTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.IntentTile;
@@ -77,7 +82,8 @@ public class QSTileHost implements QSTile.Host, Tunable {
     private static final String TAG = "QSTileHost";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    protected static final String TILES_SETTING = "sysui_qs_tiles";
+    public static final String TILES_SETTING = "sysui_qs_tiles";
+    public static final int TILES_PER_PAGE = 8;
 
     private final Context mContext;
     private final PhoneStatusBar mStatusBar;
@@ -131,6 +137,14 @@ public class QSTileHost implements QSTile.Host, Tunable {
         TunerService.get(mContext).removeTunable(this);
     }
 
+    public boolean isEditing() {
+        return mCallback.isEditing();
+    }
+
+    public void setEditing(boolean editing) {
+        mCallback.setEditing(editing);
+    }
+
     @Override
     public void setCallback(Callback callback) {
         mCallback = callback;
@@ -139,6 +153,19 @@ public class QSTileHost implements QSTile.Host, Tunable {
     @Override
     public Collection<QSTile<?>> getTiles() {
         return mTiles.values();
+    }
+
+    public List<String> getTileSpecs() {
+        return mTileSpecs;
+    }
+
+    public String getSpec(QSTile<?> tile) {
+        for (Map.Entry<String, QSTile<?>> entry : mTiles.entrySet()) {
+            if (entry.getValue() == tile) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -260,7 +287,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         }
     }
 
-    protected QSTile<?> createTile(String tileSpec) {
+    public QSTile<?> createTile(String tileSpec) {
         if (tileSpec.equals("wifi")) return new WifiTile(this);
         else if (tileSpec.equals("bt")) return new BluetoothTile(this);
         else if (tileSpec.equals("inversion")) return new ColorInversionTile(this);
@@ -284,6 +311,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("reboot")) return new RebootTile(this);
         else if (tileSpec.equals("battery_saver")) return new BatterySaverTile(this);
         else if (tileSpec.equals("expanded_desktop")) return new ExpandedDesktopTile(this);
+        else if (tileSpec.equals("edit")) return new EditTile(this);
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);
         else throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
     }
@@ -311,6 +339,47 @@ public class QSTileHost implements QSTile.Host, Tunable {
                 tiles.add(tile);
             }
         }
+        // ensure edit tile is present
+        if (tiles.size() < TILES_PER_PAGE && !tiles.contains("edit")) {
+            tiles.add("edit");
+        } else if (tiles.size() > TILES_PER_PAGE && !tiles.contains("edit")) {
+            tiles.add((TILES_PER_PAGE - 1), "edit");
+        }
         return tiles;
+    }
+
+    public void remove(String tile) {
+        MetricsLogger.action(getContext(), MetricsLogger.TUNER_QS_REMOVE, tile);
+        List<String> tiles = new ArrayList<>(mTileSpecs);
+        tiles.remove(tile);
+        setTiles(tiles);
+    }
+
+    public void setTiles(List<String> tiles) {
+        Settings.Secure.putStringForUser(getContext().getContentResolver(), TILES_SETTING,
+                TextUtils.join(",", tiles), ActivityManager.getCurrentUser());
+    }
+
+    @Override
+    public void resetTiles() {
+        setEditing(false);
+        Settings.Secure.putStringForUser(getContext().getContentResolver(),
+                Settings.Secure.QS_TILES, "default", ActivityManager.getCurrentUser());
+    }
+
+    public static int getLabelResource(String spec) {
+        if (spec.equals("wifi")) return R.string.quick_settings_wifi_label;
+        else if (spec.equals("bt")) return R.string.quick_settings_bluetooth_label;
+        else if (spec.equals("inversion")) return R.string.quick_settings_inversion_label;
+        else if (spec.equals("cell")) return R.string.quick_settings_cellular_detail_title;
+        else if (spec.equals("airplane")) return R.string.airplane_mode;
+        else if (spec.equals("dnd")) return R.string.quick_settings_dnd_label;
+        else if (spec.equals("rotation")) return R.string.quick_settings_rotation_locked_label;
+        else if (spec.equals("flashlight")) return R.string.quick_settings_flashlight_label;
+        else if (spec.equals("location")) return R.string.quick_settings_location_label;
+        else if (spec.equals("cast")) return R.string.quick_settings_cast_title;
+        else if (spec.equals("hotspot")) return R.string.quick_settings_hotspot_label;
+        else if (spec.equals("edit")) return R.string.quick_settings_edit_label;
+        return 0;
     }
 }
