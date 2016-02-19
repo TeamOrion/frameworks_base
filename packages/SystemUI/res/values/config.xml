@@ -119,11 +119,11 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_default" translatable="false">
-        wifi,bt,inversion,dnd,cell,airplane,rotation,flashlight,location,cast,hotspot,usb_tether,ambient_display,screenshot,nfc,sync,screenoff,timeout,brightness,music,reboot,battery_saver,expanded_desktop
+        wifi,bt,inversion,dnd,cell,airplane,rotation,flashlight,location,edit,cast,hotspot,usb_tether,ambient_display,screenshot,nfc,sync,screenoff,timeout,brightness,music,reboot,battery_saver,expanded_desktop
     </string>
 
     <!-- The tiles to display in QuickSettings -->
-    <string name="quick_settings_tiles" translatable="false">wifi,bt,dnd,cell,airplane,rotation,flashlight,location,cast</string>
+    <string name="quick_settings_tiles" translatable="false">wifi,bt,dnd,cell,airplane,rotation,location,cast,edit</string>
 
     <!-- Whether or not the RSSI tile is capitalized or not. -->
     <bool name="quick_settings_rssi_tile_capitalization">true</bool>

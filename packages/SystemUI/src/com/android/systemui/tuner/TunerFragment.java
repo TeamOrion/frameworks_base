@@ -67,7 +67,7 @@ public class TunerFragment extends PreferenceFragment {
     public void onPause() {
         super.onPause();
         getContext().getContentResolver().unregisterContentObserver(mSettingObserver);
-        
+
         unregisterPrefs(getPreferenceScreen());
         MetricsLogger.visibility(getContext(), MetricsLogger.TUNER, false);
     }

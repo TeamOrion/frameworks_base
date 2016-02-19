@@ -132,7 +132,7 @@ public class TunerService extends SystemUI {
     }
 
     public void clearAll() {
-    for (String key : mTunableLookup.keySet()) {
+        for (String key : mTunableLookup.keySet()) {
             Settings.Secure.putString(mContentResolver, key, null);
         }
     }
