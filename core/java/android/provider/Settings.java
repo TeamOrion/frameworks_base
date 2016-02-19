@@ -6598,6 +6598,12 @@ public final class Settings {
          * @hide
          */
         public static final String LOCKSCREEN_TARGETS = "lockscreen_target_actions";
+
+        /**
+         * List of QS tile names
+         * @hide
+         */
+        public static final String QS_TILES = "sysui_qs_tiles";
         
         /**
          * This are the settings to be backed up.
