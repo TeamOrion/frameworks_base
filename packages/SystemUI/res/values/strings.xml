@@ -1145,5 +1145,13 @@
 
     <!-- Bluetooth enablement ok text [CHAR LIMIT=40] -->
     <string name="enable_bluetooth_confirmation_ok">Turn on</string>
+    
+    <string name="quick_settings_title_enlarge_first_row">Enlarge first row</string>
 
+    <!-- Sound QS Tile -->
+    <string name="quick_settings_sound_label">Sound</string>
+
+    <!-- Reboot/Recovery QS Tile -->
+    <string name="quick_settings_reboot_label">Reboot</string>
+    <string name="quick_settings_reboot_recovery_label">Recovery</string>
 </resources>

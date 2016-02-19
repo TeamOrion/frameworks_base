@@ -21,7 +21,6 @@ import android.os.Handler;
 import android.os.PowerManager;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
-
 import com.android.internal.logging.MetricsLogger;
 
 public class RebootTile extends QSTile<QSTile.BooleanState> {
@@ -30,6 +29,11 @@ public class RebootTile extends QSTile<QSTile.BooleanState> {
 
     public RebootTile(Host host) {
         super(host);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsLogger.DISPLAY;
     }
 
     @Override
@@ -56,30 +60,15 @@ public class RebootTile extends QSTile<QSTile.BooleanState> {
         }, 500);
     }
 
-	@Override
-    public int getMetricsCategory() {
-        return MetricsLogger.DONT_TRACK_ME_BRO;
-    }
-
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
         state.visible = true;
-		state.label = mContext.getString(R.string.quick_settings_reboot_label);
         if (mRebootToRecovery) {
-            state.contentDescription =  mContext.getString(R.string.quick_settings_reboot_recovery_label);
+            state.label = mContext.getString(R.string.quick_settings_reboot_recovery_label);
             state.icon = ResourceIcon.get(R.drawable.ic_qs_reboot_recovery);
         } else {
-            state.contentDescription =  mContext.getString(R.string.quick_settings_reboot_label);
+            state.label = mContext.getString(R.string.quick_settings_reboot_label);
             state.icon = ResourceIcon.get(R.drawable.ic_qs_reboot);
-        }
-    }
-
-	@Override
-    protected String composeChangeAnnouncement() {
-        if (mRebootToRecovery) {
-            return mContext.getString(R.string.quick_settings_reboot_recovery_label);
-        } else {
-            return mContext.getString(R.string.quick_settings_reboot_label);
         }
     }
 
