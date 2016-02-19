@@ -380,7 +380,6 @@ public class QSTileView extends ViewGroup {
             }
             setClickable(editing);
             setFocusable(editing);
-            setOnLongClickListener(editing ? mLongClick : null);
         } else {
             if (mLabel != null) {
                 mLabel.setFocusable(!editing);
