@@ -4022,6 +4022,12 @@ public final class Settings {
          */
         public static final String PROXIMITY_AUTO_SPEAKER_DELAY = "proximity_auto_speaker_delay";
 
+	/**
+         * Whether to show switches for wifi/cell/bt in the settings dashboard
+         * @hide
+         */
+        public static final String DASHBOARD_SWITCHES = "dashboard_switches";
+
         /**
          * Whether the proximity sensor will adjust call to speaker,
          * only while in call (not while ringing on outgoing call)
