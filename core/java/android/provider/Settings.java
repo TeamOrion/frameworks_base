@@ -3996,6 +3996,7 @@ public final class Settings {
          * 0 = default
          * 1 = modern
          * 2 = poly hd
+	 * 3 = orion
          * @hide
          */
         public static final String STATUS_BAR_CUSTOM_HEADER_DEFAULT = "status_bar_custom_header_default";
