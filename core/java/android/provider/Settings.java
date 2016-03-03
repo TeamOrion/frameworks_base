@@ -3668,6 +3668,16 @@ public final class Settings {
         public static final String RECENT_PANEL_EXPANDED_MODE = "recent_panel_expanded_mode";
 
         /**
+         * Whether to swap app switch button with back button, the value is boolean.
+         * @hide
+         */
+        public static final String APP_SWITCH_SWAP_BUTTONS = "app_switch_swap_buttons";
+
+        /** @hide */
+        public static final Validator APP_SWITCH_SWAP_BUTTONS_VALIDATOR =
+                sBooleanValidator;
+
+        /**
          * Recent panel: Show topmost task
          *
          * @hide
