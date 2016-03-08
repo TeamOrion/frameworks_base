@@ -33,6 +33,14 @@ public class QSPage extends ViewGroup {
         setClipToOutline(false);
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public boolean hasOverlappingRendering() {
+        return false;
+    }
+
+>>>>>>> orion/fix
     public int getPageIndex() {
         return mPage;
     }

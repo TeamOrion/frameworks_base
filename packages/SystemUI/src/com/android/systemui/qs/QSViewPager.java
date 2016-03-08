@@ -24,6 +24,14 @@ public class QSViewPager extends ViewPager {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public boolean hasOverlappingRendering() {
+        return false;
+    }
+
+    @Override
+>>>>>>> orion/fix
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = 0;
         for (int i = 0; i < getChildCount(); i++) {

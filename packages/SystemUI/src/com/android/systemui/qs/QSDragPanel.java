@@ -18,6 +18,7 @@ package com.android.systemui.qs;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+<<<<<<< HEAD
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -29,11 +30,22 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
+=======
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Canvas;
+import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
+>>>>>>> orion/fix
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
+<<<<<<< HEAD
 import android.util.TypedValue;
+=======
+>>>>>>> orion/fix
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +64,12 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.tuner.QsTuner;
 import com.viewpagerindicator.CirclePageIndicator;
 
+<<<<<<< HEAD
+=======
+import com.android.internal.util.cm.QSConstants;
+import com.android.internal.util.cm.QSUtils;
+
+>>>>>>> orion/fix
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -64,6 +82,10 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
     private static final String TAG = "QSDragPanel";
 
     public static final boolean DEBUG_DRAG = true;
+<<<<<<< HEAD
+=======
+	private static final String BROADCAST_TILE_SPEC_PLACEHOLDER = "broadcast_placeholder";
+>>>>>>> orion/fix
 
     protected final ArrayList<QSPage> mPages = new ArrayList<>();
 
@@ -182,7 +204,10 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
             }
         };
         mViewPager.setAdapter(mPagerAdapter);
+<<<<<<< HEAD
         mViewPager.setCurrentItem(0);
+=======
+>>>>>>> orion/fix
 
         mPageIndicator.setViewPager(mViewPager);
         mPageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -217,15 +242,33 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
 
             }
         });
+<<<<<<< HEAD
 
         setClipChildren(false);
         updateResources();
 
         mViewPager.setOnDragListener(this);
+=======
+        mPageIndicator.setCurrentItem(0);
+        mViewPager.setOverScrollMode(OVER_SCROLL_NEVER);
+
+        updateResources();
+
+        mViewPager.setOnDragListener(this);
+        mPageIndicator.setOnDragListener(this);
+>>>>>>> orion/fix
         mQsPanelTop.getBrightnessView().setOnDragListener(this);
         mQsPanelTop.getDropTarget().setOnDragListener(this);
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public boolean hasOverlappingRendering() {
+        return mClipper.isAnimating();
+    }
+
+>>>>>>> orion/fix
     protected void drawTile(TileRecord r, QSTile.State state) {
         final int visibility = state.visible || mEditing ? VISIBLE : GONE;
         setTileVisibility(r.tileView, visibility);
@@ -288,8 +331,15 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
         return mEditing;
     }
 
+<<<<<<< HEAD
     protected int getPagesForCount(int size) {
         return (int) Math.ceil(size / (double) getTilesPerPage());
+=======
+    protected int getPagesForCount(int tileCount) {
+        tileCount -=  getTilesPerPage(true);
+        // first page + rest of tiles
+        return 1 + (int) Math.ceil(tileCount / (double) getTilesPerPage(false));
+>>>>>>> orion/fix
     }
 
     protected int getCurrentMaxPageCount() {
@@ -464,7 +514,14 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
         mViewPager.setPagingEnabled(pagingEnabled);
     }
 
+<<<<<<< HEAD
     public int getTilesPerPage() {
+=======
+    public int getTilesPerPage(boolean firstPage) {
+        if ((firstPage)|| !firstPage) {
+            return QSTileHost.TILES_PER_PAGE + 1;
+        }
+>>>>>>> orion/fix
         return QSTileHost.TILES_PER_PAGE;
     }
 
@@ -479,7 +536,12 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
         mPageIndicator.measure(exactly(width), MeasureSpec.UNSPECIFIED);
         mFooter.getView().measure(exactly(width), MeasureSpec.UNSPECIFIED);
 
+<<<<<<< HEAD
         int h = mQsPanelTop.getMeasuredHeight()
+=======
+        int h = mBrightnessPaddingTop
+                + mQsPanelTop.getMeasuredHeight()
+>>>>>>> orion/fix
                 + mViewPager.getMeasuredHeight()
                 + mPageIndicator.getMeasuredHeight();
         if (mFooter.hasFooter()) {
@@ -507,11 +569,36 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    protected void handleShowDetailTile(TileRecord r, boolean show) {
+        if (r instanceof DragTileRecord) {
+            if ((mDetailRecord != null) == show && mDetailRecord == r) return;
+
+            if (show) {
+                r.detailAdapter = r.tile.getDetailAdapter();
+                if (r.detailAdapter == null) return;
+            }
+            r.tile.setDetailListening(show);
+            int x = (int) ((DragTileRecord) r).destination.x + r.tileView.getWidth() / 2;
+            int y = mViewPager.getTop() + (int) ((DragTileRecord) r).destination.y + r.tileView.getHeight() / 2;
+            handleShowDetailImpl(r, show, x, y);
+        } else {
+            super.handleShowDetailTile(r, show);
+        }
+    }
+
+    @Override
+>>>>>>> orion/fix
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         if (DEBUG_DRAG) Log.d(TAG, "onLayout()");
         final int w = getWidth();
 
+<<<<<<< HEAD
         int top = 0;
+=======
+        int top = mBrightnessPaddingTop;
+>>>>>>> orion/fix
         mQsPanelTop.layout(0, top, w, top + mQsPanelTop.getMeasuredHeight());
         top += mQsPanelTop.getMeasuredHeight();
 
@@ -522,7 +609,10 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
         mPageIndicator.layout(0, top, w, top + mPageIndicator.getMeasuredHeight());
 
         // detail takes up whole height
+<<<<<<< HEAD
         final int dh = Math.max(mDetail.getMeasuredHeight(), mViewPager.getMeasuredHeight());
+=======
+>>>>>>> orion/fix
         mDetail.layout(0, 0, mDetail.getMeasuredWidth(), getMeasuredHeight());
 
         if (mFooter.hasFooter()) {
@@ -1318,6 +1408,7 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
     }
 
     // todo implement proper add tile ui
+<<<<<<< HEAD
     protected void showAddDialog() {
         List<String> tiles = mHost.getTileSpecs();
         int numBroadcast = 0;
@@ -1358,6 +1449,42 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
                             add(availableTiles[which]);
                         } else {
                             showBroadcastTileDialog();
+=======
+	protected void showAddDialog() {
+    List<String> currentTileSpec = mHost.getTileSpecs();
+        final List<String> availableTilesSpec = QSUtils.getAvailableTiles(getContext());
+
+        // Remove tiles already used
+        availableTilesSpec.removeAll(currentTileSpec);
+
+        // Populate labels
+        List<String> availableTilesLabel = new ArrayList<String>();
+        for (String tileSpec : availableTilesSpec) {
+            int resource = QSTileHost.getLabelResource(tileSpec);
+            if (resource != 0) {
+                availableTilesLabel.add(getContext().getString(resource));
+            } else {
+                availableTilesLabel.add(tileSpec);
+            }
+        }
+
+        // Add broadcast tile
+        availableTilesLabel.add(getContext().getString(R.string.broadcast_tile));
+        availableTilesSpec.add(BROADCAST_TILE_SPEC_PLACEHOLDER);
+
+        String[] items = new String[availableTilesLabel.size()];
+        availableTilesLabel.toArray(items);
+
+        final AlertDialog d = new AlertDialog.Builder(getContext(), R.style.Theme_SystemUI_Dialog)
+                .setTitle(R.string.add_tile)
+                .setItems(items, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String tileSpec = availableTilesSpec.get(which);
+                        if (tileSpec.equals(BROADCAST_TILE_SPEC_PLACEHOLDER)) {
+                            showBroadcastTileDialog();
+                        } else {
+                            add(tileSpec);
+>>>>>>> orion/fix
                         }
                     }
                 }).create();

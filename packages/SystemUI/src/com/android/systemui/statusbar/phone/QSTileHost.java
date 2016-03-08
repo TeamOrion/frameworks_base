@@ -55,6 +55,11 @@ import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.ScreenOffTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.ScreenTimeoutTile;
+import com.android.systemui.qs.tiles.RebootTile;
+import com.android.systemui.qs.tiles.RotationLockTile;
+import com.android.systemui.qs.tiles.ScreenOffTile;
+import com.android.systemui.qs.tiles.ScreenTimeoutTile;
+import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.statusbar.policy.BluetoothController;
 import com.android.systemui.statusbar.policy.CastController;
@@ -312,6 +317,12 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("battery_saver")) return new BatterySaverTile(this);
         else if (tileSpec.equals("expanded_desktop")) return new ExpandedDesktopTile(this);
         else if (tileSpec.equals("edit")) return new EditTile(this);
+        else if (tileSpec.equals("edit")) return new EditTile(this);
+        else if (tileSpec.equals("screen_timeout")) return new ScreenTimeoutTile(this);
+        else if (tileSpec.equals("screen_off")) return  new ScreenOffTile(this);
+	else if (tileSpec.equals("reboot")) return  new RebootTile(this);
+	else if (tileSpec.equals("ambient_display")) return new AmbientDisplayTile(this);
+        else if (tileSpec.equals("sound")) return new SoundTile(this);
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);
         else throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
     }
@@ -363,8 +374,8 @@ public class QSTileHost implements QSTile.Host, Tunable {
     @Override
     public void resetTiles() {
         setEditing(false);
-        Settings.Secure.putStringForUser(getContext().getContentResolver(),
-                Settings.Secure.QS_TILES, "default", ActivityManager.getCurrentUser());
+        Settings.System.putStringForUser(getContext().getContentResolver(),
+                Settings.System.QS_TILES, "default", ActivityManager.getCurrentUser());
     }
 
     public static int getLabelResource(String spec) {
@@ -380,6 +391,11 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (spec.equals("cast")) return R.string.quick_settings_cast_title;
         else if (spec.equals("hotspot")) return R.string.quick_settings_hotspot_label;
         else if (spec.equals("edit")) return R.string.quick_settings_edit_label;
+	else if (spec.equals("screen_timeout")) return R.string.quick_settings_screen_timeout_detail_title;
+	else if (spec.equals("screen_off")) return R.string.quick_settings_screen_off;
+	else if (spec.equals("reboot")) return R.string.quick_settings_reboot_label;
+	else if (spec.equals("ambient_display")) return R.string.quick_settings_ambient_display_label;
+        else if (spec.equals("sound")) return R.string.quick_settings_sound_label;
         return 0;
     }
 }

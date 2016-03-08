@@ -895,6 +895,13 @@
     <!-- Text which is shown in the notification shade when there are no notifications. [CHAR LIMIT=30] -->
     <string name="empty_shade_text">No notifications</string>
 
+    <!-- Task Manager -->
+    <string name="task_manager_title">Task Manager</string>
+    <string name="message_switch_fail">Cannot switch to this task, because it has no interface.</string>
+    <string name="tasklist_killall">Kill All</string>
+    <string name="tasklist_memory_usage">"Free/Total Memory: <xliff:g id="number">%s</xliff:g> / <xliff:g id="name">%s</xliff:g>"</string>
+    <string name="message_keep_one_launcher">Should keep at least one home activity!</string>
+
     <!-- Footer device owned text [CHAR LIMIT=50] -->
     <string name="device_owned_footer">Device may be monitored</string>
 
@@ -1129,5 +1136,13 @@
 
     <!-- Bluetooth enablement ok text [CHAR LIMIT=40] -->
     <string name="enable_bluetooth_confirmation_ok">Turn on</string>
+    
+    <string name="quick_settings_title_enlarge_first_row">Enlarge first row</string>
 
+    <!-- Sound QS Tile -->
+    <string name="quick_settings_sound_label">Sound</string>
+
+    <!-- Reboot/Recovery QS Tile -->
+    <string name="quick_settings_reboot_label">Reboot</string>
+    <string name="quick_settings_reboot_recovery_label">Recovery</string>
 </resources>
