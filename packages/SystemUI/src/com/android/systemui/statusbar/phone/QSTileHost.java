@@ -379,23 +379,29 @@ public class QSTileHost implements QSTile.Host, Tunable {
     }
 
     public static int getLabelResource(String spec) {
-        if (spec.equals("wifi")) return R.string.quick_settings_wifi_label;
-        else if (spec.equals("bt")) return R.string.quick_settings_bluetooth_label;
-        else if (spec.equals("inversion")) return R.string.quick_settings_inversion_label;
-        else if (spec.equals("cell")) return R.string.quick_settings_cellular_detail_title;
-        else if (spec.equals("airplane")) return R.string.airplane_mode;
-        else if (spec.equals("dnd")) return R.string.quick_settings_dnd_label;
-        else if (spec.equals("rotation")) return R.string.quick_settings_rotation_locked_label;
-        else if (spec.equals("flashlight")) return R.string.quick_settings_flashlight_label;
-        else if (spec.equals("location")) return R.string.quick_settings_location_label;
-        else if (spec.equals("cast")) return R.string.quick_settings_cast_title;
-        else if (spec.equals("hotspot")) return R.string.quick_settings_hotspot_label;
-        else if (spec.equals("edit")) return R.string.quick_settings_edit_label;
-	else if (spec.equals("screen_timeout")) return R.string.quick_settings_screen_timeout_detail_title;
-	else if (spec.equals("screen_off")) return R.string.quick_settings_screen_off;
-	else if (spec.equals("reboot")) return R.string.quick_settings_reboot_label;
-	else if (spec.equals("ambient_display")) return R.string.quick_settings_ambient_display_label;
-        else if (spec.equals("sound")) return R.string.quick_settings_sound_label;
+         if (spec.equals("wifi")) return R.string.quick_settings_wifi_label;
+         else if (spec.equals("bt")) return R.string.quick_settings_bluetooth_label;
+         else if (spec.equals("inversion")) return R.string.quick_settings_inversion_label;
+         else if (spec.equals("cell")) return R.string.quick_settings_cellular_detail_title;
+         else if (spec.equals("airplane")) return R.string.airplane_mode;
+         else if (spec.equals("dnd")) return R.string.quick_settings_dnd_label;
+         else if (spec.equals("rotation")) return R.string.quick_settings_rotation_locked_label;
+         else if (spec.equals("flashlight")) return R.string.quick_settings_flashlight_label;
+         else if (spec.equals("location")) return R.string.quick_settings_location_label;
+         else if (spec.equals("cast")) return R.string.quick_settings_cast_title;
+         else if (spec.equals("hotspot")) return R.string.quick_settings_hotspot_label;
+         else if (spec.equals("usb_tether")) return R.string.quick_settings_usb_tether_label;
+         else if (spec.equals("ambient_display")) return R.string.quick_settings_ambient_display_label;
+         else if (spec.equals("screenshot")) return R.string.quick_settings_screenshot_label;
+         else if (spec.equals("nfc")) return R.string.quick_settings_nfc_label;
+         else if (spec.equals("screenoff")) return R.string.quick_settings_screen_off;
+         else if (spec.equals("sync")) return R.string.quick_settings_sync_label;
+         else if (spec.equals("timeout")) return R.string.quick_settings_timeout_label;
+         else if (spec.equals("brightness")) return R.string.quick_settings_brightness;
+         else if (spec.equals("music")) return R.string.quick_settings_music_label;
+         else if (spec.equals("reboot")) return R.string.quick_settings_reboot_label;
+         else if (spec.equals("battery_saver")) return R.string.quick_settings_battery_saver;
+         else if (spec.equals("expanded_desktop")) return R.string.quick_settings_expanded_desktop;
         return 0;
     }
 }
