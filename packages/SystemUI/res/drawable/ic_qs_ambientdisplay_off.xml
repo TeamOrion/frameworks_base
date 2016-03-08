@@ -14,18 +14,6 @@ Copyright (C) 2014 The Android Open Source Project
     limitations under the License.
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-    android:width="64dp"
-    android:height="64dp"
-    android:viewportWidth="64"
-    android:viewportHeight="64">
-
-    <group
-        android:translateY="-988.583">
-        <path
-            android:fillColor="#4DFFFFFF"
-            android:pathData="M14.9929
-=======
         android:width="64dp"
         android:height="64dp"
         android:viewportWidth="64"
@@ -36,7 +24,6 @@ Copyright (C) 2014 The Android Open Source Project
         <path
                 android:fillColor="#4DFFFFFF"
                 android:pathData="M14.9929
->>>>>>> orion/fix
 1051.24c-0.860426-0.1558-1.60181-0.6484-2.08043-1.3823-0.191527-0.2937-0.318133-0.5822-0.424976-0.9684l-0.07925-0.2865-0.0077-21.1653-0.0077-21.1652-5.65481-5.6547c-3.75978-3.75965-5.65481-5.67485-5.65481-5.71485
 0-0.039 0.455164-0.5152 1.31263-1.3725 1.14594-1.1458 1.32404-1.3124
 1.40251-1.3124 0.07978 0 3.23905 3.1492 28.1024 28.0124 22.4142 22.4142 28.0125
@@ -68,8 +55,4 @@ Copyright (C) 2014 The Android Open Source Project
 1.0368 0.81228 2.2666 0.93638 3.8931 0.0267 0.35 0.0876 2.4717 0.0896 3.1193
 0.00057 0.1902-0.004 0.2025-0.0669 0.2025-0.0498 0-1.40242-1.3349-5.145-5.0775z" />
     </group>
-<<<<<<< HEAD
 </vector>
-=======
-</vector>
->>>>>>> orion/fix

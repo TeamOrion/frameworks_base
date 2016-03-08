@@ -21,19 +21,12 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 
-<<<<<<< HEAD
-=======
-import com.android.internal.logging.MetricsLogger;
->>>>>>> orion/fix
 import com.android.systemui.qs.SecureSetting;
 import com.android.systemui.qs.QSTile;
 import com.android.systemui.R;
 
-<<<<<<< HEAD
 import com.android.internal.logging.MetricsLogger;
 
-=======
->>>>>>> orion/fix
 /** Quick settings tile: Ambient Display **/
 public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
 
@@ -94,27 +87,17 @@ public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-<<<<<<< HEAD
         return MetricsLogger.DISPLAY;
-=======
-        return MetricsLogger.DONT_TRACK_ME_BRO;
->>>>>>> orion/fix
     }
 
     @Override
     protected String composeChangeAnnouncement() {
         if (mState.value) {
-<<<<<<< HEAD
-            return mContext.getString(R.string.accessibility_quick_settings_ambient_display_changed_on);
-        } else {
-            return mContext.getString(R.string.accessibility_quick_settings_ambient_display_changed_off);
-=======
             return mContext.getString(
                     R.string.accessibility_quick_settings_ambient_display_changed_on);
         } else {
             return mContext.getString(
                     R.string.accessibility_quick_settings_ambient_display_changed_off);
->>>>>>> orion/fix
         }
     }
 
@@ -122,8 +105,4 @@ public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
     public void setListening(boolean listening) {
         // Do nothing
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> orion/fix

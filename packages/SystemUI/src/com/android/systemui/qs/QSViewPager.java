@@ -24,14 +24,11 @@ public class QSViewPager extends ViewPager {
     }
 
     @Override
-<<<<<<< HEAD
-=======
     public boolean hasOverlappingRendering() {
         return false;
     }
 
     @Override
->>>>>>> orion/fix
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = 0;
         for (int i = 0; i < getChildCount(); i++) {
@@ -40,7 +37,7 @@ public class QSViewPager extends ViewPager {
             int h = child.getMeasuredHeight();
             if (h > height) height = h;
         }
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);hat i 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
