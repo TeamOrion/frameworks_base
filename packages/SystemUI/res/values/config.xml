@@ -122,6 +122,9 @@
         wifi,bt,cell,airplane,rotation,flashlight,location,edit,dnd
     </string>
 
+    <!-- Default, comma-delimited, quick settings tiles. See QSConstants.java for a list of all available tiles -->
+    <string name="config_defaultQuickSettingsTiles">wifi,bt,cell,airplane,rotation,flashlight,location,edit,visualizer,dnd</string>
+    
     <!-- The tiles to display in QuickSettings -->
     <string name="quick_settings_tiles" translatable="false">default</string>
 
