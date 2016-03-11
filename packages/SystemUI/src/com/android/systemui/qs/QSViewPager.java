@@ -37,7 +37,7 @@ public class QSViewPager extends ViewPager {
             int h = child.getMeasuredHeight();
             if (h > height) height = h;
         }
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);hat i 
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 

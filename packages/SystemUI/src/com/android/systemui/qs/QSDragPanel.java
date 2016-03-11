@@ -50,6 +50,8 @@ import com.android.systemui.statusbar.phone.QSTileHost;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.tuner.QsTuner;
 import com.viewpagerindicator.CirclePageIndicator;
+import com.android.internal.util.cm.QSConstants;
+import com.android.internal.util.cm.QSUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -478,7 +480,7 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
 }
     public int getTilesPerPage(boolean firstPage) {
       //We didn't seem to have the full thing, taken some logic from CM here
-      if ((!mFirstRowLarge && firstPage) || !firstPage) {
+      if ((firstPage) || !firstPage) {
             return QSTileHost.TILES_PER_PAGE + 1;
         }
         return QSTileHost.TILES_PER_PAGE;

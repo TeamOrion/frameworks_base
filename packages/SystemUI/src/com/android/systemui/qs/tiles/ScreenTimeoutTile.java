@@ -187,6 +187,11 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
     }
 
     @Override
+    public int getMetricsCategory() {
+        return MetricsLogger.DISPLAY;
+    }
+
+    @Override
     protected void handleUpdateState(final TimeoutState state, Object arg) {
         if (mAnimationList.isEmpty() && mShowingDetail && arg == null) {
             return;

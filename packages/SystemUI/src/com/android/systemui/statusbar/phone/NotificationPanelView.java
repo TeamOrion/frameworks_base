@@ -1532,37 +1532,7 @@ public class NotificationPanelView extends PanelView implements
             return onHeader || (showQsOverride && mStatusBarState == StatusBarState.SHADE);
         }
     }
-
-    void setTaskManagerEnabled(boolean enabled) {
-        mShowTaskManager = enabled;
-        // explicity restore visibility states when disabled
-        // and TaskManager last state was showing
-        if (!enabled && mTaskManagerShowing) {
-            mTaskManagerShowing = false;
-            mQsPanel.setVisibility(View.VISIBLE);
-            mTaskManagerPanel.setVisibility(View.GONE);
-        }
-    }
-
-    public void setTaskManagerVisibility(boolean taskManagerShowing) {
-        if (mShowTaskManager) {
-            mTaskManagerShowing = taskManagerShowing;
-            cancelAnimation();
-            boolean expandVisually = mQsExpanded || mStackScrollerOverscrolling;
-            mQsPanel.setVisibility(expandVisually && !taskManagerShowing
-                    ? View.VISIBLE : View.GONE);
-            mTaskManagerPanel.setVisibility(expandVisually && taskManagerShowing
-                    && !mKeyguardShowing ? View.VISIBLE : View.GONE);
-        }
-    }
-
-
-
-  private void cancelAnimation() {
-        if (mQsExpansionAnimator != null) {
-            mQsExpansionAnimator.cancel();
-        }
-    }
+    
 
     void setTaskManagerEnabled(boolean enabled) {
         mShowTaskManager = enabled;
