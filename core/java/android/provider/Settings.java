@@ -8800,6 +8800,7 @@ public final class Settings {
         public static final String[] SETTINGS_TO_BACKUP = {
             BUGREPORT_IN_POWER_MENU,
             STAY_ON_WHILE_PLUGGED_IN,
+            WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
             AUTO_TIME,
             AUTO_TIME_ZONE,
             POWER_SOUNDS_ENABLED,
