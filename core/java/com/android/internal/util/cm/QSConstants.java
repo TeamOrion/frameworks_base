@@ -38,8 +38,15 @@ public class QSConstants {
 	public static final String TILE_AMBIENT_DISPLAY = "ambient_display";
         public static final String TILE_SOUND = "sound";
 	public static final String TILE_EDIT = "edit";
-
-    protected static final ArrayList<String> STATIC_TILES_AVAILABLE = new ArrayList<String>();
+        public static final String TILE_HEADSUP = "headsup";
+        public static final String TILE_EXPANDED_DESKTOP = "expanded_desktop";
+        public static final String TILE_BATTERY_SAVER = "battery_saver";
+        public static final String TILE_MUSIC = "music";
+        public static final String TILE_SCREENSHOT = "screenshot"; 
+        public static final String TILE_USB_TETHER = "usb_tether";
+        public static final String TILE_NFC = "nfc"; 
+        public static final String TILE_SYNC = "sync";
+   protected static final ArrayList<String> STATIC_TILES_AVAILABLE = new ArrayList<String>();
     protected static final ArrayList<String> TILES_AVAILABLE = new ArrayList<String>();
 
     static {
@@ -65,6 +72,14 @@ public class QSConstants {
 		STATIC_TILES_AVAILABLE.add(TILE_REBOOT);
 		STATIC_TILES_AVAILABLE.add(TILE_AMBIENT_DISPLAY);
                 STATIC_TILES_AVAILABLE.add(TILE_SOUND);
+                STATIC_TILES_AVAILABLE.add(TILE_HEADSUP);
+                STATIC_TILES_AVAILABLE.add(TILE_EXPANDED_DESKTOP);
+                STATIC_TILES_AVAILABLE.add(TILE_BATTERY_SAVER);
+                STATIC_TILES_AVAILABLE.add(TILE_MUSIC);
+                STATIC_TILES_AVAILABLE.add(TILE_SCREENSHOT);
+                STATIC_TILES_AVAILABLE.add(TILE_USB_TETHER);
+                STATIC_TILES_AVAILABLE.add(TILE_NFC);
+                STATIC_TILES_AVAILABLE.add(TILE_SYNC);
         TILES_AVAILABLE.addAll(STATIC_TILES_AVAILABLE);
     }
 }
