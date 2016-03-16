@@ -139,7 +139,7 @@ public class QsTuner extends Fragment implements Callback {
     @Override
     public void onTilesChanged() {
         mQsPanel.setTiles(mTileHost.getTiles());
-    }
+       }
 
     @Override
     public void setEditing(boolean editing) {
@@ -180,7 +180,13 @@ public class QsTuner extends Fragment implements Callback {
             setTiles(order);
         }
 
-        private static class BlankSecurityController implements SecurityController {
+      public void reset() {
+    Secure.putStringForUser(getContext().getContentResolver(), TILES_SETTING,
+         "wifi,bt,dnd,cell,airplane,rotation,flashlight,location,cast,edit",
+              ActivityManager.getCurrentUser());
+        }
+
+      private static class BlankSecurityController implements SecurityController {
             @Override
             public boolean hasDeviceOwner() {
                 return false;
@@ -297,20 +303,6 @@ public class QsTuner extends Fragment implements Callback {
             else if (mSpec.equals("rotation")) return R.drawable.ic_portrait_from_auto_rotate;
             else if (mSpec.equals("flashlight")) return R.drawable.ic_signal_flashlight_enable;
             else if (mSpec.equals("location")) return R.drawable.ic_signal_location_enable;
-            else if (mSpec.equals("cast")) return R.drawable.ic_qs_cast_on;
-            else if (mSpec.equals("hotspot")) return R.drawable.ic_hotspot_enable;
-            else if (mSpec.equals("usb_tether")) return R.drawable.ic_qs_usb_tether_off;
-            else if (mSpec.equals("ambient_display")) return R.drawable.ic_qs_ambientdisplay_on;
-            else if (mSpec.equals("screenshot")) return R.drawable.ic_qs_screenshot;
-            else if (mSpec.equals("nfc")) return R.drawable.ic_qs_nfc_on;
-            else if (mSpec.equals("screenoff")) return R.drawable.ic_qs_power;
-            else if (mSpec.equals("sync")) return R.drawable.ic_qs_sync_on;
-            else if (mSpec.equals("timeout")) return R.drawable.ic_qs_screen_timeout_vector;
-            else if (mSpec.equals("brightness")) return R.drawable.ic_qs_brightness_auto_on_alpha;
-            else if (mSpec.equals("music")) return R.drawable.ic_qs_media_play;
-            else if (mSpec.equals("reboot")) return R.drawable.ic_qs_reboot;
-            else if (mSpec.equals("battery_saver")) return R.drawable.ic_qs_battery_saver_on;
-            else if (mSpec.equals("expanded_desktop")) return R.drawable.ic_qs_expanded_desktop;
             return R.drawable.android;
         }
 

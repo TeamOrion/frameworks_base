@@ -42,7 +42,9 @@ import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.ExpandedDesktopTile;
 import com.android.systemui.qs.tiles.EditTile;
+import com.android.systemui.qs.tiles.ExpandedDesktopTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
+import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
@@ -56,10 +58,15 @@ import com.android.systemui.qs.tiles.ScreenOffTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.ScreenTimeoutTile;
 import com.android.systemui.qs.tiles.RebootTile;
+import com.android.systemui.qs.tiles.MusicTile;
+import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenOffTile;
 import com.android.systemui.qs.tiles.ScreenTimeoutTile;
 import com.android.systemui.qs.tiles.SoundTile;
+import com.android.systemui.qs.tiles.ScreenshotTile;
+import com.android.systemui.qs.tiles.UsbTetherTile;
+import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.statusbar.policy.BluetoothController;
 import com.android.systemui.statusbar.policy.CastController;
@@ -323,6 +330,14 @@ public class QSTileHost implements QSTile.Host, Tunable {
 	else if (tileSpec.equals("reboot")) return  new RebootTile(this);
 	else if (tileSpec.equals("ambient_display")) return new AmbientDisplayTile(this);
         else if (tileSpec.equals("sound")) return new SoundTile(this);
+        else if (tileSpec.equals("headsup")) return new HeadsUpTile(this);
+        else if (tileSpec.equals("expanded_desktop")) return new ExpandedDesktopTile(this);
+        else if (tileSpec.equals("battery_saver")) return new BatterySaverTile(this);
+        else if (tileSpec.equals("music")) return new MusicTile(this);
+        else if (tileSpec.equals("screenshot")) return new ScreenshotTile(this);
+        else if (tileSpec.equals("usb_tether")) return new UsbTetherTile(this);
+        else if (tileSpec.equals("nfc")) return new NfcTile(this);
+        else if (tileSpec.equals("sync")) return new SyncTile(this);
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);
         else throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
     }
@@ -375,33 +390,34 @@ public class QSTileHost implements QSTile.Host, Tunable {
     public void resetTiles() {
         setEditing(false);
         Settings.System.putStringForUser(getContext().getContentResolver(),
-                Settings.System.QS_TILES, "default", ActivityManager.getCurrentUser());
+                Settings.System.QS_TILES, "wifi,bt,dnd,cell,airplane,rotation,flashlight,location,edit", ActivityManager.getCurrentUser());
     }
 
     public static int getLabelResource(String spec) {
-         if (spec.equals("wifi")) return R.string.quick_settings_wifi_label;
-         else if (spec.equals("bt")) return R.string.quick_settings_bluetooth_label;
-         else if (spec.equals("inversion")) return R.string.quick_settings_inversion_label;
-         else if (spec.equals("cell")) return R.string.quick_settings_cellular_detail_title;
-         else if (spec.equals("airplane")) return R.string.airplane_mode;
-         else if (spec.equals("dnd")) return R.string.quick_settings_dnd_label;
-         else if (spec.equals("rotation")) return R.string.quick_settings_rotation_locked_label;
-         else if (spec.equals("flashlight")) return R.string.quick_settings_flashlight_label;
-         else if (spec.equals("location")) return R.string.quick_settings_location_label;
-         else if (spec.equals("cast")) return R.string.quick_settings_cast_title;
-         else if (spec.equals("hotspot")) return R.string.quick_settings_hotspot_label;
-         else if (spec.equals("usb_tether")) return R.string.quick_settings_usb_tether_label;
-         else if (spec.equals("ambient_display")) return R.string.quick_settings_ambient_display_label;
-         else if (spec.equals("screenshot")) return R.string.quick_settings_screenshot_label;
-         else if (spec.equals("nfc")) return R.string.quick_settings_nfc_label;
-         else if (spec.equals("screenoff")) return R.string.quick_settings_screen_off;
-         else if (spec.equals("sync")) return R.string.quick_settings_sync_label;
-         else if (spec.equals("timeout")) return R.string.quick_settings_timeout_label;
-         else if (spec.equals("brightness")) return R.string.quick_settings_brightness;
-         else if (spec.equals("music")) return R.string.quick_settings_music_label;
-         else if (spec.equals("reboot")) return R.string.quick_settings_reboot_label;
-         else if (spec.equals("battery_saver")) return R.string.quick_settings_battery_saver;
-         else if (spec.equals("expanded_desktop")) return R.string.quick_settings_expanded_desktop;
-        return 0;
-    }
+        if (spec.equals("wifi")) return R.string.quick_settings_wifi_label;
+        else if (spec.equals("bt")) return R.string.quick_settings_bluetooth_label;
+        else if (spec.equals("inversion")) return R.string.quick_settings_inversion_label;
+        else if (spec.equals("cell")) return R.string.quick_settings_cellular_detail_title;
+        else if (spec.equals("airplane")) return R.string.airplane_mode;
+        else if (spec.equals("dnd")) return R.string.quick_settings_dnd_label;
+        else if (spec.equals("rotation")) return R.string.quick_settings_rotation_locked_label;
+        else if (spec.equals("flashlight")) return R.string.quick_settings_flashlight_label;
+        else if (spec.equals("location")) return R.string.quick_settings_location_label;
+        else if (spec.equals("cast")) return R.string.quick_settings_cast_title;
+        else if (spec.equals("hotspot")) return R.string.quick_settings_hotspot_label;
+        else if (spec.equals("edit")) return R.string.quick_settings_edit_label;
+		else if (spec.equals("screen_timeout")) return R.string.quick_settings_screen_timeout_detail_title;
+		else if (spec.equals("screen_off")) return R.string.quick_settings_screen_off;
+		else if (spec.equals("reboot")) return R.string.quick_settings_reboot_label;
+		else if (spec.equals("ambient_display")) return R.string.quick_settings_ambient_display_label;
+        else if (spec.equals("sound")) return R.string.quick_settings_sound_label;
+        else if (spec.equals("headsup")) return R.string.quick_settings_heads_up_label;  
+     else if (spec.equals("expanded_desktop")) return R.string.quick_settings_expanded_desktop; 
+     else if (spec.equals("battery_saver")) return R.string.quick_settings_battery_saver;  
+     else if (spec.equals("music")) return R.string.quick_settings_music_label;
+     else if (spec.equals("screenshot")) return R.string.quick_settings_screenshot_label;
+     else if (spec.equals("usb_tether")) return R.string.quick_settings_usb_tether_label;
+     else if (spec.equals("nfc")) return R.string.quick_settings_nfc_label;
+     else if (spec.equals("sync")) return R.string.quick_settings_sync_label;     return 0; 
+   }
 }
