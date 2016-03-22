@@ -3647,6 +3647,12 @@ public final class Settings {
          */
         public static final String NAVIGATION_BAR_IME_ARROWS = "navigation_bar_ime_arrows";
 
+         /**
+         * Whether the capacitive hardware keys lights are disabled
+         * @hide
+         */
+        public static final String DISABLE_HW_KEY_LIGHTS = "disable_hw_key_lights";
+
         /**
          * Whether wifi settings will connect to access point automatically
          * 0 = automatically
