@@ -1284,7 +1284,7 @@ public class QSDragPanel extends QSPanel implements View.OnDragListener, View.On
             ti.col = lastCol;
 
             ti.destination.x = getLeft(lastRow, lastCol, columnCountF,
-                    lastPage == 0 && lastRow == 0 && mFirstRowLarge);
+                    lastPage == 0 && lastRow == 0);
             ti.destination.y = getRowTop(lastRow);
 
             final boolean dual = getPage(ti.destinationPage).dualRecord(ti);
