@@ -58,9 +58,6 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
             new AnimationIcon(R.drawable.ic_qs_screen_timeout_long_reverse_avd);
 
     private String[] mEntries, mValues;
-    private boolean mShowingDetail;
-    ArrayList<Integer> mAnimationList
-            = new ArrayList<Integer>();
 
     public ScreenTimeoutTile(Host host) {
         super(host);
@@ -124,8 +121,6 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
     @Override
     protected void handleClick() {
         if (mEntries.length > 0) {
-            mShowingDetail = true;
-            mAnimationList.clear();
             showDetail(true);
         }
     }
@@ -193,10 +188,6 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
 
     @Override
     protected void handleUpdateState(final TimeoutState state, Object arg) {
-        if (mAnimationList.isEmpty() && mShowingDetail && arg == null) {
-            return;
-        }
-
         int newTimeout = getScreenTimeout();
 
         AnimationIcon d = null;
@@ -314,7 +305,6 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
                     mUiHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            mShowingDetail = false;
                             refreshState(true);
                         }
                     }, 100);
