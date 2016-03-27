@@ -2296,6 +2296,12 @@ public final class Settings {
 
         private static final Validator BLUETOOTH_DISCOVERABILITY_VALIDATOR =
                 new InclusiveIntegerRangeValidator(0, 2);
+        /**
+        * If all file types can be accepted over Bluetooth OBEX.
+        * @hide
+        */
+        public static final String BLUETOOTH_ACCEPT_ALL_FILES =
+            "bluetooth_accept_all_files";
 
         /**
          * Bluetooth discoverability timeout.  If this value is nonzero, then
@@ -3911,6 +3917,16 @@ public final class Settings {
         public static final String KEY_APP_SWITCH_ACTION = "key_app_switch_action";
 
         /**
+         * Whether to swap app switch button with back button, the value is boolean.
+         * @hide
+         */
+        public static final String APP_SWITCH_SWAP_BUTTONS = "app_switch_swap_buttons";
+
+        /** @hide */
+        public static final Validator APP_SWITCH_SWAP_BUTTONS_VALIDATOR =
+                sBooleanValidator;
+
+        /**
          * Action to perform when the app switch key is long-pressed. (Default is 0)
          * (See KEY_HOME_LONG_PRESS_ACTION for valid values)
          * @hide
@@ -3953,8 +3969,14 @@ public final class Settings {
          * @hide
          */
         public static final String HARDWARE_KEY_REBINDING = "hardware_key_rebinding";
-	
-		/**
+       
+         /**
+         * Whether the capacitive hardware keys are disabled
+         * @hide
+         */
+        public static final String HARDWARE_KEYS_ENABLED = "hardware_keys_enabled";
+
+	 /**
          * Action to perform when the back key is pressed (default: ACTION_BACK)
          * (See ButtonsConstants.java for valid values)
          * @hide
@@ -4184,6 +4206,7 @@ public final class Settings {
             WIFI_STATIC_DNS2,
             BLUETOOTH_DISCOVERABILITY,
             BLUETOOTH_DISCOVERABILITY_TIMEOUT,
+            BLUETOOTH_ACCEPT_ALL_FILES,
             DIM_SCREEN,
             SCREEN_OFF_TIMEOUT,
             SCREEN_BRIGHTNESS,
