@@ -385,15 +385,6 @@ public class TelecomManager {
             "android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION";
 
     /**
-     * Broadcast intent action for letting custom component know to show the missed call
-     * notification.
-     * @hide
-     */
-    @SystemApi
-    public static final String ACTION_SHOW_MISSED_CALLS_NOTIFICATION =
-            "android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION";
-
-    /**
      * The number of calls associated with the notification.
      * @hide
      */
