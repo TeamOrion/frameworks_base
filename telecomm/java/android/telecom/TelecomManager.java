@@ -117,6 +117,15 @@ public class TelecomManager {
             "android.telecom.action.PHONE_ACCOUNT_REGISTERED";
 
     /**
+     * The {@link android.content.Intent} action used indicate that a phone account was
+     * just unregistered.
+     * @hide
+     */
+    @SystemApi
+    public static final String ACTION_PHONE_ACCOUNT_UNREGISTERED =
+            "android.telecom.action.PHONE_ACCOUNT_UNREGISTERED";
+
+    /**
      * Activity action: Shows a dialog asking the user whether or not they want to replace the
      * current default Dialer with the one specified in
      * {@link #EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME}.
@@ -376,6 +385,15 @@ public class TelecomManager {
             "android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION";
 
     /**
+     * Broadcast intent action for letting custom component know to show the missed call
+     * notification.
+     * @hide
+     */
+    @SystemApi
+    public static final String ACTION_SHOW_MISSED_CALLS_NOTIFICATION =
+            "android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION";
+
+    /**
      * The number of calls associated with the notification.
      * @hide
      */
@@ -400,14 +418,14 @@ public class TelecomManager {
     public static final String EXTRA_CLEAR_MISSED_CALLS_INTENT =
             "android.telecom.extra.CLEAR_MISSED_CALLS_INTENT";
 
-   /**
+    /**
      * The intent to call back a missed call.
      * @hide
      */
     @SystemApi
     public static final String EXTRA_CALL_BACK_INTENT =
             "android.telecom.extra.CALL_BACK_INTENT";
-            
+
     /**
      * The following 4 constants define how properties such as phone numbers and names are
      * displayed to the user.
