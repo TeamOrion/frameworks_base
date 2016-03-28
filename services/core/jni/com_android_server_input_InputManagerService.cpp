@@ -453,7 +453,6 @@ void NativeInputManager::getReaderConfiguration(InputReaderConfiguration* outCon
         outConfig->showTouches = mLocked.showTouches;
         outConfig->appSwitchSwapButtonsEnabled = mLocked.appSwitchSwapButtonsEnabled;
   
-
         outConfig->setDisplayInfo(false /*external*/, mLocked.internalViewport);
         outConfig->setDisplayInfo(true /*external*/, mLocked.externalViewport);
     } // release lock
