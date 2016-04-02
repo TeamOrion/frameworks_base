@@ -2553,4 +2553,10 @@
           true will use SystemClock.elapsedRealtimeNanos() to set timestamp-->
     <bool name="config_useSystemClockforSensors">false</bool>
 
+	<!-- Bool whether to show notification slider in Universe -->
+    <bool name="config_showNotificationSlider">false</bool>
+    
+    <!-- Bool whether to show MotoDoze Gestures in Universe -->
+    <bool name="config_showMotoDozeGestures">false</bool>
+    
 </resources>

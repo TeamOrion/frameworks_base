@@ -2448,4 +2448,11 @@
 
   <!-- Sensor Handling -->
   <java-symbol type="bool" name="config_useSystemClockforSensors" />
+  
+  
+  <!-- Notification Slider -->
+  <java-symbol type="bool" name="config_showNotificationSlider" />
+    
+  <!-- MotoDoze -->
+   <java-symbol type="bool" name="config_showMotoDozeGestures" />
 </resources>
