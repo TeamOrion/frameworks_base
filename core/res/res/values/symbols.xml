@@ -822,6 +822,8 @@
   <java-symbol type="string" name="reboot_to_update_reboot" />
   <java-symbol type="string" name="reboot_to_reset_title" />
   <java-symbol type="string" name="reboot_to_reset_message" />
+  <java-symbol type="string" name="reboot_confirm" />
+  <java-symbol type="string" name="reboot_progress" />
   <java-symbol type="string" name="reboot_safemode_confirm" />
   <java-symbol type="string" name="reboot_safemode_title" />
   <java-symbol type="string" name="relationTypeAssistant" />
@@ -2727,7 +2729,7 @@
   <!-- Screen-size-dependent modes for picker dialogs. -->
   <java-symbol type="integer" name="time_picker_mode" />
   <java-symbol type="integer" name="date_picker_mode" />
-  
+
   <!-- Symbols/Overlays for carrier hotspot -->
   <java-symbol type="bool" name="config_regional_hotspot_show_maximum_connection_enable" />
 
