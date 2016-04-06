@@ -2472,7 +2472,10 @@
   
   <!-- Hardware key rebinding -->
   <java-symbol type="integer" name="config_deviceHardwareKeys" />
-  
+
+  <!-- HwKeys -->
+  <java-symbol type="bool" name="config_showHwKeys" />
+   
   <!-- Hardware key disable path -->
   <java-symbol type="string" name="config_deviceHardwareKeysFilePath" />
 

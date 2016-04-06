@@ -1030,6 +1030,9 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">95</integer>
 
+    <!-- Bool whether to show Hardware keys settings -->
+    <bool name="config_showHwKeys">false</bool>
+
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
     <integer name="config_screenBrightnessSettingMinimum">10</integer>
