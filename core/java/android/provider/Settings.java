@@ -4169,6 +4169,12 @@ public final class Settings {
         public static final String PROXIMITY_AUTO_SPEAKER_INCALL_ONLY =
                 "proximity_auto_speaker_incall_only";
 
+        /**
+         * Check the proximity sensor during wakeup
+         * @hide
+         */
+        public static final String PROXIMITY_ON_WAKE = "proximity_on_wake";
+
 		/**
          * List of QS tile names
          * @hide
