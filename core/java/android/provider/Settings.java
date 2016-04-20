@@ -4046,17 +4046,17 @@ public final class Settings {
                 "key_camera_double_tap_action";
                 
          /**
-         * Whether the capacitive hardware keys are disabled
-         * @hide
-         */
-        public static final String HARDWARE_KEYS_ENABLED = "hardware_keys_enabled";
-
-         	       
-        /**
          * Whether custom hardware key rebinding is enabled
          * @hide
          */
         public static final String HARDWARE_KEY_REBINDING = "hardware_key_rebinding";
+
+         	       
+        /**
+         * Whether hardware keys are enabled
+         * @hide
+         */
+        public static final String DISABLE_HARDWARE_KEYS = "disable_hardware_keys";
 	
 		/**
          * Action to perform when the back key is pressed (default: ACTION_BACK)
