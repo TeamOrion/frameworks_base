@@ -70,6 +70,7 @@ import com.android.internal.util.Protocol;
 import com.android.internal.util.State;
 import com.android.internal.util.StateMachine;
 import com.android.server.IoThread;
+import com.android.server.NetPluginDelegate;
 import com.android.server.connectivity.tethering.IControlsTethering;
 import com.android.server.connectivity.tethering.IPv6TetheringCoordinator;
 import com.android.server.connectivity.tethering.TetherInterfaceStateMachine;
@@ -1450,6 +1451,8 @@ public class Tethering extends BaseNetworkObserver implements IControlsTethering
 
                 Network network = null;
                 if (upType != ConnectivityManager.TYPE_NONE) {
+					Network network = getConnectivityManager().getNetworkForType(upType);
+                    NetPluginDelegate.setUpstream(network);
                     LinkProperties linkProperties = cm.getLinkProperties(upType);
                     if (linkProperties != null) {
                         // Find the interface with the default IPv4 route. It may be the
@@ -1467,7 +1470,6 @@ public class Tethering extends BaseNetworkObserver implements IControlsTethering
                     }
 
                     if (iface != null) {
-                        network = cm.getNetworkForType(upType);
                         if (network == null) {
                             Log.e(TAG, "No Network for upstream type " + upType + "!");
                         }
