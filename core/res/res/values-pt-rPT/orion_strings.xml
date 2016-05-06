@@ -15,49 +15,49 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Reboot menu -->
   <!-- Button to reboot the phone, within the Reboot Options dialog -->
-  <string name="reboot_reboot">Neustarten</string>
+  <string name="reboot_reboot">Reiniciar</string>
   <!-- Button to soft reboot the phone, within the Reboot Options dialog -->
-  <string name="reboot_soft">Schneller Neustart</string>
+  <string name="reboot_soft">Reiniciar software</string>
   <!-- Button to reboot the phone into recovery, within the Reboot Options dialog -->
-  <string name="reboot_recovery">Wiederherstellung</string>
+  <string name="reboot_recovery">Recuperação</string>
   <!-- Button to reboot the phone into bootloader, within the Reboot Options dialog -->
   <string name="reboot_bootloader">Bootloader</string>
   <!-- Button to reboot the phone into download, within the Reboot Options dialog -->
-  <string name="reboot_download">Download</string>
+  <string name="reboot_download">Transferência</string>
   <!-- Reboot Progress Dialog. This is shown if the user chooses to reboot the phone. -->
-  <string name="reboot_progress">Neustarten\u2026</string>
+  <string name="reboot_progress">A reiniciar</string>
   <!-- Button to reboot the phone, within the Phone Options dialog -->
-  <string name="reboot_system" product="tablet">Tablet neustarten</string>
-  <string name="reboot_system" product="default">Telefon neustarten</string>
+  <string name="reboot_system" product="tablet">Reiniciar tablet</string>
+  <string name="reboot_system" product="default">Reiniciar o telefone</string>
   <!-- Slimseekbar -->
-  <string name="default_string">Standard</string>
+  <string name="default_string">Predefinido</string>
   <!-- label for item that screenshots in phone options dialog -->
-  <string name="global_action_screenshot">Bildschirmfoto</string>
+  <string name="global_action_screenshot">Captura de Ecrâ</string>
   <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permgrouplab_security">Sicherheit</string>
+  <string name="permgrouplab_security">Segurança</string>
   <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permgroupdesc_security">Berechtigungen bezüglich der Geräte-Sicherheit.</string>
+  <string name="permgroupdesc_security">Permissões relacionadas com as informações de segurança do dispositivo.</string>
   <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permlab_readPhoneBlacklist">Telefon-Sperrliste lesen</string>
+  <string name="permlab_readPhoneBlacklist">ler a lista negra do telefone</string>
   <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_readPhoneBlacklist">Erlaubt es der App, Informationen über Nummern, von denen eingehende Anrufe und Nachrichten blockiert werden, zu lesen.</string>
+  <string name="permdesc_readPhoneBlacklist">Permite a uma aplicação ler informações sobre números de telefone que estão bloqueados para chamadas ou mensagens.</string>
   <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permlab_changePhoneBlacklist">Sperrliste ändern</string>
+  <string name="permlab_changePhoneBlacklist">alterar a lista negra do telefone</string>
   <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_changePhoneBlacklist">Erlaubt es einer App, die Nummern, von denen eingehende Anrufe und Nachrichten blockiert werden, zu ändern.</string>
-  <string name="permlab_preventpower">Ein/Aus Taste ändern</string>
+  <string name="permdesc_changePhoneBlacklist">Permite a uma aplicação alterar os números de telefone que estão bloqueados para chamadas ou mensagens.</string>
+  <string name="permlab_preventpower">substituir a ação do botão de ligar/desligar</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_preventpower">Ermöglicht einer App, der Ein/Aus-Taste eine andere Funktion zuzuweisen.</string>
+  <string name="permdesc_preventpower">Permite que uma aplicação substitua a ação do botão de ligar/desligar.</string>
   <!-- Title of an application permission, listed so the user can choose whether they want the application to do this. -->
-  <string name="permlab_setKeyguardWallpaper">Sperrbildschirm-Hintergrund ändern</string>
+  <string name="permlab_setKeyguardWallpaper">definir imagem de fundo do ecrã de bloqueio</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_setKeyguardWallpaper">Ermöglicht einer App den Sperrbildschirm-Hintergrund zu ändern.</string>
+  <string name="permdesc_setKeyguardWallpaper">Permite que uma aplicação altere a imagem de fundo do ecrã de bloqueio.</string>
   <!-- label for item that reboots the phone in phone options dialog -->
-  <string name="global_action_reboot">Neustarten</string>
+  <string name="global_action_reboot">Reiniciar</string>
   <!-- Title of dialog to confirm rebooting. -->
-  <string name="reboot_title">Neustarten</string>
+  <string name="reboot_title">Reiniciar</string>
   <!-- Reboot Confirmation Dialog.  When the user chooses to reboot the device, there will
          be a confirmation dialog.  This is the message. -->
-  <string name="reboot_confirm" product="tablet">Ihr Tablet wird neu gestartet.</string>
-  <string name="reboot_confirm" product="default">Ihr Telefon wird neu gestartet.</string>
+  <string name="reboot_confirm" product="tablet">O seu tablet irá reiniciar.</string>
+  <string name="reboot_confirm" product="default">O seu telefone irá reiniciar.</string>
 </resources>
