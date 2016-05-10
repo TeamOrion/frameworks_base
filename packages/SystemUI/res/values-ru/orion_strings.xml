@@ -17,31 +17,30 @@
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Dismiss</string>
-  <string name="battery_saver_notification_action_text_short">Turn off</string>
+  <string name="battery_saver_dismiss_title">Вернуться</string>
+  <string name="battery_saver_notification_action_text_short">Выключить</string>
   <!-- The text for the button in the notification window-shade that clears
          all of the currently visible notifications. [CHAR LIMIT=10]-->
-  <string name="clear_recents">Close all recent</string>
-  <string name="qs_tile_edit_header_instruction">Press and hold a tile to edit</string>
-  <string name="quick_settings_edit_label">Edit Tiles</string>
+  <string name="clear_recents">Закрыть все запущенные</string>
+  <string name="qs_tile_edit_header_instruction">Нажмите и удерживайте плитку для редактирования</string>
+  <string name="quick_settings_edit_label">Редактировать плитки</string>
   <string name="quick_settings_cannot_delete_edit_tile">Cannot delete the Edit tile</string>
   <string name="qs_tiles_reset_confirmation">Reset quick settings tiles to default configuration?</string>
   <!-- Screenshot QS tile -->
   <string name="quick_settings_screenshot_label">Screenshot</string>
   <!-- USB tether QS tile -->
   <string name="accessibility_quick_settings_usb_tether_off">USB tethering off</string>
-  <string name="accessibility_quick_settings_usb_tether_on">USB tethering on</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_off">USB tethering turned off</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_on">USB tethering turned on</string>
-  <string name="quick_settings_usb_tether_label">USB tethering</string>
+  <string name="accessibility_quick_settings_usb_tether_on">Включить USB-модем</string>
+  <string name="accessibility_quick_settings_usb_tether_changed_off">Выключить USB-модем</string>
+  <string name="accessibility_quick_settings_usb_tether_changed_on">USB-модем включен</string>
+  <string name="quick_settings_usb_tether_label">USB модем</string>
   <!-- LTE Tile -->
   <string name="qs_lte_label">LTE</string>
-  <string name="lte_on">LTE ON
-    </string>
+  <string name="lte_on">LTE НА    </string>
   <string name="lte_off">LTE OFF</string>
   <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Dismiss</string>
-  <string name="battery_saver_notification_action_text_short">Turn off</string>
+  <string name="battery_saver_dismiss_title">Вернуться</string>
+  <string name="battery_saver_notification_action_text_short">Выключить</string>
   <!-- Kill app toast -->
   <string name="app_killed_message">App Killed</string>
   <!-- Screenshot -->
@@ -77,8 +76,8 @@
   <string name="select_application">Select application</string>
   <string name="lockscreen_choose_action_title">Choose action</string>
   <string name="lockscreen_none_target">None</string>
-  <string name="qs_tile_edit_header_instruction">Press and hold a tile to edit</string>
-  <string name="quick_settings_edit_label">Edit Tiles</string>
+  <string name="qs_tile_edit_header_instruction">Нажмите и удерживайте плитку для редактирования</string>
+  <string name="quick_settings_edit_label">Редактировать плитки</string>
   <string name="quick_settings_cannot_delete_edit_tile">Cannot delete the Edit tile</string>
   <string name="qs_tiles_reset_confirmation">Reset quick settings tiles to default configuration?</string>
   <string name="quick_settings_tile_reset_to_default">Reset to default layout</string>
@@ -87,8 +86,8 @@
   <string name="quick_settings_remove">Remove tile</string>
   <string name="quick_settings_screen_off">Screen off</string>
   <string name="quick_settings_screen_off">Screen off</string>
-  <string name="quick_settings_reboot_label">Reboot</string>
-  <string name="quick_settings_reboot_recovery_label">Recovery</string>
+  <string name="quick_settings_reboot_label">Перезагрузка</string>
+  <string name="quick_settings_reboot_recovery_label">Восстановление</string>
   <string name="quick_settings_ambient_display_label">Ambient display</string>
   <string name="quick_settings_screen_timeout_detail_title">Screen timeout</string>
   <!-- Content description of the screen timeout tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
@@ -176,19 +175,19 @@
   <!-- Color for the RAM bar text in the recent view -->
   <!-- Task Manager -->
   <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Dismiss</string>
-  <string name="battery_saver_notification_action_text_short">Turn off</string>
+  <string name="battery_saver_dismiss_title">Вернуться</string>
+  <string name="battery_saver_notification_action_text_short">Выключить</string>
   <!-- Screenshot Delete Toast -->
   <string name="delete_screenshot_toast">Screenshot Deleted</string>
   <!-- USB tether QS tile -->
   <string name="accessibility_quick_settings_usb_tether_off">USB tethering off</string>
-  <string name="accessibility_quick_settings_usb_tether_on">USB tethering on</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_off">USB tethering turned off</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_on">USB tethering turned on</string>
-  <string name="quick_settings_usb_tether_label">USB tethering</string>
+  <string name="accessibility_quick_settings_usb_tether_on">Включить USB-модем</string>
+  <string name="accessibility_quick_settings_usb_tether_changed_off">Выключить USB-модем</string>
+  <string name="accessibility_quick_settings_usb_tether_changed_on">USB-модем включен</string>
+  <string name="quick_settings_usb_tether_label">USB модем</string>
   <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Dismiss</string>
-  <string name="battery_saver_notification_action_text_short">Turn off</string>
+  <string name="battery_saver_dismiss_title">Вернуться</string>
+  <string name="battery_saver_notification_action_text_short">Выключить</string>
   <!-- SystemUI Tuner Parts -->
   <string name="systemui_tuner_statusbar_title">Statusbar Items</string>
   <string name="systemui_tuner_qs_title">Quick Settings</string>
@@ -217,15 +216,15 @@
          [CHAR LIMIT=4] -->
   <!-- The text for the button in the notification window-shade that clears
          all of the currently visible notifications. [CHAR LIMIT=10]-->
-  <string name="clear_recents">Close all recent</string>
+  <string name="clear_recents">Закрыть все запущенные</string>
   <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
   <string name="accessibility_data_connection_HP">HSPA+</string>
   <!-- USB tether QS tile -->
   <string name="accessibility_quick_settings_usb_tether_off">USB tethering off</string>
-  <string name="accessibility_quick_settings_usb_tether_on">USB tethering on</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_off">USB tethering turned off</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_on">USB tethering turned on</string>
-  <string name="quick_settings_usb_tether_label">USB tethering</string>
+  <string name="accessibility_quick_settings_usb_tether_on">Включить USB-модем</string>
+  <string name="accessibility_quick_settings_usb_tether_changed_off">Выключить USB-модем</string>
+  <string name="accessibility_quick_settings_usb_tether_changed_on">USB-модем включен</string>
+  <string name="quick_settings_usb_tether_label">USB модем</string>
   <!-- Ambient Display QS tile -->
   <string name="accessibility_quick_settings_ambient_display_off">Ambient display off.</string>
   <string name="accessibility_quick_settings_ambient_display_on">Ambient display on.</string>
@@ -258,8 +257,8 @@
   <string name="quick_settings_music_play">Play</string>
   <string name="quick_settings_music_pause">Pause</string>
   <!-- Reboot/Recovery QS Tile -->
-  <string name="quick_settings_reboot_label">Reboot</string>
-  <string name="quick_settings_reboot_recovery_label">Recovery</string>
+  <string name="quick_settings_reboot_label">Перезагрузка</string>
+  <string name="quick_settings_reboot_recovery_label">Восстановление</string>
   <!-- Battery Saver QS Tile -->
   <string name="quick_settings_battery_saver">Battery saver</string>
   <string name="quick_settings_battery_saver_off">Battery saver off</string>
