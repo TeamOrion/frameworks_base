@@ -2546,6 +2546,14 @@ public final class Settings {
         public static final String VIBRATE_INPUT_DEVICES = "vibrate_input_devices";
 
         private static final Validator VIBRATE_INPUT_DEVICES_VALIDATOR = sBooleanValidator;
+        
+        /**
+         * Check the proximity sensor during wakeup
+         * @hide
+         */
+        public static final String PROXIMITY_ON_WAKE = "proximity_on_wake";
+        
+        public static final Validator PROXIMITY_ON_WAKE_VALIDATOR = sBooleanValidator;
 
         /**
          * Ringer volume. This is used internally, changing this value will not
@@ -4276,7 +4284,7 @@ public final class Settings {
          */
         public static final String PROXIMITY_AUTO_SPEAKER_INCALL_ONLY =
                 "proximity_auto_speaker_incall_only";
-
+                
         /**
          * Volume rocker wake
          * @hide
@@ -4523,6 +4531,7 @@ public final class Settings {
             VALIDATORS.put(WIFI_STATIC_DNS1, WIFI_STATIC_DNS1_VALIDATOR);
             VALIDATORS.put(WIFI_STATIC_DNS2, WIFI_STATIC_DNS2_VALIDATOR);
             VALIDATORS.put(POWER_OFF_ALARM_MODE, POWER_OFF_ALARM_MODE_VALIDATOR);
+            VALIDATORS.put(PROXIMITY_ON_WAKE, PROXIMITY_ON_WAKE_VALIDATOR);
         }
 
         /**

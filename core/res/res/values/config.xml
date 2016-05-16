@@ -2568,5 +2568,12 @@
     <bool name="config_showOnePlusDozeGestures">false</bool>    
     
     <!-- Bool whether to show OnePlus ScreenOff Gestures in Universe -->
-    <bool name="config_showScreenoffGesture">false</bool>    
+    <bool name="config_showScreenoffGesture">false</bool>  
+    
+    <!-- Default value for proximity check on screen wake
+         NOTE ! - Enable for devices that have a fast response proximity sensor (ideally < 300ms)
+    -->
+    <bool name="config_proximityCheckOnWake">false</bool>
+    <integer name="config_proximityCheckTimeout">250</integer>
+
 </resources>
