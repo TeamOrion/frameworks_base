@@ -23,7 +23,7 @@
   <!-- Button to reboot the phone into bootloader, within the Reboot Options dialog -->
   <string name="reboot_bootloader">Bootloader</string>
   <!-- Button to reboot the phone into download, within the Reboot Options dialog -->
-  <string name="reboot_download">Transferência</string>
+  <string name="reboot_download">Modo de Transferência</string>
   <!-- Reboot Progress Dialog. This is shown if the user chooses to reboot the phone. -->
   <string name="reboot_progress">A reiniciar</string>
   <!-- Button to reboot the phone, within the Phone Options dialog -->
