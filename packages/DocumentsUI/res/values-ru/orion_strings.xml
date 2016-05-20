@@ -16,14 +16,14 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Action bar title when the app is in standalone (file manager) mode [CHAR LIMIT=32] -->
-  <string name="title_standalone">Files</string>
+  <string name="title_standalone">файлы</string>
   <!-- Toast shown after successfully deleting files -->
-  <string name="toast_success_delete">Files deleted</string>
+  <string name="toast_success_delete">Файлы удалены</string>
   <!-- Title of the Delete confirmation dialog -->
-  <string name="dialog_delete_confirm_title">Delete files?</string>
+  <string name="dialog_delete_confirm_title">Удалить файлы?</string>
   <!-- Text shown in a toast when the user copies files -->
   <plurals name="files_copied">
-    <item quantity="one">The file has been put in the clipboard</item>
+    <item quantity="one">Файл был помещен в буфер обмена</item>
     <item quantity="few">%d files have been put in the clipboard</item>
     <item quantity="other">%d files have been put in the clipboard</item>
   </plurals>

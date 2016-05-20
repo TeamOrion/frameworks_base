@@ -19,15 +19,15 @@
   <!-- Button to soft reboot the phone, within the Reboot Options dialog -->
   <string name="reboot_soft">软重启</string>
   <!-- Button to reboot the phone into recovery, within the Reboot Options dialog -->
-  <string name="reboot_recovery">恢复</string>
+  <string name="reboot_recovery">恢复模式</string>
   <!-- Button to reboot the phone into bootloader, within the Reboot Options dialog -->
-  <string name="reboot_bootloader">Bootloader</string>
+  <string name="reboot_bootloader">引导程序</string>
   <!-- Button to reboot the phone into download, within the Reboot Options dialog -->
   <string name="reboot_download">下载</string>
   <!-- Reboot Progress Dialog. This is shown if the user chooses to reboot the phone. -->
   <string name="reboot_progress">正在重启\u2026</string>
   <!-- Button to reboot the phone, within the Phone Options dialog -->
-  <string name="reboot_system" product="tablet">重启平板</string>
+  <string name="reboot_system" product="tablet">重启面板</string>
   <string name="reboot_system" product="default">重启手机</string>
   <!-- Slimseekbar -->
   <string name="default_string">默认</string>
