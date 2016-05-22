@@ -135,6 +135,11 @@ public class Action {
                 } catch (RemoteException e) {
                 }
                 return;
+            } else if (action.equals(ActionConstants.ACTION_NOWONTAP)) {
+                try {
+                    barService.startAssist(new Bundle());
+                } catch (RemoteException e) {
+                }
             } else if (action.equals(ActionConstants.ACTION_TORCH)) {
                 try {
                     CameraManager cameraManager = (CameraManager)
@@ -329,10 +334,6 @@ public class Action {
                     barService.toggleScreenshot();
                 } catch (RemoteException e) {}
                 return;
-            } else if (action.equals(ActionConstants.ACTION_NOW_ON_TAP)) {
-                try {
-                    barService.startAssist(new Bundle());
-                } catch (RemoteException e) {}
             } else {
                 // we must have a custom uri
                 Intent intent = null;
