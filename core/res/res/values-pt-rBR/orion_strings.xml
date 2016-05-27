@@ -58,6 +58,6 @@
   <string name="reboot_title">Reiniciar</string>
   <!-- Reboot Confirmation Dialog.  When the user chooses to reboot the device, there will
          be a confirmation dialog.  This is the message. -->
-  <string name="reboot_confirm" product="tablet">Your tablet will reboot.</string>
-  <string name="reboot_confirm" product="default">Your phone will reboot.</string>
+  <string name="reboot_confirm" product="tablet">O seu tablet irá reiniciar.</string>
+  <string name="reboot_confirm" product="default">Seu telefone será reiniciado.</string>
 </resources>
