@@ -34,24 +34,24 @@
   <!-- label for item that screenshots in phone options dialog -->
   <string name="global_action_screenshot">Zrzut ekranu</string>
   <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permgrouplab_security">Security</string>
+  <string name="permgrouplab_security">Zabezpieczenia</string>
   <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permgroupdesc_security">Permissions related to device security information.</string>
+  <string name="permgroupdesc_security">Uprawnienia związane z informacjami o bezpieczeństwie urządzenia.</string>
   <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permlab_readPhoneBlacklist">read phone blacklist</string>
+  <string name="permlab_readPhoneBlacklist">czytaj czarną listę telefonu</string>
   <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_readPhoneBlacklist">Allows an app to read information about phone numbers that are blocked for incoming calls or messages.</string>
+  <string name="permdesc_readPhoneBlacklist">Zezwala aplikacji na odczytywanie informacji o numerach telefonów, od których połączenia przychodzące i wiadomości są blokowane.</string>
   <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permlab_changePhoneBlacklist">change phone blacklist</string>
+  <string name="permlab_changePhoneBlacklist">zmień czarną listę telefonu</string>
   <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_changePhoneBlacklist">Allows an app to change the phone numbers that are blocked for incoming calls or messages.</string>
-  <string name="permlab_preventpower">override power key</string>
+  <string name="permdesc_changePhoneBlacklist">Umożliwia aplikacji zmianę numerów telefonów, od których połączenia przychodzące i wiadomości są blokowane.</string>
+  <string name="permlab_preventpower">przejmij przycisk zasilania</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_preventpower">Allows an app to override the power key.</string>
+  <string name="permdesc_preventpower">Pozwala aplikacji przejąć kontrolę nad przyciskiem zasilania.</string>
   <!-- Title of an application permission, listed so the user can choose whether they want the application to do this. -->
-  <string name="permlab_setKeyguardWallpaper">set keyguard wallpaper</string>
+  <string name="permlab_setKeyguardWallpaper">ustaw tapetę blokady klawiatury</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_setKeyguardWallpaper">Allows an app to change the lock screen wallpaper.</string>
+  <string name="permdesc_setKeyguardWallpaper">Umożliwia aplikacji zmianę tapety ekranu blokady.</string>
   <!-- label for item that reboots the phone in phone options dialog -->
   <string name="global_action_reboot">Uruchom ponownie</string>
   <!-- Title of dialog to confirm rebooting. -->

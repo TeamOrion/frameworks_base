@@ -27,7 +27,7 @@
   <string name="quick_settings_cannot_delete_edit_tile">Cannot delete the Edit tile</string>
   <string name="qs_tiles_reset_confirmation">Reset quick settings tiles to default configuration?</string>
   <!-- Screenshot QS tile -->
-  <string name="quick_settings_screenshot_label">Screenshot</string>
+  <string name="quick_settings_screenshot_label">Captură</string>
   <!-- USB tether QS tile -->
   <string name="accessibility_quick_settings_usb_tether_off">USB tethering off</string>
   <string name="accessibility_quick_settings_usb_tether_on">USB tethering on</string>
@@ -45,7 +45,7 @@
   <!-- Kill app toast -->
   <string name="app_killed_message">App Killed</string>
   <!-- Screenshot -->
-  <string name="shortcut_screenshot">Screenshot</string>
+  <string name="shortcut_screenshot">Captură</string>
   <!-- Battery level for expanded quick settings [CHAR LIMIT=2] -->
   <string name="battery_level_template">
         <xliff:g id="level" example="45">%d</xliff:g>%%</string>
@@ -53,7 +53,7 @@
   <string name="left_shortcut_hint">Swipe right for %1$s</string>
   <string name="right_shortcut_hint">Swipe left for %1$s</string>
   <string name="lockscreen_message">Tap an icon on the left or right to reassign a lock screen shortcut.</string>
-  <string name="lockscreen_default_target">Default</string>
+  <string name="lockscreen_default_target">Implicit</string>
   <string name="select_application">Select application</string>
   <string name="lockscreen_choose_action_title">Choose action</string>
   <string name="lockscreen_none_target">None</string>
@@ -73,7 +73,7 @@
         -
         <xliff:g id="condition">%2$s</xliff:g>
     </string>
-  <string name="lockscreen_default_target">Default</string>
+  <string name="lockscreen_default_target">Implicit</string>
   <string name="select_application">Select application</string>
   <string name="lockscreen_choose_action_title">Choose action</string>
   <string name="lockscreen_none_target">None</string>
@@ -87,8 +87,8 @@
   <string name="quick_settings_remove">Remove tile</string>
   <string name="quick_settings_screen_off">Screen off</string>
   <string name="quick_settings_screen_off">Screen off</string>
-  <string name="quick_settings_reboot_label">Reboot</string>
-  <string name="quick_settings_reboot_recovery_label">Recovery</string>
+  <string name="quick_settings_reboot_label">Repornire</string>
+  <string name="quick_settings_reboot_recovery_label">Mod Recuperare</string>
   <string name="quick_settings_ambient_display_label">Ambient display</string>
   <string name="quick_settings_screen_timeout_detail_title">Screen timeout</string>
   <!-- Content description of the screen timeout tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
@@ -207,7 +207,7 @@
   <string name="left_shortcut_hint">Swipe right for %1$s</string>
   <string name="right_shortcut_hint">Swipe left for %1$s</string>
   <string name="lockscreen_message">Tap an icon on the left or right to reassign a lock screen shortcut.</string>
-  <string name="lockscreen_default_target">Default</string>
+  <string name="lockscreen_default_target">Implicit</string>
   <string name="select_application">Select application</string>
   <string name="lockscreen_choose_action_title">Choose action</string>
   <string name="lockscreen_none_target">None</string>
@@ -237,7 +237,7 @@
   <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display turned on.</string>
   <string name="quick_settings_ambient_display_label">Ambient display</string>
   <!-- Screenshot QS tile -->
-  <string name="quick_settings_screenshot_label">Screenshot</string>
+  <string name="quick_settings_screenshot_label">Captură</string>
   <!-- NFC QS tile -->
   <string name="quick_settings_nfc_label">NFC</string>
   <!-- Sync QS tile -->
@@ -258,8 +258,8 @@
   <string name="quick_settings_music_play">Play</string>
   <string name="quick_settings_music_pause">Pause</string>
   <!-- Reboot/Recovery QS Tile -->
-  <string name="quick_settings_reboot_label">Reboot</string>
-  <string name="quick_settings_reboot_recovery_label">Recovery</string>
+  <string name="quick_settings_reboot_label">Repornire</string>
+  <string name="quick_settings_reboot_recovery_label">Mod Recuperare</string>
   <!-- Battery Saver QS Tile -->
   <string name="quick_settings_battery_saver">Battery saver</string>
   <string name="quick_settings_battery_saver_off">Battery saver off</string>

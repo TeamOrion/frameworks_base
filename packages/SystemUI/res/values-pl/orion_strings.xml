@@ -22,10 +22,10 @@
   <!-- The text for the button in the notification window-shade that clears
          all of the currently visible notifications. [CHAR LIMIT=10]-->
   <string name="clear_recents">Wyczyść wszystkie powiadomienia</string>
-  <string name="qs_tile_edit_header_instruction">Press and hold a tile to edit</string>
-  <string name="quick_settings_edit_label">Edit Tiles</string>
-  <string name="quick_settings_cannot_delete_edit_tile">Cannot delete the Edit tile</string>
-  <string name="qs_tiles_reset_confirmation">Reset quick settings tiles to default configuration?</string>
+  <string name="qs_tile_edit_header_instruction">Naciśnij i przytrzymaj kafelek, aby edytować</string>
+  <string name="quick_settings_edit_label">Edytuj kafelki</string>
+  <string name="quick_settings_cannot_delete_edit_tile">Nie można usunąć kafelka edycji</string>
+  <string name="qs_tiles_reset_confirmation">Przywrócić ustawienia domyślne kafelków szybkiego dostępu?</string>
   <!-- Screenshot QS tile -->
   <string name="quick_settings_screenshot_label">Zrzut ekranu</string>
   <!-- USB tether QS tile -->
@@ -36,27 +36,26 @@
   <string name="quick_settings_usb_tether_label">Tethering przez USB</string>
   <!-- LTE Tile -->
   <string name="qs_lte_label">LTE</string>
-  <string name="lte_on">LTE ON
-    </string>
-  <string name="lte_off">LTE OFF</string>
+  <string name="lte_on">LTE włączone    </string>
+  <string name="lte_off">LTE wyłączone</string>
   <!-- Battery Saver Dimss -->
   <string name="battery_saver_dismiss_title">Odrzuć</string>
   <string name="battery_saver_notification_action_text_short">Wyłącz</string>
   <!-- Kill app toast -->
-  <string name="app_killed_message">App Killed</string>
+  <string name="app_killed_message">Aplikacja została zabita</string>
   <!-- Screenshot -->
   <string name="shortcut_screenshot">Zrzut ekranu</string>
   <!-- Battery level for expanded quick settings [CHAR LIMIT=2] -->
   <string name="battery_level_template">
         <xliff:g id="level" example="45">%d</xliff:g>%%</string>
   <!-- Strings for lockscreen shortcut hints -->
-  <string name="left_shortcut_hint">Swipe right for %1$s</string>
-  <string name="right_shortcut_hint">Swipe left for %1$s</string>
-  <string name="lockscreen_message">Tap an icon on the left or right to reassign a lock screen shortcut.</string>
+  <string name="left_shortcut_hint">Przesuń w prawo, aby %1$s</string>
+  <string name="right_shortcut_hint">Przesuń w lewo, aby %1$s</string>
+  <string name="lockscreen_message">Dotknij ikony na lewo lub prawo, aby przypisać skrót ekranu blokady.</string>
   <string name="lockscreen_default_target">Domyślny</string>
   <string name="select_application">Wybierz aplikację</string>
-  <string name="lockscreen_choose_action_title">Choose action</string>
-  <string name="lockscreen_none_target">None</string>
+  <string name="lockscreen_choose_action_title">Wybierz akcję</string>
+  <string name="lockscreen_none_target">Brak</string>
   <!-- Weather string format in expanded statusbar header -->
   <string name="status_bar_expanded_header_weather_format">
         <xliff:g id="temp">%1$s</xliff:g>
@@ -64,9 +63,9 @@
         <xliff:g id="condition">%2$s</xliff:g>
     </string>
   <!-- Strings for lockscreen shortcut hints -->
-  <string name="left_shortcut_hint">Swipe right for %1$s</string>
-  <string name="right_shortcut_hint">Swipe left for %1$s</string>
-  <string name="lockscreen_message">Tap an icon on the left or right to reassign a lock screen shortcut.</string>
+  <string name="left_shortcut_hint">Przesuń w prawo, aby %1$s</string>
+  <string name="right_shortcut_hint">Przesuń w lewo, aby %1$s</string>
+  <string name="lockscreen_message">Dotknij ikony na lewo lub prawo, aby przypisać skrót ekranu blokady.</string>
   <!-- Weather string format in expanded statusbar header -->
   <string name="status_bar_expanded_header_weather_format">
         <xliff:g id="temp">%1$s</xliff:g>
@@ -75,39 +74,39 @@
     </string>
   <string name="lockscreen_default_target">Domyślny</string>
   <string name="select_application">Wybierz aplikację</string>
-  <string name="lockscreen_choose_action_title">Choose action</string>
-  <string name="lockscreen_none_target">None</string>
-  <string name="qs_tile_edit_header_instruction">Press and hold a tile to edit</string>
-  <string name="quick_settings_edit_label">Edit Tiles</string>
-  <string name="quick_settings_cannot_delete_edit_tile">Cannot delete the Edit tile</string>
-  <string name="qs_tiles_reset_confirmation">Reset quick settings tiles to default configuration?</string>
-  <string name="quick_settings_tile_reset_to_default">Reset to default layout</string>
-  <string name="quick_settings_title_header">Header</string>
-  <string name="quick_settings_title_tiles">Tiles</string>
-  <string name="quick_settings_remove">Remove tile</string>
-  <string name="quick_settings_screen_off">Screen off</string>
-  <string name="quick_settings_screen_off">Screen off</string>
+  <string name="lockscreen_choose_action_title">Wybierz akcję</string>
+  <string name="lockscreen_none_target">Brak</string>
+  <string name="qs_tile_edit_header_instruction">Naciśnij i przytrzymaj kafelek, aby edytować</string>
+  <string name="quick_settings_edit_label">Edytuj kafelki</string>
+  <string name="quick_settings_cannot_delete_edit_tile">Nie można usunąć kafelka edycji</string>
+  <string name="qs_tiles_reset_confirmation">Przywrócić ustawienia domyślne kafelków szybkiego dostępu?</string>
+  <string name="quick_settings_tile_reset_to_default">Przywróć domyślny układ</string>
+  <string name="quick_settings_title_header">Nagłówek</string>
+  <string name="quick_settings_title_tiles">Kafelki</string>
+  <string name="quick_settings_remove">Usuń kafelek</string>
+  <string name="quick_settings_screen_off">Wyłącz ekran</string>
+  <string name="quick_settings_screen_off">Wyłącz ekran</string>
   <string name="quick_settings_reboot_label">Uruchom ponownie</string>
   <string name="quick_settings_reboot_recovery_label">Uruchom w trybie Recovery</string>
-  <string name="quick_settings_ambient_display_label">Ambient display</string>
+  <string name="quick_settings_ambient_display_label">Ambients display</string>
   <string name="quick_settings_screen_timeout_detail_title">Wygaszenie ekranu</string>
   <!-- Content description of the screen timeout tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_screen_timeout">Screen timeout:
+  <string name="accessibility_quick_settings_screen_timeout">Czasu wygaszenia ekranu:
         <xliff:g id="timeout" example="30 seconds">%s</xliff:g>.</string>
   <!-- Announcement made when the screen timeout tile changes (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_screen_timeout_changed">Screen timeout changed to
-        <xliff:g id="timeout" example="30 seconds">%s</xliff:g>.</string>
+  <string name="accessibility_quick_settings_screen_timeout_changed">Czas wygaszania ekranu zmieniono na
+        <xliff:g id="timeout" example="30 seconds">%s </xliff:g>.</string>
   <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
   <string name="accessibility_data_connection_hspap">HSPA+</string>
-  <string name="quick_settings_title_advanced_location">Tri-state location</string>
+  <string name="quick_settings_title_advanced_location">Trójstanowa lokalizacja</string>
   <!-- Content description of the location tile in quick settings when on, battery saving mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_battery_saving">Location reporting: battery saving mode.</string>
+  <string name="accessibility_quick_settings_location_battery_saving">Raportowanie lokalizacji: tryb oszczędzania baterii.</string>
   <!-- Content description of the location tile in quick settings when on, sensors only mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_gps_only">Location reporting: sensors only mode.</string>
+  <string name="accessibility_quick_settings_location_gps_only">Raportowanie lokalizacji: tylko czujniki.</string>
   <!-- Content description of the location tile in quick settings when on, high accuracy mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_high_accuracy">Location reporting: high accuracy mode.</string>
+  <string name="accessibility_quick_settings_location_high_accuracy">Raportowanie lokalizacji: wysoka dokładność.</string>
   <!-- QuickSettings: Location (On, low-power) [CHAR LIMIT=NONE] -->
-  <string name="quick_settings_location_battery_saving_label">Battery saving</string>
+  <string name="quick_settings_location_battery_saving_label">Oszczędzanie baterii</string>
   <!-- QuickSettings: Location (On, gps-only) [CHAR LIMIT=NONE] -->
   <string name="quick_settings_location_gps_only_label">Tylko GPS</string>
   <!-- QuickSettings: Location (On, high-accuracy) [CHAR LIMIT=NONE] -->
@@ -121,7 +120,7 @@
   <!-- [CHAR LIMIT=30] Location detail panel, battery saving location mode -->
   <string name="quick_settings_location_detail_mode_battery_saving_title">Oszczędzanie baterii</string>
   <!-- [CHAR LIMIT=30] Location detail panel, device only location mode -->
-  <string name="quick_settings_location_detail_mode_sensors_only_title">Device only</string>
+  <string name="quick_settings_location_detail_mode_sensors_only_title">Tylko urządzenie</string>
   <!-- [CHAR LIMIT=130] Location detail panel, description for high accuracy mode -->
   <string name="quick_settings_location_detail_mode_high_accuracy_description">Użyj GPS, Wi-Fi i sieci komórkowej do określenia Twojej lokalizacji    </string>
   <!-- [CHAR LIMIT=130] Location detail panel, description for battery saving mode -->
@@ -131,43 +130,43 @@
   <!-- Announcement made when the location tile changes to battery saving (not shown on the screen). [CHAR LIMIT=NONE] -->
   <string name="accessibility_quick_settings_location_changed_battery_saving">Lokalizacja zmieniona na tryb oszczędzania baterii.</string>
   <!-- Announcement made when the location tile changes to sensors only (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_changed_gps_only">Location reporting changed to sensors only mode.</string>
+  <string name="accessibility_quick_settings_location_changed_gps_only">Zmieniono raportowanie lokalizacji na tryb korzystania tylko z czujników.</string>
   <!-- Announcement made when the location tile changes to high accuracy (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_changed_high_accuracy">Location reporting changed to high accuracy mode.</string>
+  <string name="accessibility_quick_settings_location_changed_high_accuracy">Zmieniono raportowanie lokalizacji na tryb wysokiej dokładności.</string>
   <!-- Content description of the ambient display tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_off">Ambient display off.</string>
+  <string name="accessibility_quick_settings_ambient_display_off">Ambient display wył.</string>
   <!-- Content description of the ambient display tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_on">Ambient display on.</string>
+  <string name="accessibility_quick_settings_ambient_display_on">Ambient display wł.</string>
   <!-- Announcement made when ambient display changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display turned off.</string>
+  <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display wyłączony.</string>
   <!-- Announcement made when ambient display changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display turned on.</string>
+  <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display włączony.</string>
   <!-- Heads-up Tile -->
-  <string name="quick_settings_heads_up_label">Heads up</string>
+  <string name="quick_settings_heads_up_label">Wyskakujące powiadomienia</string>
   <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_off">Heads up off.</string>
+  <string name="accessibility_quick_settings_heads_up_off">Wyskakujące powiadomienia wył.</string>
   <!-- Content description of the heads up tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_on">Heads up on.</string>
+  <string name="accessibility_quick_settings_heads_up_on">Wyskakujące powiadomienia wł.</string>
   <!-- Announcement made when heads up changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_changed_off">Heads up turned off.</string>
+  <string name="accessibility_quick_settings_heads_up_changed_off">Wyskakujące powiadomienia wyłączone.</string>
   <!-- Announcement made when heads up changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_changed_on">Heads up turned on.</string>
+  <string name="accessibility_quick_settings_heads_up_changed_on">Wyskakujące powiadomienia włączone.</string>
   <!-- Expanded Desktop QS Tile -->
-  <string name="quick_settings_expanded_desktop">Expanded</string>
-  <string name="quick_settings_expanded_desktop_off">Normal</string>
+  <string name="quick_settings_expanded_desktop">Rozszerzony</string>
+  <string name="quick_settings_expanded_desktop_off">Normalny</string>
   <!-- Battery Saver QS Tile -->
-  <string name="quick_settings_battery_saver">Battery saver</string>
-  <string name="quick_settings_battery_saver_off">Battery saver off</string>
+  <string name="quick_settings_battery_saver">Oszczędzanie baterii</string>
+  <string name="quick_settings_battery_saver_off">Oszczędzanie baterii wyłączone</string>
   <!-- Music QS Tile -->
   <string name="quick_settings_music_label">Muzyka</string>
-  <string name="quick_settings_music_play">Play</string>
-  <string name="quick_settings_music_pause">Pause</string>
+  <string name="quick_settings_music_play">Odtwórz</string>
+  <string name="quick_settings_music_pause">Pauza</string>
   <!-- NFC QS tile -->
   <string name="quick_settings_nfc_label">NFC</string>
   <!-- Sync QS tile -->
-  <string name="quick_settings_sync_label">Sync</string>
-  <string name="accessibility_quick_settings_sync_off">Sync off</string>
-  <string name="accessibility_quick_settings_sync_on">Sync on</string>
+  <string name="quick_settings_sync_label">Synchronizacja</string>
+  <string name="accessibility_quick_settings_sync_off">Synchronizacja wył</string>
+  <string name="accessibility_quick_settings_sync_on">Synchronizacja wł</string>
   <string name="accessibility_quick_settings_sync_changed_off">Synchronizacja wyłączona</string>
   <string name="accessibility_quick_settings_sync_changed_on">Synchronizacja włączona</string>
   <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
@@ -189,7 +188,7 @@
   <string name="battery_saver_dismiss_title">Odrzuć</string>
   <string name="battery_saver_notification_action_text_short">Wyłącz</string>
   <!-- SystemUI Tuner Parts -->
-  <string name="systemui_tuner_statusbar_title">Statusbar Items</string>
+  <string name="systemui_tuner_statusbar_title">Elementy paska stanu</string>
   <string name="systemui_tuner_qs_title">Szybkie ustawienia</string>
   <!-- Screenshot Delete Toast -->
   <string name="delete_screenshot_toast">Zrzut ekranu usunięty</string>
@@ -203,13 +202,13 @@
         <xliff:g id="condition">%2$s</xliff:g>
     </string>
   <!-- Strings for lockscreen shortcut hints -->
-  <string name="left_shortcut_hint">Swipe right for %1$s</string>
-  <string name="right_shortcut_hint">Swipe left for %1$s</string>
-  <string name="lockscreen_message">Tap an icon on the left or right to reassign a lock screen shortcut.</string>
+  <string name="left_shortcut_hint">Przesuń w prawo, aby %1$s</string>
+  <string name="right_shortcut_hint">Przesuń w lewo, aby %1$s</string>
+  <string name="lockscreen_message">Dotknij ikony na lewo lub prawo, aby przypisać skrót ekranu blokady.</string>
   <string name="lockscreen_default_target">Domyślny</string>
   <string name="select_application">Wybierz aplikację</string>
-  <string name="lockscreen_choose_action_title">Choose action</string>
-  <string name="lockscreen_none_target">None</string>
+  <string name="lockscreen_choose_action_title">Wybierz akcję</string>
+  <string name="lockscreen_none_target">Brak</string>
   <!-- Text to use when the number in a notification info is too large
          (greater than status_bar_notification_info_maxnum, defined in
          values/config.xml) and must be truncated.
@@ -226,43 +225,43 @@
   <string name="accessibility_quick_settings_usb_tether_changed_on">Tethering USB włączony</string>
   <string name="quick_settings_usb_tether_label">Tethering przez USB</string>
   <!-- Ambient Display QS tile -->
-  <string name="accessibility_quick_settings_ambient_display_off">Ambient display off.</string>
-  <string name="accessibility_quick_settings_ambient_display_on">Ambient display on.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display turned off.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display turned on.</string>
-  <string name="accessibility_quick_settings_ambient_display_off">Ambient display off.</string>
-  <string name="accessibility_quick_settings_ambient_display_on">Ambient display on.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display turned off.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display turned on.</string>
-  <string name="quick_settings_ambient_display_label">Ambient display</string>
+  <string name="accessibility_quick_settings_ambient_display_off">Ambient display wył.</string>
+  <string name="accessibility_quick_settings_ambient_display_on">Ambient display wł.</string>
+  <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display wyłączony.</string>
+  <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display włączony.</string>
+  <string name="accessibility_quick_settings_ambient_display_off">Ambient display wył.</string>
+  <string name="accessibility_quick_settings_ambient_display_on">Ambient display wł.</string>
+  <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display wyłączony.</string>
+  <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display włączony.</string>
+  <string name="quick_settings_ambient_display_label">Ambients display</string>
   <!-- Screenshot QS tile -->
   <string name="quick_settings_screenshot_label">Zrzut ekranu</string>
   <!-- NFC QS tile -->
   <string name="quick_settings_nfc_label">NFC</string>
   <!-- Sync QS tile -->
-  <string name="quick_settings_sync_label">Sync</string>
-  <string name="accessibility_quick_settings_sync_off">Sync off</string>
-  <string name="accessibility_quick_settings_sync_on">Sync on</string>
+  <string name="quick_settings_sync_label">Synchronizacja</string>
+  <string name="accessibility_quick_settings_sync_off">Synchronizacja wył</string>
+  <string name="accessibility_quick_settings_sync_on">Synchronizacja wł</string>
   <string name="accessibility_quick_settings_sync_changed_off">Synchronizacja wyłączona</string>
   <string name="accessibility_quick_settings_sync_changed_on">Synchronizacja włączona</string>
   <!-- Screen off QS tile -->
-  <string name="quick_settings_screen_off">Screen off</string>
+  <string name="quick_settings_screen_off">Wyłącz ekran</string>
   <!-- Screen timeout QS tile -->
-  <string name="quick_settings_timeout_label">Timeout</string>
+  <string name="quick_settings_timeout_label">Czas wygaszania ekranu</string>
   <string name="quick_settings_screen_timeout_detail_title">Wygaszenie ekranu</string>
   <!-- Brightness QS Tile -->
   <string name="quick_settings_brightness">Jasność</string>
   <!-- Music QS Tile -->
   <string name="quick_settings_music_label">Muzyka</string>
-  <string name="quick_settings_music_play">Play</string>
-  <string name="quick_settings_music_pause">Pause</string>
+  <string name="quick_settings_music_play">Odtwórz</string>
+  <string name="quick_settings_music_pause">Pauza</string>
   <!-- Reboot/Recovery QS Tile -->
   <string name="quick_settings_reboot_label">Uruchom ponownie</string>
   <string name="quick_settings_reboot_recovery_label">Uruchom w trybie Recovery</string>
   <!-- Battery Saver QS Tile -->
-  <string name="quick_settings_battery_saver">Battery saver</string>
-  <string name="quick_settings_battery_saver_off">Battery saver off</string>
+  <string name="quick_settings_battery_saver">Oszczędzanie baterii</string>
+  <string name="quick_settings_battery_saver_off">Oszczędzanie baterii wyłączone</string>
   <!-- Expanded Desktop QS Tile -->
-  <string name="quick_settings_expanded_desktop">Expanded</string>
-  <string name="quick_settings_expanded_desktop_off">Normal</string>
+  <string name="quick_settings_expanded_desktop">Rozszerzony</string>
+  <string name="quick_settings_expanded_desktop_off">Normalny</string>
 </resources>
