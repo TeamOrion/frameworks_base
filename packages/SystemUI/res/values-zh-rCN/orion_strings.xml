@@ -45,9 +45,9 @@
   <string name="app_killed_message">应用已被终止</string>
   <!-- Screenshot -->
   <string name="shortcut_screenshot">截屏</string>
-  <!-- Battery level for expanded quick settings [CHAR LIMIT=2] -->
+  <!-- DO NOT TRANSLATE Battery level for expanded quick settings [CHAR LIMIT=2] -->
   <string name="battery_level_template">
-<xliff:g id="level"example="45">%d </xliff:g>%%</string>
+    <xliff:g id="level" example="45">%d</xliff:g>%%</string>
   <!-- Strings for lockscreen shortcut hints -->
   <string name="left_shortcut_hint">向右滑动以 %1$s</string>
   <string name="right_shortcut_hint">向左滑动以%1$s</string>
@@ -85,9 +85,11 @@
   <string name="quick_settings_ambient_display_label">主动显示</string>
   <string name="quick_settings_screen_timeout_detail_title">屏幕超时</string>
   <!-- Content description of the screen timeout tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_screen_timeout">屏幕超时 ︰ <xliff:g id="timeout"example="30 seconds">%s </xliff:g>。</string>
+  <string name="accessibility_quick_settings_screen_timeout">屏幕超时:
+    <xliff:g id="timeout" example="30 seconds">%s</xliff:g></string>
   <!-- Announcement made when the screen timeout tile changes (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_screen_timeout_changed">屏幕超时更改为 <xliff:g id="timeout"example="30 seconds">%s </xliff:g>。</string>
+  <string name="accessibility_quick_settings_screen_timeout_changed">屏幕超时更改为
+    <xliff:g id="timeout" example="30 seconds">%s</xliff:g></string>
   <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
   <string name="accessibility_data_connection_hspap">HSPA+</string>
   <string name="quick_settings_title_advanced_location">三种状态的位置设置</string>
@@ -186,10 +188,13 @@
   <string name="delete_screenshot_toast">屏幕截图已删除</string>
   <!-- Battery level for expanded quick settings [CHAR LIMIT=2] -->
   <string name="battery_level_template">
-<xliff:g id="level"example="45">%d </xliff:g>%%</string>
+    <xliff:g id="level" example="45">%d </xliff:g>%%</string>
   <!-- Weather string format in expanded statusbar header -->
   <string name="status_bar_expanded_header_weather_format">
-<xliff:g id="temp">%1$s </xliff:g>-<xliff:g id="condition">%2$s </xliff:g>    </string>
+    <xliff:g id="temp">%1$s</xliff:g>
+    -
+    <xliff:g id="condition">%2$s</xliff:g>
+  </string>
   <!-- Strings for lockscreen shortcut hints -->
   <string name="left_shortcut_hint">向右滑动以 %1$s</string>
   <string name="right_shortcut_hint">向左滑动以%1$s</string>
