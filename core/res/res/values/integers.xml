@@ -23,4 +23,7 @@
     <integer name="button_pressed_animation_delay">100</integer>
     <integer name="disabled_alpha_animation_duration">100</integer>
     <integer name="dock_enter_exit_duration">250</integer>
+    
+    <!-- Default for Settings.Global.WIFI_IDLE_MS (15 minutes) -->
+    <integer name="def_wifi_idle_ms">900000</integer>
 </resources>
