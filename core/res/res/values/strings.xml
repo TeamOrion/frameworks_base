@@ -4119,4 +4119,7 @@
     <string name="China_Mobile">China Mobile</string>
     <string name="China_Unicom">China Unicom</string>
     <string name="China_Telecom">China Telecom</string>
+    
+    <!-- WiFi turn off notification action text -->
+    <string name="notify_turn_wifi_off_title">Turn Wi-Fi off</string>
 </resources>

@@ -2459,4 +2459,7 @@
    
   <!-- Wifi idle time default -->
   <java-symbol type="integer" name="def_wifi_idle_ms" />
+  
+  <!-- WiFi turn off notification -->
+  <java-symbol type="string" name="notify_turn_wifi_off_title" />
 </resources>
