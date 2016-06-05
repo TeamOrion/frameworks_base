@@ -138,7 +138,7 @@ public final class ShutdownThread extends Thread {
         mReboot = false;
         mRebootSafeMode = false;
         mReason = reason;
-        shutdownInner(context, confirm);
+        shutdownInner(getUiContext(context), confirm);
     }
 
     private static boolean isAdvancedRebootPossible(final Context context) {
@@ -185,12 +185,11 @@ public final class ShutdownThread extends Thread {
             final CloseDialogReceiver closer = new CloseDialogReceiver(context);
             final Context mUiContext = getUiContext(context);
             final boolean advancedReboot = isAdvancedRebootPossible(context);
-
             if (sConfirmDialog != null) {
                 sConfirmDialog.dismiss();
                 sConfirmDialog = null;
             }
-            AlertDialog.Builder confirmDialogBuilder = new AlertDialog.Builder(context)
+            AlertDialog.Builder confirmDialogBuilder = new AlertDialog.Builder(mUiContext)
                     .setTitle(mRebootSafeMode
                             ? com.android.internal.R.string.reboot_safemode_title
                             : showRebootOption
@@ -290,7 +289,7 @@ public final class ShutdownThread extends Thread {
         mRebootSafeMode = false;
         mRebootHasProgressBar = false;
         mReason = reason;
-        shutdownInner(context, confirm);
+        shutdownInner(getUiContext(context), confirm);
     }
 
     /**
