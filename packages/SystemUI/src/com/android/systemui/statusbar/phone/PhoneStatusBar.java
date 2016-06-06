@@ -503,7 +503,11 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.TRANSLUCENT_HEADER_PRECENTAGE_PREFERENCE_KEY), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY), false, this, UserHandle.USER_ALL);                    
+                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.QS_NUM_TILE_COLUMNS), false, this,
+                    UserHandle.USER_ALL);
             update();
         }
 
@@ -683,6 +687,10 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
             }
             if (mIconPolicy != null) {
                 mIconPolicy.setCurrentUserSetup(mUserSetup);
+            }
+
+            if (mQSPanel != null) {
+                mQSPanel.updateNumColumns();
             }
         }
     };
