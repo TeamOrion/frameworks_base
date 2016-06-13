@@ -15,49 +15,49 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Reboot menu -->
   <!-- Button to reboot the phone, within the Reboot Options dialog -->
-  <string name="reboot_reboot">Reboot</string>
+  <string name="reboot_reboot">Khởi động lại</string>
   <!-- Button to soft reboot the phone, within the Reboot Options dialog -->
-  <string name="reboot_soft">Soft reboot</string>
+  <string name="reboot_soft">Khởi động lại nhanh</string>
   <!-- Button to reboot the phone into recovery, within the Reboot Options dialog -->
   <string name="reboot_recovery">Recovery</string>
   <!-- Button to reboot the phone into bootloader, within the Reboot Options dialog -->
   <string name="reboot_bootloader">Bootloader</string>
   <!-- Button to reboot the phone into download, within the Reboot Options dialog -->
-  <string name="reboot_download">Download</string>
+  <string name="reboot_download">Dowload mode</string>
   <!-- Reboot Progress Dialog. This is shown if the user chooses to reboot the phone. -->
-  <string name="reboot_progress">Rebooting\u2026</string>
+  <string name="reboot_progress">Đang khởi động lại</string>
   <!-- Button to reboot the phone, within the Phone Options dialog -->
-  <string name="reboot_system" product="tablet">Reboot tablet</string>
-  <string name="reboot_system" product="default">Reboot phone</string>
+  <string name="reboot_system" product="tablet">Bảng Khởi động lại</string>
+  <string name="reboot_system" product="default">Khởi động lại điện thoại</string>
   <!-- Slimseekbar -->
-  <string name="default_string">Default</string>
+  <string name="default_string">Mặc định</string>
   <!-- label for item that screenshots in phone options dialog -->
-  <string name="global_action_screenshot">Screenshot</string>
+  <string name="global_action_screenshot">Chụp ảnh màn hình</string>
   <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permgrouplab_security">Security</string>
+  <string name="permgrouplab_security">Bảo mật</string>
   <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permgroupdesc_security">Permissions related to device security information.</string>
+  <string name="permgroupdesc_security">Những quyền liên quan đến thông tin bảo mật thiết bị.</string>
   <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permlab_readPhoneBlacklist">read phone blacklist</string>
+  <string name="permlab_readPhoneBlacklist">xem danh sách đen của điện thoại</string>
   <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_readPhoneBlacklist">Allows an app to read information about phone numbers that are blocked for incoming calls or messages.</string>
+  <string name="permdesc_readPhoneBlacklist">Cho phép một ứng dụng đọc thông tin về số điện thoại bị chặn cuộc gọi hoặc tin nhắn đến.</string>
   <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permlab_changePhoneBlacklist">change phone blacklist</string>
+  <string name="permlab_changePhoneBlacklist">thay đổi danh sách đen của điện thoại</string>
   <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_changePhoneBlacklist">Allows an app to change the phone numbers that are blocked for incoming calls or messages.</string>
-  <string name="permlab_preventpower">override power key</string>
+  <string name="permdesc_changePhoneBlacklist">Cho phép ứng dụng thay đổi số điện thoại bị chặn cuộc gọi hoặc tin nhắn đến.</string>
+  <string name="permlab_preventpower">thay thế phím nguồn</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_preventpower">Allows an app to override the power key.</string>
+  <string name="permdesc_preventpower">Cho phép ứng dụng thay thế phím nguồn.</string>
   <!-- Title of an application permission, listed so the user can choose whether they want the application to do this. -->
-  <string name="permlab_setKeyguardWallpaper">set keyguard wallpaper</string>
+  <string name="permlab_setKeyguardWallpaper">đặt ảnh nền màn hình khóa</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-  <string name="permdesc_setKeyguardWallpaper">Allows an app to change the lock screen wallpaper.</string>
+  <string name="permdesc_setKeyguardWallpaper">Cho phép ứng dụng thay đổi hình nền màn hình khóa.</string>
   <!-- label for item that reboots the phone in phone options dialog -->
-  <string name="global_action_reboot">Reboot</string>
+  <string name="global_action_reboot">Khởi động lại</string>
   <!-- Title of dialog to confirm rebooting. -->
-  <string name="reboot_title">Reboot</string>
+  <string name="reboot_title">Khởi động lại</string>
   <!-- Reboot Confirmation Dialog.  When the user chooses to reboot the device, there will
          be a confirmation dialog.  This is the message. -->
-  <string name="reboot_confirm" product="tablet">Your tablet will reboot.</string>
-  <string name="reboot_confirm" product="default">Your phone will reboot.</string>
+  <string name="reboot_confirm" product="tablet">Thiết bị của bạn sẽ khởi động lại.</string>
+  <string name="reboot_confirm" product="default">Điện thoại của bạn sẽ khởi động lại.</string>
 </resources>
