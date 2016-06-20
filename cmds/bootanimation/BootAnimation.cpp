@@ -62,7 +62,6 @@
 #define OEM_BOOTANIMATION_FILE "/oem/media/bootanimation.zip"
 #define SYSTEM_BOOTANIMATION_FILE "/system/media/bootanimation.zip"
 #define SYSTEM_ENCRYPTED_BOOTANIMATION_FILE "/system/media/bootanimation-encrypted.zip"
-
 #define EXIT_PROP_NAME "service.bootanim.exit"
 
 namespace android {
