@@ -6876,8 +6876,8 @@ public final class Settings {
             SLEEP_TIMEOUT,
             DOUBLE_TAP_TO_WAKE,
             CAMERA_GESTURE_DISABLED,
-            ADVANCED_REBOOT
-            STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD,
+            ADVANCED_REBOOT,
+            STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD
         };
 
         /**
