@@ -401,21 +401,8 @@ class OverlayManagerServiceImpl {
         boolean stateCheck = mDatabase.getEnabled(overlayPackage.packageName, userId);
 
         // STATE 1 CHECK: Check if the overlay's target package is missing from the device
-        //
-        // Team Substratum: We have to take account for that the package is momentarily 
-        // removed from the device during an app update. Set the timeout to 10 seconds 
-        // (10000ms) to take account for big applications.
         if (targetPackage == null) {
-            try {
-                Thread.sleep(10000);
-                if (targetPackage == null) {
-                    return STATE_NOT_APPROVED_MISSING_TARGET;
-                } else {
-                    return stateCheck ? STATE_APPROVED_ENABLED : STATE_APPROVED_DISABLED;    
-                }
-            } catch (InterruptedException ie) {
-                return STATE_NOT_APPROVED_MISSING_TARGET;
-            }
+            return STATE_NOT_APPROVED_MISSING_TARGET;
         }
 
         // STATE 2 CHECK: Check if the overlay has an existing idmap file created. Perhaps
