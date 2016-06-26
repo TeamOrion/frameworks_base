@@ -64,6 +64,8 @@ public final class Om {
             return runEnableDisable(true);
         } else if ("disable".equals(op)) {
             return runEnableDisable(false);
+        } else if ("disable-all".equals(op)) {
+            return runDisableAll();
         } else if ("set-priority".equals(op)) {
             return runSetPriority();
         } else if (op != null) {
@@ -247,7 +249,45 @@ public final class Om {
         }
     }
 
+    private int runDisableAll() {
+        try {
+            int userId = UserHandle.USER_OWNER;
+            String opt;
+            while ((opt = nextOption()) != null) {
+                switch (opt) {
+                    case "--user":
+                        String optionData = nextOptionData();
+                        if (optionData == null || !isNumber(optionData)) {
+                            System.err.println("Error: no USER_ID specified");
+                            showUsage();
+                            return 1;
+                        }
+                        userId = Integer.parseInt(optionData);
+                        break;
+                    default:
+                        System.err.println("Error: Unknown option: " + opt);
+                        return 1;
+                }
+            }
 
+            Map<String, List<OverlayInfo>> targetsAndOverlays = mOm.getAllOverlays(userId);
+
+            for (Entry<String, List<OverlayInfo>> targetEntry : targetsAndOverlays.entrySet()) {
+                for (OverlayInfo oi : targetEntry.getValue()) {
+                    boolean worked = mOm.setEnabled(oi.packageName, false, userId);
+                    if(!worked) {
+                        System.err.println("Failed to disable " + oi.packageName);
+                    }
+                }
+            }
+            System.out.println();
+        } catch (RemoteException e) {
+            System.err.println(e.toString());
+            System.err.println(OM_NOT_RUNNING_ERR);
+            return 1;
+        }
+        return 0;
+    }
 
     private String nextOption() {
         if (mNextArg >= mArgs.length) {
@@ -308,6 +348,7 @@ public final class Om {
         System.err.println("usage: om list [--user USER_ID] [PACKAGE [PACKAGE [...]]]");
         System.err.println("       om enable [--user USER_ID] PACKAGE");
         System.err.println("       om disable [--user USER_ID] PACKAGE");
+        System.err.println("       om disable-all [--user USER_ID]");
         System.err.println("       om set-priority [--user USER_ID] PACKAGE PARENT|lowest|highest");
         System.err.println("");
         System.err.println("om list: print all overlay packages in priority order;");
@@ -318,6 +359,7 @@ public final class Om {
         System.err.println("om enable PACKAGE: enable overlay package PACKAGE");
         System.err.println("");
         System.err.println("om disable PACKAGE: disable overlay package PACKAGE");
+        System.err.println("om disable-all: disables all overlay packages");
         System.err.println("");
         System.err.println("om set-priority PACKAGE PARENT: change the priority of the overlay");
         System.err.println("         PACKAGE to be just higher than the priority of PACKAGE_PARENT");
