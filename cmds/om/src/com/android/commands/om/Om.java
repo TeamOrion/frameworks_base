@@ -191,18 +191,41 @@ public final class Om {
                     return 1;
             }
         }
+
+        int argc = 0;
         try {
             String packageName = nextArg();
+            ArrayList<String> packages = new ArrayList<>();
             if (packageName == null) {
-                System.err.println("Error: no package specified");
+                System.err.println("Error: no packages specified");
                 return 1;
             }
-            return mOm.setEnabled(packageName, enable, userId) ? 0 : 1;
+            while(packageName != null) {
+                argc++;
+                packages.add(packageName);
+                packageName = nextArg();
+            }
+            if(argc > 1) {
+                for(String pkg : packages) {
+                    boolean ret = mOm.setEnabled(pkg, enable, userId, true);
+                    if(!ret) {
+                        System.err.println("Error: Failed to " + ((enable) ? "enable ":"disable ") + pkg);
+                    }
+                }
+                return 0;
+            } else if(argc == 1) {
+                return mOm.setEnabled(packages.get(0), enable, userId, false) ? 0:1;
+            } else {
+                System.err.println("Error: should never reach here");
+                return 1;
+            }
         } catch (RemoteException e) {
             System.err.println(e.toString());
             System.err.println(OM_NOT_RUNNING_ERR);
-            return 1;
+        } finally {
+            try { if(argc > 1) mOm.refresh(userId); } catch (RemoteException e) { System.err.println(e.toString()); System.err.println(OM_NOT_RUNNING_ERR); }
         }
+        return 0;
     }
 
     private int runSetPriority() {
@@ -250,8 +273,8 @@ public final class Om {
     }
 
     private int runDisableAll() {
+        int userId = UserHandle.USER_OWNER;
         try {
-            int userId = UserHandle.USER_OWNER;
             String opt;
             while ((opt = nextOption()) != null) {
                 switch (opt) {
@@ -274,17 +297,17 @@ public final class Om {
 
             for (Entry<String, List<OverlayInfo>> targetEntry : targetsAndOverlays.entrySet()) {
                 for (OverlayInfo oi : targetEntry.getValue()) {
-                    boolean worked = mOm.setEnabled(oi.packageName, false, userId);
+                    boolean worked = mOm.setEnabled(oi.packageName, false, userId, true);
                     if(!worked) {
                         System.err.println("Failed to disable " + oi.packageName);
                     }
                 }
             }
-            System.out.println();
         } catch (RemoteException e) {
             System.err.println(e.toString());
             System.err.println(OM_NOT_RUNNING_ERR);
-            return 1;
+        } finally {
+            try { mOm.refresh(userId); } catch (RemoteException e) { System.err.println(e.toString()); System.err.println(OM_NOT_RUNNING_ERR); }
         }
         return 0;
     }
