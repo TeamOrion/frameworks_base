@@ -17,5 +17,4 @@
 <webviewproviders>
     <!-- The default WebView implementation (We provide google webview) -->
     <webviewprovider description="Google WebView" packageName="com.google.android.webview" availableByDefault="true" />
-    </webviewprovider>
 </webviewproviders>
