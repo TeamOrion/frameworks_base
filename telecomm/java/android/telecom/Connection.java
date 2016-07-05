@@ -324,9 +324,16 @@ public abstract class Connection extends Conferenceable {
      */
     public static final int CAPABILITY_VOICE_PRIVACY = 0x02000000;
 
+    /**
+     * Add participant in an active or conference call option
+     *
+     * @hide
+     */
+    public static final int CAPABILITY_ADD_PARTICIPANT = 0x04000000;
+
 
     //**********************************************************************************************
-    // Next CAPABILITY value: 0x04000000
+    // Next CAPABILITY value: 0x08000000
     //**********************************************************************************************
 
     /**
