@@ -55,6 +55,7 @@ public class KeyguardSimPinView extends KeyguardPinBasedInputView {
     private AlertDialog mRemainingAttemptsDialog;
     private int mSubId;
     private ImageView mSimImageView;
+    private int mResult = PhoneConstants.PIN_PASSWORD_INCORRECT;
 
     KeyguardUpdateMonitorCallback mUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() {
         @Override
