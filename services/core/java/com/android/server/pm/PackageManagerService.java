@@ -7164,25 +7164,6 @@ public class PackageManagerService extends IPackageManager.Stub {
         KeySetManagerService ksms = mSettings.mKeySetManagerService;
         ksms.assertScannedPackageValid(pkg);
 
-        // Get the current theme config. We do this outside the lock
-        // since ActivityManager might be waiting on us already
-        // and a deadlock would result.
-        final boolean isBootScan = (scanFlags & SCAN_BOOTING) != 0;
-        ThemeConfig config = mBootThemeConfig;
-        if (!isBootScan) {
-            final IActivityManager am = ActivityManagerNative.getDefault();
-            try {
-                if (am != null) {
-                    config = am.getConfiguration().themeConfig;
-                } else {
-                    Log.w(TAG, "ActivityManager getDefault() " +
-                            "returned null, cannot compile app's theme");
-                }
-            } catch(RemoteException e) {
-                Log.w(TAG, "Failed to get the theme config from ActivityManager");
-            }
-        }
-
         // writer
         synchronized (mPackages) {
             // We don't expect installation to fail beyond this point
@@ -7512,100 +7493,6 @@ public class PackageManagerService extends IPackageManager.Stub {
             }
 
             pkgSetting.setTimeStamp(scanFileTime);
-
-            // Generate resources & idmaps if pkg is NOT a theme
-            // We must compile resources here because during the initial boot process we may get
-            // here before a default theme has had a chance to compile its resources
-            // During app installation we only compile applied theme here (rest will be compiled
-            // in background)
-            if (pkg.mOverlayTargets.isEmpty() && mOverlays.containsKey(pkg.packageName)) {
-                ArrayMap<String, PackageParser.Package> themes = mOverlays.get(pkg.packageName);
-
-                if (config != null) {
-                    for(PackageParser.Package themePkg : themes.values()) {
-                        if (themePkg.packageName.equals(config.getOverlayPkgName()) ||
-                            themePkg.packageName.equals(
-                                     config.getOverlayPkgNameForApp(pkg.packageName))) {
-                            try {
-                                compileResourcesAndIdmapIfNeeded(pkg, themePkg);
-                            } catch (Exception e) {
-                                // Do not stop a pkg installation just because of one bad theme
-                                // Also we don't break here because we should try to compile other
-                                // themes
-                                Slog.w(TAG, "Unable to compile " + themePkg.packageName
-                                        + " for target " + pkg.packageName, e);
-                                themePkg.mOverlayTargets.remove(pkg.packageName);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // If this is a theme we should re-compile common resources if they exist so
-            // remove this package from mAvailableCommonResources.
-            if (!isBootScan && pkg.mOverlayTargets.size() > 0) {
-                mAvailableCommonResources.remove(pkg.packageName);
-            }
-
-            // Generate Idmaps and res tables if pkg is a theme
-            Iterator<String> iterator = pkg.mOverlayTargets.iterator();
-            while(iterator.hasNext()) {
-                String target = iterator.next();
-                Exception failedException = null;
-
-                insertIntoOverlayMap(target, pkg);
-                if (isBootScan && mBootThemeConfig != null &&
-                        (pkg.packageName.equals(mBootThemeConfig.getOverlayPkgName()) ||
-                        pkg.packageName.equals(
-                                mBootThemeConfig.getOverlayPkgNameForApp(target)))) {
-                    try {
-                        compileResourcesAndIdmapIfNeeded(mPackages.get(target), pkg);
-                    } catch (IdmapException e) {
-                        failedException = e;
-                    } catch (AaptException e) {
-                        failedException = e;
-                    } catch (Exception e) {
-                        failedException = e;
-                    }
-
-                    if (failedException != null) {
-                        if (failedException instanceof AaptException &&
-                                ((AaptException) failedException).isCommon) {
-                            Slog.e(TAG, "Unable to process common resources for " + pkgName +
-                                    ", uninstalling theme.", failedException);
-                            uninstallThemeForAllApps(pkg);
-                            deletePackageLI(pkg.packageName, null, true, null, null, 0, null,
-                                    false);
-                            throw new PackageManagerException(
-                                    PackageManager.INSTALL_FAILED_THEME_AAPT_ERROR,
-                                    "Unable to process theme " + pkgName, failedException);
-                        } else {
-                            Slog.w(TAG, "Unable to process theme " + pkgName + " for " + target,
-                                    failedException);
-                            // remove target from mOverlayTargets
-                            iterator.remove();
-                        }
-                    }
-                }
-            }
-
-            //Icon Packs need aapt too
-            if (isBootScan && (mBootThemeConfig != null &&
-                    pkg.packageName.equals(mBootThemeConfig.getIconPackPkgName()))) {
-                if (isIconCompileNeeded(pkg)) {
-                    try {
-                        ThemeUtils.createCacheDirIfNotExists();
-                        ThemeUtils.createIconDirIfNotExists(pkg.packageName);
-                        compileIconPack(pkg);
-                    } catch (Exception e) {
-                        uninstallThemeForAllApps(pkg);
-                        deletePackageLI(pkg.packageName, null, true, null, null, 0, null, false);
-                        throw new PackageManagerException(
-                                PackageManager.INSTALL_FAILED_THEME_AAPT_ERROR,
-                                "Unable to process theme " + pkgName);
-                    }
-                }
-            }
         }
 
         return pkg;
