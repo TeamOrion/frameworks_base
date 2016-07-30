@@ -243,7 +243,12 @@ public class DisconnectCause {
 
     public static final int NON_SELECTED_USER_CLEARING = 98;
 
-
+    /**
+     * Call was rejected due to number being blacklisted by user.
+     * {@@hide}
+     */
+    public static final int CALL_BLACKLISTED = 400;
+    
     //*********************************************************************************************
     // When adding a disconnect type:
     // 1) Please assign the new type the next id value below.
@@ -259,7 +264,7 @@ public class DisconnectCause {
     public static final int MINIMUM_VALID_VALUE = NOT_DISCONNECTED;
 
     /** Largest valid value for call disconnect codes. */
-    public static final int MAXIMUM_VALID_VALUE = NON_SELECTED_USER_CLEARING;
+    public static final int MAXIMUM_VALID_VALUE = CALL_BLACKLISTED;
 
     /** Private constructor to avoid class instantiation. */
     private DisconnectCause() {
@@ -465,6 +470,8 @@ public class DisconnectCause {
             return "EMERGENCY_TEMP_FAILURE";
         case EMERGENCY_PERM_FAILURE:
             return "EMERGENCY_PERM_FAILURE";
+        case CALL_BLACKLISTED:
+            return "CALL_BLACKLISTED";            
         default:
             return "INVALID: " + cause;
         }
