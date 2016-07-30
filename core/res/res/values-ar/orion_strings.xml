@@ -15,20 +15,20 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Reboot menu -->
   <!-- Button to reboot the phone, within the Reboot Options dialog -->
-  <string name="reboot_reboot">Reboot</string>
+  <string name="reboot_reboot">اعادة التشغيل</string>
   <!-- Button to soft reboot the phone, within the Reboot Options dialog -->
-  <string name="reboot_soft">Soft reboot</string>
+  <string name="reboot_soft">اعادة تشغيل ناعمة</string>
   <!-- Button to reboot the phone into recovery, within the Reboot Options dialog -->
-  <string name="reboot_recovery">Recovery</string>
+  <string name="reboot_recovery">الانتعاش</string>
   <!-- Button to reboot the phone into bootloader, within the Reboot Options dialog -->
-  <string name="reboot_bootloader">Bootloader</string>
+  <string name="reboot_bootloader">اداة تحميل التمهيد</string>
   <!-- Button to reboot the phone into download, within the Reboot Options dialog -->
-  <string name="reboot_download">Download</string>
+  <string name="reboot_download">تنزيل</string>
   <!-- Reboot Progress Dialog. This is shown if the user chooses to reboot the phone. -->
-  <string name="reboot_progress">Rebooting\u2026</string>
+  <string name="reboot_progress">اعادة التشغيل</string>
   <!-- Button to reboot the phone, within the Phone Options dialog -->
-  <string name="reboot_system" product="tablet">Reboot tablet</string>
-  <string name="reboot_system" product="default">Reboot phone</string>
+  <string name="reboot_system" product="tablet">اعادة تشغيل الكمبيوتر اللوحى</string>
+  <string name="reboot_system" product="default">اعادة تشغيل الهاتف</string>
   <!-- Slimseekbar -->
   <string name="default_string">Default</string>
   <!-- label for item that screenshots in phone options dialog -->
@@ -53,9 +53,9 @@
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
   <string name="permdesc_setKeyguardWallpaper">Allows an app to change the lock screen wallpaper.</string>
   <!-- label for item that reboots the phone in phone options dialog -->
-  <string name="global_action_reboot">Reboot</string>
+  <string name="global_action_reboot">اعادة التشغيل</string>
   <!-- Title of dialog to confirm rebooting. -->
-  <string name="reboot_title">Reboot</string>
+  <string name="reboot_title">اعادة التشغيل</string>
   <!-- Reboot Confirmation Dialog.  When the user chooses to reboot the device, there will
          be a confirmation dialog.  This is the message. -->
   <string name="reboot_confirm" product="tablet">Your tablet will reboot.</string>

@@ -87,8 +87,8 @@
   <string name="quick_settings_remove">Remove tile</string>
   <string name="quick_settings_screen_off">Screen off</string>
   <string name="quick_settings_screen_off">Screen off</string>
-  <string name="quick_settings_reboot_label">Reboot</string>
-  <string name="quick_settings_reboot_recovery_label">Recovery</string>
+  <string name="quick_settings_reboot_label">اعادة التشغيل</string>
+  <string name="quick_settings_reboot_recovery_label">الانتعاش</string>
   <string name="quick_settings_ambient_display_label">Ambient display</string>
   <string name="quick_settings_screen_timeout_detail_title">Screen timeout</string>
   <!-- Content description of the screen timeout tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
@@ -258,8 +258,8 @@
   <string name="quick_settings_music_play">Play</string>
   <string name="quick_settings_music_pause">Pause</string>
   <!-- Reboot/Recovery QS Tile -->
-  <string name="quick_settings_reboot_label">Reboot</string>
-  <string name="quick_settings_reboot_recovery_label">Recovery</string>
+  <string name="quick_settings_reboot_label">اعادة التشغيل</string>
+  <string name="quick_settings_reboot_recovery_label">الانتعاش</string>
   <!-- Battery Saver QS Tile -->
   <string name="quick_settings_battery_saver">Battery saver</string>
   <string name="quick_settings_battery_saver_off">Battery saver off</string>
