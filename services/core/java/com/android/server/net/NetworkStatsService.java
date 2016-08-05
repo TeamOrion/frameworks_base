@@ -1033,6 +1033,7 @@ public class NetworkStatsService extends INetworkStatsService.Stub {
         final NetworkStats xtSnapshot = getNetworkStatsXtAndVt();
         final NetworkStats devSnapshot = mNetworkManager.getNetworkStatsSummaryDev();
 
+        NetPluginDelegate.getTetherStats(uidSnapshot, xtSnapshot, devSnapshot);
 
         // For xt/dev, we pass a null VPN array because usage is aggregated by UID, so VPN traffic
         // can't be reattributed to responsible apps.
