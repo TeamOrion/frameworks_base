@@ -4249,12 +4249,6 @@ public final class Settings {
          */
         public static final String PROXIMITY_ON_WAKE = "proximity_on_wake";
 
-		/**
-         * List of QS tile names
-         * @hide
-         */
-        public static final String QS_TILES = "sysui_qs_tiles";
-
         /**
          * Volume rocker wake
          * @hide
