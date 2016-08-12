@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
- * Copyright (C) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,10 +67,9 @@ public class QSTileView extends ViewGroup {
     private TextView mLabel;
     private QSDualTileLabel mDualLabel;
     private boolean mDual;
-    private boolean mDualDetails;
     private OnClickListener mClickPrimary;
     private OnClickListener mClickSecondary;
-    private OnLongClickListener mLongClick;
+    private OnLongClickListener mClickLong;
     private Drawable mTileBackground;
     private RippleDrawable mRipple;
 
@@ -143,23 +141,18 @@ public class QSTileView extends ViewGroup {
         }
         final Resources res = mContext.getResources();
         if (mDual) {
-            if (mDualLabel == null) {
-                mDualLabel = new QSDualTileLabel(mContext);
-                mDualLabel.setId(View.generateViewId());
-                mDualLabel.setBackgroundResource(R.drawable.btn_borderless_rect);
-                if (mDualDetails) {
-                    mDualLabel.setFirstLineCaret(mContext.getDrawable(R.drawable.qs_dual_tile_caret));
-                }
-                mDualLabel.setTextColor(mContext.getColor(R.color.qs_tile_text));
-                mDualLabel.setPadding(0, mDualTileVerticalPaddingPx, 0, mDualTileVerticalPaddingPx);
-                mDualLabel.setTypeface(CONDENSED);
-                mDualLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                        res.getDimensionPixelSize(R.dimen.qs_tile_text_size));
-                mDualLabel.setClickable(true);
-                mDualLabel.setFocusable(true);
-                mDualLabel.setOnClickListener(mDualDetails ? mClickSecondary : mClickPrimary);
-                mDualLabel.setOnLongClickListener(mLongClick);
-            }
+            mDualLabel = new QSDualTileLabel(mContext);
+            mDualLabel.setId(View.generateViewId());
+            mDualLabel.setBackgroundResource(R.drawable.btn_borderless_rect);
+            mDualLabel.setFirstLineCaret(mContext.getDrawable(R.drawable.qs_dual_tile_caret));
+            mDualLabel.setTextColor(mContext.getColor(R.color.qs_tile_text));
+            mDualLabel.setPadding(0, mDualTileVerticalPaddingPx, 0, mDualTileVerticalPaddingPx);
+            mDualLabel.setTypeface(CONDENSED);
+            mDualLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    res.getDimensionPixelSize(R.dimen.qs_tile_text_size));
+            mDualLabel.setClickable(true);
+            mDualLabel.setOnClickListener(mClickSecondary);
+            mDualLabel.setFocusable(true);
             if (labelText != null) {
                 mDualLabel.setText(labelText);
             }
@@ -169,18 +162,15 @@ public class QSTileView extends ViewGroup {
             addView(mDualLabel);
             mDualLabel.setAccessibilityTraversalAfter(mTopBackgroundView.getId());
         } else {
-            if (mLabel == null) {
-                mLabel = new TextView(mContext);
-                mLabel.setTextColor(mContext.getColor(R.color.qs_tile_text));
-                mLabel.setGravity(Gravity.CENTER_HORIZONTAL);
-                mLabel.setMinLines(2);
-                mLabel.setPadding(0, 0, 0, 0);
-                mLabel.setTypeface(CONDENSED);
-                mLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                        res.getDimensionPixelSize(R.dimen.qs_tile_text_size));
-                mLabel.setClickable(false);
-                mLabel.setFocusable(false);
-            }
+            mLabel = new TextView(mContext);
+            mLabel.setTextColor(mContext.getColor(R.color.qs_tile_text));
+            mLabel.setGravity(Gravity.CENTER_HORIZONTAL);
+            mLabel.setMinLines(2);
+            mLabel.setPadding(0, 0, 0, 0);
+            mLabel.setTypeface(CONDENSED);
+            mLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    res.getDimensionPixelSize(R.dimen.qs_tile_text_size));
+            mLabel.setClickable(false);
             if (labelText != null) {
                 mLabel.setText(labelText);
             }
@@ -192,50 +182,46 @@ public class QSTileView extends ViewGroup {
         return mDual;
     }
 
-    public boolean setDual(boolean dual, boolean hasDetails) {
+    public boolean setDual(boolean dual) {
         final boolean changed = dual != mDual;
         mDual = dual;
-        mDualDetails = hasDetails;
         if (changed) {
             recreateLabel();
         }
 
         if (dual) {
             mTopBackgroundView.setOnClickListener(mClickPrimary);
-            mTopBackgroundView.setOnLongClickListener(mLongClick);
+            mTopBackgroundView.setOnLongClickListener(mClickLong);
             setOnClickListener(null);
-            setOnLongClickListener(null);
+            setClickable(false);
             setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
         } else {
             mTopBackgroundView.setOnClickListener(null);
-            mTopBackgroundView.setOnLongClickListener(null);
+            mTopBackgroundView.setClickable(false);
             setOnClickListener(mClickPrimary);
-            setOnLongClickListener(mLongClick);
+            setOnLongClickListener(mClickLong);
             setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
         }
-        setTileBackground();
-        mTopBackgroundView.setClickable(dual);
+        setTileBackground(mTileBackground);
         mTopBackgroundView.setFocusable(dual);
-        setClickable(!dual);
         setFocusable(!dual);
         mDivider.setVisibility(dual ? VISIBLE : GONE);
-        mTopBackgroundView.setVisibility(dual ? VISIBLE : GONE);
-
-        if (changed) {
-            getParent().requestLayout();
-        }
         postInvalidate();
         return changed;
     }
 
-    protected void setTileBackground() {
+    protected void setTileBackground(Drawable background) {
+        mTileBackground = background;
         if (mTileBackground instanceof RippleDrawable) {
             setRipple((RippleDrawable) mTileBackground);
         } else {
             setRipple(null);
         }
-        mTopBackgroundView.setBackground(mDual ? mTileBackground : null);
-        setBackground(!mDual ? mTileBackground : null);
+        if (mDual) {
+            mTopBackgroundView.setBackground(mTileBackground);
+        } else {
+            setBackground(mTileBackground);
+        }
     }
 
     private void setRipple(RippleDrawable tileBackground) {
@@ -245,10 +231,10 @@ public class QSTileView extends ViewGroup {
         }
     }
 
-    public void init(OnClickListener clickPrimary, OnClickListener clickSecondary, OnLongClickListener longClick) {
+    public void init(OnClickListener clickPrimary, OnClickListener clickSecondary, OnLongClickListener clickLong) {
         mClickPrimary = clickPrimary;
         mClickSecondary = clickSecondary;
-        mLongClick = longClick;
+        mClickLong = clickLong;
     }
 
     protected View createIcon() {
@@ -394,7 +380,6 @@ public class QSTileView extends ViewGroup {
         if (mDual) {
             if (mTopBackgroundView != null) {
                 mTopBackgroundView.setFocusable(!editing);
-                mTopBackgroundView.setClickable(!editing);
             }
             if (mDualLabel != null) {
                 mDualLabel.setFocusable(!editing);
@@ -402,6 +387,7 @@ public class QSTileView extends ViewGroup {
             }
             setClickable(editing);
             setFocusable(editing);
+            setOnLongClickListener(editing ? mClickLong : null);
         } else {
             if (mLabel != null) {
                 mLabel.setFocusable(!editing);

@@ -484,12 +484,15 @@ public class QSPanel extends ViewGroup {
         int r = -1;
         int c = -1;
         int rows = 0;
+        boolean rowIsDual = false;
         for (TileRecord record : mRecords) {
             if (record.tileView.getVisibility() == GONE) continue;
             // wrap to next column if we've reached the max # of columns
-            if (r == -1 || c == (mColumns - 1)) {
+            // also don't allow dual + single tiles on the same row
+            if (r == -1 || c == (mColumns - 1) || rowIsDual != record.tile.supportsDualTargets()) {
                 r++;
                 c = 0;
+                rowIsDual = record.tile.supportsDualTargets();
             } else {
                 c++;
             }
@@ -500,8 +503,7 @@ public class QSPanel extends ViewGroup {
 
         View previousView = mBrightnessView;
         for (TileRecord record : mRecords) {
-            final boolean dualTarget = record.tile.hasDualTargetsDetails();
-            if (record.tileView.setDual(dualTarget, dualTarget)) {
+            if (record.tileView.setDual(record.tile.supportsDualTargets())) {
                 record.tileView.handleStateChanged(record.tile.getState());
             }
             if (record.tileView.getVisibility() == GONE) continue;
