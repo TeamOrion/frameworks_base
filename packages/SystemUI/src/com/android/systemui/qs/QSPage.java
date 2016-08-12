@@ -33,11 +33,6 @@ public class QSPage extends ViewGroup {
         setClipToOutline(false);
     }
 
-    @Override
-    public boolean hasOverlappingRendering() {
-        return false;
-    }
-
     public int getPageIndex() {
         return mPage;
     }

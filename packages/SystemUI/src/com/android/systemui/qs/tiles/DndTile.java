@@ -121,16 +121,6 @@ public class DndTile extends QSTile<QSTile.BooleanState> {
     }
 
     @Override
-    protected void handleSecondaryClick() {
-        handleClick();
-    }
-
-    @Override
-    public void handleLongClick() {
-        mHost.startActivityDismissingKeyguard(ZEN_SETTINGS);
-    }
-
-    @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
         final int zen = arg instanceof Integer ? (Integer) arg : mController.getZen();
         final boolean newValue = zen != Global.ZEN_MODE_OFF;
@@ -196,11 +186,6 @@ public class DndTile extends QSTile<QSTile.BooleanState> {
             mController.removeCallback(mZenCallback);
             Prefs.unregisterListener(mContext, mPrefListener);
         }
-    }
-
-    @Override
-    public boolean hasDualTargetsDetails() {
-        return true;
     }
 
     private final OnSharedPreferenceChangeListener mPrefListener

@@ -24,11 +24,6 @@ public class QSViewPager extends ViewPager {
     }
 
     @Override
-    public boolean hasOverlappingRendering() {
-        return false;
-    }
-
-    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = 0;
         for (int i = 0; i < getChildCount(); i++) {
