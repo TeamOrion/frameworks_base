@@ -4050,12 +4050,6 @@ public final class Settings {
          * @hide
          */
         public static final String HARDWARE_KEY_REBINDING = "hardware_key_rebinding";
- 
-        /**
-         * Whether hardware keys are enabled
-         * @hide
-         */
-        public static final String DISABLE_HARDWARE_KEYS = "disable_hardware_keys";
          	       
         /**
          * Whether hardware keys are enabled
