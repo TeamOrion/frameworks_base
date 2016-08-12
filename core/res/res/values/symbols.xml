@@ -2475,4 +2475,7 @@
   
   <!-- Hardware key rebinding -->
   <java-symbol type="integer" name="config_deviceHardwareKeys" />
+  
+  <!-- Hardware key disable path -->
+  <java-symbol type="string" name="config_controlPathHardwareKeys" />
 </resources>

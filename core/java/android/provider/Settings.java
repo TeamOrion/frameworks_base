@@ -3545,7 +3545,6 @@ public final class Settings {
 
         /**
          * Forces formal text input.  1 to replace emoticon key with enter key.
->>>>>>> f267256... Lockscreen weather options [1/2]
          * @hide
          */
         public static final String EGG_MODE = "egg_mode";
@@ -4038,7 +4037,13 @@ public final class Settings {
          */
         public static final String KEY_CAMERA_DOUBLE_TAP_ACTION =
                 "key_camera_double_tap_action";
-       
+                
+         /**
+         * Whether the capacitive hardware keys are disabled
+         * @hide
+         */
+        public static final String DISABLE_HW_KEYS = "disable_hw_keys";
+         	       
         /**
          * Whether custom hardware key rebinding is enabled
          * @hide
