@@ -4038,7 +4038,13 @@ public final class Settings {
          */
         public static final String KEY_CAMERA_DOUBLE_TAP_ACTION =
                 "key_camera_double_tap_action";
-       
+
+        /**
+         * Whether hardware keys are enabled
+         * @hide
+         */
+        public static final String DISABLE_HARDWARE_KEYS = "disable_hardware_keys";
+               
         /**
          * Whether custom hardware key rebinding is enabled
          * @hide
