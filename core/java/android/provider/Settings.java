@@ -4185,12 +4185,6 @@ public final class Settings {
          */
         public static final String STATUS_BAR_CUSTOM_HEADER_PROVIDER = "status_bar_custom_header_provider";
 
-		/**
-         * Whether detail view for the location tile is enabled
-         * @hide
-         */
-        public static final String QS_LOCATION_ADVANCED = "qs_location_advanced";
-
         /**
          * Whether to use default custom header or poly hd
          * 0 = default

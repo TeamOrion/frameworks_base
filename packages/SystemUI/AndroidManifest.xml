@@ -156,14 +156,6 @@
     <!-- Kill app permission -->
     <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
 
-	<!-- Reboot/Recovery tile -->
-    <uses-permission android:name="android.permission.REBOOT" />
-    <uses-permission android:name="android.permission.RECOVERY" />
-
-    <!-- Reboot -->
-    <uses-permission android:name="android.permission.REBOOT" />
-    <uses-permission android:name="android.permission.RECOVERY" />
-
     <application
         android:name=".SystemUIApplication"
         android:persistent="true"
