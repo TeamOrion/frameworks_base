@@ -392,7 +392,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         mWeatherContainer.setVisibility(mExpanded && mShowWeather ? View.VISIBLE : View.GONE);
         mTaskManagerButton.setVisibility(mExpanded && mShowTaskManager ? View.VISIBLE : View.GONE);
         mSettingsButton.setVisibility(mExpanded ? View.VISIBLE : View.INVISIBLE);
-        mQsDetailHeader.setVisibility(mExpanded && mShowingDetail? View.VISIBLE : View.INVISIBLE);
+        mQsDetailHeader.setVisibility(mExpanded && mShowingDetail? View.VISIBLE : View.GONE);
         if (mSignalCluster != null) {
             updateSignalClusterDetachment();
         }
@@ -685,7 +685,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         target.settingsAlpha = getAlphaForVisibility(mSettingsButton);
         target.settingsTranslation = mExpanded
                 ? 0
-                : mMultiUserSwitch.getLeft() - mSettingsContainer.getLeft();
+                : mMultiUserSwitch.getLeft() - mSettingsButton.getLeft();
         target.taskManagerAlpha = getAlphaForVisibility(mTaskManagerButton);
 	target.taskManagerTranslation = mExpanded
                 ? 0
@@ -742,11 +742,6 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
             mSignalCluster.setTranslationX(0f);
             mSignalCluster.setTranslationY(0f);
         }
-        if (!mSettingsButton.isAnimating()) {
-            mSettingsButton.setTranslationY(mSystemIconsSuperContainer.getTranslationY());
-            mSettingsButton.setTranslationX(values.settingsTranslation);
-            mSettingsButton.setRotation(values.settingsRotation);
-	}
             mTaskManagerButton.setTranslationY(mSystemIconsSuperContainer.getTranslationY());
             mTaskManagerButton.setTranslationX(values.settingsTranslation);
             mTaskManagerButton.setRotation(values.settingsRotation);

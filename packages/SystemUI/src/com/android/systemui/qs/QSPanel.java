@@ -47,7 +47,7 @@ import java.util.Collection;
 
 /** View that represents the quick settings tile panel. **/
 public class QSPanel extends ViewGroup {
-    protected static final float TILE_ASPECT = 1.2f;
+    private static final float TILE_ASPECT = 1.2f;
 
     private final Context mContext;
     protected final ArrayList<TileRecord> mRecords = new ArrayList<TileRecord>();
@@ -68,6 +68,7 @@ public class QSPanel extends ViewGroup {
     protected int mDualTileUnderlap;
     protected int mBrightnessPaddingTop;
     protected int mGridHeight;
+    private int mNumberOfColumns;
     private boolean mExpanded;
     private boolean mListening;
     private boolean mClosingDetail;
@@ -511,7 +512,7 @@ public class QSPanel extends ViewGroup {
         boolean isRtl = getLayoutDirection() == LAYOUT_DIRECTION_RTL;
         for (TileRecord record : mRecords) {
             if (record.tileView.getVisibility() == GONE) continue;
-            final int cols = useFourColumns();
+            final int cols = getColumnCount(record.row);
             final int cw = record.row == 0 ? mLargeCellWidth : mCellWidth;
             final int extra = (w - cw * cols) / (cols + 1);
             int left = record.col * cw + (record.col + 1) * extra;

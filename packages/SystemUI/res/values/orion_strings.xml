@@ -35,6 +35,14 @@
     <string name="battery_level_template">
         <xliff:g id="level" example="45">%d</xliff:g>%%</string>
 
+    <!-- LTE Tile -->
+    <string name="qs_lte_label">LTE</string>
+    <string name="lte_on">LTE ON</string>
+    <string name="lte_off">LTE OFF</string>
+
+    <!-- Brightness QS Tile -->
+    <string name="quick_settings_brightness">Brightness</string>
+
     <!-- QS location sensors -->
     <!-- Content description of the location tile in quick settings when on, battery saving mode (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_location_battery_saving">Location reporting: battery saving mode.</string>

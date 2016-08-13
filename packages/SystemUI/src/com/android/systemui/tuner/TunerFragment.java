@@ -43,8 +43,6 @@ public class TunerFragment extends PreferenceFragment {
 
     private final SettingObserver mSettingObserver = new SettingObserver();
 
-    private final SettingObserver mSettingObserver = new SettingObserver();
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
