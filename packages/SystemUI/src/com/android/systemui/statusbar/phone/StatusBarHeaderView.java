@@ -54,7 +54,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.internal.util.du.WeatherController;
 import com.android.internal.util.du.WeatherControllerImpl;
@@ -70,7 +69,6 @@ import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.NetworkControllerImpl.EmergencyListener;
 import com.android.systemui.statusbar.policy.NextAlarmController;
 import com.android.systemui.statusbar.policy.UserInfoController;
-import com.android.systemui.tuner.TunerService;
 
 import java.text.NumberFormat;
 
@@ -99,8 +97,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     private TextView mDateExpanded;
     private LinearLayout mSystemIcons;
     private View mSignalCluster;
-    private SettingsButton mSettingsButton;
-    private View mSettingsContainer;
+    private View mSettingsButton;
     private View mQsDetailHeader;
     private TextView mQsDetailHeaderTitle;
     private Switch mQsDetailHeaderSwitch;
@@ -185,8 +182,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         mMultiUserAvatar = (ImageView) findViewById(R.id.multi_user_avatar);
         mDateCollapsed = (TextView) findViewById(R.id.date_collapsed);
         mDateExpanded = (TextView) findViewById(R.id.date_expanded);
-        mSettingsButton = (SettingsButton) findViewById(R.id.settings_button);
-        mSettingsContainer = findViewById(R.id.settings_button_container);
+        mSettingsButton = findViewById(R.id.settings_button);
         mSettingsButton.setOnClickListener(this);
         mTaskManagerButton = findViewById(R.id.task_manager_button);
         mQsDetailHeader = findViewById(R.id.qs_detail_header);
@@ -393,17 +389,15 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         mDateCollapsed.setVisibility(mExpanded && mAlarmShowing ? View.VISIBLE : View.INVISIBLE);
         mDateExpanded.setVisibility(mExpanded && mAlarmShowing ? View.INVISIBLE : View.VISIBLE);
         mAlarmStatus.setVisibility(mExpanded && mAlarmShowing ? View.VISIBLE : View.INVISIBLE);
-        mSettingsContainer.setVisibility(mExpanded ? View.VISIBLE : View.INVISIBLE);
         mWeatherContainer.setVisibility(mExpanded && mShowWeather ? View.VISIBLE : View.GONE);
         mTaskManagerButton.setVisibility(mExpanded && mShowTaskManager ? View.VISIBLE : View.GONE);
-        mQsDetailHeader.setVisibility(mExpanded && mShowingDetail ? View.VISIBLE : View.GONE);
+        mSettingsButton.setVisibility(mExpanded ? View.VISIBLE : View.INVISIBLE);
+        mQsDetailHeader.setVisibility(mExpanded && mShowingDetail? View.VISIBLE : View.INVISIBLE);
         if (mSignalCluster != null) {
             updateSignalClusterDetachment();
         }
         mEmergencyCallsOnly.setVisibility(mExpanded && mShowEmergencyCallsOnly ? VISIBLE : GONE);
         mBatteryLevel.setVisibility(mExpanded ? View.VISIBLE : View.GONE);
-        mSettingsContainer.findViewById(R.id.tuner_icon).setVisibility(
-                TunerService.isTunerEnabled(mContext) ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void updateSignalClusterDetachment() {
@@ -427,7 +421,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         RelativeLayout.LayoutParams lp = (LayoutParams) mSystemIconsSuperContainer
                 .getLayoutParams();
         int rule = mExpanded
-                ? mSettingsContainer.getId()
+                ? mSettingsButton.getId()
                 : mMultiUserSwitch.getId();
         int taskManager = mShowTaskManager && mExpanded
                 ? mTaskManagerButton.getId() : rule;
@@ -589,20 +583,6 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == mSettingsButton) {
-            if (mSettingsButton.isTunerClick()) {
-                if (TunerService.isTunerEnabled(mContext)) {
-                    TunerService.showResetRequest(mContext, new Runnable() {
-                        @Override
-                        public void run() {
-                            // Relaunch settings so that the tuner disappears.
-                            startSettingsActivity();
-                        }
-                    });
-                } else {
-                    Toast.makeText(getContext(), R.string.tuner_toast, Toast.LENGTH_LONG).show();
-                    TunerService.setTunerEnabled(mContext, true);
-                }
-            }
             startSettingsActivity();
         } else if (v == mSystemIconsSuperContainer) {
             startBatteryActivity();
@@ -702,7 +682,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         }
         target.batteryY = mSystemIconsSuperContainer.getTop() + mSystemIconsContainer.getTop();
         target.batteryLevelAlpha = getAlphaForVisibility(mBatteryLevel);
-        target.settingsAlpha = getAlphaForVisibility(mSettingsContainer);
+        target.settingsAlpha = getAlphaForVisibility(mSettingsButton);
         target.settingsTranslation = mExpanded
                 ? 0
                 : mMultiUserSwitch.getLeft() - mSettingsContainer.getLeft();
@@ -763,8 +743,8 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
             mSignalCluster.setTranslationY(0f);
         }
         if (!mSettingsButton.isAnimating()) {
-            mSettingsContainer.setTranslationY(mSystemIconsSuperContainer.getTranslationY());
-            mSettingsContainer.setTranslationX(values.settingsTranslation);
+            mSettingsButton.setTranslationY(mSystemIconsSuperContainer.getTranslationY());
+            mSettingsButton.setTranslationX(values.settingsTranslation);
             mSettingsButton.setRotation(values.settingsRotation);
 	}
             mTaskManagerButton.setTranslationY(mSystemIconsSuperContainer.getTranslationY());
@@ -778,7 +758,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         applyAlpha(mDateCollapsed, values.dateCollapsedAlpha);
         applyAlpha(mDateExpanded, values.dateExpandedAlpha);
         applyAlpha(mBatteryLevel, values.batteryLevelAlpha);
-        applyAlpha(mSettingsContainer, values.settingsAlpha);
+        applyAlpha(mSettingsButton, values.settingsAlpha);
         applyAlpha(mTaskManagerButton, values.settingsAlpha);
         applyAlpha(mWeatherLine1, values.settingsAlpha);
         applyAlpha(mWeatherLine2, values.settingsAlpha);

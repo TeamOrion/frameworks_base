@@ -3877,7 +3877,7 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
     public void dispatchDemoCommand(String command, Bundle args) {
         if (!mDemoModeAllowed) {
             mDemoModeAllowed = Settings.Global.getInt(mContext.getContentResolver(),
-                    DEMO_MODE_ALLOWED, 0) != 0;
+                    "sysui_demo_allowed", 0) != 0;
         }
         if (!mDemoModeAllowed) return;
         if (command.equals(COMMAND_ENTER)) {
