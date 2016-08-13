@@ -401,8 +401,9 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
             updateSignalClusterDetachment();
         }
         mEmergencyCallsOnly.setVisibility(mExpanded && mShowEmergencyCallsOnly ? VISIBLE : GONE);
-        mBatteryLevel.setForceShown(mExpanded && mShowBatteryTextExpanded);
-        mBatteryLevel.setVisibility(View.VISIBLE);
+        mBatteryLevel.setVisibility(mExpanded ? View.VISIBLE : View.GONE);
+        mSettingsContainer.findViewById(R.id.tuner_icon).setVisibility(
+                TunerService.isTunerEnabled(mContext) ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void updateSignalClusterDetachment() {
