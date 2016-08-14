@@ -388,6 +388,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private int mHeaderTranslucencyPercentage;
     private int mQSTranslucencyPercentage;
     private int mNotTranslucencyPercentage;
+    private boolean mTranslucentRecents;
+
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
 
     private int mStatusBarHeaderHeight;
@@ -508,6 +510,9 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.QS_NUM_TILE_COLUMNS), false, this,
                     UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY), false, this,
+                      UserHandle.USER_ALL);
             update();
         }
 
@@ -627,6 +632,11 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                     Settings.System.TRANSLUCENT_HEADER_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1;
             mQSTranslucencyPercentage = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.TRANSLUCENT_QUICK_SETTINGS_PRECENTAGE_PREFERENCE_KEY, 60);
+            mTranslucentHeader = Settings.System.getIntForUser(resolver,
+                    Settings.System.TRANSLUCENT_HEADER_PREFERENCE_KEY, 0,
+                    UserHandle.USER_CURRENT) == 1;
+            mTranslucentRecents = Settings.System.getIntForUser(resolver,
+                    Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1;
             mHeaderTranslucencyPercentage = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.TRANSLUCENT_HEADER_PRECENTAGE_PREFERENCE_KEY, 70);
             mNotTranslucencyPercentage = Settings.System.getInt(mContext.getContentResolver(),
@@ -1379,7 +1389,11 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                         }
                         //RecentsActivity.onConfigurationChanged();
 
-                        if (mExpandedVisible && NotificationPanelView.mBlurredStatusBarExpandedEnabled && (!NotificationPanelView.mKeyguardShowing)) {
+                        RecentsActivity.onConfigurationChanged();
+
+                        if (mExpandedVisible &&
+                                NotificationPanelView.mBlurredStatusBarExpandedEnabled &&
+                                (!NotificationPanelView.mKeyguardShowing)) {
                             makeExpandedInvisible();
                         }
                     }
@@ -1390,7 +1404,7 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
             intent.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
             this.mContext.registerReceiver(receiver, intent);
 
-           // RecentsActivity.init(this.mContext);
+            RecentsActivity.init(this.mContext);
 
             updatePreferences(this.mContext);
         } catch (Exception e){
@@ -1404,6 +1418,7 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
     }
 
     public static void updatePreferences(Context context) {
+        RecentsActivity.updatePreferences(context);
         BaseStatusBar.updatePreferences();
     }
 
