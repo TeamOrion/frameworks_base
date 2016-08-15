@@ -22,26 +22,6 @@
   <!-- The text for the button in the notification window-shade that clears
          all of the currently visible notifications. [CHAR LIMIT=10]-->
   <string name="clear_recents">Tüm bildirimleri temizle</string>
-  <string name="qs_tile_edit_header_instruction">Düzenlemek için kareye basılı tutun</string>
-  <string name="quick_settings_edit_label">Kareleri Düzenle</string>
-  <string name="quick_settings_cannot_delete_edit_tile">Düzenlenen kare silinemez</string>
-  <string name="qs_tiles_reset_confirmation">Hızlı ayarlar kareleri sıfırlansın mı?</string>
-  <!-- Screenshot QS tile -->
-  <string name="quick_settings_screenshot_label">Ekran Görüntüsü Al</string>
-  <!-- USB tether QS tile -->
-  <string name="accessibility_quick_settings_usb_tether_off">USB internet paylaşımı kapalı</string>
-  <string name="accessibility_quick_settings_usb_tether_on">USB internet paylaşımı açık</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_off">USB internet paylaşımı kapatıldı</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_on">USB internet paylaşımı açıldı</string>
-  <string name="quick_settings_usb_tether_label">USB internet paylaşımı</string>
-  <!-- LTE Tile -->
-  <string name="qs_lte_label">LTE</string>
-  <string name="lte_on">LTE AÇIK
-    </string>
-  <string name="lte_off">LTE KAPALI</string>
-  <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Yoksay</string>
-  <string name="battery_saver_notification_action_text_short">Kapat</string>
   <!-- Kill app toast -->
   <string name="app_killed_message">Uygulama sonlandırıldı</string>
   <!-- Screenshot -->
@@ -49,153 +29,56 @@
   <!-- Battery level for expanded quick settings [CHAR LIMIT=2] -->
   <string name="battery_level_template">
         <xliff:g id="level" example="45">%d</xliff:g>%%</string>
-  <!-- Strings for lockscreen shortcut hints -->
-  <string name="left_shortcut_hint">%1$s için sağa kaydırın</string>
-  <string name="right_shortcut_hint">%1$s için sola kaydırın</string>
-  <string name="lockscreen_message">Sol veya sağ kilit ekrana kısayol atamak bir diyalog kutusuna dokunun.</string>
-  <string name="lockscreen_default_target">Varsayılan</string>
-  <string name="select_application">Uygulama seçin</string>
-  <string name="lockscreen_choose_action_title">Ne yapmak istediğinizi seçin</string>
-  <string name="lockscreen_none_target">Yok</string>
-  <!-- Weather string format in expanded statusbar header -->
-  <string name="status_bar_expanded_header_weather_format">
-        <xliff:g id="temp">%1$s</xliff:g>
-        -
-        <xliff:g id="condition">%2$s</xliff:g>
-    </string>
-  <!-- Strings for lockscreen shortcut hints -->
-  <string name="left_shortcut_hint">%1$s için sağa kaydırın</string>
-  <string name="right_shortcut_hint">%1$s için sola kaydırın</string>
-  <string name="lockscreen_message">Sol veya sağ kilit ekrana kısayol atamak bir diyalog kutusuna dokunun.</string>
-  <!-- Weather string format in expanded statusbar header -->
-  <string name="status_bar_expanded_header_weather_format">
-        <xliff:g id="temp">%1$s</xliff:g>
-        -
-        <xliff:g id="condition">%2$s</xliff:g>
-    </string>
-  <string name="lockscreen_default_target">Varsayılan</string>
-  <string name="select_application">Uygulama seçin</string>
-  <string name="lockscreen_choose_action_title">Ne yapmak istediğinizi seçin</string>
-  <string name="lockscreen_none_target">Yok</string>
-  <string name="qs_tile_edit_header_instruction">Düzenlemek için kareye basılı tutun</string>
-  <string name="quick_settings_edit_label">Kareleri Düzenle</string>
-  <string name="quick_settings_cannot_delete_edit_tile">Düzenlenen kare silinemez</string>
-  <string name="qs_tiles_reset_confirmation">Hızlı ayarlar kareleri sıfırlansın mı?</string>
-  <string name="quick_settings_tile_reset_to_default">Varsayılan düzene sıfırla</string>
-  <string name="quick_settings_title_header">Başlık</string>
-  <string name="quick_settings_title_tiles">Kareler</string>
-  <string name="quick_settings_remove">Kareyi kaldır</string>
-  <string name="quick_settings_screen_off">Ekran kapalı</string>
-  <string name="quick_settings_screen_off">Ekran kapalı</string>
-  <string name="quick_settings_reboot_label">Yeniden Başlat</string>
-  <string name="quick_settings_reboot_recovery_label">Kurtarma Modu</string>
-  <string name="quick_settings_ambient_display_label">Ortam Ekranı</string>
-  <string name="quick_settings_screen_timeout_detail_title">Ekran zaman aşımı</string>
-  <!-- Content description of the screen timeout tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_screen_timeout">Ekran zaman aşımı:
-        <xliff:g id="timeout" example="30 seconds">%s</xliff:g>.</string>
-  <!-- Announcement made when the screen timeout tile changes (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_screen_timeout_changed">Ekran zaman aşımı
-        <xliff:g id="timeout" example="30 seconds">%s</xliff:g> için değişti.</string>
-  <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_data_connection_hspap">HSPA+</string>
-  <string name="quick_settings_title_advanced_location">Tri-state konumu</string>
+  <!-- LTE Tile -->
+  <string name="qs_lte_label">LTE</string>
+  <string name="lte_on">LTE ON</string>
+  <string name="lte_off">LTE KAPALI</string>
+  <!-- Brightness QS Tile -->
+  <string name="quick_settings_brightness">Parlaklık</string>
+  <!-- QS location sensors -->
   <!-- Content description of the location tile in quick settings when on, battery saving mode (not shown on the screen). [CHAR LIMIT=NONE] -->
   <string name="accessibility_quick_settings_location_battery_saving">Konum bildirimi: pil tasarruf modu.</string>
   <!-- Content description of the location tile in quick settings when on, sensors only mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_gps_only">Konum bildirimi: sadece sensörler modu.</string>
+  <string name="accessibility_quick_settings_location_sensors_only">Location reporting: sensors only mode.</string>
   <!-- Content description of the location tile in quick settings when on, high accuracy mode (not shown on the screen). [CHAR LIMIT=NONE] -->
   <string name="accessibility_quick_settings_location_high_accuracy">Konum bildirimi: yüksek hassasiyet modu.</string>
   <!-- QuickSettings: Location (On, low-power) [CHAR LIMIT=NONE] -->
   <string name="quick_settings_location_battery_saving_label">Pil tasarrufu</string>
   <!-- QuickSettings: Location (On, gps-only) [CHAR LIMIT=NONE] -->
-  <string name="quick_settings_location_gps_only_label">Sadece GPS</string>
+  <string name="quick_settings_location_sensors_only_label">Sadece cihaz</string>
   <!-- QuickSettings: Location (On, high-accuracy) [CHAR LIMIT=NONE] -->
   <string name="quick_settings_location_high_accuracy_label">Yüksek doğruluk</string>
   <!-- QuickSettings: Location detail panel title [CHAR LIMIT=NONE] -->
   <string name="quick_settings_location_detail_title">Konum</string>
   <!-- QuickSettings: Location detail panel menu title [CHAR LIMIT=NONE] -->
   <string name="quick_settings_location_detail_menu_title">Modu seç:</string>
-  <!-- [CHAR LIMIT=30] Location detail panel, high accuracy location mode -->
-  <string name="quick_settings_location_detail_mode_high_accuracy_title">Yüksek doğruluk</string>
   <!-- [CHAR LIMIT=30] Location detail panel, battery saving location mode -->
   <string name="quick_settings_location_detail_mode_battery_saving_title">Pil tasarrufu</string>
   <!-- [CHAR LIMIT=30] Location detail panel, device only location mode -->
   <string name="quick_settings_location_detail_mode_sensors_only_title">Sadece cihaz</string>
-  <!-- [CHAR LIMIT=130] Location detail panel, description for high accuracy mode -->
-  <string name="quick_settings_location_detail_mode_high_accuracy_description">Konumu belirlemek için GPS, Wi\u2011Fi, Bluetooth veya hücresel ağlar kullanılır    </string>
+  <!-- [CHAR LIMIT=30] Location detail panel, high accuracy location mode -->
+  <string name="quick_settings_location_detail_mode_high_accuracy_title">Yüksek doğruluk</string>
   <!-- [CHAR LIMIT=130] Location detail panel, description for battery saving mode -->
   <string name="quick_settings_location_detail_mode_battery_saving_description">Konumu belirlemek için Wi\u2011Fi ve hücresel ağlar kullanılır</string>
   <!-- [CHAR LIMIT=130] Location detail panel, description for sensors only mode -->
   <string name="quick_settings_location_detail_mode_sensors_only_description">Konumu belirlemek için GPS kullanılır</string>
-  <!-- Announcement made when the location tile changes to battery saving (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_changed_battery_saving">Konumu raporlama için pil tasarruf moduna geçildi.</string>
-  <!-- Announcement made when the location tile changes to sensors only (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_changed_gps_only">Konumu raporlama sensörler moduna değişti.</string>
-  <!-- Announcement made when the location tile changes to high accuracy (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_changed_high_accuracy">Konumu raporlama için yüksek hassasiyet moduna geçildi.</string>
-  <!-- Content description of the ambient display tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_off">Ortam ekranı özelliğini kapat.</string>
-  <!-- Content description of the ambient display tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_on">Ortam ekranı özelliğini aç.</string>
-  <!-- Announcement made when ambient display changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_changed_off">Ortam ekranı kapalı.</string>
-  <!-- Announcement made when ambient display changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_changed_on">Oratm ekranı açık.</string>
-  <!-- Heads-up Tile -->
-  <string name="quick_settings_heads_up_label">Üst bildirim</string>
-  <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_off">Yukarı bak bildirimlerini kapat.</string>
-  <!-- Content description of the heads up tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_on">Yukarı bak bildirimlerini aç.</string>
-  <!-- Announcement made when heads up changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_changed_off">Yukarı bak bildirimleri kapalı.</string>
-  <!-- Announcement made when heads up changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_changed_on">Yukarı bak bildirimleri açık.</string>
-  <!-- Expanded Desktop QS Tile -->
-  <string name="quick_settings_expanded_desktop">Genişletilmiş</string>
-  <string name="quick_settings_expanded_desktop_off">Normal</string>
-  <!-- Battery Saver QS Tile -->
-  <string name="quick_settings_battery_saver">Pil tasarrufu</string>
-  <string name="quick_settings_battery_saver_off">Pil tasarrufu kapalı</string>
-  <!-- Music QS Tile -->
-  <string name="quick_settings_music_label">Müzik</string>
-  <string name="quick_settings_music_play">Oynat</string>
-  <string name="quick_settings_music_pause">Duraklat</string>
-  <!-- NFC QS tile -->
-  <string name="quick_settings_nfc_label">NFC</string>
-  <!-- Sync QS tile -->
+  <!-- [CHAR LIMIT=130] Location detail panel, description for high accuracy mode -->
+  <string name="quick_settings_location_detail_mode_high_accuracy_description">Use GPS, Wi\u2011Fi, and cellular networks to determine location </string>
+  <!-- Screen timeout tile -->
+  <string name="quick_settings_timeout_label">Zaman aşımı</string>
+  <string name="quick_settings_screen_timeout_detail_title">Ekran zaman aşımı</string>
+  <!-- Sync qs tile -->
   <string name="quick_settings_sync_label">Eşitleme</string>
-  <string name="accessibility_quick_settings_sync_off">Eşitleme kapalı</string>
-  <string name="accessibility_quick_settings_sync_on">Eşitleme açık</string>
-  <string name="accessibility_quick_settings_sync_changed_off">Eşitleme kapatıldı</string>
-  <string name="accessibility_quick_settings_sync_changed_on">Eşitleme açıldı</string>
-  <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_data_connection_hspap">HSPA+</string>
-  <!-- Color for the RAM bar text in the recent view -->
-  <!-- Task Manager -->
-  <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Yoksay</string>
-  <string name="battery_saver_notification_action_text_short">Kapat</string>
-  <!-- Screenshot Delete Toast -->
-  <string name="delete_screenshot_toast">Ekran Görüntüsü Silindi</string>
-  <!-- USB tether QS tile -->
-  <string name="accessibility_quick_settings_usb_tether_off">USB internet paylaşımı kapalı</string>
-  <string name="accessibility_quick_settings_usb_tether_on">USB internet paylaşımı açık</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_off">USB internet paylaşımı kapatıldı</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_on">USB internet paylaşımı açıldı</string>
-  <string name="quick_settings_usb_tether_label">USB internet paylaşımı</string>
-  <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Yoksay</string>
-  <string name="battery_saver_notification_action_text_short">Kapat</string>
-  <!-- SystemUI Tuner Parts -->
-  <string name="systemui_tuner_statusbar_title">Durum çubuğu öğeleri</string>
-  <string name="systemui_tuner_qs_title">Hızlı Ayarlar</string>
-  <!-- Screenshot Delete Toast -->
-  <string name="delete_screenshot_toast">Ekran Görüntüsü Silindi</string>
-  <!-- Battery level for expanded quick settings [CHAR LIMIT=2] -->
-  <string name="battery_level_template">
-        <xliff:g id="level" example="45">%d</xliff:g>%%</string>
+  <!-- Content description of the sync tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_quick_settings_sync_off">Sync off.</string>
+  <!-- Content description of the sync tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_quick_settings_sync_on">Sync on.</string>
+  <!-- Announcement made when sync changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_quick_settings_sync_changed_off">Sync turned off.</string>
+  <!-- Announcement made when sync changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_quick_settings_sync_changed_on">Sync turned on.</string>
+  <!-- Screen timeout tile -->
+  <string name="quick_settings_screen_off">Ekran kapalı</string>
   <!-- Weather string format in expanded statusbar header -->
   <string name="status_bar_expanded_header_weather_format">
         <xliff:g id="temp">%1$s</xliff:g>
@@ -210,59 +93,17 @@
   <string name="select_application">Uygulama seçin</string>
   <string name="lockscreen_choose_action_title">Ne yapmak istediğinizi seçin</string>
   <string name="lockscreen_none_target">Yok</string>
+  <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_data_connection_hspap">HSPA+</string>
+  <!-- Color for the RAM bar text in the recent view -->
+  <!-- Task Manager -->
+  <!-- Screenshot Delete Toast -->
+  <string name="delete_screenshot_toast">Ekran Görüntüsü Silindi</string>
+  <!-- SystemUI Tuner Parts -->
+  <string name="systemui_tuner_statusbar_title">Durum çubuğu öğeleri</string>
+  <string name="systemui_tuner_qs_title">Hızlı Ayarlar</string>
   <!-- Text to use when the number in a notification info is too large
          (greater than status_bar_notification_info_maxnum, defined in
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
-  <!-- The text for the button in the notification window-shade that clears
-         all of the currently visible notifications. [CHAR LIMIT=10]-->
-  <string name="clear_recents">Tüm bildirimleri temizle</string>
-  <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_data_connection_HP">HSPA+</string>
-  <!-- USB tether QS tile -->
-  <string name="accessibility_quick_settings_usb_tether_off">USB internet paylaşımı kapalı</string>
-  <string name="accessibility_quick_settings_usb_tether_on">USB internet paylaşımı açık</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_off">USB internet paylaşımı kapatıldı</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_on">USB internet paylaşımı açıldı</string>
-  <string name="quick_settings_usb_tether_label">USB internet paylaşımı</string>
-  <!-- Ambient Display QS tile -->
-  <string name="accessibility_quick_settings_ambient_display_off">Ortam ekranı özelliğini kapat.</string>
-  <string name="accessibility_quick_settings_ambient_display_on">Ortam ekranı özelliğini aç.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_off">Ortam ekranı kapalı.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_on">Oratm ekranı açık.</string>
-  <string name="accessibility_quick_settings_ambient_display_off">Ortam ekranı özelliğini kapat.</string>
-  <string name="accessibility_quick_settings_ambient_display_on">Ortam ekranı özelliğini aç.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_off">Ortam ekranı kapalı.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_on">Oratm ekranı açık.</string>
-  <string name="quick_settings_ambient_display_label">Ortam Ekranı</string>
-  <!-- Screenshot QS tile -->
-  <string name="quick_settings_screenshot_label">Ekran Görüntüsü Al</string>
-  <!-- NFC QS tile -->
-  <string name="quick_settings_nfc_label">NFC</string>
-  <!-- Sync QS tile -->
-  <string name="quick_settings_sync_label">Eşitleme</string>
-  <string name="accessibility_quick_settings_sync_off">Eşitleme kapalı</string>
-  <string name="accessibility_quick_settings_sync_on">Eşitleme açık</string>
-  <string name="accessibility_quick_settings_sync_changed_off">Eşitleme kapatıldı</string>
-  <string name="accessibility_quick_settings_sync_changed_on">Eşitleme açıldı</string>
-  <!-- Screen off QS tile -->
-  <string name="quick_settings_screen_off">Ekran kapalı</string>
-  <!-- Screen timeout QS tile -->
-  <string name="quick_settings_timeout_label">Zaman aşımı</string>
-  <string name="quick_settings_screen_timeout_detail_title">Ekran zaman aşımı</string>
-  <!-- Brightness QS Tile -->
-  <string name="quick_settings_brightness">Parlaklık</string>
-  <!-- Music QS Tile -->
-  <string name="quick_settings_music_label">Müzik</string>
-  <string name="quick_settings_music_play">Oynat</string>
-  <string name="quick_settings_music_pause">Duraklat</string>
-  <!-- Reboot/Recovery QS Tile -->
-  <string name="quick_settings_reboot_label">Yeniden Başlat</string>
-  <string name="quick_settings_reboot_recovery_label">Kurtarma Modu</string>
-  <!-- Battery Saver QS Tile -->
-  <string name="quick_settings_battery_saver">Pil tasarrufu</string>
-  <string name="quick_settings_battery_saver_off">Pil tasarrufu kapalı</string>
-  <!-- Expanded Desktop QS Tile -->
-  <string name="quick_settings_expanded_desktop">Genişletilmiş</string>
-  <string name="quick_settings_expanded_desktop_off">Normal</string>
 </resources>

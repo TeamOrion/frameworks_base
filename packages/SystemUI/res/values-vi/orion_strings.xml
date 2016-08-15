@@ -22,26 +22,6 @@
   <!-- The text for the button in the notification window-shade that clears
          all of the currently visible notifications. [CHAR LIMIT=10]-->
   <string name="clear_recents">Đóng tất cả thông báo gần đây</string>
-  <string name="qs_tile_edit_header_instruction">Nhấn và giữ một mục để chỉnh sửa</string>
-  <string name="quick_settings_edit_label">Chỉnh sửa các Mục</string>
-  <string name="quick_settings_cannot_delete_edit_tile">Không thể xóa Chỉnh sửa mục</string>
-  <string name="qs_tiles_reset_confirmation">Reset quick settings tiles to default configuration?</string>
-  <!-- Screenshot QS tile -->
-  <string name="quick_settings_screenshot_label">Chụp ảnh màn hình</string>
-  <!-- USB tether QS tile -->
-  <string name="accessibility_quick_settings_usb_tether_off">USB tethering off</string>
-  <string name="accessibility_quick_settings_usb_tether_on">USB tethering on</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_off">USB tethering turned off</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_on">USB tethering turned on</string>
-  <string name="quick_settings_usb_tether_label">USB tethering</string>
-  <!-- LTE Tile -->
-  <string name="qs_lte_label">LTE</string>
-  <string name="lte_on">LTE ON
-    </string>
-  <string name="lte_off">LTE OFF</string>
-  <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Bỏ qua</string>
-  <string name="battery_saver_notification_action_text_short">Tắt</string>
   <!-- Kill app toast -->
   <string name="app_killed_message">App Killed</string>
   <!-- Screenshot -->
@@ -49,154 +29,56 @@
   <!-- Battery level for expanded quick settings [CHAR LIMIT=2] -->
   <string name="battery_level_template">
         <xliff:g id="level" example="45">%d</xliff:g>%%</string>
-  <!-- Strings for lockscreen shortcut hints -->
-  <string name="left_shortcut_hint">Swipe right for %1$s</string>
-  <string name="right_shortcut_hint">Swipe left for %1$s</string>
-  <string name="lockscreen_message">Tap an icon on the left or right to reassign a lock screen shortcut.</string>
-  <string name="lockscreen_default_target">Mặc định</string>
-  <string name="select_application">Select application</string>
-  <string name="lockscreen_choose_action_title">Choose action</string>
-  <string name="lockscreen_none_target">None</string>
-  <!-- Weather string format in expanded statusbar header -->
-  <string name="status_bar_expanded_header_weather_format">
-        <xliff:g id="temp">%1$s</xliff:g>
-        -
-        <xliff:g id="condition">%2$s</xliff:g>
-    </string>
-  <!-- Strings for lockscreen shortcut hints -->
-  <string name="left_shortcut_hint">Swipe right for %1$s</string>
-  <string name="right_shortcut_hint">Swipe left for %1$s</string>
-  <string name="lockscreen_message">Tap an icon on the left or right to reassign a lock screen shortcut.</string>
-  <!-- Weather string format in expanded statusbar header -->
-  <string name="status_bar_expanded_header_weather_format">
-        <xliff:g id="temp">%1$s</xliff:g>
-        -
-        <xliff:g id="condition">%2$s</xliff:g>
-    </string>
-  <string name="lockscreen_default_target">Mặc định</string>
-  <string name="select_application">Select application</string>
-  <string name="lockscreen_choose_action_title">Choose action</string>
-  <string name="lockscreen_none_target">None</string>
-  <string name="qs_tile_edit_header_instruction">Nhấn và giữ một mục để chỉnh sửa</string>
-  <string name="quick_settings_edit_label">Chỉnh sửa các Mục</string>
-  <string name="quick_settings_cannot_delete_edit_tile">Không thể xóa Chỉnh sửa mục</string>
-  <string name="qs_tiles_reset_confirmation">Reset quick settings tiles to default configuration?</string>
-  <string name="quick_settings_tile_reset_to_default">Reset to default layout</string>
-  <string name="quick_settings_title_header">Header</string>
-  <string name="quick_settings_title_tiles">Tiles</string>
-  <string name="quick_settings_remove">Remove tile</string>
-  <string name="quick_settings_screen_off">Screen off</string>
-  <string name="quick_settings_screen_off">Screen off</string>
-  <string name="quick_settings_reboot_label">Khởi động lại</string>
-  <string name="quick_settings_reboot_recovery_label">Recovery</string>
-  <string name="quick_settings_ambient_display_label">Ambient display</string>
-  <string name="quick_settings_screen_timeout_detail_title">Screen timeout</string>
-  <!-- Content description of the screen timeout tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_screen_timeout">Screen timeout:
-        <xliff:g id="timeout" example="30 seconds">%s</xliff:g>.</string>
-  <!-- Announcement made when the screen timeout tile changes (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_screen_timeout_changed">Screen timeout changed to
-        <xliff:g id="timeout" example="30 seconds">%s</xliff:g>.</string>
-  <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_data_connection_hspap">HSPA+</string>
-  <string name="quick_settings_title_advanced_location">Tri-state location</string>
+  <!-- LTE Tile -->
+  <string name="qs_lte_label">LTE</string>
+  <string name="lte_on">LTE ON</string>
+  <string name="lte_off">LTE OFF</string>
+  <!-- Brightness QS Tile -->
+  <string name="quick_settings_brightness">Brightness</string>
+  <!-- QS location sensors -->
   <!-- Content description of the location tile in quick settings when on, battery saving mode (not shown on the screen). [CHAR LIMIT=NONE] -->
   <string name="accessibility_quick_settings_location_battery_saving">Location reporting: battery saving mode.</string>
   <!-- Content description of the location tile in quick settings when on, sensors only mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_gps_only">Location reporting: sensors only mode.</string>
+  <string name="accessibility_quick_settings_location_sensors_only">Location reporting: sensors only mode.</string>
   <!-- Content description of the location tile in quick settings when on, high accuracy mode (not shown on the screen). [CHAR LIMIT=NONE] -->
   <string name="accessibility_quick_settings_location_high_accuracy">Location reporting: high accuracy mode.</string>
   <!-- QuickSettings: Location (On, low-power) [CHAR LIMIT=NONE] -->
   <string name="quick_settings_location_battery_saving_label">Battery saving</string>
   <!-- QuickSettings: Location (On, gps-only) [CHAR LIMIT=NONE] -->
-  <string name="quick_settings_location_gps_only_label">GPS only</string>
+  <string name="quick_settings_location_sensors_only_label">Device only</string>
   <!-- QuickSettings: Location (On, high-accuracy) [CHAR LIMIT=NONE] -->
   <string name="quick_settings_location_high_accuracy_label">High accuracy</string>
   <!-- QuickSettings: Location detail panel title [CHAR LIMIT=NONE] -->
   <string name="quick_settings_location_detail_title">Location</string>
   <!-- QuickSettings: Location detail panel menu title [CHAR LIMIT=NONE] -->
   <string name="quick_settings_location_detail_menu_title">Select mode:</string>
-  <!-- [CHAR LIMIT=30] Location detail panel, high accuracy location mode -->
-  <string name="quick_settings_location_detail_mode_high_accuracy_title">High accuracy</string>
   <!-- [CHAR LIMIT=30] Location detail panel, battery saving location mode -->
   <string name="quick_settings_location_detail_mode_battery_saving_title">Battery saving</string>
   <!-- [CHAR LIMIT=30] Location detail panel, device only location mode -->
   <string name="quick_settings_location_detail_mode_sensors_only_title">Device only</string>
-  <!-- [CHAR LIMIT=130] Location detail panel, description for high accuracy mode -->
-  <string name="quick_settings_location_detail_mode_high_accuracy_description">Use GPS, Wi\u2011Fi, and cellular networks to determine location
-    </string>
+  <!-- [CHAR LIMIT=30] Location detail panel, high accuracy location mode -->
+  <string name="quick_settings_location_detail_mode_high_accuracy_title">High accuracy</string>
   <!-- [CHAR LIMIT=130] Location detail panel, description for battery saving mode -->
   <string name="quick_settings_location_detail_mode_battery_saving_description">Use Wi\u2011Fi and cellular networks to determine location</string>
   <!-- [CHAR LIMIT=130] Location detail panel, description for sensors only mode -->
   <string name="quick_settings_location_detail_mode_sensors_only_description">Use GPS to determine your location</string>
-  <!-- Announcement made when the location tile changes to battery saving (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_changed_battery_saving">Location reporting changed to battery saving mode.</string>
-  <!-- Announcement made when the location tile changes to sensors only (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_changed_gps_only">Location reporting changed to sensors only mode.</string>
-  <!-- Announcement made when the location tile changes to high accuracy (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_location_changed_high_accuracy">Location reporting changed to high accuracy mode.</string>
-  <!-- Content description of the ambient display tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_off">Ambient display off.</string>
-  <!-- Content description of the ambient display tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_on">Ambient display on.</string>
-  <!-- Announcement made when ambient display changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display turned off.</string>
-  <!-- Announcement made when ambient display changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display turned on.</string>
-  <!-- Heads-up Tile -->
-  <string name="quick_settings_heads_up_label">Heads up</string>
-  <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_off">Heads up off.</string>
-  <!-- Content description of the heads up tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_on">Heads up on.</string>
-  <!-- Announcement made when heads up changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_changed_off">Heads up turned off.</string>
-  <!-- Announcement made when heads up changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_quick_settings_heads_up_changed_on">Heads up turned on.</string>
-  <!-- Expanded Desktop QS Tile -->
-  <string name="quick_settings_expanded_desktop">Expanded</string>
-  <string name="quick_settings_expanded_desktop_off">Normal</string>
-  <!-- Battery Saver QS Tile -->
-  <string name="quick_settings_battery_saver">Battery saver</string>
-  <string name="quick_settings_battery_saver_off">Battery saver off</string>
-  <!-- Music QS Tile -->
-  <string name="quick_settings_music_label">Music</string>
-  <string name="quick_settings_music_play">Play</string>
-  <string name="quick_settings_music_pause">Pause</string>
-  <!-- NFC QS tile -->
-  <string name="quick_settings_nfc_label">NFC</string>
-  <!-- Sync QS tile -->
+  <!-- [CHAR LIMIT=130] Location detail panel, description for high accuracy mode -->
+  <string name="quick_settings_location_detail_mode_high_accuracy_description">Use GPS, Wi\u2011Fi, and cellular networks to determine location </string>
+  <!-- Screen timeout tile -->
+  <string name="quick_settings_timeout_label">Timeout</string>
+  <string name="quick_settings_screen_timeout_detail_title">Screen timeout</string>
+  <!-- Sync qs tile -->
   <string name="quick_settings_sync_label">Sync</string>
-  <string name="accessibility_quick_settings_sync_off">Sync off</string>
-  <string name="accessibility_quick_settings_sync_on">Sync on</string>
-  <string name="accessibility_quick_settings_sync_changed_off">Sync turned off</string>
-  <string name="accessibility_quick_settings_sync_changed_on">Sync turned on</string>
-  <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_data_connection_hspap">HSPA+</string>
-  <!-- Color for the RAM bar text in the recent view -->
-  <!-- Task Manager -->
-  <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Bỏ qua</string>
-  <string name="battery_saver_notification_action_text_short">Tắt</string>
-  <!-- Screenshot Delete Toast -->
-  <string name="delete_screenshot_toast">Screenshot Deleted</string>
-  <!-- USB tether QS tile -->
-  <string name="accessibility_quick_settings_usb_tether_off">USB tethering off</string>
-  <string name="accessibility_quick_settings_usb_tether_on">USB tethering on</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_off">USB tethering turned off</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_on">USB tethering turned on</string>
-  <string name="quick_settings_usb_tether_label">USB tethering</string>
-  <!-- Battery Saver Dimss -->
-  <string name="battery_saver_dismiss_title">Bỏ qua</string>
-  <string name="battery_saver_notification_action_text_short">Tắt</string>
-  <!-- SystemUI Tuner Parts -->
-  <string name="systemui_tuner_statusbar_title">Statusbar Items</string>
-  <string name="systemui_tuner_qs_title">Quick Settings</string>
-  <!-- Screenshot Delete Toast -->
-  <string name="delete_screenshot_toast">Screenshot Deleted</string>
-  <!-- Battery level for expanded quick settings [CHAR LIMIT=2] -->
-  <string name="battery_level_template">
-        <xliff:g id="level" example="45">%d</xliff:g>%%</string>
+  <!-- Content description of the sync tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_quick_settings_sync_off">Sync off.</string>
+  <!-- Content description of the sync tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_quick_settings_sync_on">Sync on.</string>
+  <!-- Announcement made when sync changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_quick_settings_sync_changed_off">Sync turned off.</string>
+  <!-- Announcement made when sync changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_quick_settings_sync_changed_on">Sync turned on.</string>
+  <!-- Screen timeout tile -->
+  <string name="quick_settings_screen_off">Screen off</string>
   <!-- Weather string format in expanded statusbar header -->
   <string name="status_bar_expanded_header_weather_format">
         <xliff:g id="temp">%1$s</xliff:g>
@@ -211,59 +93,17 @@
   <string name="select_application">Select application</string>
   <string name="lockscreen_choose_action_title">Choose action</string>
   <string name="lockscreen_none_target">None</string>
+  <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+  <string name="accessibility_data_connection_hspap">HSPA+</string>
+  <!-- Color for the RAM bar text in the recent view -->
+  <!-- Task Manager -->
+  <!-- Screenshot Delete Toast -->
+  <string name="delete_screenshot_toast">Screenshot Deleted</string>
+  <!-- SystemUI Tuner Parts -->
+  <string name="systemui_tuner_statusbar_title">Statusbar Items</string>
+  <string name="systemui_tuner_qs_title">Quick Settings</string>
   <!-- Text to use when the number in a notification info is too large
          (greater than status_bar_notification_info_maxnum, defined in
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
-  <!-- The text for the button in the notification window-shade that clears
-         all of the currently visible notifications. [CHAR LIMIT=10]-->
-  <string name="clear_recents">Đóng tất cả thông báo gần đây</string>
-  <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-  <string name="accessibility_data_connection_HP">HSPA+</string>
-  <!-- USB tether QS tile -->
-  <string name="accessibility_quick_settings_usb_tether_off">USB tethering off</string>
-  <string name="accessibility_quick_settings_usb_tether_on">USB tethering on</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_off">USB tethering turned off</string>
-  <string name="accessibility_quick_settings_usb_tether_changed_on">USB tethering turned on</string>
-  <string name="quick_settings_usb_tether_label">USB tethering</string>
-  <!-- Ambient Display QS tile -->
-  <string name="accessibility_quick_settings_ambient_display_off">Ambient display off.</string>
-  <string name="accessibility_quick_settings_ambient_display_on">Ambient display on.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display turned off.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display turned on.</string>
-  <string name="accessibility_quick_settings_ambient_display_off">Ambient display off.</string>
-  <string name="accessibility_quick_settings_ambient_display_on">Ambient display on.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display turned off.</string>
-  <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display turned on.</string>
-  <string name="quick_settings_ambient_display_label">Ambient display</string>
-  <!-- Screenshot QS tile -->
-  <string name="quick_settings_screenshot_label">Chụp ảnh màn hình</string>
-  <!-- NFC QS tile -->
-  <string name="quick_settings_nfc_label">NFC</string>
-  <!-- Sync QS tile -->
-  <string name="quick_settings_sync_label">Sync</string>
-  <string name="accessibility_quick_settings_sync_off">Sync off</string>
-  <string name="accessibility_quick_settings_sync_on">Sync on</string>
-  <string name="accessibility_quick_settings_sync_changed_off">Sync turned off</string>
-  <string name="accessibility_quick_settings_sync_changed_on">Sync turned on</string>
-  <!-- Screen off QS tile -->
-  <string name="quick_settings_screen_off">Screen off</string>
-  <!-- Screen timeout QS tile -->
-  <string name="quick_settings_timeout_label">Timeout</string>
-  <string name="quick_settings_screen_timeout_detail_title">Screen timeout</string>
-  <!-- Brightness QS Tile -->
-  <string name="quick_settings_brightness">Brightness</string>
-  <!-- Music QS Tile -->
-  <string name="quick_settings_music_label">Music</string>
-  <string name="quick_settings_music_play">Play</string>
-  <string name="quick_settings_music_pause">Pause</string>
-  <!-- Reboot/Recovery QS Tile -->
-  <string name="quick_settings_reboot_label">Khởi động lại</string>
-  <string name="quick_settings_reboot_recovery_label">Recovery</string>
-  <!-- Battery Saver QS Tile -->
-  <string name="quick_settings_battery_saver">Battery saver</string>
-  <string name="quick_settings_battery_saver_off">Battery saver off</string>
-  <!-- Expanded Desktop QS Tile -->
-  <string name="quick_settings_expanded_desktop">Expanded</string>
-  <string name="quick_settings_expanded_desktop_off">Normal</string>
 </resources>
