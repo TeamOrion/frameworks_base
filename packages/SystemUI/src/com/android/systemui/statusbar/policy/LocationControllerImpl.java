@@ -55,6 +55,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
     private StatusBarManager mStatusBarManager;
 
     private boolean mAreActiveLocationRequests;
+
     private int mLastActiveMode;
 
     private ArrayList<LocationSettingsChangeCallback> mSettingsChangeCallbacks =
@@ -63,11 +64,6 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
 
     public LocationControllerImpl(Context context, Looper bgLooper) {
         mContext = context;
-
-        // Initialize last active mode. If state was off use the default high accuracy mode
-        mLastActiveMode = getLocationCurrentState();
-        if(mLastActiveMode == Settings.Secure.LOCATION_MODE_OFF)
-            mLastActiveMode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
 
         // Register to listen for changes in location settings.
         IntentFilter filter = new IntentFilter();
@@ -78,6 +74,11 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mStatusBarManager
                 = (StatusBarManager) context.getSystemService(Context.STATUS_BAR_SERVICE);
+
+        // Initialize last active mode. If state was off use the default high accuracy mode
+        mLastActiveMode = getLocationCurrentState();
+        if(mLastActiveMode == Settings.Secure.LOCATION_MODE_OFF)
+            mLastActiveMode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
 
         // Examine the current location state and initialize the status view.
         updateActiveLocationRequests();
@@ -116,9 +117,8 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
 
         // Store last active mode if we are switching off
         // so we can restore it at the next enable
-        if(!enabled) {
+        if(!enabled)
             mLastActiveMode = getLocationCurrentState();
-        }
 
         // When enabling location, a user consent dialog will pop up, and the
         // setting won't be fully enabled until the user accepts the agreement.
@@ -148,11 +148,10 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         }
         final ContentResolver cr = mContext.getContentResolver();
         // When enabling location, a user consent dialog will pop up, and the
-        // setting won't be fully enabled until the user accepts the agreement.
+        // setting won't be fully enabled until the user accepts the agreement.   
         // QuickSettings always runs as the owner, so specifically set the settings
         // for the current foreground user.
-        return Settings.Secure.putIntForUser(cr, Settings.Secure.LOCATION_MODE,
-                mode, currentUserId);
+        return Settings.Secure.putIntForUser(cr, Settings.Secure.LOCATION_MODE, mode, currentUserId);
     }
 
     /**
@@ -164,8 +163,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
             return Settings.Secure.LOCATION_MODE_OFF;
         }
         final ContentResolver cr = mContext.getContentResolver();
-        return Settings.Secure.getIntForUser(cr, Settings.Secure.LOCATION_MODE,
-                Settings.Secure.LOCATION_MODE_OFF, currentUserId);
+        return Settings.Secure.getIntForUser(cr, Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF, currentUserId);
     }
 
     /**
@@ -181,11 +179,10 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
     }
 
     /**
-     * Check if advanced location tile is enabled in settings
+     *
      */
     public boolean isAdvancedSettingsEnabled() {
-        return Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.QS_LOCATION_ADVANCED, 0, ActivityManager.getCurrentUser()) == 1;
+        return mContext.getResources().getBoolean(R.bool.config_qs_advancedlocation);
     }
 
     /**

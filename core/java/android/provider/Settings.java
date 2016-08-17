@@ -4191,12 +4191,6 @@ public final class Settings {
          */
         public static final String STATUS_BAR_CUSTOM_HEADER_PROVIDER = "status_bar_custom_header_provider";
 
-		/**
-         * Whether detail view for the location tile is enabled
-         * @hide
-         */
-        public static final String QS_LOCATION_ADVANCED = "qs_location_advanced";
-
         /**
          * Whether to use default custom header or poly hd
          * 0 = default
@@ -4255,12 +4249,6 @@ public final class Settings {
          */
         public static final String PROXIMITY_ON_WAKE = "proximity_on_wake";
 
-		/**
-         * List of QS tile names
-         * @hide
-         */
-        public static final String QS_TILES = "sysui_qs_tiles";
-
         /**
          * Volume rocker wake
          * @hide
@@ -4272,12 +4260,6 @@ public final class Settings {
          * @hide
          */
         public static final String SCREENSHOT_SOUND = "screenshot_sound";
-
-        /**
-         * Whether to show four tiles per row.
-         * @hide
-         */
-        public static final String QS_USE_FOUR_COLUMNS = "qs_use_four_columns";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -6870,17 +6852,18 @@ public final class Settings {
         public static final String LOCKSCREEN_TARGETS = "lockscreen_target_actions";
 
         /**
-         * Whether to show four tiles per row.
-         * @hide
-         */
-        public static final String QS_USE_FOUR_COLUMNS = "qs_use_four_columns";
-
-        /**
          * List of QS tile names
          * @hide
          */
         public static final String QS_TILES = "sysui_qs_tiles";
         
+        /**
+         * Use "main" tiles on the first row of the quick settings panel
+         * 0 = no, 1 = yes
+         * @hide
+         */
+        public static final String QS_USE_MAIN_TILES = "sysui_qs_main_tiles";
+
         /**
          * This are the settings to be backed up.
          *

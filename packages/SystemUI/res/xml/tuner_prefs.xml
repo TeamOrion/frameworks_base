@@ -57,4 +57,8 @@
             android:key="airplane"
             android:title="@string/status_bar_airplane" />
 
+        <Preference
+            android:key="demo_mode"
+            android:title="@string/demo_mode" />
+
 </PreferenceScreen>

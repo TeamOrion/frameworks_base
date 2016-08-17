@@ -156,14 +156,6 @@
     <!-- Kill app permission -->
     <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
 
-	<!-- Reboot/Recovery tile -->
-    <uses-permission android:name="android.permission.REBOOT" />
-    <uses-permission android:name="android.permission.RECOVERY" />
-
-    <!-- Reboot -->
-    <uses-permission android:name="android.permission.REBOOT" />
-    <uses-permission android:name="android.permission.RECOVERY" />
-
     <application
         android:name=".SystemUIApplication"
         android:persistent="true"
@@ -223,12 +215,12 @@
                   android:theme="@android:style/Theme.Material.Settings"
                   android:label="@string/systemui_tuner_qs_title"
                   android:process=":tuner"
+                  android:parentActivityName="com.android.settings.slim.InterfaceSettings"
                   android:exported="true">
         </activity>
 
         <activity android:name=".tuner.TunerActivity"
                   android:enabled="true"
-                  android:icon="@drawable/tuner"
                   android:theme="@android:style/Theme.Material.Settings"
                   android:label="@string/systemui_tuner_statusbar_title"
                   android:process=":tuner"
@@ -448,14 +440,6 @@
             android:exported="true"
             android:singleUser="true"
             android:permission="android.permission.BIND_DREAM_SERVICE" />
-
-        <receiver
-            android:name=".tuner.TunerService$ClearReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.android.systemui.action.CLEAR_TUNER" />
-            </intent-filter>
-        </receiver>
         
          <activity
             android:name=".cm.LockscreenShortcutsActivity"

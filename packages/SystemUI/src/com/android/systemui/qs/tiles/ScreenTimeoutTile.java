@@ -39,7 +39,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
-    private static final Intent SETTINGS_INTENT = new Intent("android.settings.DISPLAY_SETTINGS");
+
+    private static final Intent SETTINGS_INTENT = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
     private static final String TIMEOUT_ENTRIES_NAME = "screen_timeout_entries";
     private static final String TIMEOUT_VALUES_NAME = "screen_timeout_values";
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
@@ -58,6 +59,9 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
             new AnimationIcon(R.drawable.ic_qs_screen_timeout_long_reverse_avd);
 
     private String[] mEntries, mValues;
+    private boolean mShowingDetail;
+    ArrayList<Integer> mAnimationList
+            = new ArrayList<Integer>();
 
     public ScreenTimeoutTile(Host host) {
         super(host);
@@ -91,8 +95,13 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
     }
 
     @Override
+    public int getMetricsCategory() {
+        return MetricsLogger.DISPLAY;
+    }
+
+    @Override
     public DetailAdapter getDetailAdapter() {
-        return new ScreenTimeoutDetailAdapter();
+        return new TimeoutDetailAdapter();
     }
 
     private ContentObserver mObserver = new ContentObserver(mHandler) {
@@ -121,8 +130,15 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
     @Override
     protected void handleClick() {
         if (mEntries.length > 0) {
+            mShowingDetail = true;
+            mAnimationList.clear();
             showDetail(true);
         }
+    }
+
+    @Override
+    protected void handleSecondaryClick() {
+        mHost.startActivityDismissingKeyguard(SETTINGS_INTENT);
     }
 
     @Override
@@ -180,14 +196,12 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
         }
 
     }
-
-    @Override
-    public int getMetricsCategory() {
-        return MetricsLogger.DISPLAY;
-    }
-
     @Override
     protected void handleUpdateState(final TimeoutState state, Object arg) {
+        if (mAnimationList.isEmpty() && mShowingDetail && arg == null) {
+            return;
+        }
+
         int newTimeout = getScreenTimeout();
 
         AnimationIcon d = null;
@@ -259,9 +273,13 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
         }
 
     }
-    private class ScreenTimeoutDetailAdapter implements DetailAdapter,
-            AdapterView.OnItemClickListener {
+    private class TimeoutDetailAdapter implements DetailAdapter, AdapterView.OnItemClickListener {
         private QSDetailItemsList mItems;
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsLogger.DISPLAY;
+        }
 
         @Override
         public int getTitle() {
@@ -305,6 +323,7 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
                     mUiHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            mShowingDetail = false;
                             refreshState(true);
                         }
                     }, 100);
@@ -320,10 +339,6 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.SCREEN_OFF_TIMEOUT, selectedTimeout);
         }
-
-        @Override
-        public int getMetricsCategory() {
-        return MetricsLogger.DISPLAY;
-        }
     }
 }
+

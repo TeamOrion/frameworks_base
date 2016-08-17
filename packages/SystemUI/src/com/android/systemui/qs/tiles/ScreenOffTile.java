@@ -62,19 +62,19 @@ public class ScreenOffTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public void handleClick() {
-		mHost.collapsePanels();
+        mHost.collapsePanels();
         mPm.goToSleep(SystemClock.uptimeMillis());
     }
-    
+
     @Override
     protected void handleSecondaryClick() {
         mHost.collapsePanels();
         triggerVirtualKeypress(KeyEvent.KEYCODE_POWER, true);
-     }
+    }
 
     @Override
     public void handleLongClick() {
-		mHost.collapsePanels();
+        mHost.collapsePanels();
         triggerVirtualKeypress(KeyEvent.KEYCODE_POWER, true);
     }
 

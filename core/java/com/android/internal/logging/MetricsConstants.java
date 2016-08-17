@@ -183,7 +183,6 @@ public interface MetricsConstants {
     public static final int QS_SWITCH_USER = 156;
     public static final int QS_CAST_SELECT = 157;
     public static final int QS_CAST_DISCONNECT = 158;
-    public static final int QS_HEADSUP = 243;
     public static final int ACTION_BLUETOOTH_TOGGLE = 159;
     public static final int ACTION_BLUETOOTH_SCAN = 160;
     public static final int ACTION_BLUETOOTH_RENAME = 161;

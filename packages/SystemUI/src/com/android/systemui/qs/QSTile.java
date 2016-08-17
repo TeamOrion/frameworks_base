@@ -85,10 +85,6 @@ public abstract class QSTile<TState extends State> implements Listenable {
         mHandler = new H(host.getLooper());
     }
 
-    public boolean hasDualTargetsDetails() {
-        return false;
-    }
-
     public Host getHost() {
         return mHost;
     }
@@ -340,14 +336,9 @@ public abstract class QSTile<TState extends State> implements Listenable {
         CastController getCastController();
         FlashlightController getFlashlightController();
         KeyguardMonitor getKeyguardMonitor();
-        boolean isEditing();
-        void setEditing(boolean editing);
-        void resetTiles();
 
         public interface Callback {
             void onTilesChanged();
-            void setEditing(boolean editing);
-            boolean isEditing();
         }
     }
 
