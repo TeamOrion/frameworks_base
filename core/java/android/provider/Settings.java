@@ -3545,7 +3545,6 @@ public final class Settings {
 
         /**
          * Forces formal text input.  1 to replace emoticon key with enter key.
->>>>>>> f267256... Lockscreen weather options [1/2]
          * @hide
          */
         public static final String EGG_MODE = "egg_mode";
@@ -3647,6 +3646,13 @@ public final class Settings {
          * @hide
          */
         public static final String NAVIGATION_BAR_IME_ARROWS = "navigation_bar_ime_arrows";
+
+         /**
+         * Whether the capacitive hardware keys lights are disabled
+         * @hide
+         */
+        public static final String HARDWARE_KEY_LIGHTS_ENABLED = "hardware_key_lights_enabled";
+
 
         /**
          * Whether wifi settings will connect to access point automatically
@@ -4038,18 +4044,18 @@ public final class Settings {
          */
         public static final String KEY_CAMERA_DOUBLE_TAP_ACTION =
                 "key_camera_double_tap_action";
-
+                
+         /**
+         * Whether custom hardware key rebinding is enabled
+         * @hide
+         */
+        public static final String HARDWARE_KEY_REBINDING = "hardware_key_rebinding";
+         	       
         /**
          * Whether hardware keys are enabled
          * @hide
          */
         public static final String DISABLE_HARDWARE_KEYS = "disable_hardware_keys";
-               
-        /**
-         * Whether custom hardware key rebinding is enabled
-         * @hide
-         */
-        public static final String HARDWARE_KEY_REBINDING = "hardware_key_rebinding";
 	
 		/**
          * Action to perform when the back key is pressed (default: ACTION_BACK)

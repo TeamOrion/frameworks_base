@@ -989,7 +989,8 @@
          This needs to match the constants in
          policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
     -->
-    <integer name="config_longPressOnHomeBehavior">2</integer>
+    
+    <integer name="config_longPressOnHomeBehavior">5</integer>
 
     <!-- Control the behavior when the user double-taps the home button.
             0 - Nothing
@@ -1001,7 +1002,7 @@
          This needs to match the constants in
          policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
     -->
-    <integer name="config_doubleTapOnHomeBehavior">0</integer>
+    <integer name="config_doubleTapOnHomeBehavior">2</integer>
 
     <!-- Control the behavior when the user long presses the menu button.
             0 - Nothing
@@ -1015,18 +1016,6 @@
     -->
     <integer name="config_longPressOnMenuBehavior">3</integer>
 
-    <!-- Control the behavior when the user long presses the app switch button.
-            0 - Nothing
-            1 - Menu key
-            2 - Recent apps view in SystemUI
-            3 - Launch assist intent
-            4 - Voice Search
-            5 - In-app Search
-         This needs to match the constants in
-         services/core/java/com/android/server/policy/policy/impl/PhoneWindowManager.java
-    -->
-    <integer name="config_longPressOnAppSwitchBehavior">0</integer>
-
     <!-- Hardware keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
          of the following keys present:
@@ -1039,7 +1028,7 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <integer name="config_deviceHardwareKeys">95</integer>
+    <integer name="config_deviceHardwareKeys">0</integer>
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
@@ -2547,7 +2536,7 @@
     <bool name="config_invert_colors_on_doze">true</bool>
     
     
-      <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
+    <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
          of the following keys present:
              1 - Home
@@ -2561,8 +2550,19 @@
          config to 7. -->
     <integer name="config_deviceHardwareWakeKeys">0</integer>
     
+    <!-- Control path for disabling the capacitive hardware keys.
+         For example: "/proc/touchpanel/keypad_enable"  -->
+    <string name="config_deviceHardwareKeysFilePath" translatable="false">@null</string>
+
+    <!-- Max Brightness path for the capacitive hardware key lights.
+           For example: "/sys/class/leds/button-backlight/max_brightness"  -->
+    <string name="config_deviceHardwareKeyLightsFilePath" translatable="false">@null</string>
+    
     <!-- Setting to false will disable CM's IME switcher implementation for tablets -->
     <bool name="config_show_cmIMESwitcher">true</bool>
+    
+    <!-- Default, comma-delimited, quick settings tiles. See QSConstants.java for a list of all available tiles -->
+    <string name="config_defaultQuickSettingsTiles">wifi,bt,cell,airplane,rotation,flashlight,location,edit,hotspot,dnd</string>
 
     <!-- Older sensors are not setting event.timestamp correctly.  Setting to
           true will use SystemClock.elapsedRealtimeNanos() to set timestamp-->
@@ -2572,6 +2572,5 @@
     <bool name="config_showNotificationSlider">false</bool>
     
     <!-- Bool whether to show MotoDoze Gestures in Universe -->
-    <bool name="config_showMotoDozeGestures">false</bool>
-    
+    <bool name="config_showMotoDozeGestures">false</bool>    
 </resources>
