@@ -2573,4 +2573,10 @@
     
     <!-- Bool whether to show MotoDoze Gestures in Universe -->
     <bool name="config_showMotoDozeGestures">false</bool>    
+    
+    <!-- Bool whether to show OnePlusDoze Gestures in Universe -->
+    <bool name="config_showOnePlusDozeGestures">false</bool>    
+    
+    <!-- Bool whether to show OnePlus ScreenOff Gestures in Universe -->
+    <bool name="config_showScreenoffGesture">false</bool>    
 </resources>
