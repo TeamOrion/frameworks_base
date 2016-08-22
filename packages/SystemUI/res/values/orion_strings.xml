@@ -61,7 +61,7 @@
     <string name="accessibility_quick_settings_ambient_display_on">Ambient Display on</string>
     <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient Display turned off</string>
     <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient Display turned on</string>
-    <string name="quick_settings_ambient_display_label">Ambient Display</string
+    <string name="quick_settings_ambient_display_label">Ambient Display</string>
 
     <!-- Screenshot QS tile -->
     <string name="quick_settings_screenshot_label">Screenshot</string>
@@ -91,7 +91,7 @@
     <string name="accessibility_quick_settings_network_adb_off">ADB over network off.</string>
     <string name="accessibility_quick_settings_network_adb_on">ADB over network on.</string>
     <string name="accessibility_quick_settings_network_adb_changed_off">ADB over network turned off.</string>
-    <string name="accessibility_quick_settings_network_adb_changed_on">ADB over network turned on.</string
+    <string name="accessibility_quick_settings_network_adb_changed_on">ADB over network turned on.</string>
 
     <!-- QS location sensors -->
     <!-- Content description of the location tile in quick settings when on, battery saving mode (not shown on the screen). [CHAR LIMIT=NONE] -->
