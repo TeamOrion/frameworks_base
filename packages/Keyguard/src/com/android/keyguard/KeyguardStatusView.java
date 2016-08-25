@@ -206,6 +206,7 @@ public class KeyguardStatusView extends GridLayout implements
         Patterns.update(mContext, nextAlarm != null);
 
         refreshTime();
+        hideLockscreenItems();
         refreshAlarmStatus(nextAlarm);
         updateWeatherSettings(false);
     }
@@ -248,6 +249,7 @@ public class KeyguardStatusView extends GridLayout implements
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mInfoCallback);
+        hideLockscreenItems();
         updateWeatherSettings(false);
         mWeatherController.addCallback(this);
     }
