@@ -29,7 +29,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
-import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -81,9 +80,7 @@ public class QSPanel extends ViewGroup {
     private boolean mListening;
     private boolean mClosingDetail;
 
-    private boolean mBrightnessSliderEnabled;
     private boolean mUseFourColumns;
-    private boolean mVibrationEnabled;
 
     private Record mDetailRecord;
     private Callback mCallback;
@@ -92,8 +89,6 @@ public class QSPanel extends ViewGroup {
 
     private QSFooter mFooter;
     private boolean mGridContentVisible = true;
-
-    protected Vibrator mVibrator;
 
     private SettingsObserver mSettingsObserver;
 
@@ -121,7 +116,6 @@ public class QSPanel extends ViewGroup {
         addView(mBrightnessView);
         addView(mFooter.getView());
         mClipper = new QSDetailClipper(mDetail);
-        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         mSettingsObserver = new SettingsObserver(mHandler);
         updateResources();
 
@@ -137,22 +131,6 @@ public class QSPanel extends ViewGroup {
                 closeDetail();
             }
         });
-    }
-
-    /**
-     * Enable/disable brightness slider.
-     */
-    private boolean showBrightnessSlider() {
-        ToggleSlider brightnessSlider = (ToggleSlider) findViewById(R.id.brightness_slider);
-        if (mBrightnessSliderEnabled) {
-            mBrightnessView.setVisibility(VISIBLE);
-            brightnessSlider.setVisibility(VISIBLE);
-        } else {
-            mBrightnessView.setVisibility(GONE);
-            brightnessSlider.setVisibility(GONE);
-        }
-        updateResources();
-        return mBrightnessSliderEnabled;
     }
 
     /**
@@ -295,7 +273,7 @@ public class QSPanel extends ViewGroup {
         } else {
             mSettingsObserver.unobserve();
         }
-        if (listening && showBrightnessSlider()) {
+        if (listening) {
             mBrightnessController.registerCallbacks();
         } else {
             mBrightnessController.unregisterCallbacks();
@@ -526,7 +504,7 @@ public class QSPanel extends ViewGroup {
                 tileRecord.tileView.setVisibility(newVis);
             }
         }
-        mBrightnessView.setVisibility(showBrightnessSlider() ? newVis : GONE);
+        mBrightnessView.setVisibility(newVis);
         if (mGridContentVisible != visible) {
             MetricsLogger.visibility(mContext, MetricsLogger.QS_PANEL, newVis);
         }
