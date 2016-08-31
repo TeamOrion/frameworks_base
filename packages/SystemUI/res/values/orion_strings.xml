@@ -65,6 +65,9 @@
 
     <!-- Screenshot QS tile -->
     <string name="quick_settings_screenshot_label">Screenshot</string>
+    
+    <!-- Brightness QS tile -->
+    <string name="quick_settings_brightness">Brightness</string>
 
     <!-- NFC QS tile -->
     <string name="quick_settings_nfc_label">NFC</string>
