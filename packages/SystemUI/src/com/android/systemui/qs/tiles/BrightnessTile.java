@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
  * Copyright (C) 2013-2015 The CyanogenMod Project
- * Copyright (C) 2015 The Euphoria-OS Project
+ * Copyright 2014-2015 The Euphoria-OS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,21 +76,15 @@ public class BrightnessTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public void handleClick() {
-        mHost.collapsePanels();
-        mContext.startActivityAsUser(new Intent(
-            Intent.ACTION_SHOW_BRIGHTNESS_DIALOG), UserHandle.CURRENT_OR_SELF);
-    }
-
-    @Override
-    protected void handleSecondaryClick() {
         toggleState();
         refreshState();
     }
 
     @Override
     public void handleLongClick() {
-        toggleState();
-        refreshState();
+        mContext.startActivityAsUser(new Intent(
+            Intent.ACTION_SHOW_BRIGHTNESS_DIALOG), UserHandle.CURRENT_OR_SELF);
+        mHost.collapsePanels();
     }
 
     @Override
@@ -100,7 +94,7 @@ public class BrightnessTile extends QSTile<QSTile.BooleanState> {
         state.visible = true;
         state.label = mContext.getString(R.string.quick_settings_brightness);
         state.icon = autoBrightness
-                ? ResourceIcon.get(R.drawable.ic_qs_brightness_auto_on)
+                ? ResourceIcon.get(R.drawable.ic_qs_brightness_auto_on_alpha)
                 : ResourceIcon.get(R.drawable.ic_qs_brightness_auto_off_alpha);
     }
 

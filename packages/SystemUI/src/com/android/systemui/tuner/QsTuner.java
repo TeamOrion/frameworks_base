@@ -201,6 +201,7 @@ public class QsTuner extends Fragment implements Callback {
         else if (spec.equals("hotspot")) return R.string.quick_settings_hotspot_label;
         else if (spec.equals("screenoff")) return R.string.quick_settings_screen_off;
         else if (spec.equals("timeout")) return R.string.quick_settings_timeout_label;
+        else if (spec.equals("brightness")) return R.string.quick_settings_brightness;
         else if (spec.equals("sound")) return R.string.quick_settings_sound_label;
         else if (spec.equals("sync")) return R.string.quick_settings_sync_label;
         else if (spec.equals("usb_tether")) return R.string.quick_settings_usb_tether_label;
@@ -457,6 +458,7 @@ public class QsTuner extends Fragment implements Callback {
             else if (mSpec.equals("hotspot")) return R.drawable.ic_hotspot_enable;
             else if (mSpec.equals("screenoff")) return R.drawable.ic_qs_power;
             else if (mSpec.equals("timeout")) return R.drawable.ic_qs_screen_timeout_vector;
+            else if (mSpec.equals("brightness")) return R.drawable.ic_qs_brightness_auto_on_alpha;
             else if (mSpec.equals("sound")) return R.drawable.ic_qs_ringer_audible;
             else if (mSpec.equals("sync")) return R.drawable.ic_qs_sync_on;
             else if (mSpec.equals("usb_tether")) return R.drawable.ic_qs_usb_tether_off;
