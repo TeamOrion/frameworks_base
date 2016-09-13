@@ -4278,12 +4278,6 @@ public final class Settings {
                 "proximity_auto_speaker_incall_only";
 
         /**
-         * Check the proximity sensor during wakeup
-         * @hide
-         */
-        public static final String PROXIMITY_ON_WAKE = "proximity_on_wake";
-
-        /**
          * Volume rocker wake
          * @hide
          */
