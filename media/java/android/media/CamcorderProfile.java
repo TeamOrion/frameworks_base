@@ -277,13 +277,13 @@ public class CamcorderProfile
      * Quality level corresponding to 1440p (2560 x 1440) resolution.
      * @hide
      */
-    public static final int QUALITY_1440P = 10011;
+    public static final int QUALITY_1440P = 9;
 
     /**
      * Time lapse quality level corresponding to the 1440p (2560 x 1440) resolution.
      * @hide
      */
-    public static final int QUALITY_TIME_LAPSE_1440P = 10012;
+    public static final int QUALITY_TIME_LAPSE_1440P = 1009;
 
     // Start and end of vendor quality list
     private static final int QUALITY_VENDOR_LIST_START = QUALITY_VGA;
