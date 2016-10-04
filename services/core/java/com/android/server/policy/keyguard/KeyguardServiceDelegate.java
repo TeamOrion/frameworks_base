@@ -58,6 +58,7 @@ public class KeyguardServiceDelegate {
             showingAndNotOccluded = true;
             secure = true;
             deviceHasKeyguard = true;
+            keyguardDone = false;
         }
         boolean showing;
         boolean showingAndNotOccluded;
@@ -73,6 +74,7 @@ public class KeyguardServiceDelegate {
         public boolean bootCompleted;
         public int screenState;
         public int interactiveState;
+        public boolean keyguardDone;
     };
 
     public interface DrawnListener {
@@ -209,6 +211,8 @@ public class KeyguardServiceDelegate {
         if (mKeyguardService != null) {
             mKeyguardService.keyguardDone(authenticated, wakeup);
         }
+        mKeyguardState.keyguardDone = true;
+        hideScrim();
     }
 
     public void setOccluded(boolean isOccluded) {
@@ -262,16 +266,18 @@ public class KeyguardServiceDelegate {
     }
 
     public void onScreenTurningOn(final DrawnListener drawnListener) {
-        if (mKeyguardService != null) {
-            if (DEBUG) Log.v(TAG, "onScreenTurnedOn(showListener = " + drawnListener + ")");
-            mKeyguardService.onScreenTurningOn(new KeyguardShowDelegate(drawnListener));
-        } else {
-            // try again when we establish a connection
-            Slog.w(TAG, "onScreenTurningOn(): no keyguard service!");
-            // This shouldn't happen, but if it does, show the scrim immediately and
-            // invoke the listener's callback after the service actually connects.
-            mDrawnListenerWhenConnect = drawnListener;
-            showScrim();
+        if (!mKeyguardState.keyguardDone) {
+            if (mKeyguardService != null) {
+                if (DEBUG) Log.v(TAG, "onScreenTurnedOn(showListener = " + drawnListener + ")");
+                mKeyguardService.onScreenTurningOn(new KeyguardShowDelegate(drawnListener));
+            } else {
+                // try again when we establish a connection
+                Slog.w(TAG, "onScreenTurningOn(): no keyguard service!");
+                // This shouldn't happen, but if it does, show the scrim immediately and
+                // invoke the listener's callback after the service actually connects.
+                mDrawnListenerWhenConnect = drawnListener;
+                showScrim();
+            }
         }
         mKeyguardState.screenState = SCREEN_STATE_TURNING_ON;
     }
@@ -279,7 +285,9 @@ public class KeyguardServiceDelegate {
     public void onScreenTurnedOn() {
         if (mKeyguardService != null) {
             if (DEBUG) Log.v(TAG, "onScreenTurnedOn()");
-            mKeyguardService.onScreenTurnedOn();
+            if (!mKeyguardState.keyguardDone) {
+                mKeyguardService.onScreenTurnedOn();
+            }
         }
         mKeyguardState.screenState = SCREEN_STATE_ON;
     }
@@ -303,7 +311,7 @@ public class KeyguardServiceDelegate {
         if (mKeyguardService != null) {
             mKeyguardService.setKeyguardEnabled(enabled);
         }
-        mKeyguardState.enabled = enabled;
+        mKeyguardState.keyguardDone = !enabled;
     }
 
     public void onSystemReady() {
@@ -418,4 +426,8 @@ public class KeyguardServiceDelegate {
             mKeyguardService.dump(prefix, pw);
         }
     }
+    public void showKeyguard() {
+        mKeyguardState.keyguardDone = false;
+         mKeyguardService.showKeyguard();
+     }
 }

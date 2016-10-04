@@ -332,6 +332,16 @@ public class StatusBarKeyguardViewManager {
             updateStates();
         }
     }
+    
+    public void hideNoAnimation() {
+        mShowing = false;
+        mPhoneStatusBar.hideKeyguard();
+        mStatusBarWindowManager.setKeyguardShowing(false);
+        mBouncer.hide(true /* destroyView */);
+        mViewMediatorCallback.keyguardGone();
+        mFingerprintUnlockController.finishKeyguardFadingAway();
+        updateStates();
+    }
 
     private void animateScrimControllerKeyguardFadingOut(long delay, long duration,
             boolean skipFirstFrame) {

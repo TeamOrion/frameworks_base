@@ -2284,8 +2284,9 @@ Settings.System.BATTERY_SAVER_MODE_COLOR),
                 if (DEBUG_MEDIA) {
                     Log.v(TAG, "DEBUG_MEDIA: Fading out album artwork");
                 }
-                if (mFingerprintUnlockController.getMode()
-                        == FingerprintUnlockController.MODE_WAKE_AND_UNLOCK_PULSING) {
+                int fpMode = mFingerprintUnlockController.getMode();
+                if (fpMode == FingerprintUnlockController.MODE_WAKE_AND_UNLOCK_PULSING ||
+                        fpMode == FingerprintUnlockController.MODE_WAKE_AND_UNLOCK) {
 
                     // We are unlocking directly - no animation!
                     mBackdrop.setVisibility(View.GONE);

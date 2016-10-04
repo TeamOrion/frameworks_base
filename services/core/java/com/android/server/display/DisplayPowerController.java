@@ -808,7 +808,7 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
             mWindowManagerPolicy.screenTurnedOff();
         } else if (!isOff && mReportedScreenStateToPolicy == REPORTED_TO_POLICY_SCREEN_OFF) {
             mReportedScreenStateToPolicy = REPORTED_TO_POLICY_SCREEN_TURNING_ON;
-            if (mPowerState.getColorFadeLevel() == 0.0f) {
+            if (USE_COLOR_FADE_ON_ANIMATION && mPowerState.getColorFadeLevel() == 0.0f) {
                 blockScreenOn();
             } else {
                 unblockScreenOn();
