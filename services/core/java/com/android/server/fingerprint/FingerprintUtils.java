@@ -32,7 +32,7 @@ import java.util.List;
 public class FingerprintUtils {
 
     private static final long[] FP_ERROR_VIBRATE_PATTERN = new long[] {0, 30, 100, 30};
-    private static final long[] FP_SUCCESS_VIBRATE_PATTERN = new long[] {0, 30};
+    private static final long[] FP_SUCCESS_VIBRATE_PATTERN = 30;
 
     private static final Object sInstanceLock = new Object();
     private static FingerprintUtils sInstance;
@@ -82,7 +82,7 @@ public class FingerprintUtils {
     public static void vibrateFingerprintSuccess(Context context) {
         Vibrator vibrator = context.getSystemService(Vibrator.class);
         if (vibrator != null) {
-            vibrator.vibrate(FP_SUCCESS_VIBRATE_PATTERN, -1);
+            vibrator.vibrate(FP_SUCCESS_VIBRATE_PATTERN);
         }
     }
 
