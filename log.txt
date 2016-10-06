@@ -1,0 +1,537 @@
+commit 3d4688c7c9e80ef56e29c33d98256e5e12ef9419
+Author: bgos10 <bishalgoswami@gmail.com>
+Date:   Thu Oct 6 18:58:36 2016 +0530
+
+    Revert "SystemUI: Support display for radio tech"
+    
+    This reverts commit 3259cb75bf2ef94255cc9cd565846c470541bfdc.
+
+diff --git a/core/java/android/util/NativeTextHelper.java b/core/java/android/util/NativeTextHelper.java
+deleted file mode 100644
+index eb380e9..0000000
+--- a/core/java/android/util/NativeTextHelper.java
++++ /dev/null
+@@ -1,92 +0,0 @@
+-/*
+- * Copyright (C) 2015, The Linux Foundation. All rights reserved.
+- *
+- * Redistribution and use in source and binary forms, with or without
+- * modification, are permitted provided that the following conditions are
+- * met:
+- *     * Redistributions of source code must retain the above copyright
+- *       notice, this list of conditions and the following disclaimer.
+- *     * Redistributions in binary form must reproduce the above
+- *       copyright notice, this list of conditions and the following
+- *       disclaimer in the documentation and/or other materials provided
+- *       with the distribution.
+- *     * Neither the name of The Linux Foundation nor the names of its
+- *       contributors may be used to endorse or promote products derived
+- *       from this software without specific prior written permission.
+- *
+- * THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+- * ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+- * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+- * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+- */
+-package android.util;
+-
+-import android.content.Context;
+-
+-/**
+- *@hide
+- */
+-public class NativeTextHelper {
+-
+-    /**
+-     * parse the string to current language.
+-     *
+-     * @param context base context of the application
+-     * @param originalString original string
+-     * @param defPackage the target package where the local language strings
+-     *            defined
+-     * @param originNamesId the id of the original string array.
+-     * @param localNamesId the id of the local string keys.
+-     * @return local language string
+-     */
+-    private static final String getLocalString(Context context, String originalString,
+-            String defPackage, int originNamesId, int localNamesId) {
+-        String[] origNames = context.getResources().getStringArray(originNamesId);
+-        String[] localNames = context.getResources().getStringArray(localNamesId);
+-        for (int i = 0; i < origNames.length; i++) {
+-            if (origNames[i].equalsIgnoreCase(originalString)) {
+-                return context.getString(context.getResources().getIdentifier(localNames[i],
+-                        "string", defPackage));
+-            }
+-        }
+-        return originalString;
+-    }
+-
+-    /**
+-     * parse the string to current language string in public resources.
+-     *
+-     * @param context base context of the application
+-     * @param originalString original string
+-     * @param originNamesId the id of the original string array.
+-     * @param localNamesId the id of the local string keys.
+-     * @return local language string
+-     */
+-    public static final String getLocalString(Context context, String originalString,
+-            int originNamesId, int localNamesId) {
+-        return getLocalString(context, originalString, "android", originNamesId, localNamesId);
+-    }
+-
+-    /**
+-     * parse the string to current language string in current resources.
+-     *
+-     * @param context base context of the application
+-     * @param originalString original string
+-     * @param originNamesId the id of the original string array.
+-     * @param localNamesId the id of the local string keys.
+-     * @return local language string
+-     */
+-    public static final String getInternalLocalString(Context context, String originalString,
+-            int originNamesId,
+-            int localNamesId) {
+-        return getLocalString(context, originalString, context.getPackageName(), originNamesId,
+-                localNamesId);
+-    }
+-
+-}
+diff --git a/core/res/res/values-zh-rHK/strings.xml b/core/res/res/values-zh-rHK/strings.xml
+index bcfe807..8b46ae9 100644
+--- a/core/res/res/values-zh-rHK/strings.xml
++++ b/core/res/res/values-zh-rHK/strings.xml
+@@ -1517,8 +1517,4 @@
+       <item quantity="other">已選取 <xliff:g id="COUNT_1">%1$d</xliff:g> 個項目</item>
+       <item quantity="one">已選取 <xliff:g id="COUNT_0">%1$d</xliff:g> 個項目</item>
+     </plurals>
+-    <!-- Carrier Name -->
+-    <string name="China_Mobile">中國移動</string>
+-    <string name="China_Unicom">中國聯通</string>
+-    <string name="China_Telecom">中國電信</string>
+ </resources>
+diff --git a/core/res/res/values/config.xml b/core/res/res/values/config.xml
+index b883629..0e191c6 100644
+--- a/core/res/res/values/config.xml
++++ b/core/res/res/values/config.xml
+@@ -2472,49 +2472,6 @@
+          automatically try to pair with it when the device exits tablet mode. -->
+     <string translatable="false" name="config_packagedKeyboardName"></string>
+ 
+-    <string-array name="origin_carrier_names">
+-        <item>CHINA\u0020\u0020MOBILE</item>
+-        <item>CMCC</item>
+-        <item>CHN-UNICOM</item>
+-        <item>China Mobile</item>
+-        <item>China Unicom</item>
+-        <item>China Telecom</item>
+-        <item>中国移动</item>
+-        <item>中国联通</item>
+-        <item>中国电信</item>
+-        <item>中國移動</item>
+-        <item>中國聯通</item>
+-        <item>中國電信</item>
+-        <item>Searching for Service</item>
+-    </string-array>
+-
+-    <string-array name="locale_carrier_names">
+-        <item>China_Mobile</item>
+-        <item>China_Mobile</item>
+-        <item>China_Unicom</item>
+-        <item>China_Mobile</item>
+-        <item>China_Unicom</item>
+-        <item>China_Telecom</item>
+-       <item>China_Mobile</item>
+-        <item>China_Unicom</item>
+-        <item>China_Telecom</item>
+-        <item>China_Mobile</item>
+-        <item>China_Unicom</item>
+-        <item>China_Telecom</item>
+-        <item>roamingTextSearching</item>
+-    </string-array>
+-
+-    <!-- monitor locale change -->
+-    <bool name="config_monitor_locale_change">false</bool>
+-
+-    <!-- display for radio tech -->
+-    <bool name="config_display_rat">false</bool>
+-
+-    <!-- config 2G/3G/4G RAT strings for carriers -->
+-    <string name="config_rat_2g" translatable="false">2G</string>
+-    <string name="config_rat_3g" translatable="false">3G</string>
+-    <string name="config_rat_4g" translatable="false">4G</string>
+-
+      <!-- Keypress Optimization -->
+     <bool name="config_enableKeypressOptimization">false</bool>
+     <integer-array name="keypress_param_value"/>
+diff --git a/core/res/res/values/strings.xml b/core/res/res/values/strings.xml
+index 0b415c3..e2fd8dd 100644
+--- a/core/res/res/values/strings.xml
++++ b/core/res/res/values/strings.xml
+@@ -4115,11 +4115,6 @@
+         <item quantity="other"><xliff:g id="count" example="3">%1$d</xliff:g> selected</item>
+     </plurals>
+ 
+-    <!-- Carrier Name -->
+-    <string name="China_Mobile">China Mobile</string>
+-    <string name="China_Unicom">China Unicom</string>
+-    <string name="China_Telecom">China Telecom</string>
+-    
+     <!-- WiFi turn off notification action text -->
+     <string name="notify_turn_wifi_off_title">Turn Wi-Fi off</string>
+     
+diff --git a/core/res/res/values/symbols.xml b/core/res/res/values/symbols.xml
+index 23ddc95..d2a3d8f 100644
+--- a/core/res/res/values/symbols.xml
++++ b/core/res/res/values/symbols.xml
+@@ -2402,20 +2402,7 @@
+   <java-symbol type="string" name="def_wifi_wifihotspot_pass" />
+   <java-symbol type="string" name="def_wifi_direct_name" />
+   <java-symbol type="string" name="def_custom_bt_defname" />
+-  <!-- config 2G/3G/4G RAT strings for carriers -->
+-  <java-symbol type="string" name="config_rat_2g" />
+-  <java-symbol type="string" name="config_rat_3g" />
+-  <java-symbol type="string" name="config_rat_4g" />
+-
+-  <!-- monitor locale change -->
+-  <java-symbol type="bool" name="config_monitor_locale_change" />
+-
+-  <!-- display for radio tech -->
+-  <java-symbol type="bool" name="config_display_rat" />
+-
+-  <java-symbol type="array" name="origin_carrier_names" />
+-  <java-symbol type="array" name="locale_carrier_names" />
+-
++  
+   <!-- Doze invert -->
+   <java-symbol type="bool" name="config_invert_colors_on_doze" />
+ 
+diff --git a/packages/Keyguard/src/com/android/keyguard/CarrierText.java b/packages/Keyguard/src/com/android/keyguard/CarrierText.java
+index 66f88fa..d851a84 100644
+--- a/packages/Keyguard/src/com/android/keyguard/CarrierText.java
++++ b/packages/Keyguard/src/com/android/keyguard/CarrierText.java
+@@ -28,7 +28,6 @@ import android.net.ConnectivityManager;
+ import android.net.wifi.WifiManager;
+ import android.telephony.ServiceState;
+ import android.telephony.SubscriptionInfo;
+-import android.telephony.TelephonyManager;
+ import android.text.TextUtils;
+ import android.text.method.SingleLineTransformationMethod;
+ import android.util.AttributeSet;
+@@ -112,59 +111,15 @@ public class CarrierText extends TextView {
+     protected void updateCarrierText() {
+         boolean allSimsMissing = true;
+         boolean anySimReadyAndInService = false;
+-        boolean showLocale = getContext().getResources().getBoolean(
+-                com.android.internal.R.bool.config_monitor_locale_change);
+-        boolean showRat = getContext().getResources().getBoolean(
+-                com.android.internal.R.bool.config_display_rat);
+         CharSequence displayText = null;
+ 
+         List<SubscriptionInfo> subs = mKeyguardUpdateMonitor.getSubscriptionInfo(false);
+         final int N = subs.size();
+         if (DEBUG) Log.d(TAG, "updateCarrierText(): " + N);
+         for (int i = 0; i < N; i++) {
+-            CharSequence networkClass = "";
+             int subId = subs.get(i).getSubscriptionId();
+             State simState = mKeyguardUpdateMonitor.getSimState(subId);
+-            if (showRat) {
+-                ServiceState ss = mKeyguardUpdateMonitor.mServiceStates.get(subId);
+-                if (ss != null && (ss.getDataRegState() == ServiceState.STATE_IN_SERVICE
+-                        || ss.getVoiceRegState() == ServiceState.STATE_IN_SERVICE)) {
+-                    int networkType = TelephonyManager.NETWORK_TYPE_UNKNOWN;
+-                    if (ss.getRilDataRadioTechnology() !=
+-                            ServiceState.RIL_RADIO_TECHNOLOGY_UNKNOWN) {
+-                        networkType = ss.getDataNetworkType();
+-                    } else if (ss.getRilVoiceRadioTechnology() !=
+-                                ServiceState.RIL_RADIO_TECHNOLOGY_UNKNOWN) {
+-                        networkType = ss.getVoiceNetworkType();
+-                    }
+-                    networkClass = networkClassToString(TelephonyManager
+-                            .getNetworkClass(networkType));
+-                }
+-            }
+             CharSequence carrierName = subs.get(i).getCarrierName();
+-            if (showLocale || showRat) {
+-                String[] names = carrierName.toString().split(mSeparator.toString(), 2);
+-                StringBuilder newCarrierName = new StringBuilder();
+-                for (int j = 0; j < names.length; j++) {
+-                    if (showLocale) {
+-                        names[j] = android.util.NativeTextHelper.getLocalString(getContext(),
+-                                names[j], com.android.internal.R.array.origin_carrier_names,
+-                                com.android.internal.R.array.locale_carrier_names);
+-                    }
+-                    if (!TextUtils.isEmpty(names[j])) {
+-                        if (!TextUtils.isEmpty(networkClass) && showRat) {
+-                            names[j] = new StringBuilder().append(names[j]).append(" ")
+-                                    .append(networkClass).toString();
+-                        }
+-                        if (j > 0 && names[j].equals(names[j-1])) {
+-                            continue;
+-                        }
+-                        if (j > 0) newCarrierName.append(mSeparator);
+-                        newCarrierName.append(names[j]);
+-                    }
+-                }
+-                carrierName = newCarrierName.toString();
+-            }
+             CharSequence carrierTextForSimState = getCarrierTextForSimState(simState, carrierName);
+             if (DEBUG) {
+                 Log.d(TAG, "Handling (subId=" + subId + "): " + simState + " " + carrierName);
+@@ -462,16 +417,4 @@ public class CarrierText extends TextView {
+             return source;
+         }
+     }
+-
+-    private String networkClassToString (int networkClass) {
+-        final int[] classIds = { 0, // TelephonyManager.NETWORK_CLASS_UNKNOWN
+-            com.android.internal.R.string.config_rat_2g,
+-            com.android.internal.R.string.config_rat_3g,
+-            com.android.internal.R.string.config_rat_4g };
+-        String classString = null;
+-        if (networkClass < classIds.length) {
+-            classString = getContext().getResources().getString(classIds[networkClass]);
+-        }
+-        return (classString == null) ? "" : classString;
+-    }
+ }
+diff --git a/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java b/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java
+index e3a85e3..121c5c4 100644
+--- a/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java
++++ b/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java
+@@ -136,7 +136,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
+     private static final int MSG_SERVICE_STATE_CHANGE = 330;
+     private static final int MSG_SCREEN_TURNED_ON = 331;
+     private static final int MSG_SCREEN_TURNED_OFF = 332;
+-    private static final int MSG_LOCALE_CHANGED = 500;
+ 
+     /** Fingerprint state: Not listening to fingerprint. */
+     private static final int FINGERPRINT_STATE_STOPPED = 0;
+@@ -275,9 +274,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
+                 case MSG_SCREEN_TURNED_OFF:
+                     handleScreenTurnedOff();
+                     break;
+-                case MSG_LOCALE_CHANGED:
+-                    handleLocaleChanged();
+-                    break;
+             }
+         }
+     };
+@@ -684,8 +680,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
+                 }
+                 mHandler.sendMessage(
+                         mHandler.obtainMessage(MSG_SERVICE_STATE_CHANGE, subId, 0, serviceState));
+-            } else if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
+-                mHandler.sendEmptyMessage(MSG_LOCALE_CHANGED);
+             }
+         }
+     };
+@@ -1014,7 +1008,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
+         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
+         filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
+         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+-        filter.addAction(Intent.ACTION_LOCALE_CHANGED);
+         filter.addAction(TelephonyIntents.ACTION_SIM_STATE_CHANGED);
+         filter.addAction(TelephonyIntents.ACTION_SERVICE_STATE_CHANGED);
+         filter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+@@ -1355,18 +1348,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
+     }
+ 
+     /**
+-     * Handle {@link #MSG_LOCALE_CHANGED}
+-     */
+-    private void handleLocaleChanged() {
+-        for (int j = 0; j < mCallbacks.size(); j++) {
+-            KeyguardUpdateMonitorCallback cb = mCallbacks.get(j).get();
+-            if (cb != null) {
+-                cb.onRefreshCarrierInfo();
+-            }
+-        }
+-    }
+-
+-    /**
+      * Handle {@link #MSG_SERVICE_STATE_CHANGE}
+      */
+     private void handleServiceStateChange(int subId, ServiceState serviceState) {
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/policy/MobileSignalController.java b/packages/SystemUI/src/com/android/systemui/statusbar/policy/MobileSignalController.java
+index e2f3503..3591aa3 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/policy/MobileSignalController.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/policy/MobileSignalController.java
+@@ -57,12 +57,6 @@ public class MobileSignalController extends SignalController<
+     // @VisibleForDemoMode
+     final SparseArray<MobileIconGroup> mNetworkToIconLookup;
+ 
+-    private boolean mLastShowSpn;
+-    private String mLastSpn;
+-    private String mLastDataSpn;
+-    private boolean mLastShowPlmn;
+-    private String mLastPlmn;
+-
+     // Since some pieces of the phone state are interdependent we store it locally,
+     // this could potentially become part of MobileState for simplification/complication
+     // of code.
+@@ -342,11 +336,6 @@ public class MobileSignalController extends SignalController<
+         } else if (action.equals(TelephonyIntents.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)) {
+             updateDataSim();
+             notifyListenersIfNecessary();
+-        } else if (action.equals(Intent.ACTION_LOCALE_CHANGED)) {
+-            if (mConfig.showLocale) {
+-                updateNetworkName(mLastShowSpn, mLastSpn, mLastDataSpn, mLastShowPlmn, mLastPlmn);
+-                notifyListenersIfNecessary();
+-            }
+         }
+     }
+ 
+@@ -366,85 +355,27 @@ public class MobileSignalController extends SignalController<
+         }
+     }
+ 
+-    private String getLocalString(String originalString) {
+-        return android.util.NativeTextHelper.getLocalString(mContext, originalString,
+-                          com.android.internal.R.array.origin_carrier_names,
+-                          com.android.internal.R.array.locale_carrier_names);
+-    }
+-
+-    private String getNetworkClassString(ServiceState state) {
+-        if (state != null && (state.getDataRegState() == ServiceState.STATE_IN_SERVICE ||
+-                state.getVoiceRegState() == ServiceState.STATE_IN_SERVICE)) {
+-            int voiceNetType = state.getVoiceNetworkType();
+-            int dataNetType =  state.getDataNetworkType();
+-            int chosenNetType =
+-                    ((dataNetType == TelephonyManager.NETWORK_TYPE_UNKNOWN)
+-                    ? voiceNetType : dataNetType);
+-            return networkClassToString(TelephonyManager.getNetworkClass(chosenNetType));
+-        } else {
+-            return "";
+-        }
+-    }
+-
+-    private String networkClassToString (int networkClass) {
+-        final int[] classIds = { 0, // TelephonyManager.NETWORK_CLASS_UNKNOWN
+-            com.android.internal.R.string.config_rat_2g,
+-            com.android.internal.R.string.config_rat_3g,
+-            com.android.internal.R.string.config_rat_4g };
+-        String classString = null;
+-        if (networkClass < classIds.length) {
+-            classString = mContext.getResources().getString(classIds[networkClass]);
+-        }
+-        return (classString == null) ? "" : classString;
+-    }
+-
+     /**
+      * Updates the network's name based on incoming spn and plmn.
+      */
+     void updateNetworkName(boolean showSpn, String spn, String dataSpn,
+             boolean showPlmn, String plmn) {
+-        mLastShowSpn = showSpn;
+-        mLastSpn = spn;
+-        mLastDataSpn = dataSpn;
+-        mLastShowPlmn = showPlmn;
+-        mLastPlmn = plmn;
+         if (CHATTY) {
+             Log.d("CarrierLabel", "updateNetworkName showSpn=" + showSpn
+                     + " spn=" + spn + " dataSpn=" + dataSpn
+                     + " showPlmn=" + showPlmn + " plmn=" + plmn);
+         }
+-        if (mConfig.showLocale) {
+-            if (showSpn && !TextUtils.isEmpty(spn)) {
+-                spn = getLocalString(spn);
+-            }
+-            if (showSpn && !TextUtils.isEmpty(dataSpn)) {
+-                dataSpn = getLocalString(dataSpn);
+-            }
+-            if (showPlmn && !TextUtils.isEmpty(plmn)) {
+-                plmn = getLocalString(plmn);
+-            }
+-        }
+-        if (showPlmn && showSpn && !TextUtils.isEmpty(spn) && !TextUtils.isEmpty(plmn)
+-                && plmn.equals(spn)) {
+-            showSpn = false;
+-        }
+-        String networkClass = getNetworkClassString(mServiceState);
+         StringBuilder str = new StringBuilder();
+         StringBuilder strData = new StringBuilder();
+         if (showPlmn && plmn != null) {
+             str.append(plmn);
+             strData.append(plmn);
+-            if (mConfig.showRat) {
+-                str.append(" ").append(networkClass);
+-                strData.append(" ").append(networkClass);
+-            }
+         }
+         if (showSpn && spn != null) {
+             if (str.length() != 0) {
+                 str.append(mNetworkNameSeparator);
+             }
+             str.append(spn);
+-            if (mConfig.showRat) str.append(" ").append(networkClass);
+         }
+         if (str.length() != 0) {
+             mCurrentState.networkName = str.toString();
+@@ -456,7 +387,6 @@ public class MobileSignalController extends SignalController<
+                 strData.append(mNetworkNameSeparator);
+             }
+             strData.append(dataSpn);
+-            if (mConfig.showRat) strData.append(" ").append(networkClass);
+         }
+         if (strData.length() != 0) {
+             mCurrentState.networkNameData = strData.toString();
+@@ -767,7 +697,6 @@ public class MobileSignalController extends SignalController<
+                         + " dataState=" + state.getDataRegState());
+             }
+             mServiceState = state;
+-            updateNetworkName(mLastShowSpn, mLastSpn, mLastDataSpn, mLastShowPlmn, mLastPlmn);
+             mDataNetType = state.getDataNetworkType();
+             updateTelephony();
+         }
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/policy/NetworkControllerImpl.java b/packages/SystemUI/src/com/android/systemui/statusbar/policy/NetworkControllerImpl.java
+index 5098059..0af5be4 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/policy/NetworkControllerImpl.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/policy/NetworkControllerImpl.java
+@@ -210,7 +210,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
+         filter.addAction(TelephonyIntents.SPN_STRINGS_UPDATED_ACTION);
+         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+         filter.addAction(ConnectivityManager.INET_CONDITION_ACTION);
+-        filter.addAction(Intent.ACTION_LOCALE_CHANGED);
+         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+         mContext.registerReceiver(this, filter, null, mReceiverHandler);
+         mListening = true;
+@@ -378,10 +377,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
+         } else if (action.equals(TelephonyIntents.ACTION_SIM_STATE_CHANGED)) {
+             // Might have different subscriptions now.
+             updateMobileControllers();
+-        } else if (action.equals(Intent.ACTION_LOCALE_CHANGED)) {
+-            for (MobileSignalController controller : mMobileSignalControllers.values()) {
+-                controller.handleBroadcast(intent);
+-            }
+         } else if (action.equals(TelephonyIntents.ACTION_SERVICE_STATE_CHANGED)) {
+             mLastServiceState = ServiceState.newFromBundle(intent.getExtras());
+             if (mMobileSignalControllers.size() == 0) {
+@@ -834,8 +829,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
+         boolean hspaDataDistinguishable;
+         boolean readIconsFromXml;
+         boolean showRsrpSignalLevelforLTE;
+-        boolean showLocale;
+-        boolean showRat;
+ 
+         static Config readConfig(Context context) {
+             Config config = new Config();
+@@ -850,11 +843,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
+             config.readIconsFromXml = res.getBoolean(R.bool.config_read_icons_from_xml);
+             config.showRsrpSignalLevelforLTE =
+                     res.getBoolean(R.bool.config_showRsrpSignalLevelforLTE);
+-            config.showLocale =
+-                    res.getBoolean(com.android.internal.R.bool.config_monitor_locale_change);
+-            config.showRat =
+-                    res.getBoolean(com.android.internal.R.bool.config_display_rat);
+-
+             return config;
+         }
+     }
