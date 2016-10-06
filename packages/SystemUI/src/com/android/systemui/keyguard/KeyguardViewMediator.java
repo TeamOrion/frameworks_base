@@ -1521,7 +1521,7 @@ mStatusBarKeyguardViewManager.isKeyguardShowingMedia());
             }
 
             setShowingLocked(false);
-            +            if (mWakeAndUnlocking) {
+                        if (mWakeAndUnlocking) {
                 mStatusBarKeyguardViewManager.hideNoAnimation();
             } else {
                 mStatusBarKeyguardViewManager.hide(startTime, fadeoutDuration);
