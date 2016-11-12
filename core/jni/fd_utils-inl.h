@@ -58,7 +58,8 @@ static const char* kPathWhitelist[] = {
   "/dev/ion",
   "/dev/rpmsg-omx0",
   "/dev/rpmsg-omx1",
-  "@netlink@"
+  "@netlink@",
+  "/proc/ged"
 };
 
 static const char* kFdPath = "/proc/self/fd";
