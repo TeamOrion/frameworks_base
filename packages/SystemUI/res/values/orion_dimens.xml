@@ -11,14 +11,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    
-    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveBatteryLed">false</bool>
+<resources>
 
-    <!-- Battery level for when "show battery percent only on low battery" is enabled -->
-    <integer name="config_batteryPercentLowOnlyLevel">25</integer>
+   <!-- single handed mode threshold -->
+   <dimen name="navbar_single_hand_mode_horizontal_threshhold">90dp</dimen>
+   <dimen name="navbar_single_hand_mode_vertical_threshhold">48dp</dimen>
 
-    <!-- Single handed mode config -->
-    <bool name="single_hand_mode">true</bool>
 </resources>
