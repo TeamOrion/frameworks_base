@@ -3672,6 +3672,12 @@ public final class Settings {
         public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
 
         /**
+         * Whether to enable the pixel navbar animation
+         * @hide
+         */
+        public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
+
+        /**
          * Whether user can enable/disable navigation bar.
          * <p>
          * Type: int (0 for false, 1 for true)
