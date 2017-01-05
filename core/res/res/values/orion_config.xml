@@ -12,7 +12,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveBatteryLed">false</bool>
 
@@ -21,4 +20,8 @@
 
     <!-- Single handed mode config -->
     <bool name="single_hand_mode">true</bool>
+
+    <!-- Nav bar button swapped ordering/layout -->
+    <string name="config_navBarLayoutSwapped" translatable="false">menu_ime,recent;home;back,space</string>
+
 </resources>
