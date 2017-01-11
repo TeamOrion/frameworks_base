@@ -44,4 +44,7 @@
   <java-symbol type="string" name="reboot_confirm" />
   <java-symbol type="string" name="reboot_progress" />
   <java-symbol type="string" name="global_action_reboot" />
+
+  <!-- Internal default to navigation bar value -->
+  <java-symbol type="bool" name="config_defaultToNavigationBar" />
 </resources>

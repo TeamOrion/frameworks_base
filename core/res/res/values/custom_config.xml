@@ -74,6 +74,9 @@
          config to 19. -->
     <integer name="config_deviceHardwareKeys">19</integer>
 
+    <!-- Internal default to navigation bar value -->
+    <bool name="config_defaultToNavigationBar">true</bool>
+
     <!-- Is Advanced Reboot enabled? -->
     <bool name="config_advanced_reboot">true</bool>
 </resources>
