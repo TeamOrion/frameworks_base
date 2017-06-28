@@ -226,7 +226,6 @@ public class BatteryMeterDrawable extends Drawable implements
         mIntrinsicWidth = context.getResources().getDimensionPixelSize(R.dimen.battery_width);
         mIntrinsicHeight = context.getResources().getDimensionPixelSize(R.dimen.battery_height);
 
-        mBatteryPct = context.getResources().getBoolean(R.bool.config_showBatteryPercentage);
     }
 
     @Override
