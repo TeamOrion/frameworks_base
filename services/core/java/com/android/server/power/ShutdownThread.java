@@ -22,7 +22,6 @@ import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.IActivityManager;
-import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.IBluetoothManager;
@@ -50,14 +49,12 @@ import android.os.storage.IMountService;
 import android.os.storage.IMountShutdownObserver;
 import android.system.ErrnoException;
 import android.system.Os;
-import android.provider.Settings;
 
 import com.android.internal.telephony.ITelephony;
 import com.android.server.pm.PackageManagerService;
 
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.ListView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -142,16 +139,6 @@ public final class ShutdownThread extends Thread {
         shutdownInner(context, confirm);
     }
 
-    private static boolean isAdvancedRebootPossible(final Context context) {
-        KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-        boolean keyguardLocked = km.inKeyguardRestrictedInputMode() && km.isKeyguardSecure();
-        boolean advancedRebootEnabled = Settings.Secure.getInt(context.getContentResolver(),
-            Settings.Secure.ADVANCED_REBOOT, 0) == 1;
-        boolean isPrimaryUser = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
-
-        return advancedRebootEnabled && !keyguardLocked && isPrimaryUser;
-    }
-
     static void shutdownInner(final Context context, boolean confirm) {
         // ensure that only one thread is trying to power down.
         // any additional calls are just returned
@@ -164,61 +151,31 @@ public final class ShutdownThread extends Thread {
 
         final int longPressBehavior = context.getResources().getInteger(
                         com.android.internal.R.integer.config_longPressOnPowerBehavior);
-        int resourceId = mRebootSafeMode
+        final int resourceId = mRebootSafeMode
                 ? com.android.internal.R.string.reboot_safemode_confirm
-                : mReboot
-                        ? com.android.internal.R.string.reboot_confirm
-                        : (longPressBehavior == 2
-                                ? com.android.internal.R.string.shutdown_confirm_question
-                                : com.android.internal.R.string.shutdown_confirm);
+                : (longPressBehavior == 2
+                        ? com.android.internal.R.string.shutdown_confirm_question
+                        : com.android.internal.R.string.shutdown_confirm);
 
         Log.d(TAG, "Notifying thread to start shutdown longPressBehavior=" + longPressBehavior);
 
         if (confirm) {
             final CloseDialogReceiver closer = new CloseDialogReceiver(context);
-            final boolean advancedReboot = isAdvancedRebootPossible(context);
-
             if (sConfirmDialog != null) {
                 sConfirmDialog.dismiss();
-                sConfirmDialog = null;
             }
-            AlertDialog.Builder confirmDialogBuilder = new AlertDialog.Builder(context)
+            sConfirmDialog = new AlertDialog.Builder(context)
                     .setTitle(mRebootSafeMode
                             ? com.android.internal.R.string.reboot_safemode_title
-                            : mReboot
-                            ? com.android.internal.R.string.reboot_title
-                            : com.android.internal.R.string.power_off);
-
-            if (advancedReboot && mReboot && !mRebootSafeMode) {
-                confirmDialogBuilder
-                      .setSingleChoiceItems(com.android.internal.R.array.shutdown_reboot_options,
-                              0, null);
-            } else {
-                confirmDialogBuilder.setMessage(resourceId);
-            }
-
-            confirmDialogBuilder.setPositiveButton(com.android.internal.R.string.yes,
-                    new DialogInterface.OnClickListener() {
-                        @Override
+                            : com.android.internal.R.string.power_off)
+                    .setMessage(resourceId)
+                    .setPositiveButton(com.android.internal.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            if (advancedReboot && mReboot && !mRebootSafeMode) {
-                                ListView reasonsList = ((AlertDialog)dialog).getListView();
-                                int selected = reasonsList.getCheckedItemPosition();
-                                if (selected != ListView.INVALID_POSITION) {
-                                    String actions[] = context.getResources().getStringArray(
-                                            com.android.internal.R.array.shutdown_reboot_actions);
-                                    if (selected >= 0 && selected < actions.length) {
-                                        mReason = actions[selected];
-                                    }
-                                }
-                                mReboot = true;
-                            }
                             beginShutdownSequence(context);
                         }
-                    });
-
-            confirmDialogBuilder.setNegativeButton(com.android.internal.R.string.no, null);
-            sConfirmDialog = confirmDialogBuilder.create();
+                    })
+                    .setNegativeButton(com.android.internal.R.string.no, null)
+                    .create();
             closer.dialog = sConfirmDialog;
             sConfirmDialog.setOnDismissListener(closer);
             sConfirmDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
@@ -348,13 +305,6 @@ public final class ShutdownThread extends Thread {
             pd.setTitle(context.getText(com.android.internal.R.string.power_off));
             pd.setMessage(context.getText(com.android.internal.R.string.shutdown_progress));
             pd.setIndeterminate(true);
-        }
-        if (mReboot) {
-            pd.setTitle(context.getText(com.android.internal.R.string.reboot_title));
-            pd.setMessage(context.getText(com.android.internal.R.string.reboot_progress));
-        } else {
-            pd.setTitle(context.getText(com.android.internal.R.string.power_off));
-            pd.setMessage(context.getText(com.android.internal.R.string.shutdown_progress));
         }
         pd.setCancelable(false);
         pd.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
